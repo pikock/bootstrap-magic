@@ -91,8 +91,10 @@ angular.module('bootstrapVariablesEditor.services', []).
     lessEngine.getVariablesToString = function ($scope) {
     	var string = "" +
     	"/*\n"+
-    	"* pickok, autreplanete \n"+
+    	"* pikock, autreplanete \n"+
+    	"*  \n"+
     	"**/\n";
+    	
         for (var i = 0; i < $scope.variables.length; i++ ) {
             string += '\n\n// ' + $scope.variables[i].name + "\n"
             for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
@@ -100,6 +102,52 @@ angular.module('bootstrapVariablesEditor.services', []).
             }
         }
         return string;
+    };
+    
+    lessEngine.saveLessVar = function(data){
+        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').append(
+                $('<input>')
+                    .attr('type', 'hidden')
+                    .attr('name', 'data')
+                    .attr('value', data)
+            ).
+            append(
+                $('<input>')
+                    .attr('type', 'hidden')
+                    .attr('name', 'type')
+                    .attr('value', 'less')
+            );
+        $('body').append($form);
+        $form.submit();
+    };
+    
+    lessEngine.saveCSS = function($scope){
+    	var parser = new(less.Parser)({
+            paths: ['../twitter-bootstrap/less/'], // Specify search paths for @import directives
+            filename: 'bootstrap.less' // Specify a filename, for better error messages
+        });
+        $(document).load($('#twitterBootstrapLess').attr('href'), function (data) {
+        	parser.parse(data, function (err, tree) {
+        	    if (err) { return console.error(err) }
+        	    var type = ($scope.minified) ? 'mincss' : 'css';
+                var css = tree.toCSS({ compress: $scope.minified });
+                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').
+                    append(
+                        $('<input>')
+                            .attr('type', 'hidden')
+                            .attr('name', 'data')
+                            .attr('value', css)
+                    ).
+                    append(
+                        $('<input>')
+                            .attr('type', 'hidden')
+                            .attr('name', 'type')
+                            .attr('value', type)
+                    );
+                $('body').append($form);
+                $form.submit();
+            });
+        });
     };
     
     return lessEngine;

@@ -78,26 +78,13 @@ function LessCtrl($scope, $http, ap_less) {
     
     $scope.minified = false;
     
+    
     $scope.saveCSS = function() {
-    	$scope.isViewLoading = true;
-    	var parser = new(less.Parser)({
-            paths: ['../twitter-bootstrap/less/'], // Specify search paths for @import directives
-            filename: 'bootstrap.less' // Specify a filename, for better error messages
-        });
-        $(document).load($('#twitterBootstrapLess').attr('href'), function (data) {
-        	parser.parse(data, function (err, tree) {
-        	    if (err) { return console.error(err) }
-                //tree.toCSS({ compress: true }); // Minify CSS output
-                //console.log($scope.minified);
-                console.log(tree.toCSS({ compress: $scope.minified }));
-                //console.log(tree.toCSS({ compress: true })); // Minify CSS output
-            });
-        });
-        $scope.isViewLoading = false;
+        ap_less.saveCSS($scope);
     }
     
     $scope.saveLessVariables = function () {
-    	console.log(ap_less.getVariablesToString($scope));
+    	ap_less.saveLessVar(ap_less.getVariablesToString($scope));
     };
     
     $scope.resetLessVariables = function () {
