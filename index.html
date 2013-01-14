@@ -9,6 +9,7 @@
     
   <title>Bootstrap Magic : Twitter bootstrap themes generator</title>
   <meta name="description" content="Simple and fast Twitter bootstrap themes generator made with AngularJS. Design your own bootstrap theme, like it ? Download less or css on the go." />
+  <link itemprop="SoftwareApplicationCategory" href="http://schema.org/SoftwareApplication"/>
 </head>
 <body data-ng-cloak>
 	<div class="protected">
@@ -33,13 +34,13 @@
 	</div>
 	
 	<div class="container">
-	<div class="protected">
+	<div class="protected" itemscope itemtype="http://schema.org/SoftwareApplication">
 	        <div class="protectedIntroBody">
 	            <section class="row">
 		            <div class="span12">	
 		                <div class="introHeader">
-		                    <h1>Bootstrap Magic <small>made with AngularJS</small></h1>
-		                        <p class="lead">Create simply your own <a href="http://twitter.github.com/bootstrap/index.html" title="Twitter Bootstrap themes generator">Twitter Bootstrap</a> theme. Like it ? Save it !</p>
+		                    <h1><span itemprop="name">Bootstrap Magic </span><small>made with AngularJS</small></h1>
+		                        <p class="lead"><span itemprop="description">Create simply your own <a href="http://twitter.github.com/bootstrap/index.html" title="Twitter Bootstrap themes generator">Twitter Bootstrap</a> theme.</span> Like it ? Save it !</p>
 		                        <p class="buttonsBlocks">
 		                            <a class="btn btn-primary btn-large" href="app/index.html" title="try bootstrap themes generator angularjs">
 		                              <span class="apico games-white apico-brush"></span>Create your theme
@@ -107,7 +108,7 @@
 		<div class="footer">
 			<div class="container">
 				<div class="span12 ">
-					<p class="pull-right">Handmade by <a href="http://www.pikock.com" title="create your website easily">Pikock</a> x <a href="http://www.autreplanete.com/" title="web agency paris">Autre planète</a> in Paris.</p>
+					<p class="pull-right">Handmade by <span itemprop="author" itemscope itemtype="http://schema.org/Organization"><a itemprop="url" href="http://www.pikock.com" title="create your website easily"><span itemprop="name">Pikock<span></a> </span>x <a href="http://www.autreplanete.com/" title="web agency paris">Autre planète</a> in Paris.</p>
 				</div>
 			</div>
 		</div>
