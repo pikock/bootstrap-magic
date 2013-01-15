@@ -250,9 +250,8 @@
 		"name" : "Sprites",
 		"data": [
 			{"key":"@iconSpritePath", "value":"'../twitter-bootstrap/img/glyphicons-halflings.png'", "type": "icons"},
-			{"key":"@iconWhiteSpritePath", "value":"'../twitter-bootstrap/img/glyphicons-halflings-white.png'", "type": "icons"},
-			{"key":"@iconSpritePath", "value":"'../twitter-bootstrap/img/ap_icons_black_interface-orientation.png'", "type": "icons"},
-			{"key":"@iconWhiteSpritePath", "value":"'../twitter-bootstrap/img/ap_icons_black_game-tools.png'", "type": "icons"}
+			{"key":"@iconWhiteSpritePath", "value":"'../twitter-bootstrap/img/glyphicons-halflings-white.png'", "type": "icons"}
+
 		]
 	}
 ]
