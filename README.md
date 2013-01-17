@@ -3,6 +3,8 @@ Bootstrap magic
 
 Bootstrap themes generator made with AngularJS
 
+[Try it out!](http://pikock.github.com/bootstrap-magic/)
+
 
 #### Build on Angular-seed
 
