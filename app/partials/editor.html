@@ -5,6 +5,7 @@
             <li><button class="btn btn-info" ng-click="saveLessVariables()">Save Less Variables</button></li>
             <li><button class="btn btn-success" ng-click="saveCSS()">Save CSS</button></li>
             <li><label class="checkbox"><input type="checkbox" name="cssMinified" data-ng-model="minified">Minified</label></li>
+            <li><button class="btn btn-warning" href="#myModal" role="button" data-toggle="modal">Import Less Variables</button></li>
             <li><button class="btn" ng-click="resetLessVariables()">Reset</button></li>
         </ul>
         <span class="sign">Handmade by <a href="http://www.pikock.com" title="create your website easily">Pikock</a> x <a href="http://www.autreplanete.com/" title="web agency paris">Autre planète</a> in Paris.</span>
@@ -37,4 +38,35 @@
     </form>
 </div>
 
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel"><span class="apico games apico-cloud-upload"></span>Import your Less Variables</h3>
+	</div>
+	<div class="modal-body">
+		<p>Add your less variables to Bootstrap Magic.</p>
+		<textarea rows="10" style="width: 97%" placeholder="// Colors
+		@black: #000;
+		@grayDarker: #222;
+		@grayDark: #333;
+		@gray: #555;
+		@grayLight: #999;
+		@grayLighter: #eee;
+		@white: #fff;
+		@blue: #049cdb;
+		@blueDark: #0064cd;
+		@green: #46a546;
+		@red: #9d261d;
+		@yellow: #ffc40d;
+		@orange: #f89406;
+		@pink: #c3325f;
+		@purple: #7a43b6;"></textarea>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary" ng-click="importLessVariables()">Import</button>
+	</div>
+</div>
 
