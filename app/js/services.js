@@ -91,10 +91,9 @@ angular.module('bootstrapVariablesEditor.services', []).
     lessEngine.getVariablesToString = function ($scope) {
     	var string = "" +
     	"/*\n"+
-    	"* pikock, autreplanete \n"+
+    	"* pikock, autreplanete http://www.autreplanete.com/ \n"+
     	"*  \n"+
     	"**/\n";
-    	
         for (var i = 0; i < $scope.variables.length; i++ ) {
             string += '\n\n// ' + $scope.variables[i].name + "\n"
             for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
@@ -127,6 +126,11 @@ angular.module('bootstrapVariablesEditor.services', []).
             filename: 'bootstrap.less' // Specify a filename, for better error messages
         });
         $(document).load($('#twitterBootstrapLess').attr('href'), function (data) {
+        	var vars = lessEngine.getVariables($scope);
+            for (name in vars) {
+                data += ((name.slice(0,1) === '@')? '' : '@') + name +': '+ 
+                        ((vars[name].slice(-1) === ';')? vars[name] : vars[name] +';');
+            }
         	parser.parse(data, function (err, tree) {
         	    if (err) { return console.error(err) }
         	    var type = ($scope.minified) ? 'mincss' : 'css';
@@ -149,6 +153,5 @@ angular.module('bootstrapVariablesEditor.services', []).
             });
         });
     };
-    
     return lessEngine;
 });

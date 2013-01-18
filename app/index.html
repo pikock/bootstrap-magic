@@ -68,8 +68,8 @@
             $script([
             'lib/angular/angular.js',
             'js/app.js' + ext,
-            'js/services.min.js' + ext,
-            'js/controllers.min.js' + ext,
+            'js/services.js' + ext,
+            'js/controllers.js' + ext,
             'js/filters.js' + ext,
             'js/directives.js' + ext
             ], function() {
@@ -86,17 +86,17 @@
   <link id="twitterBootstrapLess" rel="stylesheet/less" href="../twitter-bootstrap/less/bootstrap.less">
   <link id="twitterResponsiveLess" rel="stylesheet/less" href="../twitter-bootstrap/less/responsive.less">
   <script type="text/javascript">
-  
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-37710723-1']);
-    _gaq.push(['_trackPageview']);
-  
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  
+    
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-37710723-1']);
+      _gaq.push(['_trackPageview']);
+   
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+     
   </script>
 </head>
 <body data-ng-cloak>
@@ -144,6 +144,6 @@
 			<p>Variables Bootstrap AngularJS Editor: v<span app-version></span></p>
 		</div>
 	</footer>-->
-		
+	
 </body>
 </html>
