@@ -253,5 +253,57 @@
 			{"key":"@iconWhiteSpritePath", "value":"'../twitter-bootstrap/img/glyphicons-halflings-white.png'", "type": "icons"}
 
 		]
+	},
+  	
+	{ 
+		"name" : "Private",
+		"data": [
+			{"key":"@zindexDropdown", "value":"1000", "type": "text"},
+			{"key":"@zindexPopover", "value": "1010", "type": "text"},
+			{"key":"@zindexTooltip", "value": "1030", "type": "text"},
+			{"key":"@zindexFixedNavbar", "value": "1030", "type": "text"},
+			{"key":"@zindexModalBackdrop", "value": "1040", "type": "text"},
+			{"key":"@zindexModal", "value": "1050", "type": "text"},
+
+			{"key":"@navbarInverseBackground", "value": "#111111", "type": "color"},
+			{"key":"@navbarInverseBackgroundHighlight", "value": "#222222", "type": "color"},
+			{"key":"@navbarInverseBorder", "value": "#252525", "type": "color"},
+
+			{"key":"@navbarInverseText", "value": "@grayLight", "type": "color"},
+			{"key":"@navbarInverseLinkColor", "value": "@grayLight", "type": "color"},
+			{"key":"@navbarInverseLinkColorHover", "value": "@white", "type": "color"},
+			{"key":"@navbarInverseLinkColorActive", "value": "@navbarInverseLinkColorHover", "type": "color"},
+			{"key":"@navbarInverseLinkBackgroundHover", "value": "transparent", "type": "color"},
+			{"key":"@navbarInverseLinkBackgroundActive", "value": "@navbarInverseBackground", "type": "color"},
+
+			{"key":"@navbarInverseSearchBackground", "value": "lighten(@navbarInverseBackground, 25%)", "type": "color"},
+			{"key":"@navbarInverseSearchBackgroundFocus", "value": "@white", "type": "color"},
+			{"key":"@navbarInverseSearchBorder", "value": "@navbarInverseBackground", "type": "color"},
+			{"key":"@navbarInverseSearchPlaceholderColor", "value": "#ccc", "type": "color"},
+
+			{"key":"@navbarInverseBrandColor", "value": "@navbarInverseLinkColor", "type": "color"},
+
+			{"key":"@gridColumns", "value": "12", "type": "text"},
+			{"key":"@gridColumnWidth", "value": "60px", "type": "text"},
+			{"key":"@gridGutterWidth", "value": "20px", "type": "text"},
+			{"key":"@gridRowWidth", "value": "(@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1))", "type": "text"},
+
+			{"key":"@gridColumnWidth1200", "value": "70px", "type": "text"},
+			{"key":"@gridGutterWidth1200", "value": "30px", "type": "text"},
+			{"key":"@gridRowWidth1200", "value": "(@gridColumns * @gridColumnWidth1200) + (@gridGutterWidth1200 * (@gridColumns - 1))", "type": "text"},
+
+			{"key":"@gridColumnWidth768", "value": "42px", "type": "text"},
+			{"key":"@gridGutterWidth768", "value": "20px", "type": "text"},
+			{"key":"@gridRowWidth768", "value": "(@gridColumns * @gridColumnWidth768) + (@gridGutterWidth768 * (@gridColumns - 1))", "type": "text"},
+
+			{"key":"@fluidGridColumnWidth", "value": "percentage(@gridColumnWidth/@gridRowWidth)", "type": "text"},
+			{"key":"@fluidGridGutterWidth", "value": "percentage(@gridGutterWidth/@gridRowWidth)", "type": "text"},
+
+			{"key":"@fluidGridColumnWidth1200", "value": "percentage(@gridColumnWidth1200/@gridRowWidth1200)", "type": "text"},
+			{"key":"@fluidGridGutterWidth1200", "value": "percentage(@gridGutterWidth1200/@gridRowWidth1200)", "type": "text"},
+
+			{"key":"@fluidGridColumnWidth768", "value": "percentage(@gridColumnWidth768/@gridRowWidth768)", "type": "text"},
+			{"key":"@fluidGridGutterWidth768", "value": "percentage(@gridColumnWidth768/@gridRowWidth768)", "type": "text"}
+		]
 	}
 ]
