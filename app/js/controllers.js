@@ -38,7 +38,6 @@ function LessCtrl($scope, $http, ap_less) {
                         	    var src = keys;
                         	    
                         }
-                        console.log();
                         $(this).typeahead({ 
                             source: src,
                             updater: function (item) {
@@ -92,6 +91,11 @@ function LessCtrl($scope, $http, ap_less) {
     	setTimeout(function() {
             $scope.applyLess();
         },0);
+    };
+    
+    $scope.importLessVariables= function (string) {
+        $scope = ap_less.importVariables($scope, string);
+        $scope.applyLess();
     };
     
     $scope.isViewLoading = false;

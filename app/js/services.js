@@ -11,6 +11,45 @@ angular.module('bootstrapVariablesEditor.services', []).
   
     var lessEngine = {};
     
+    lessEngine.importVariables = function ($scope, string) {
+        var regex = {
+            variable: /^\s*([^:]*)\s*:\s*([^\\;]*)/,
+            emptyLine: /(^\s*$)/,
+            comment: /(^\s*\/\/.*[^\r\n]*)/,
+            commentMulti: /\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+\//
+        };
+        var parse = function (data){
+            if(regex.commentMulti.test(data)){
+                data = data.replace(regex.commentMulti,'');
+                console.log(data);
+            }
+            var variables = [];
+            var lines = data.split(/\r\n|\r|\n/);
+            lines.forEach( 
+                function(line){
+                    if(regex.comment.test(line)){
+                        return;
+                    }else if(regex.emptyLine.test(line)){
+                        return;
+                    } else if(regex.variable.test(line)){
+                        var match = line.match(regex.variable);
+                        variables[match[1]] = match[2];
+                    };
+                }
+            );
+            return variables;
+        };
+        var vars = parse(string);
+        for (var i = 0; i < $scope.variables.length; i++ ) {
+    		for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
+    		    if (vars[$scope.variables[i].data[j].key]) {    
+                    $scope.variables[i].data[j].value = vars[$scope.variables[i].data[j].key];
+                }
+            }
+    	}
+        return $scope;
+    }
+    
     lessEngine.getVariables = function ($scope) {
     	var variables = {};
     	for (var i = 0; i < $scope.variables.length; i++ ) {
@@ -19,6 +58,16 @@ angular.module('bootstrapVariablesEditor.services', []).
             }
     	}
         return variables;
+    };
+    
+    /* var => array of variables */
+    lessEngine.setVariables = function ($scope, vars) {
+    	for (var i = 0; i < $scope.variables.length; i++ ) {
+    		for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
+                $scope.variables[i].data[j].value = vars[$scope.variables[i].data[j].key];
+            }
+    	}
+        return $scope;
     };
     
     lessEngine.getKeys = function ($scope) {
