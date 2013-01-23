@@ -14,7 +14,7 @@
 
 <div class="container">
     <form class="piEditor">
-        <section ng-repeat="group in variables">
+        <section ng-repeat="group in variables" class="{{ group.name }}">
             <div class="row" class="protected">
                 <div class="span12">
                     <h2 class="groupNameTitle" id="{{ group.name }}">{{ group.name }}</h2>

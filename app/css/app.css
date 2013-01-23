@@ -2,6 +2,9 @@
 .protectedIntroBody {
   margin-bottom: 50px;
 }
+.Private {
+  display: none;
+}
 .piEditor {
   margin-bottom: 100px;
 }
