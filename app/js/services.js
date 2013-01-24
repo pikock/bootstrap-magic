@@ -52,7 +52,7 @@ angular.module('bootstrapVariablesEditor.services', []).
     	}
     	
     	var myVars = {
-    	    name: 'myVars',
+    	    name: 'My Variables',
     	    data: []
     	};
     	
