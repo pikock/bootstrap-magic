@@ -53,6 +53,14 @@ function LessCtrl($scope, $http, ap_less) {
     };
     initLessVariables();
     
+    $scope.autoapplyless = false;
+    
+    $scope.autoApplyLess = function (event) {
+        if ($scope.autoapplyless){
+            var vars = ap_less.getVariables($scope);
+            less.modifyVars(vars);
+        }
+    };
     
     $scope.applyLess = function (event) {
         var vars = ap_less.getVariables($scope);
@@ -97,6 +105,10 @@ function LessCtrl($scope, $http, ap_less) {
         $scope = ap_less.importVariables($scope, string);
         $scope.applyLess();
     };
+    
+    $scope.upDateValue = function () {
+        
+    };
     
     $scope.isViewLoading = false;
     

@@ -12,38 +12,23 @@ angular.module('bootstrapVariablesEditor.directives', []).
     }]).
 
     directive('apColorPicker',[ function() {
-        
-        return function(scope, element, attrs) {
-            
-            scope.$watch(attrs.ngModel,
-                function(value){
-                    /*
-                    lessData.variables[scope.variable.key] = value;
-                    clearTimeout(lessData.timer);
-                    lessData.timer = setTimeout(
+        return {
+            restrict: 'C',
+            link: function(scope, element, attrs) {
+                var inputChange;
+                
+                element.bind('change',  function () {
+                	if (scope.variable.value.charAt(0) == '#') {
+                        element.colorpicker('setValue', scope.variable.value);
+                    }
+                	clearTimeout(inputChange);
+                    inputChange = setTimeout(
                         function () {
-                            console.log('update');
-                            less.modifyVars(lessData.variables);
-                        }, 3000
+                            scope.$apply(attrs.colorpickerapply);
+                        }, 400
                     );
-                    */
-                }
-            );
-            
-            
-            element.bind('blur', 
-                function(event){
-                    lessData.variables[scope.variable.key] = scope.variable.value;
-                    clearTimeout(lessData.timer);
-                    lessData.timer = setTimeout(
-                        function () {
-                            console.log('update');
-                            less.modifyVars(lessData.variables);
-                        }, 100
-                    );
-                    
-                }
-            );
-            
+                });
+                
+            }
         };
     }]);

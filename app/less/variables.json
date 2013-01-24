@@ -25,7 +25,7 @@
 		"data": [
 			{ "key":"@mainBrandColor", "value":"#000", "type": "color"},
 			{ "key":"@secondBrandColor", "value":"#222", "type": "color"},
-			{ "key":"@thirdBandColor", "value":"#333", "type": "color"},
+			{ "key":"@thirdBrandColor", "value":"#333", "type": "color"},
 			{ "key":"@callToActionColor", "value":"#333", "type": "color"}
 		]
 	},

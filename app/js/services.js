@@ -18,6 +18,7 @@ angular.module('bootstrapVariablesEditor.services', []).
             comment: /(^\s*\/\/.*[^\r\n]*)/,
             commentMulti: /\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+\//
         };
+        
         var parse = function (data){
             if(regex.commentMulti.test(data)){
                 data = data.replace(regex.commentMulti,'');
@@ -39,14 +40,40 @@ angular.module('bootstrapVariablesEditor.services', []).
             );
             return variables;
         };
+        
         var vars = parse(string);
         for (var i = 0; i < $scope.variables.length; i++ ) {
     		for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
-    		    if (vars[$scope.variables[i].data[j].key]) {    
+    		    if (vars[$scope.variables[i].data[j].key]) {
                     $scope.variables[i].data[j].value = vars[$scope.variables[i].data[j].key];
+                    delete vars[$scope.variables[i].data[j].key];
                 }
             }
     	}
+    	
+    	var myVars = {
+    	    name: 'My Variables',
+    	    data: []
+    	};
+    	
+    	for (var key in vars) {
+    	    console.log('toto');
+    	    var type = 'text';
+    	    if (key.toLowerCase().indexOf('color')) {
+    	        type = 'color';
+    	    }
+    	    if (key.toLowerCase().indexOf('fontfamily')) {
+    	        type = 'font';
+    	    }
+    	    var myVar = {
+    	        key: key,
+    	        value: vars[key],
+    	        type: type
+    	    };
+    	    myVars.data.push(myVar);
+    	    
+    	}
+    	$scope.variables.push(myVars);
         return $scope;
     }
     
