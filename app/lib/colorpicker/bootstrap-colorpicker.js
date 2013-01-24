@@ -345,7 +345,7 @@
 		}
 	}
 
-	$.fn.colorpicker = function ( option ) {
+	$.fn.colorpicker = function ( option, args ) {
 		return this.each(function () {
 			var $this = $(this),
 				data = $this.data('colorpicker'),
@@ -353,7 +353,7 @@
 			if (!data) {
 				$this.data('colorpicker', (data = new Colorpicker(this, $.extend({}, $.fn.colorpicker.defaults,options))));
 			}
-			if (typeof option === 'string') data[option]();
+			if (typeof option === 'string') data[option](args);
 		});
 	};
 
