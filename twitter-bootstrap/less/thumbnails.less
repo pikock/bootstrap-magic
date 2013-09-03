@@ -3,6 +3,7 @@
 // --------------------------------------------------
 
 
+<<<<<<< HEAD
 // Note: `.thumbnails` and `.thumbnails > li` are overriden in responsive files
 
 // Make wrapper ul behave like the grid
@@ -37,16 +38,41 @@
 a.thumbnail:hover {
   border-color: @linkColor;
   .box-shadow(0 1px 4px rgba(0,105,214,.25));
+=======
+// Mixin and adjust the regular image class
+.thumbnail {
+  .img-thumbnail();
+  display: block; // Override the inline-block from `.img-thumbnail`
+
+  > img {
+    .img-responsive();
+  }
+}
+
+
+// Add a hover state for linked versions only
+a.thumbnail:hover,
+a.thumbnail:focus {
+  border-color: @link-color;
+>>>>>>> master
 }
 
 // Images and captions
 .thumbnail > img {
+<<<<<<< HEAD
   display: block;
   max-width: 100%;
+=======
+>>>>>>> master
   margin-left: auto;
   margin-right: auto;
 }
 .thumbnail .caption {
+<<<<<<< HEAD
   padding: 9px;
   color: @gray;
+=======
+  padding: @thumbnail-caption-padding;
+  color: @thumbnail-caption-color;
+>>>>>>> master
 }

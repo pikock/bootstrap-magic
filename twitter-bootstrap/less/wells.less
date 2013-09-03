@@ -8,9 +8,15 @@
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
+<<<<<<< HEAD
   background-color: @wellBackground;
   border: 1px solid darken(@wellBackground, 7%);
   .border-radius(@baseBorderRadius);
+=======
+  background-color: @well-bg;
+  border: 1px solid darken(@well-bg, 7%);
+  border-radius: @border-radius-base;
+>>>>>>> master
   .box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
   blockquote {
     border-color: #ddd;
@@ -19,6 +25,7 @@
 }
 
 // Sizes
+<<<<<<< HEAD
 .well-large {
   padding: 24px;
   .border-radius(@borderRadiusLarge);
@@ -26,4 +33,13 @@
 .well-small {
   padding: 9px;
   .border-radius(@borderRadiusSmall);
+=======
+.well-lg {
+  padding: 24px;
+  border-radius: @border-radius-large;
+}
+.well-sm {
+  padding: 9px;
+  border-radius: @border-radius-small;
+>>>>>>> master
 }

@@ -3,14 +3,92 @@
 // -----
 // @INTRO
 // -----
+<<<<<<< HEAD
 .protectedIntroBody{
 	margin-bottom: 50px;
 }
+=======
+// .protectedIntroBody{
+// 	margin-bottom: 50px;
+// }
+>>>>>>> master
 
 .Private{display: none;}
 // @end
 
+<<<<<<< HEAD
 
+=======
+.importantContainer{
+	background: url("../img/geometry.png");
+	border-bottom: 1px dashed @gray-lighter;
+}
+
+.blockquotes{
+	margin-bottom: 90px;
+}
+.credit{
+	color:@gray-light;
+	position: absolute;
+	right:10px;
+	bottom:10px;
+}
+
+#scrollTop{
+	display: block;
+	background-color: @gray-light;
+	text-align: center;
+	border-radius:3px;
+	color: #fff;
+	font-size: 18px;
+	vertical-align: center;
+	.square(50px);
+	line-height: 44px;
+	position: fixed;
+	bottom: 60px;
+	right: 30px;
+	text-decoration: none;
+	.opacity(50);
+	cursor: pointer;
+	z-index:1020;
+}
+.pikockContainer{
+	@backgroundImg: "../img/create-website-pikock.jpg";
+	background-image: url("@{backgroundImg}");
+	background-position: center center;
+	background-size:cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-color: #fff;
+	position: absolute;
+	min-width: 100%;
+	width: 100%;
+	top: 50px;
+	bottom: 0;
+	left: 0;
+	right:0;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='@{backgroundImg}', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='@{backgroundImg}', sizingMethod='scale')";
+
+	.overlayContainer{
+		background: url("../img/background.png");
+		position: absolute;
+		width:100%;
+		height:100%;
+		top:0;
+		left:0;
+		right:0;
+	}
+	.intro{
+		text-align: center;
+		color: #fff;
+		padding-top:12%;
+		p.lead{
+			font-size: 31px;
+		}
+	}
+}
+>>>>>>> master
 // -------
 // @EDITOR
 // -------
@@ -43,15 +121,50 @@
 
 // @end
 
+<<<<<<< HEAD
 /* @loader  */
 .isViewLoading{
 	font-family: @baseFontFamily;
+=======
+
+//EXAMPLE//
+
+.bs-example{
+	margin: 30px 0;
+	.popover{
+		position: relative;
+		display: block;
+		float: left;
+		z-index:990;
+		width: 260px;
+		&.top,&.left,&.right,&.bottom{
+			margin: inherit;
+		}
+		margin: 20px;
+	}
+
+	.modal{
+		position: relative;
+		top: auto;
+		right: auto;
+		left: auto;
+		bottom: auto;
+		z-index: 1;
+		display: block;
+		overflow: hidden;
+	}
+}
+/* @loader  */
+.isViewLoading{
+	font-family: @font-family-base;
+>>>>>>> master
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	right: 0;
 	left: 0;
 	z-index: 1;
+<<<<<<< HEAD
 	background-color: @grayLighter;
 	
 	h1 {
@@ -66,23 +179,42 @@
 	  text-shadow: 0 1px 2px @white;
 	}
 	
+=======
+	background: url("../img/geometry.png");
+	h1{
+		text-align: center;
+		padding-top: 180px;
+	}
+>>>>>>> master
 	.loader {
 		position:relative;
 		.square(100px);
 		margin-right: auto;
+<<<<<<< HEAD
 		.border-radius(100px);
+=======
+		border-radius:100px;
+>>>>>>> master
 		.scale(0.5);
 		margin-left: auto;
 		margin-top: 50px;
 		
 		div {
 		  .square(20px);
+<<<<<<< HEAD
 		  background:@black;
+=======
+		  background:@gray-light;
+>>>>>>> master
 		  text-shadow: 0 1px 2px #F6F6F6;
 		  position:absolute;
 		  top:40px;
 		  left:40px;
+<<<<<<< HEAD
 		  .border-radius(10px);
+=======
+		  border-radius:10px;
+>>>>>>> master
 		}
 	}
 }
@@ -181,26 +313,42 @@ div.colorpicker{
 
 
 .groupNameTitle{
+<<<<<<< HEAD
 	color: @textColor;
+=======
+	color: @text-color;
+>>>>>>> master
 	text-shadow: 0 1px 1px #F6F6F6;
 }
 
 .labelTitle{
+<<<<<<< HEAD
 	line-height: @baseLineHeight;
 	font-size: 14px;
 	font-weight: normal;
 	color: @textColor;
+=======
+	line-height: @line-height-base;
+	font-size: 14px;
+	font-weight: normal;
+	color: @text-color;
+>>>>>>> master
 	text-shadow: 0 1px 1px #F6F6F6;
 }
 
 
 .protected {
+<<<<<<< HEAD
 	font-family: @baseFontFamily;
+=======
+	font-family: @font-family-base;
+>>>>>>> master
 	font-size: 14px;
 	line-height: 20px;
 	color: #333;
 	
 	a{
+<<<<<<< HEAD
 		color: @linkColor;
 		&:hover {
 			color: @linkColorHover;
@@ -213,6 +361,26 @@ div.colorpicker{
 		text-align: center;
 		padding: 90px;
 		border-bottom: 1px dashed @grayLighter;
+=======
+		color: @link-color;
+		&:hover {
+			color: @link-hover-color;
+		}
+	}
+
+	.socialButtons{
+		padding-top: 15px;
+		li{
+			margin-left: 5px;
+		}
+	}
+
+	.introHeader{
+		padding: 180px 90px;
+		h1{
+			font-size: 46px;
+		}
+>>>>>>> master
 	}
 	
 	.buttonsBlocks{
@@ -222,11 +390,32 @@ div.colorpicker{
 		}
 	}
 	
+<<<<<<< HEAD
 	.buttonsDiv{
 		text-align: center;
 		border-top: 1px dashed @grayLighter;
 		margin-top: 45px;
 		padding : 45px 0 0;
+=======
+	.navbar{
+		z-index:1010;
+	}
+	.buttonsDiv{
+		background: @brand-primary;
+		border-top: 1px dashed @gray-lighter;
+		border-bottom: 1px dashed @gray-lighter;
+		margin-top: 45px;
+		padding : 45px 0;
+
+		.buttonsBlocks{
+			padding-left: 90px;
+			color:#fff;
+			margin-bottom: 0;
+			a{
+				margin-left: 30px;
+			}
+		}
+>>>>>>> master
 	}
 
 	.centerTitle{
@@ -235,7 +424,11 @@ div.colorpicker{
 	}	
 	
 	#menuBottom{
+<<<<<<< HEAD
 		background: @grayDarker;
+=======
+		background: @gray-darker;
+>>>>>>> master
 		padding: 7px 0 10px;
 		position: fixed;
 		right: 0;
@@ -252,13 +445,21 @@ div.colorpicker{
 			}
 		}	
 		.sign{
+<<<<<<< HEAD
 			color: @grayLight;
+=======
+			color: @gray-light;
+>>>>>>> master
 			float: right;
 			padding :7px;
 		}
 		
 		.checkbox{
+<<<<<<< HEAD
 			color: @grayLight;
+=======
+			color: @gray-light;
+>>>>>>> master
 			padding-right: 10px;
 			padding-top: 10px;
 		
@@ -275,8 +476,13 @@ div.colorpicker{
 	}
 	
 	.footer{
+<<<<<<< HEAD
 		background: @grayDarker;
 		color: @grayLight;
+=======
+		background: @gray-darker;
+		color: @gray-light;
+>>>>>>> master
 		padding: 10px 0;
 	}
 	
@@ -288,6 +494,7 @@ div.colorpicker{
 			margin-bottom: 30px;
 			#gradient > .vertical(#f5f5f5, #f9f9f9);
 			.box-shadow(inset 0 1px 2px rgba(0,0,0,.1));
+<<<<<<< HEAD
 			.border-radius(@baseBorderRadius);
 			.colorShowBar{
 				  width: 100%;
@@ -300,6 +507,20 @@ div.colorpicker{
 				  .box-shadow(inset 0 -1px 0 rgba(0,0,0,.15));
 				  .box-sizing(border-box);
 				  .transition(width .6s ease);
+=======
+			border-radius: @border-radius-base;
+			.colorShowBar{
+			  width: 100%;
+			  height: 100%;
+			  color: #fff;
+			  float: left;
+			  font-size: 12px;
+			  text-align: center;
+			  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+			  .box-shadow(inset 0 -1px 0 rgba(0,0,0,.15));
+			  .box-sizing(border-box);
+			  .transition(width .6s ease);
+>>>>>>> master
 			}
 		}
 	}
@@ -309,11 +530,16 @@ div.colorpicker{
 	// colorpicker
 	// -------------------------
 	.colorpicker{
+<<<<<<< HEAD
 		span.add-on{
+=======
+		span.input-group-addon{
+>>>>>>> master
 			padding: 0;
 			width: 28px;
 			height: 28px;
 			i{
+<<<<<<< HEAD
 				margin: -1px 0px 0px;
 				width: 30px;
 				height: 30px;
@@ -322,10 +548,23 @@ div.colorpicker{
 				border-bottom-right-radius: @baseBorderRadius;
 				.box-shadow(inset 0px 0px 1px @grayLight);
 				margin-left: -1px;
+=======
+				margin: -0px 0px 0px;
+				width: 30px;
+				height: 32px;
+				z-index: 0;
+				border-top-right-radius: 4px;
+				border-bottom-right-radius: 4px;
+				-webkit-box-shadow: inset 0px 0px 1px #999999;
+				box-shadow: inset 0px 0px 1px #999999;
+				margin-left: -1px;
+				display: block;
+>>>>>>> master
 			}
 		}
 	}
 	// @end
+<<<<<<< HEAD
 
 
 	// -------------------------
@@ -921,6 +1160,16 @@ div.colorpicker{
 		}
 	}
 	
+=======
+@import "../../twitter-bootstrap/less/forms.less";
+@import "../../twitter-bootstrap/less/type.less";
+@import "../../twitter-bootstrap/less/modals.less";
+@import "../../twitter-bootstrap/less/utilities.less";
+@import "../../twitter-bootstrap/less/navbar.less";
+@import "../../twitter-bootstrap/less/dropdowns.less";
+@import "../../twitter-bootstrap/less/buttons.less";
+
+>>>>>>> master
 }
 
 

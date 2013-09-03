@@ -6,5 +6,9 @@ angular.module('bootstrapVariablesEditor', ['bootstrapVariablesEditor.filters', 
     $locationProvider.hashPrefix('!');
     //$routeProvider.when('/intro', {templateUrl: 'partials/intro.html', controller: IntroCtrl});
     $routeProvider.when('/editor', {templateUrl: 'partials/editor.html', controller: LessCtrl});
+<<<<<<< HEAD
+=======
+    $routeProvider.when('/create-website-pikock', {templateUrl: 'partials/create-website-pikock.html', controller: PageCtrl});
+>>>>>>> master
     $routeProvider.otherwise({redirectTo: '/editor'});
   }]);

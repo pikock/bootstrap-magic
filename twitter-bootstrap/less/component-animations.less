@@ -2,6 +2,13 @@
 // Component animations
 // --------------------------------------------------
 
+<<<<<<< HEAD
+=======
+// Heads up!
+//
+// We don't use the `.opacity()` mixin here since it causes a bug with text
+// fields in IE7-8. Source: https://github.com/twitter/bootstrap/pull/3552.
+>>>>>>> master
 
 .fade {
   opacity: 0;
@@ -12,11 +19,23 @@
 }
 
 .collapse {
+<<<<<<< HEAD
+=======
+  display: none;
+  &.in {
+    display: block;
+  }
+}
+.collapsing {
+>>>>>>> master
   position: relative;
   height: 0;
   overflow: hidden;
   .transition(height .35s ease);
+<<<<<<< HEAD
   &.in {
     height: auto;
   }
+=======
+>>>>>>> master
 }
