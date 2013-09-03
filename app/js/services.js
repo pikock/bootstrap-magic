@@ -84,7 +84,6 @@ angular.module('bootstrapVariablesEditor.services', []).
                 variables[$scope.variables[i].data[j].key] = $scope.variables[i].data[j].value;
             }
     	}
-        console.log(variables)
         return variables;
     };
     
@@ -181,7 +180,7 @@ angular.module('bootstrapVariablesEditor.services', []).
     };
     
     lessEngine.saveLessVar = function(data){
-        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').append(
+        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').append(
                 $('<input>')
                     .attr('type', 'hidden')
                     .attr('name', 'data')
@@ -212,7 +211,7 @@ angular.module('bootstrapVariablesEditor.services', []).
         	    if (err) { return console.error(err) }
         	    var type = ($scope.minified) ? 'mincss' : 'css';
                 var css = tree.toCSS({ compress: $scope.minified });
-                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').
+                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').
                     append(
                         $('<input>')
                             .attr('type', 'hidden')

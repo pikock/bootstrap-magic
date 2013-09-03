@@ -19,13 +19,11 @@ angular.module('bootstrapVariablesEditor.directives', []).
                 
                 element.bind('change',  function () {
                 	if (scope.variable.value.charAt(0) == '#') {
-                        console.log("toto")
                         element.colorpicker('setValue', scope.variable.value);
                     }
                 	clearTimeout(inputChange);
                     inputChange = setTimeout(
                         function () {
-                            console.log("tutu")
                             scope.$apply(attrs.colorpickerapply);
                         }, 400
                     );

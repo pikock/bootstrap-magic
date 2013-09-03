@@ -23,6 +23,7 @@ function LessCtrl($scope, $http, ap_less) {
                     
                     $('.lessVariable').each( function(index){
                         var scope = angular.element(this).scope();
+                        console.log();
                         switch ( scope.variable.type ) {
                         	case 'icons':
                         		var src = icons;
