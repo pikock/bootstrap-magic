@@ -79,17 +79,15 @@ angular.module('bootstrapVariablesEditor.services', []).
     	var variables = {};
         var fonts = [];
     	for (var i = 0; i < $scope.variables.length; i++ ) {
-            if (all == false && $scope.variables[i].name == "Private") {
-                $scope.variables.splice(i,1);
-            }else{
-                for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
-                    // if type =  font, push it to an array 
-                    if ($scope.variables[i].data[j].type == "font") {
-                        fonts.push($scope.variables[i].data[j].value);
-                    };
-                    variables[$scope.variables[i].data[j].key] = $scope.variables[i].data[j].value;
-                }   
-            }
+            
+            for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
+                // if type =  font, push it to an array 
+                if ($scope.variables[i].data[j].type == "font") {
+                    fonts.push($scope.variables[i].data[j].value);
+                };
+                variables[$scope.variables[i].data[j].key] = $scope.variables[i].data[j].value;
+            }   
+            
     	}
         return{
             variables: variables,
@@ -207,7 +205,7 @@ angular.module('bootstrapVariablesEditor.services', []).
     };
     
     lessEngine.saveLessVar = function(data){
-        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').append(
+        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').append(
                 $('<input>')
                     .attr('type', 'hidden')
                     .attr('name', 'data')
@@ -229,16 +227,18 @@ angular.module('bootstrapVariablesEditor.services', []).
             filename: 'bootstrap.less' // Specify a filename, for better error messages
         });
         $(document).load($('#twitterBootstrapLess').attr('href'), function (data) {
-        	var vars = lessEngine.getVariables($scope);
+        	var vars = lessEngine.getVariables($scope).variables;
             for (name in vars) {
                 data += ((name.slice(0,1) === '@')? '' : '@') + name +': '+ 
                         ((vars[name].slice(-1) === ';')? vars[name] : vars[name] +';');
             }
+            console.log(vars)
         	parser.parse(data, function (err, tree) {
         	    if (err) { return console.error(err) }
         	    var type = ($scope.minified) ? 'mincss' : 'css';
                 var css = tree.toCSS({ compress: $scope.minified });
-                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').
+                console.log(css)
+                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').
                     append(
                         $('<input>')
                             .attr('type', 'hidden')

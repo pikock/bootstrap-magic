@@ -44,7 +44,7 @@
 
 			{"key":"@line-height-large", "value":"1.33","type":"text"},
 			{"key":"@line-height-small", "value":"1.5","type":"text"},
-			
+
 			{"key":"@component-active-bg", "value":"@brand-primary", "type": "text"}
 		]
 	},
@@ -54,9 +54,9 @@
 		"data": [
 
 
-			{"key":"@font-family-sans-serif", "value":"'Helvetica Neue', Helvetica, Arial, sans-serif", "type": "font"},
-			{"key":"@font-family-serif", "value":"Georgia, 'Times New Roman', Times, serif", "type": "font"},
-			{"key":"@font-family-monospace", "value":"Monaco, Menlo, Consolas, 'Courier New', monospace", "type": "font"},
+			{"key":"@font-family-sans-serif", "value":"Open Sans", "type": "font"},
+			{"key":"@font-family-serif", "value":"PT Serif", "type": "font"},
+			{"key":"@font-family-monospace", "value":"Monaco", "type": "font"},
 			{"key":"@font-family-base", "value":"@font-family-sans-serif", "type": "text"},
 
 			{"key":"@font-size-base", "value":"14px", "type": "text"},
