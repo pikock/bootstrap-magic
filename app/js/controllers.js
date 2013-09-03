@@ -6,6 +6,16 @@ function LessCtrl($scope, $http, ap_less, $timeout) {
     $scope.fonts = {};
     var initLessVariables = function () {
         $http.get('less/variables.json').success(function(data) {
+
+            if (window.localStorage) {
+                for (var key in window.localStorage) {
+                    var url = "http://pikock.github.io/bootstrap-magic/twitter-bootstrap/less/bootstrap.less:timestamp"
+                    if (key == url) {
+                        delete window.localStorage[key];
+                    };
+                  }
+            };
+            
             $scope.variables = data;
             $timeout(function() {
                 $scope.applyLess(false);
@@ -21,9 +31,12 @@ function LessCtrl($scope, $http, ap_less, $timeout) {
                         var scope = angular.element(this).scope();
                         scope.variable.value = ev.color.toHex();
 
-                        if ($scope.autoapplyless){
-                            $scope.autoApplyLess();
-                        }
+                        $timeout(function() {
+                            if ($scope.autoapplyless){
+                                $scope.autoApplyLess();
+                            }
+                        }, 500);
+                        
                     });
                     
                     $('.lessVariable').each( function(index){
