@@ -1,0 +1,131 @@
+
+@font-face {
+    font-family: 'Agrafiel';
+    src: url('Agrafiel-webfont.eot');
+    src: url('Agrafiel-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Agrafiel-webfont.woff') format('woff'),
+         url('Agrafiel-webfont.ttf') format('truetype'),
+         url('Agrafiel-webfont.svg#Agrafielregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.header{.box-shadow( 0 1px 1px @grayLighter);}
+.tophead{
+	.logo{
+		padding: 0 45px;
+	}
+		
+	background-color: @white;
+	padding: 20px;
+	.superBaseline{
+		font-family: @headingsFontFamily;
+		font-size: 2.3em;
+		display: block;
+		margin-top: 30px;
+		margin-bottom: 10px;
+		color: @secondBrandColor;
+		text-shadow: 0 1px 1px @grayLighter;
+	}
+}
+.well{
+	background-color: @white;
+	.box-shadow( 0 1px 1px @grayLighter);
+	.unstyled{
+
+		li{
+			line-height: 24px;
+			border-bottom:1px solid @grayLighter;
+			padding: 10px 15px;
+
+		}
+	}
+
+}
+
+.projectTable{
+	td{
+		vertical-align: middle;
+	}
+
+}
+.input-append .add-on, .input-prepend .add-on {
+	line-height: 35px;
+	height: 35px;
+}
+h1{
+	margin-bottom : 30px;
+}
+
+h1 { font-size: @baseFontSize * 2.5; } // ~38px
+h2 { font-size: @baseFontSize * 2; } // ~32px
+h3 { font-size: @baseFontSize * 1.5; } // ~24px
+h4 { font-size: @baseFontSize * 1.25; } // ~18px
+h5 { font-size: @baseFontSize; }
+h6 { font-size: @baseFontSize * 0.85; } // ~12px
+
+input[type="text"], input[type="email"]{
+	height: 35px;
+	line-height: 35px;
+}
+.centered{
+	text-align: center;
+}
+.bigLineHeight{
+	line-height: 35px;
+}
+.btn{
+	text-transform: uppercase;
+}
+.span25{
+	width: 80px;
+}
+.radioContent{
+	overflow: hidden;
+}
+.radioBox{
+	float: left;
+	text-align: center;
+	width: 40px;
+	margin: 0 10px;
+	
+	span{
+		display: block;
+		font-size: 1.5em;
+	}
+}
+
+.civiliteBlock{
+	margin-bottom: 9px;
+}
+#Adress, #selectArche, #prelevement, #montantLibre{
+	display: none;
+}
+
+#selectArche{
+	margin-top: 9px;
+}
+
+.error-message ,.error{
+	.alert;
+	.alert-error;
+	width: 72%;
+}
+
+.input-prepend{
+	overflow: hidden;
+	padding-left: 30px;
+}
+.affectation{
+	margin: 30px 0;
+}
+.footer{
+	background-color: darken(@navbarBackgroundHighlight, 3%);
+	color:@grayLighter;
+	padding: @paddingLarge;
+
+		a{
+			color:@grayLighter;
+
+		}
+}

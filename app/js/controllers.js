@@ -1,24 +1,29 @@
 /* Controllers */
 
-function LessCtrl($scope, $http, ap_less) {
+function LessCtrl($scope, $http, ap_less, $timeout) {
 
     $scope.variables = {};
+    $scope.fonts = {};
     var initLessVariables = function () {
         $http.get('less/variables.json').success(function(data) {
             $scope.variables = data;
-            setTimeout(function() {
-                $scope.applyLess();
+            $timeout(function() {
+                $scope.applyLess(false);
             },0);
-            setTimeout(function() {
+            $timeout(function() {
                 // move into a service
                 var keys = ap_less.getKeys($scope);
                 var icons = ap_less.getUrls();
                 var font = ap_less.getFonts();
-                setTimeout(function() {
+                $timeout(function() {
                     var $colorpicker = $('.colorpicker');
                     $colorpicker.colorpicker().on('changeColor', function(ev){
                         var scope = angular.element(this).scope();
                         scope.variable.value = ev.color.toHex();
+
+                        if ($scope.autoapplyless){
+                            $scope.autoApplyLess();
+                        }
                     });
                     
                     $('.lessVariable').each( function(index){
@@ -56,14 +61,26 @@ function LessCtrl($scope, $http, ap_less) {
     
     $scope.autoApplyLess = function (event) {
         if ($scope.autoapplyless){
-            var vars = ap_less.getVariables($scope);
-            less.modifyVars(vars);
+            var vars = ap_less.getVariables($scope, false);
+            less.modifyVars(vars.variables);
+
+            WebFont.load({
+              google: {
+                families: vars.fonts
+              }
+            });
         }
     };
     
-    $scope.applyLess = function (event) {
-        var vars = ap_less.getVariables($scope);
-        less.modifyVars(vars);
+    $scope.applyLess = function (applyAll) {
+        var vars = ap_less.getVariables($scope, applyAll);
+        less.modifyVars(vars.variables);
+
+        WebFont.load({
+          google: {
+            families: vars.fonts
+          }
+        });
     };
     
     $scope.colorpicker = function(type) {
@@ -112,12 +129,10 @@ function LessCtrl($scope, $http, ap_less) {
     $scope.isViewLoading = false;
     
     $scope.$on('$routeChangeStart', function() {
-        //console.log('routeChangeStart');
         $scope.isViewLoading = true;
     });
     
     $scope.$on('$routeChangeSuccess', function() {
-        //console.log('routeChangeSuccess');
         $scope.isViewLoading = false;
     });
     
@@ -126,4 +141,8 @@ function LessCtrl($scope, $http, ap_less) {
     };
     
 }
-LessCtrl.$inject = ['$scope', '$http', 'ap_less'];
+LessCtrl.$inject = ['$scope', '$http', 'ap_less', '$timeout'];
+
+function PageCtrl($scope, $http, ap_less) {
+    }
+PageCtrl.$inject = ['$scope', '$http', 'ap_less'];
