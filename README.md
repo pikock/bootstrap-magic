@@ -2,7 +2,6 @@ Bootstrap magic featuring Bootstrap 3
 =====================================
 
 Bootstrap themes generator, featuring Bootstrap 3 and AngularJS.
-
 Update your variables, change it with a smooth colorpicker and get instantly the result.
 
 [Try it out!](http://pikock.github.com/bootstrap-magic/)
@@ -10,9 +9,12 @@ Update your variables, change it with a smooth colorpicker and get instantly the
 If you want to use Bootstrap Magic featuring Bootstrap 2.3.2, it's still available 
 [here](http://pikock.github.com/bootstrap-magic/2.3.2)
 
-#### Build with AngularJS and Less CSS
+#### New features
 
-Bootstrap Magic has been developped with [AngularJS](http://angularjs.org/) and [LessCSS](http://lesscss.org/) . 
+* Bootstrap 3 adapted
+* Google webfonts included in typehead
+* Better performance
+* Still developped with [AngularJS](http://angularjs.org/) and [LessCSS](http://lesscss.org/) . 
 
 ## Contact
 
@@ -20,6 +22,8 @@ Bootstrap Magic has been developped with [AngularJS](http://angularjs.org/) and 
 * For more information on [Autre planete](http://www.autreplanete.com/)  please check out http://www.autreplanete.com/
 * For more information on [AngularJS](http://angularjs.org/)  please check out http://angularjs.org/
 * For more information on [Twitter Bootstrap](http://twitter.github.com/bootstrap/)  please check out http://twitter.github.com/bootstrap/
+* For more information on [Webfontloader](https://github.com/typekit/webfontloader)  please check out https://github.com/typekit/webfontloader
+
 
 
 ## License
