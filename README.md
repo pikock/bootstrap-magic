@@ -9,14 +9,14 @@ Update your variables, change it with a smooth colorpicker and get instantly the
 If you want to use Bootstrap Magic featuring Bootstrap 2.3.2, it's still available 
 [here](http://pikock.github.com/bootstrap-magic/2.3.2)
 
-#### New features
+### New features
 
-* Bootstrap 3 adapted
+* Bootstrap 3 awesomeness
 * Google webfonts included in typehead
 * Better performance
 * Still developped with [AngularJS](http://angularjs.org/) and [LessCSS](http://lesscss.org/) . 
 
-## Contact
+### Contact
 
 * Create your website easily with [Pikock](http://www.pikock.com/en), try it out on http://www.pikock.com/en
 * For more information on [Autre planete](http://www.autreplanete.com/)  please check out http://www.autreplanete.com/
@@ -26,7 +26,7 @@ If you want to use Bootstrap Magic featuring Bootstrap 2.3.2, it's still availab
 
 
 
-## License
+### License
 
 The MIT License
 
