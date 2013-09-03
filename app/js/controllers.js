@@ -30,12 +30,13 @@ function LessCtrl($scope, $http, ap_less, $timeout) {
                     $colorpicker.colorpicker().on('changeColor', function(ev){
                         var scope = angular.element(this).scope();
                         scope.variable.value = ev.color.toHex();
-                        
+
                         $timeout(function() {
                             if ($scope.autoapplyless){
                                 $scope.autoApplyLess();
                             }
                         }, 500);
+                        
                     });
                     
                     $('.lessVariable').each( function(index){

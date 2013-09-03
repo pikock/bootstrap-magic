@@ -3,35 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="fragment" content="!">
+  <title>Bootstrap Magic : Generate your own bootstrap theme quickly and easily</title>
+  <meta name="description" content="Awesome features like contextual typeahead and colorpicker help you make your custom bootstrap 3 themes quickly and easily." />
   <link rel="stylesheet" href="css/app.css">
   <style>
     [ng-cloak] {
       display: none;
     }
   </style>
-  <script type="text/javascript">
-    
-    less = {
-        env: "development", // or "production"
-        async: false,       // load imports async
-        fileAsync: false,   // load imports async when in a page under 
-                            // a file protocol
-        poll: 3000,         // when in watch mode, time in ms between polls
-        functions: {},      // user functions, keyed by name
-        dumpLineNumbers: "comments", // or "mediaQuery" or "all"
-        relativeUrls: false,
-        
-        // whether to adjust url's to be relative
-        // if false, url's are already relative to the
-        // entry less file
-        
-        // rootpath: "/tutu/"
-        // rootpath: "/github/variables-bootstrap-angularJS-editor/"
-        // a path to add on to the start of every url 
-        //resource
-    };
-    
-  </script>
+ 
   <script>
     // include angular loader, which allows the files to load in any order
     /*
@@ -58,7 +38,7 @@
     
     // load all of the dependencies asynchronously.
     $script([
-        'lib/less/less-1.3.3.min.js',
+        'lib/less/less-1.4.1.min.js',
         'lib/jquery/jquery-1.8.3.min.js'
     ], function() {
         $script([
@@ -81,12 +61,24 @@
     
     
   </script>
-  <title>Bootstrap Magic : Generate simply your own bootstrap theme</title>
-  <meta name="description" content="Awesome features like contextual typeahead and colorpicker to make smooth bootstrap theme faster." />
+  <title>Bootstrap Magic : Generate simply your own bootstrap 3 theme </title>
+  <meta name="description" content="Awesome features like contextual typeahead and colorpicker to make smooth bootstrap 3 theme faster." />
   <link id="twitterBootstrapLess" rel="stylesheet/less" href="../twitter-bootstrap/less/bootstrap.less">
-  <link id="twitterResponsiveLess" rel="stylesheet/less" href="../twitter-bootstrap/less/responsive.less">
+ <!--  <link id="twitterResponsiveLess" rel="stylesheet/less" href="../twitter-bootstrap/less/responsive.less"> -->
+
+
+ <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Droid Sans', 'Droid Serif']
+      }
+    });
+  </script>
+
+
   <script type="text/javascript">
-    
+      
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-37710723-1']);
       _gaq.push(['_trackPageview']);
@@ -101,49 +93,81 @@
 </head>
 <body data-ng-cloak>
 	<div class="protected">
-	    <div class=" navbar navbar-static-top navbar-inverse" id="menuTop">
-	        <div class="navbar-inner">
-	            <div class="container">
-	                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	                </a>
-	                <a class="brand" href="../index.html" title="Bootrstrap Magic written in AngularJS">Bootstrap Magic</a>
-	                    <ul class="nav">
-	                        <li><a href="../index.html" title="bootstrap themes generator presentation">Intro</a></li>
-	                        <li class="divider-vertical"></li>
-	                        <li ><a href="index.html#!/editor" title="bootstrap themes generator">Editor</a></li>
-	                        <li class="divider-vertical"></li>
-	                    </ul>
-	            </div>
-	        </div>
-	    </div>
+    <nav class="navbar-inverse navbar-default" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html" title="Bootrstrap Magic written in AngularJS">Bootstrap Magic</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="../index.html" title="bootstrap 3 themes generator presentation">Home</a></li>
+          <li class="divider-vertical"></li>
+          <li ><a href="index.html#!/editor" title="bootstrap 3 themes generator">Editor</a></li>
+          <li class="divider-vertical"></li>
+          <li ><a href="index.html#!/create-website-pikock" title="create website easily">Create your website with Pikock</a></li>
+          <li class="divider-vertical"></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right socialButtons">
+            <li>
+              <div class="fb-like" data-href="http://pikock.github.io/bootstrap-magic/"  data-send="false" data-layout="button_count" data-width="50" data-show-faces="false" data-action="like"></div>
+            </li>
+            <li class="twitter">
+              <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://pikock.github.io/bootstrap-magic/" data-text="Bootstrap Magic feat Bootstrap 3 : Awesome theme generator with live preview" data-lang="en" data-hashtags="bootstrap,angularjs">Tweeter</a>
+            </li>
+            <li><div class="g-plusone" data-size="medium" data-href="http://pikock.github.io/bootstrap-magic/"></div></li>    
+          </ul>
+
+      </div><!-- /.navbar-collapse -->
+    </nav>
 	</div>
 	
-	<div class="container">
-	    <div class="isViewLoading" ng-show="isViewLoading">
-	    	<h1>It's gonna be magic... wait for it...</h1>
-	        <div class="loader">
-	          <div class="bar1"></div>
-	          <div class="bar2"></div>
-	          <div class="bar3"></div>
-	          <div class="bar4"></div>
-	          <div class="bar5"></div>
-	          <div class="bar6"></div>
-	          <div class="bar7"></div>
-	          <div class="bar8"></div>
-	        </div>
-      	</div>
-		<div ng-view></div>
-				
-	</div>
-	
-	<!--<footer>
-		<div class="container">
-			<p>Variables Bootstrap AngularJS Editor: v<span app-version></span></p>
-		</div>
-	</footer>-->
-	
+  <div class="protected">
+    <div class="isViewLoading" ng-show="isViewLoading">
+      <h1>It's gonna be magic... wait for it...</h1>
+        <div class="loader">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+          <div class="bar4"></div>
+          <div class="bar5"></div>
+          <div class="bar6"></div>
+          <div class="bar7"></div>
+          <div class="bar8"></div>
+        </div>
+    </div>
+  </div>
+  
+  <div ng-view></div>
+
+<div id="fb-root"></div>
+<script type="text/javascript">
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=239545502808545";
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  window.___gcfg = {lang: 'fr'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+    
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+</script>
+
 </body>
 </html>
