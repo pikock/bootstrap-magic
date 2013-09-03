@@ -6,8 +6,8 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('bootstrapVariablesEditor.services', []).
-  value('version', '0.2').
-  factory('ap_less',['$http', function($http) {
+  value('version', '0.1').
+  factory('ap_less', function() {
   
     var lessEngine = {};
     
@@ -22,6 +22,7 @@ angular.module('bootstrapVariablesEditor.services', []).
         var parse = function (data){
             if(regex.commentMulti.test(data)){
                 data = data.replace(regex.commentMulti,'');
+                console.log(data);
             }
             var variables = [];
             var lines = data.split(/\r\n|\r|\n/);
@@ -56,6 +57,7 @@ angular.module('bootstrapVariablesEditor.services', []).
     	};
     	
     	for (var key in vars) {
+    	    console.log('toto');
     	    var type = 'text';
     	    if (key.toLowerCase().indexOf('color')) {
     	        type = 'color';
@@ -75,22 +77,15 @@ angular.module('bootstrapVariablesEditor.services', []).
         return $scope;
     }
     
-    lessEngine.getVariables = function ($scope, all) {
+    lessEngine.getVariables = function ($scope) {
     	var variables = {};
-        var fonts = [];
     	for (var i = 0; i < $scope.variables.length; i++ ) {
-            for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
-                // if type =  font, push it to an array 
-                if ($scope.variables[i].data[j].type == "font") {
-                    fonts.push($scope.variables[i].data[j].value);
-                };
+    		for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
                 variables[$scope.variables[i].data[j].key] = $scope.variables[i].data[j].value;
-            }   
+            }
     	}
-        return{
-            variables: variables,
-            fonts: fonts
-        }
+        console.log(variables)
+        return variables;
     };
     
     /* var => array of variables */
@@ -133,11 +128,7 @@ angular.module('bootstrapVariablesEditor.services', []).
             'difference(@color1, @color2)',
             'exclusion(@color1, @color2)',
             'average(@color1, @color2)',
-            'negation(@color1, @color2)',
-            'ceil(@number)',                
-            'floor(@number)',               
-            'percentage(@number)',
-
+            'negation(@color1, @color2)',    	
     	];
     	
         for (var i = 0; i < $scope.variables.length; i++ ) {
@@ -145,7 +136,6 @@ angular.module('bootstrapVariablesEditor.services', []).
                 keys.push($scope.variables[i].data[j].key);
             }
         }
-    
         return keys;
     };
     
@@ -172,25 +162,13 @@ angular.module('bootstrapVariablesEditor.services', []).
             "Verdana, Geneva",
     	    "'Times New Roman', Times"
     	];
-
-        $.ajax({
-            url: "https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBb_pLbXGeesG8wE32FMtywG4Vsfq6Uk_8",
-            type: 'GET',
-            dataType: 'JSONP',
-            success: function (data) {   
-                for (var i = 0; i < data.items.length; i++ ) {
-                    keys.push(data.items[i].family);
-                }
-            }
-        });
-
     	return keys;
     };
     
     lessEngine.getVariablesToString = function ($scope) {
     	var string = "" +
     	"/*\n"+
-    	"* pikock http://www.pikock.com/ , autreplanete http://www.autreplanete.com/ \n"+
+    	"* pikock, autreplanete http://www.autreplanete.com/ \n"+
     	"*  \n"+
     	"**/\n";
         for (var i = 0; i < $scope.variables.length; i++ ) {
@@ -253,4 +231,4 @@ angular.module('bootstrapVariablesEditor.services', []).
         });
     };
     return lessEngine;
-}]);
+});

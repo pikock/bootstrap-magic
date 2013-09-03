@@ -11,51 +11,26 @@ angular.module('bootstrapVariablesEditor.directives', []).
         };
     }]).
 
-    // directive('colorPickerApply',[ function() {
-    //     return {
-    //         link: function(scope, element, attrs) {
-                
-    //             element.bind('change',  function () {
-    //             	// if (scope.variable.value.charAt(0) == '#') {
-    //              //        element.colorpicker('setValue', scope.variable.value);
-    //              //    }
-    //             	// clearTimeout(inputChange);
-    //              //    inputChange = setTimeout(
-    //              //        function () {
-    //              //            scope.$apply(attrs.colorPickerApply);
-    //              //        }, 400
-    //              //    );
-    //             });
-                
-    //         }
-    //     };
-    // }]).
-
-    directive('scrollTop',[ function() {
+    directive('apColorPicker',[ function() {
         return {
+            restrict: 'C',
             link: function(scope, element, attrs) {
-                $('#scrollTop').hide();
-
-                $(function(){
-                    $(window).scroll(function(){
-                       if ($(this).scrollTop() > 200){
-                           $('#scrollTop').fadeIn();
-                       }else{
-                           $('#scrollTop').fadeOut();
-                       }
-                    });
+                var inputChange;
+                
+                element.bind('change',  function () {
+                	if (scope.variable.value.charAt(0) == '#') {
+                        console.log("toto")
+                        element.colorpicker('setValue', scope.variable.value);
+                    }
+                	clearTimeout(inputChange);
+                    inputChange = setTimeout(
+                        function () {
+                            console.log("tutu")
+                            scope.$apply(attrs.colorpickerapply);
+                        }, 400
+                    );
                 });
-
-                 $('#scrollTop').click(function(){
-                    $('body,html').animate({
-                       scrollTop: 0
-                    }, 300);
-                    return false;
-                 }); 
-                    
+                
             }
         };
     }]);
-
-
- 
