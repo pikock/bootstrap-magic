@@ -11,29 +11,6 @@ angular.module('bootstrapVariablesEditor.directives', []).
         };
     }]).
 
-<<<<<<< HEAD
-    directive('apColorPicker',[ function() {
-        return {
-            restrict: 'C',
-            link: function(scope, element, attrs) {
-                var inputChange;
-                
-                element.bind('change',  function () {
-                	if (scope.variable.value.charAt(0) == '#') {
-                        element.colorpicker('setValue', scope.variable.value);
-                    }
-                	clearTimeout(inputChange);
-                    inputChange = setTimeout(
-                        function () {
-                            scope.$apply(attrs.colorpickerapply);
-                        }, 400
-                    );
-                });
-                
-            }
-        };
-    }]);
-=======
     // directive('colorPickerApply',[ function() {
     //     return {
     //         link: function(scope, element, attrs) {
@@ -82,4 +59,3 @@ angular.module('bootstrapVariablesEditor.directives', []).
 
 
  
->>>>>>> master

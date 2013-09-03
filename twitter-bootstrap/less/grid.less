@@ -3,23 +3,6 @@
 // --------------------------------------------------
 
 
-<<<<<<< HEAD
-// Fixed (940px)
-#grid > .core(@gridColumnWidth, @gridGutterWidth);
-
-// Fluid (940px)
-#grid > .fluid(@fluidGridColumnWidth, @fluidGridGutterWidth);
-
-// Reset utility classes due to specificity
-[class*="span"].hide,
-.row-fluid [class*="span"].hide {
-  display: none;
-}
-
-[class*="span"].pull-right,
-.row-fluid [class*="span"].pull-right {
-  float: right;
-=======
 // Set the container width, and override it for fixed navbars in media queries
 .container {
   .container-fixed();
@@ -360,5 +343,4 @@
   .col-lg-offset-9  { margin-left: percentage((9 / @grid-columns)); }
   .col-lg-offset-10 { margin-left: percentage((10/ @grid-columns)); }
   .col-lg-offset-11 { margin-left: percentage((11/ @grid-columns)); }
->>>>>>> master
 }

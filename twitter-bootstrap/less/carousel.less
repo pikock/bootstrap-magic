@@ -3,21 +3,6 @@
 // --------------------------------------------------
 
 
-<<<<<<< HEAD
-.carousel {
-  position: relative;
-  margin-bottom: @baseLineHeight;
-  line-height: 1;
-}
-
-.carousel-inner {
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-}
-
-.carousel-inner {
-=======
 // Wrapper for the slide container and indicators
 .carousel {
   position: relative;
@@ -27,20 +12,11 @@
   position: relative;
   overflow: hidden;
   width: 100%;
->>>>>>> master
 
   > .item {
     display: none;
     position: relative;
     .transition(.6s ease-in-out left);
-<<<<<<< HEAD
-  }
-
-  // Account for jankitude on images
-  > .item > img {
-    display: block;
-    line-height: 1;
-=======
 
     // Account for jankitude on images
     > img,
@@ -48,7 +24,6 @@
       .img-responsive();
       line-height: 1;
     }
->>>>>>> master
   }
 
   > .active,
@@ -91,67 +66,6 @@
 
 .carousel-control {
   position: absolute;
-<<<<<<< HEAD
-  top: 40%;
-  left: 15px;
-  width: 40px;
-  height: 40px;
-  margin-top: -20px;
-  font-size: 60px;
-  font-weight: 100;
-  line-height: 30px;
-  color: @white;
-  text-align: center;
-  background: @grayDarker;
-  border: 3px solid @white;
-  .border-radius(23px);
-  .opacity(50);
-
-  // we can't have this transition here
-  // because webkit cancels the carousel
-  // animation if you trip this while
-  // in the middle of another animation
-  // ;_;
-  // .transition(opacity .2s linear);
-
-  // Reposition the right one
-  &.right {
-    left: auto;
-    right: 15px;
-  }
-
-  // Hover state
-  &:hover {
-    color: @white;
-    text-decoration: none;
-    .opacity(90);
-  }
-}
-
-
-// Caption for text below images
-// -----------------------------
-
-.carousel-caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 15px;
-  background: @grayDark;
-  background: rgba(0,0,0,.75);
-}
-.carousel-caption h4,
-.carousel-caption p {
-  color: @white;
-  line-height: @baseLineHeight;
-}
-.carousel-caption h4 {
-  margin: 0 0 5px;
-}
-.carousel-caption p {
-  margin-bottom: 0;
-=======
   top: 0;
   left: 0;
   bottom: 0;
@@ -292,5 +206,4 @@
   .carousel-indicators {
     bottom: 20px;
   }
->>>>>>> master
 }

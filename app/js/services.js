@@ -6,13 +6,8 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('bootstrapVariablesEditor.services', []).
-<<<<<<< HEAD
-  value('version', '0.1').
-  factory('ap_less', function() {
-=======
   value('version', '0.2').
   factory('ap_less',['$http', function($http) {
->>>>>>> master
   
     var lessEngine = {};
     
@@ -27,10 +22,6 @@ angular.module('bootstrapVariablesEditor.services', []).
         var parse = function (data){
             if(regex.commentMulti.test(data)){
                 data = data.replace(regex.commentMulti,'');
-<<<<<<< HEAD
-                console.log(data);
-=======
->>>>>>> master
             }
             var variables = [];
             var lines = data.split(/\r\n|\r|\n/);
@@ -65,10 +56,6 @@ angular.module('bootstrapVariablesEditor.services', []).
     	};
     	
     	for (var key in vars) {
-<<<<<<< HEAD
-    	    console.log('toto');
-=======
->>>>>>> master
     	    var type = 'text';
     	    if (key.toLowerCase().indexOf('color')) {
     	        type = 'color';
@@ -88,16 +75,6 @@ angular.module('bootstrapVariablesEditor.services', []).
         return $scope;
     }
     
-<<<<<<< HEAD
-    lessEngine.getVariables = function ($scope) {
-    	var variables = {};
-    	for (var i = 0; i < $scope.variables.length; i++ ) {
-    		for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
-                variables[$scope.variables[i].data[j].key] = $scope.variables[i].data[j].value;
-            }
-    	}
-        return variables;
-=======
     lessEngine.getVariables = function ($scope, all) {
     	var variables = {};
         var fonts = [];
@@ -118,7 +95,6 @@ angular.module('bootstrapVariablesEditor.services', []).
             variables: variables,
             fonts: fonts
         }
->>>>>>> master
     };
     
     /* var => array of variables */
@@ -161,15 +137,11 @@ angular.module('bootstrapVariablesEditor.services', []).
             'difference(@color1, @color2)',
             'exclusion(@color1, @color2)',
             'average(@color1, @color2)',
-<<<<<<< HEAD
-            'negation(@color1, @color2)',    	
-=======
             'negation(@color1, @color2)',
             'ceil(@number)',                
             'floor(@number)',               
             'percentage(@number)',
 
->>>>>>> master
     	];
     	
         for (var i = 0; i < $scope.variables.length; i++ ) {
@@ -177,10 +149,7 @@ angular.module('bootstrapVariablesEditor.services', []).
                 keys.push($scope.variables[i].data[j].key);
             }
         }
-<<<<<<< HEAD
-=======
     
->>>>>>> master
         return keys;
     };
     
@@ -207,8 +176,6 @@ angular.module('bootstrapVariablesEditor.services', []).
             "Verdana, Geneva",
     	    "'Times New Roman', Times"
     	];
-<<<<<<< HEAD
-=======
 
         $.ajax({
             url: "https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBb_pLbXGeesG8wE32FMtywG4Vsfq6Uk_8",
@@ -221,18 +188,13 @@ angular.module('bootstrapVariablesEditor.services', []).
             }
         });
 
->>>>>>> master
     	return keys;
     };
     
     lessEngine.getVariablesToString = function ($scope) {
     	var string = "" +
     	"/*\n"+
-<<<<<<< HEAD
-    	"* pikock, autreplanete http://www.autreplanete.com/ \n"+
-=======
     	"* pikock http://www.pikock.com/ , autreplanete http://www.autreplanete.com/ \n"+
->>>>>>> master
     	"*  \n"+
     	"**/\n";
         for (var i = 0; i < $scope.variables.length; i++ ) {
@@ -245,11 +207,7 @@ angular.module('bootstrapVariablesEditor.services', []).
     };
     
     lessEngine.saveLessVar = function(data){
-<<<<<<< HEAD
-        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').append(
-=======
         var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').append(
->>>>>>> master
                 $('<input>')
                     .attr('type', 'hidden')
                     .attr('name', 'data')
@@ -280,11 +238,7 @@ angular.module('bootstrapVariablesEditor.services', []).
         	    if (err) { return console.error(err) }
         	    var type = ($scope.minified) ? 'mincss' : 'css';
                 var css = tree.toCSS({ compress: $scope.minified });
-<<<<<<< HEAD
-                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').
-=======
                 var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').
->>>>>>> master
                     append(
                         $('<input>')
                             .attr('type', 'hidden')
@@ -303,8 +257,4 @@ angular.module('bootstrapVariablesEditor.services', []).
         });
     };
     return lessEngine;
-<<<<<<< HEAD
-});
-=======
 }]);
->>>>>>> master

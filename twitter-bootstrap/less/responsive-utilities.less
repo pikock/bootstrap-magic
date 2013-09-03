@@ -3,13 +3,6 @@
 // --------------------------------------------------
 
 
-<<<<<<< HEAD
-// Hide from screenreaders and browsers
-// Credit: HTML5 Boilerplate
-.hidden {
-  display: none;
-  visibility: hidden;
-=======
 // IE10 Metro responsive
 // Required for Windows 8 Metro split-screen snapping with IE10
 //
@@ -38,41 +31,10 @@
 .hidden {
   display: none !important;
   visibility: hidden !important;
->>>>>>> master
 }
 
 // Visibility utilities
 
-<<<<<<< HEAD
-// For desktops
-.visible-phone     { display: none !important; }
-.visible-tablet    { display: none !important; }
-.hidden-phone      { }
-.hidden-tablet     { }
-.hidden-desktop    { display: none !important; }
-.visible-desktop   { display: inherit !important; }
-
-// Tablets & small desktops only
-@media (min-width: 768px) and (max-width: 979px) {
-  // Hide everything else
-  .hidden-desktop    { display: inherit !important; }
-  .visible-desktop   { display: none !important ; }
-  // Show
-  .visible-tablet    { display: inherit !important; }
-  // Hide
-  .hidden-tablet     { display: none !important; }
-}
-
-// Phones only
-@media (max-width: 767px) {
-  // Hide everything else
-  .hidden-desktop    { display: inherit !important; }
-  .visible-desktop   { display: none !important; }
-  // Show
-  .visible-phone     { display: inherit !important; } // Use inherit to restore previous behavior
-  // Hide
-  .hidden-phone      { display: none !important; }
-=======
 .visible-xs {
   .responsive-invisibility();
   @media (max-width: @screen-xs-max) {
@@ -255,5 +217,4 @@
   .hidden-print {
     .responsive-invisibility();
   }
->>>>>>> master
 }

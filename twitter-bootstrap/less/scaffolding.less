@@ -3,18 +3,6 @@
 // --------------------------------------------------
 
 
-<<<<<<< HEAD
-// Body reset
-// -------------------------
-
-body {
-  margin: 0;
-  font-family: @baseFontFamily;
-  font-size: @baseFontSize;
-  line-height: @baseLineHeight;
-  color: @textColor;
-  background-color: @bodyBackground;
-=======
 // Reset the box-sizing
 
 *,
@@ -58,22 +46,10 @@ input,
 select[multiple],
 textarea {
   background-image: none;
->>>>>>> master
 }
 
 
 // Links
-<<<<<<< HEAD
-// -------------------------
-
-a {
-  color: @linkColor;
-  text-decoration: none;
-}
-a:hover {
-  color: @linkColorHover;
-  text-decoration: underline;
-=======
 
 a {
   color: @link-color;
@@ -88,27 +64,10 @@ a {
   &:focus {
     .tab-focus();
   }
->>>>>>> master
 }
 
 
 // Images
-<<<<<<< HEAD
-// -------------------------
-
-// Rounded corners
-.img-rounded {
-  .border-radius(6px);
-}
-
-// Add polaroid-esque trim
-.img-polaroid {
-  padding: 4px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0,0,0,.2);
-  .box-shadow(0 1px 3px rgba(0,0,0,.1));
-=======
 
 img {
   vertical-align: middle;
@@ -137,14 +96,10 @@ img {
 
   // Keep them at most 100% wide
   .img-responsive(inline-block);
->>>>>>> master
 }
 
 // Perfect circle
 .img-circle {
-<<<<<<< HEAD
-  .border-radius(500px); // crank the border-radius so it works with most reasonably sized images
-=======
   border-radius: 50%; // set radius in percents
 }
 
@@ -172,5 +127,4 @@ hr {
   overflow: hidden;
   clip: rect(0 0 0 0);
   border: 0;
->>>>>>> master
 }
