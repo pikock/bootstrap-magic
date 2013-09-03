@@ -2,167 +2,103 @@
 <!-- Forms
 ================================================== -->
 <section id="forms">
-    <div class="row-fluid">
-        <div class="span12">
-            <section class="row-fluid">
-            	<div class="span6">
- 					<form>
- 						<fieldset>
- 						<legend>Normal Form</legend>
- 						
- 					    <div class="control-group">
- 					        <label class="control-label" for="input01">Text input</label>
- 					        <div class="controls">
- 					            <input type="text" class="input-xlarge" id="input01">
- 					            <p class="help-block">Help text for your users</p>
- 					        </div>
- 					    </div>
- 					    
- 					    <div class="control-group">
- 					        <label class="control-label" for="optionsCheckbox">Checkbox</label>
- 					        <div class="controls">
- 					            <label class="checkbox">
- 					                <input type="checkbox" id="optionsCheckbox" value="option1">
- 					                I agree, it is awesome
- 					            </label>
- 					        </div>
- 					    </div>
- 					    
-						<div class="control-group">
-						      <label class="control-label" for="select01">Select list</label>
-						      <div class="controls">
-						        <select id="select01">
-						              <option>something</option>
-						              <option>2</option>
-						              <option>3</option>
-						              <option>4</option>
-						              <option>5</option>
-						        </select>
-						      </div>
-						</div>
-						<div class="control-group">
-						    <label class="control-label" for="multiSelect">Multicon-select</label>
-						    <div class="controls">
-						        <select multiple="multiple" id="multiSelect">
-						            <option>1</option>
-						            <option>2</option>
-						            <option>3</option>
-						            <option>4</option>
-						            <option>5</option>
-						        </select>
-						    </div>
-						</div>
-						
-						<div class="input-prepend">
-						  <span class="add-on">@</span>
-						  <input class="span8" id="prependedInput" type="text" placeholder="Username">
-						</div>
-						
-						<div class="input-append">
-							<input class="span8" id="appendedInputButton" type="text">
-							<button class="btn" type="button">Go!</button>
-						</div>
- 					    
-						<div class="input-append">
-							<input type="text">
-							<div class="btn-group">
-								<a href="" title="Bootstrap Themes AngularJS" class="btn dropdown-toggle data-toggle="dropdown"">Dropdown <b class="caret"></b></a>
-								<ul class="dropdown-menu">
-								    <li><a href="" title="Bootstrap Themes AngularJS">Action</a></li>
-								    <li><a href="" title="Bootstrap Themes AngularJS">Another action</a></li>
-								    <li><a href="" title="Bootstrap Themes AngularJS">Something else here</a></li>
-								    <li class="divider"></li>
-								    <li class="dropdown-submenu" role="menu" aria-labelledby="dLabel">
-								        <a data-toggle="dropdown">Dropdown 2</a>
-								        <ul class="dropdown-menu">
-								            <li><a href="" title="Bootstrap Themes AngularJS">Action</a></li>
-								            <li><a href="" title="Bootstrap Themes AngularJS">Another action</a></li>
-								            <li><a href="" title="Bootstrap Themes AngularJS">Something else here</a></li>
-								            <li class="divider"></li>
-								            <li><a href="" title="Bootstrap Themes AngularJS">Separated link</a></li>
-								        </ul>
-								    </li>
-								</ul>
-							</div>
-						</div>
+    <div class="row">
+        <div class="col-md-12">
+            <section class="row">
+            	<div class="col-md-12">
+				        <form role="form">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                  </div>
+                  <div>
+                    <label for="exampleInputFile">Disabled input</label>
+                    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> Check me out
+                    </label>
+                  </div>
+                  <div>
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+                    </label>
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+                    </label>
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+                    </label>
+                  </div>
 
- 					    <button class="btn" type="submit">Submit</button>               
- 					  </fieldset>
- 					</form>
-            	</div>
-            	
-            	<div class="span6">
-            		<form class="form-horizontal">
-            		    <fieldset>
-            		        <legend>Horizontal Form</legend>
-            		        <div class="control-group">
-            		            <label class="control-label" for="fileInput">File input</label>
-            		            <div class="controls">
-            		                <input class="input-file" id="fileInput" type="file">
-            		            </div>
-            		        </div> 
-            		        <div class="control-group">
-            		            <label class="control-label" for="textarea">Textarea</label>
-            		            <div class="controls">
-            		                <textarea class="input-xlarge" id="textarea" row-fluids="3"></textarea>
-            		            </div>
-            		        </div>
-            		        <div class="control-group">
-            		            <label class="control-label" for="focusedInput">Focused input</label>
-            		            <div class="controls">
-            		                <input class="input-xlarge focused" id="focusedInput" type="text" value="This is focused…">
-            		            </div>
-            		        </div>
-            		        <div class="control-group">
-            		            <label class="control-label">Uneditable input</label>
-            		            <div class="controls">
-            		                <span class="input-xlarge uneditable-input">Some value here</span>
-            		            </div>
-            		        </div>
-            		        <div class="control-group">
-            		            <label class="control-label" for="disabledInput">Disabled input</label>
-            		            <div class="controls">
-            		                <input class="input-xlarge disabled" id="disabledInput" type="text" placeholder="Disabled input here…" disabled>
-            		            </div>
-            		        </div>
-            		        
-            		        <div class="control-group">
-            		            <label class="control-label" for="optionsCheckbox2">Disabled checkbox</label>
-            		            <div class="controls">
-            		                <label class="checkbox">
-            		                    <input type="checkbox" id="optionsCheckbox2" value="option1" disabled>
-            		                    This is a disabled checkbox
-            		                </label>
-            		            </div>
-            		        </div>
-            		        <div class="form-actions">
-            		            <button type="submit" class="btn btn-primary">Save changes</button>
-            		            <button type="reset" class="btn">Cancel</button>
-            		        </div>
-            		    </fieldset>
-            		</form>
+                  <label for="exampleInputFile">Radio buttons</label>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                      Option one is this and that&mdash;be sure to include why it's great
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                      Option two can be something else and selecting it will deselect option one
+                    </label>
+                  </div>
+                  <label for="exampleInputFile">Large input</label>
+                  <input class="form-control input-lg" type="text" placeholder=".input-lg">
+                  <br>
+                  <label for="exampleInputFile">Default input</label>
+                  <input class="form-control" type="text" placeholder="Default input">
+                  <br>
+                  <label for="exampleInputFile">Small input</label>
+                  <input class="form-control input-sm" type="text" placeholder=".input-sm">
+                  <br>
+
+                  <label for="exampleInputFile">Input group</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">@</span>
+                    <input type="text" class="form-control" placeholder="Username">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <input type="text" class="form-control">
+                    <span class="input-group-addon">.00</span>
+                  </div>
+
+                  <br>
+                  <button type="submit" class="btn btn-default">Submit</button>
+                </form>
             	</div>
             </section>
 
-            <section class="row-fluid">
-                  <div class="span12">
+            <section class="row">
+                  <div class="col-md-12">
                         <div class="hr">
                               <hr>
                         </div>
                   </div>
             </section>
 
-            <section class="row-fluid">
-                  <div class="span12">
+            <section class="row">
+                  <div class="col-md-12">
                         <div id="Border-Radius">
                               <div class="well">
-                                    <form class="form-inline">
-                                          <input type="text" class="input-small" placeholder="Email">
-                                          <input type="password" class="input-small" placeholder="Password">
-                                          <label class="checkbox">
-                                                <input type="checkbox"> Remember me
-                                          </label>
-                                          <button type="submit" class="btn">Sign in</button>
+                                    <form class="form-inline" role="form">
+                                      <div class="form-group">
+                                        <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                                      </div>
+                                      <div class="checkbox">
+                                        <label>
+                                          <input type="checkbox"> Remember me
+                                        </label>
+                                      </div>
+                                      <button type="submit" class="btn btn-default">Sign in</button>
                                     </form>
                               </div>
                         </div>
