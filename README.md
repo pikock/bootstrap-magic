@@ -14,7 +14,7 @@ If you want to use Bootstrap Magic featuring Bootstrap 2.3.2, it's still availab
 * Bootstrap 3 awesomeness
 * Google webfonts included in typehead
 * Better performance
-* Still developped with [AngularJS](http://angularjs.org/) and [LessCSS](http://lesscss.org/) . 
+* Still developed with [AngularJS](http://angularjs.org/) and [LessCSS](http://lesscss.org/) . 
 
 ### Contact
 
