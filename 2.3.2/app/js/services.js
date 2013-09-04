@@ -43,63 +43,63 @@ angular.module('bootstrapVariablesEditor.services', []).
         
         var vars = parse(string);
         for (var i = 0; i < $scope.variables.length; i++ ) {
-    		for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
-    		    if (vars[$scope.variables[i].data[j].key]) {
+            for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
+                if (vars[$scope.variables[i].data[j].key]) {
                     $scope.variables[i].data[j].value = vars[$scope.variables[i].data[j].key];
                     delete vars[$scope.variables[i].data[j].key];
                 }
             }
-    	}
-    	
-    	var myVars = {
-    	    name: 'My Variables',
-    	    data: []
-    	};
-    	
-    	for (var key in vars) {
-    	    console.log('toto');
-    	    var type = 'text';
-    	    if (key.toLowerCase().indexOf('color')) {
-    	        type = 'color';
-    	    }
-    	    if (key.toLowerCase().indexOf('fontfamily')) {
-    	        type = 'font';
-    	    }
-    	    var myVar = {
-    	        key: key,
-    	        value: vars[key],
-    	        type: type
-    	    };
-    	    myVars.data.push(myVar);
-    	    
-    	}
-    	$scope.variables.push(myVars);
+        }
+        
+        var myVars = {
+            name: 'My Variables',
+            data: []
+        };
+        
+        for (var key in vars) {
+            console.log('toto');
+            var type = 'text';
+            if (key.toLowerCase().indexOf('color')) {
+                type = 'color';
+            }
+            if (key.toLowerCase().indexOf('fontfamily')) {
+                type = 'font';
+            }
+            var myVar = {
+                key: key,
+                value: vars[key],
+                type: type
+            };
+            myVars.data.push(myVar);
+            
+        }
+        $scope.variables.push(myVars);
         return $scope;
     }
     
     lessEngine.getVariables = function ($scope) {
-    	var variables = {};
-    	for (var i = 0; i < $scope.variables.length; i++ ) {
-    		for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
+        var variables = {};
+        for (var i = 0; i < $scope.variables.length; i++ ) {
+            for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
                 variables[$scope.variables[i].data[j].key] = $scope.variables[i].data[j].value;
             }
-    	}
+        }
         return variables;
     };
     
     /* var => array of variables */
     lessEngine.setVariables = function ($scope, vars) {
-    	for (var i = 0; i < $scope.variables.length; i++ ) {
-    		for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
+        for (var i = 0; i < $scope.variables.length; i++ ) {
+            for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
                 $scope.variables[i].data[j].value = vars[$scope.variables[i].data[j].key];
             }
-    	}
+        }
         return $scope;
     };
     
     lessEngine.getKeys = function ($scope) {
     
-    	var keys = [
+        var keys = [
             'escape(@string)',
             'percentage(@number)',
             'rgb(@r, @g, @b)',
@@ -127,9 +127,9 @@ angular.module('bootstrapVariablesEditor.services', []).
             'difference(@color1, @color2)',
             'exclusion(@color1, @color2)',
             'average(@color1, @color2)',
-            'negation(@color1, @color2)',    	
-    	];
-    	
+            'negation(@color1, @color2)',       
+        ];
+        
         for (var i = 0; i < $scope.variables.length; i++ ) {
             for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
                 keys.push($scope.variables[i].data[j].key);
@@ -139,17 +139,17 @@ angular.module('bootstrapVariablesEditor.services', []).
     };
     
     lessEngine.getUrls = function ($scope) {
-    	var keys = [
-    	    "'../twitter-bootstrap/img/glyphicons-halflings.png'",
+        var keys = [
+            "'../twitter-bootstrap/img/glyphicons-halflings.png'",
             "'../twitter-bootstrap/img/glyphicons-halflings-white.png'",
             "'../twitter-bootstrap/img/ap_icons_black_interface-orientation.png'",
             "'../twitter-bootstrap/img/ap_icons_white_interface-orientation.png'"
-    	];
-    	return keys;
+        ];
+        return keys;
     };
     
     lessEngine.getFonts = function ($scope) {
-    	var keys = [
+        var keys = [
             "'Helvetica Neue', Helvetica, Arial",
             "Georgia",
             "'Courrier New', Consolas",
@@ -159,17 +159,17 @@ angular.module('bootstrapVariablesEditor.services', []).
             "'Trebuchet MS'",
             "Tahoma, Geneva",
             "Verdana, Geneva",
-    	    "'Times New Roman', Times"
-    	];
-    	return keys;
+            "'Times New Roman', Times"
+        ];
+        return keys;
     };
     
     lessEngine.getVariablesToString = function ($scope) {
-    	var string = "" +
-    	"/*\n"+
-    	"* pikock, autreplanete http://www.autreplanete.com/ \n"+
-    	"*  \n"+
-    	"**/\n";
+        var string = "" +
+        "/*\n"+
+        "* pikock, autreplanete http://www.autreplanete.com/ \n"+
+        "*  \n"+
+        "**/\n";
         for (var i = 0; i < $scope.variables.length; i++ ) {
             string += '\n\n// ' + $scope.variables[i].name + "\n"
             for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
@@ -180,7 +180,7 @@ angular.module('bootstrapVariablesEditor.services', []).
     };
     
     lessEngine.saveLessVar = function(data){
-        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').append(
+        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').append(
                 $('<input>')
                     .attr('type', 'hidden')
                     .attr('name', 'data')
@@ -197,21 +197,21 @@ angular.module('bootstrapVariablesEditor.services', []).
     };
     
     lessEngine.saveCSS = function($scope){
-    	var parser = new(less.Parser)({
+        var parser = new(less.Parser)({
             paths: ['../twitter-bootstrap/less/'], // Specify search paths for @import directives
             filename: 'bootstrap.less' // Specify a filename, for better error messages
         });
         $(document).load($('#twitterBootstrapLess').attr('href'), function (data) {
-        	var vars = lessEngine.getVariables($scope);
+            var vars = lessEngine.getVariables($scope);
             for (name in vars) {
                 data += ((name.slice(0,1) === '@')? '' : '@') + name +': '+ 
                         ((vars[name].slice(-1) === ';')? vars[name] : vars[name] +';');
             }
-        	parser.parse(data, function (err, tree) {
-        	    if (err) { return console.error(err) }
-        	    var type = ($scope.minified) ? 'mincss' : 'css';
+            parser.parse(data, function (err, tree) {
+                if (err) { return console.error(err) }
+                var type = ($scope.minified) ? 'mincss' : 'css';
                 var css = tree.toCSS({ compress: $scope.minified });
-                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').
+                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').
                     append(
                         $('<input>')
                             .attr('type', 'hidden')
