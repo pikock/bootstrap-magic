@@ -1,0 +1,56 @@
+<div class="protected">
+    <div class="navbar navbar-fixed-bottom" id="menuBottom" class="isEditor">
+        <ul>
+            <li><button class="btn btn-primary" ng-click="applyLess()">Apply</button></li>
+            <li><label class="checkbox"><input type="checkbox" name="cssAutoapplyless" data-ng-model="autoapplyless">Auto</label></li>
+            <li><button class="btn btn-info" ng-click="saveLessVariables()">Save Less Variables</button></li>
+            <li><button class="btn btn-success" ng-click="saveCSS()">Save CSS</button></li>
+            <li><label class="checkbox"><input type="checkbox" name="cssMinified" data-ng-model="minified">Minified</label></li>
+            <li><button class="btn btn-warning" href="#myModal" role="button" data-toggle="modal">Import Less Variables</button></li>
+            <li><button class="btn" ng-click="resetLessVariables()">Reset</button></li>
+        </ul>
+        <span class="sign">Handmade by <a href="http://www.pikock.com" title="create your website easily">Pikock</a> x <a href="http://www.autreplanete.com/" title="web agency paris">Autre planète</a> in Paris.</span>
+    </div>
+</div>
+
+<div class="container">
+    <form class="piEditor">
+        <section ng-repeat="group in variables" class="{{ group.name }}">
+            <div class="row" class="protected">
+                <div class="span12">
+                    <h2 class="groupNameTitle" id="{{ group.name }}">{{ group.name }}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span4">
+                    <div ng-repeat="variable in group.data" class="protected">
+                        <label class="labelTitle">{{variable.key}}</label></td>                
+                        <div data-ColorPickerApply="autoApplyLess()" class="input {' ap-color-picker: variable.value': colorpicker(variable.type)}" data-color="{{ color(variable.type, variable.value) }}" data-color-format="hex" ng-class="{'input-append color colorpicker' : colorpicker(variable.type)}">
+                            <input id="appendedDropdownButton" type="text" data-ng-model="variable.value" class="span3 lessVariable">
+                            <span class="add-on" ng-class="{ 'hidden' : !colorpicker(variable.type)}"><i></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="span8">
+                    <div data-ng-include src="getGroupUrl()"></div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel"><span class="apico games apico-cloud-upload"></span>Import your Less Variables</h3>
+	</div>
+	<div class="modal-body">
+		<p>Add your less variables to Bootstrap Magic.</p>
+		<textarea ng-model="importedVariables" rows="10" style="width: 97%" placeholder="Example @textColor : #242424;"></textarea>
+	</div>
+	<div class="modal-footer">
+		<button  data-dismiss="modal" aria-hidden="true" class="btn btn-primary" ng-click="importLessVariables(importedVariables)">Import</button>
+	</div>
+</div>
+
