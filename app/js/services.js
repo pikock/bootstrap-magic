@@ -241,7 +241,6 @@ angular.module('bootstrapVariablesEditor.services', []).
         	    if (err) { return console.error(err) }
         	    var type = ($scope.minified) ? 'mincss' : 'css';
                 var css = tree.toCSS({ compress: $scope.minified });
-                console.log(css)
                 var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').
                     append(
                         $('<input>')
