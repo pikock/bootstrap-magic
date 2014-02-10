@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="fragment" content="!">
   <title>Bootstrap Magic : Generate your own bootstrap theme quickly and easily</title>
-  <meta name="description" content="Awesome features like contextual typeahead and colorpicker help you make your custom bootstrap 3 themes quickly and easily." />
+  <meta name="description" content="Awesome features like contextual typeahead and colorpicker help you make your custom bootstrap 3.1 themes quickly and easily." />
   <link rel="stylesheet" href="css/app.css">
   <style>
     [ng-cloak] {
@@ -42,7 +42,7 @@
         'lib/jquery/jquery-1.8.3.min.js'
     ], function() {
         $script([
-            '../twitter-bootstrap/js/bootstrap.js',
+            '../twitter-bootstrap/js/bootstrap.min.js',
             'lib/colorpicker/bootstrap-colorpicker.js'
         ], function() {
             $script([
@@ -61,8 +61,8 @@
     
     
   </script>
-  <title>Bootstrap Magic : Generate simply your own bootstrap 3 theme </title>
-  <meta name="description" content="Awesome features like contextual typeahead and colorpicker to make smooth bootstrap 3 theme faster." />
+  <title>Bootstrap Magic : Generate simply your own bootstrap 3.1 theme </title>
+  <meta name="description" content="Awesome features like contextual typeahead and colorpicker to make smooth bootstrap 3.1 theme faster." />
   <link id="twitterBootstrapLess" rel="stylesheet/less" href="../twitter-bootstrap/less/bootstrap.less">
  <!--  <link id="twitterResponsiveLess" rel="stylesheet/less" href="../twitter-bootstrap/less/responsive.less"> -->
 
@@ -93,7 +93,7 @@
 </head>
 <body data-ng-cloak>
 	<div class="protected">
-    <nav class="navbar-inverse navbar-default" role="navigation">
+    <nav class="navbar navbar-default" role="navigation">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -108,12 +108,17 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
-          <li><a href="../index.html" title="bootstrap 3 themes generator presentation">Home</a></li>
-          <li class="divider-vertical"></li>
-          <li ><a href="index.html#!/editor" title="bootstrap 3 themes generator">Editor</a></li>
-          <li class="divider-vertical"></li>
-          <li ><a href="index.html#!/create-website-pikock" title="create website easily">Create your website with Pikock</a></li>
-          <li class="divider-vertical"></li>
+          <li><a href="../index.html" title="bootstrap 3.1 themes generator presentation">Home</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Editor <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="index.html#!/editor" title="bootstrap 3.1 themes generator">Version Bootstrap 3.1</a></li>
+              <li><a href="../3.0">Version Bootstrap 3.0</a></li>
+              <li><a href="../2.3.2">Version Bootstrap 2.3.2</a></li>
+            </ul>
+          </li>
+           <li ><a href="index.html#!/submit-theme" title="bootstrap 3.1 themes generator">Submit your theme</a></li>
+          <li ><a href="http://www.pikock.com/en" title="Create website easily">Create your website with Pikock</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right socialButtons">
@@ -121,7 +126,7 @@
               <div class="fb-like" data-href="http://pikock.github.io/bootstrap-magic/"  data-send="false" data-layout="button_count" data-width="50" data-show-faces="false" data-action="like"></div>
             </li>
             <li class="twitter">
-              <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://pikock.github.io/bootstrap-magic/" data-text="Bootstrap Magic feat Bootstrap 3 : Awesome theme generator with live preview" data-lang="en" data-hashtags="bootstrap,angularjs">Tweeter</a>
+              <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://pikock.github.io/bootstrap-magic/" data-text="Bootstrap Magic feat Bootstrap 3.1 : Awesome theme generator with live preview" data-lang="en" data-hashtags="bootstrap, angularjs">Tweeter</a>
             </li>
             <li><div class="g-plusone" data-size="medium" data-href="http://pikock.github.io/bootstrap-magic/"></div></li>    
           </ul>
