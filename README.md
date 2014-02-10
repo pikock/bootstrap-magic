@@ -1,7 +1,7 @@
-Bootstrap magic featuring Bootstrap 3
-=====================================
+Bootstrap magic featuring Bootstrap 3.1
+=======================================
 
-Bootstrap themes generator, featuring Bootstrap 3 and AngularJS.
+Bootstrap themes generator, featuring Bootstrap 3.1 and AngularJS.
 Update your variables, change it with a smooth colorpicker and get instantly the result.
 
 [Try it out!](http://pikock.github.com/bootstrap-magic/)
@@ -11,7 +11,7 @@ If you want to use Bootstrap Magic featuring Bootstrap 2.3.2, it's still availab
 
 ### New features
 
-* Bootstrap 3 awesomeness
+* Bootstrap 3.1 awesomeness
 * Google webfonts included in typehead
 * Better performance
 * Still developed with [AngularJS](http://angularjs.org/) and [LessCSS](http://lesscss.org/) . 
