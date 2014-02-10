@@ -1,4 +1,8 @@
 /* app css stylesheet */
+@import "pi.variables.less";
+@import "apico-sprites.less"; 
+@import "colorpicker.less";
+@import "mixins.less";
 
 // -----
 // @INTRO
@@ -10,14 +14,11 @@
 .Private{display: none;}
 // @end
 
-.importantContainer{
-	background: url("../img/geometry.png");
-	border-bottom: 1px dashed @gray-lighter;
-}
 
 .blockquotes{
 	margin-bottom: 90px;
 }
+
 .credit{
 	color:@gray-light;
 	position: absolute;
@@ -43,6 +44,7 @@
 	cursor: pointer;
 	z-index:1020;
 }
+
 .pikockContainer{
 	@backgroundImg: "../img/create-website-pikock.jpg";
 	background-image: url("@{backgroundImg}");
@@ -282,11 +284,22 @@ div.colorpicker{
 
 
 .protected {
+
+
 	font-family: @font-family-base;
 	font-size: 14px;
 	line-height: 20px;
 	color: #333;
 	
+	@import "../../twitter-bootstrap/less/mixins.less";
+	@import "../../twitter-bootstrap/less/forms.less";
+	@import "../../twitter-bootstrap/less/type.less";
+	@import "../../twitter-bootstrap/less/modals.less";
+	@import "../../twitter-bootstrap/less/utilities.less";
+	@import "../../twitter-bootstrap/less/navbar.less";
+	@import "../../twitter-bootstrap/less/dropdowns.less";
+	@import "../../twitter-bootstrap/less/buttons.less";
+
 	a{
 		color: @link-color;
 		&:hover {
@@ -299,7 +312,7 @@ div.colorpicker{
 		li{
 			margin-left: 5px;
 			&.twitter{
-				margin-right: -20px;
+				margin-right: -25px;
 			}
 		}
 	}
@@ -318,13 +331,47 @@ div.colorpicker{
 		}
 	}
 	
+	.navbar-default {
+		margin-bottom: 0;
+	}
 	.navbar{
 		z-index:1010;
+		margin-bottom: 0;
 	}
+
+	.importantContainer{
+		background-color: @brand-primary;
+		color:#fff;
+		text-align: center;
+		small{
+			font-size: 30%;
+			color:@gray-lighter;
+		}
+		a, a:hover{
+			color: #F6F6F6;
+		}
+
+		.lead{
+			color:@gray-lighter;
+		}
+		.btn-magic:hover{
+			color:@brand-primary;
+		}
+	}
+	.btn-magic{
+		background-color: transparent;
+		border: 1px solid #ffffff;
+		color:#ffffff;
+		&:hover{
+			background-color: #ffffff;
+			color:@brand-primary;
+			.transition(all 0.3s linear);
+		}
+	}
+	
+
 	.buttonsDiv{
 		background: @brand-primary;
-		border-top: 1px dashed @gray-lighter;
-		border-bottom: 1px dashed @gray-lighter;
 		margin-top: 45px;
 		padding : 45px 0;
 
@@ -437,13 +484,7 @@ div.colorpicker{
 		}
 	}
 	// @end
-@import "../../twitter-bootstrap/less/forms.less";
-@import "../../twitter-bootstrap/less/type.less";
-@import "../../twitter-bootstrap/less/modals.less";
-@import "../../twitter-bootstrap/less/utilities.less";
-@import "../../twitter-bootstrap/less/navbar.less";
-@import "../../twitter-bootstrap/less/dropdowns.less";
-@import "../../twitter-bootstrap/less/buttons.less";
+
 
 }
 
@@ -478,7 +519,3 @@ div.colorpicker{
 
 
 
-@import "pi.variables.less";
-@import "pi.mixins.less";
-@import "apico-sprites.less"; 
-@import "colorpicker.less";
