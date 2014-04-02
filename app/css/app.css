@@ -3907,6 +3907,14 @@ fieldset[disabled] .protected .btn-link:focus {
 .protected .importantContainer a:hover {
   color: #F6F6F6;
 }
+.protected .importantContainer .alert-success a {
+  color: #3c763d;
+  text-decoration: underline;
+}
+.protected .importantContainer .alert-success a:hover {
+  color: #3c763d;
+  text-decoration: none;
+}
 .protected .importantContainer .lead {
   color: #eeeeee;
 }

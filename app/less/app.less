@@ -343,12 +343,25 @@ div.colorpicker{
 		background-color: @brand-primary;
 		color:#fff;
 		text-align: center;
+		
 		small{
 			font-size: 30%;
 			color:@gray-lighter;
 		}
 		a, a:hover{
 			color: #F6F6F6;
+		}
+
+		.alert-success{
+			background-color: transparent;
+			a{
+				color:@state-success-text;
+				text-decoration: underline;
+				&:hover{
+					color:@state-success-text;
+					text-decoration: none;
+				}
+			}
 		}
 
 		.lead{
