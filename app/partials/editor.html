@@ -5,7 +5,7 @@
                 <li><button class="btn btn-primary" ng-click="applyLess(false)">Apply</button></li>
                 <li><label class="checkbox"><input type="checkbox" name="cssAutoapplyless" data-ng-model="autoapplyless">Auto</label></li>
                 <li><button class="btn" ng-click="saveLessVariables()">Save Less Variables</button></li>
-                <li><button class="btn" ng-click="saveCSS()">Save CSS</button></li>
+                <li><button class="btn" data-toggle="modal" href="#thankYou" ng-click="saveCSS()">Save CSS</button></li>
                 <li><label class="checkbox"><input type="checkbox" name="cssMinified" data-ng-model="minified">Minified</label></li>
                 <li><button data-toggle="modal" href="#myModal" class="btn">Import Less Variables</button></li>
                 <li><button class="btn" ng-click="resetLessVariables()">Reset</button></li>
@@ -55,6 +55,36 @@
             </div>
             <div class="modal-footer">
                 <button  data-dismiss="modal" aria-hidden="true" class="btn btn-primary" ng-click="importLessVariables(importedVariables)">Import</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+</div>
+
+<div class="protected">
+    <div class="modal fade" id="thankYou" tabindex="-1" role="dialog" aria-labelledby="thankYouLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 id="myModalLabel"><span class="apico games apico-cloud-upload"></span>Thanks you for using Bootstrap Magic.</h4>
+            </div>
+            <div class="modal-body">
+                <p>Thanks you for using Bootstrap Magic.
+                   Just wait a little bit. We are compiling your CSS.
+                </p>
+                <br>
+                <br>
+                <div class="text-center">
+                    <p>
+                        <b>Now, discover Pikock Website Builder.</b>
+                    <br>
+                    </p>
+                    <a class="btn btn-primary" href="http://www.pikock.com/?utm_source=Bootstrap%20EN&utm_medium=Bootstrap%20Pop-Up%20EN&utm_campaign=Bootstrap" target="_blank" title="Try Pikock website builder">Try Now</a> 
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button  data-dismiss="modal" aria-hidden="true" class="btn">Close</button>
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
