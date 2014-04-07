@@ -116,9 +116,9 @@ function LessCtrl($scope, $http, ap_less, $timeout) {
     
     
     $scope.saveCSS = function() {
-        $scope.isViewLoading = true;
+        // $scope.isViewLoading = true;
         ap_less.saveCSS($scope);
-        $scope.isViewLoading = false;
+        // $scope.isViewLoading = false;
     }
     
     $scope.saveLessVariables = function () {
