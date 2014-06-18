@@ -209,7 +209,7 @@ angular.module('bootstrapVariablesEditor.services', []).
     };
     
     lessEngine.saveLessVar = function(data){
-        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').append(
+        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagics-pikock.dotcloud.com/').append(
                 $('<input>')
                     .attr('type', 'hidden')
                     .attr('name', 'data')
