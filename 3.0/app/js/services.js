@@ -209,7 +209,7 @@ angular.module('bootstrapVariablesEditor.services', []).
     };
     
     lessEngine.saveLessVar = function(data){
-        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').append(
+        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagics-pikock.dotcloud.com/').append(
                 $('<input>')
                     .attr('type', 'hidden')
                     .attr('name', 'data')
@@ -242,7 +242,7 @@ angular.module('bootstrapVariablesEditor.services', []).
         	    var type = ($scope.minified) ? 'mincss' : 'css';
                 var css = tree.toCSS({ compress: $scope.minified });
                 console.log(css)
-                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic-pikock.dotcloud.com/').
+                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagics-pikock.dotcloud.com/').
                     append(
                         $('<input>')
                             .attr('type', 'hidden')
