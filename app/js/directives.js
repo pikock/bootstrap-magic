@@ -11,25 +11,17 @@ angular.module('bootstrapVariablesEditor.directives', []).
         };
     }]).
 
-    // directive('colorPickerApply',[ function() {
-    //     return {
-    //         link: function(scope, element, attrs) {
-                
-    //             element.bind('change',  function () {
-    //             	// if (scope.variable.value.charAt(0) == '#') {
-    //              //        element.colorpicker('setValue', scope.variable.value);
-    //              //    }
-    //             	// clearTimeout(inputChange);
-    //              //    inputChange = setTimeout(
-    //              //        function () {
-    //              //            scope.$apply(attrs.colorPickerApply);
-    //              //        }, 400
-    //              //    );
-    //             });
-                
-    //         }
-    //     };
-    // }]).
+    directive('colorPickerApply',[ function() {
+        return {
+            link: function(scope, element, attrs) {
+                element.bind('change',  function () {
+                	if (scope.variable.value.charAt(0) == '#') {
+                        element.colorpicker('setValue', scope.variable.value);
+                    }
+                });
+            }
+        };
+    }]).
 
     directive('scrollTop',[ function() {
         return {
