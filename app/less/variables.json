@@ -541,7 +541,7 @@
 			{"key":"@breadcrumb-color", "value":"#ccc", "type": "color"},
 			{"key":"@breadcrumb-active-color", "value":"@gray-light", "type": "color"},
 
-			{"key":"@breadcrumb-separator", "value":"/", "type": "text"},
+			{"key":"@breadcrumb-separator", "value":"", "type": "text"},
 
 			{"key":"@carousel-text-shadow", "value":"0 1px 2px rgba(0,0,0,.6)", "type": "color"},
 			{"key":"@carousel-control-color", "value":"#fff", "type": "color"},
