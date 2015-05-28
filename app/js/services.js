@@ -80,17 +80,24 @@ angular.module('bootstrapVariablesEditor.services', []).
         var fonts = [];
     	for (var i = 0; i < $scope.variables.length; i++ ) {
             
-            if (all == false && $scope.variables[i].name == "Private") {
-                $scope.variables.splice(i,1);
-            }else{
-                for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
+            for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
                     // if type =  font, push it to an array 
                     if ($scope.variables[i].data[j].type == "font") {
                         fonts.push($scope.variables[i].data[j].value);
                     };
                     variables[$scope.variables[i].data[j].key] = $scope.variables[i].data[j].value;
                 }   
-            }
+            // if (all == false && $scope.variables[i].name == "Private") {
+            //     $scope.variables.splice(i,1);
+            // }else{
+            //     for (var j = 0; j < $scope.variables[i].data.length; j++ ) {
+            //         // if type =  font, push it to an array 
+            //         if ($scope.variables[i].data[j].type == "font") {
+            //             fonts.push($scope.variables[i].data[j].value);
+            //         };
+            //         variables[$scope.variables[i].data[j].key] = $scope.variables[i].data[j].value;
+            //     }   
+            // }
                         
     	}
         return{
