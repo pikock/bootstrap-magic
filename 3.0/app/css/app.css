@@ -281,9 +281,7 @@ div.colorpicker div.colorpicker-hue {
 .protected .socialButtons li {
   margin-left: 5px;
 }
-.protected .socialButtons li.twitter {
-  margin-right: -25px;
-}
+
 .protected .introHeader {
   padding: 180px 90px;
 }
