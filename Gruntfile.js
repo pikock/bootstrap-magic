@@ -9,13 +9,13 @@ module.exports = function(grunt) {
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*!\n' +
-              ' * Bootstrap magic by @pikock and @autreplanete\n' +
+              ' * Bootstrap magic by @orson and @autreplanete\n' +
               ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
               ' * Licensed under <%= _.pluck(pkg.licenses, "url").join(", ") %>\n' +
               ' *\n' +
               ' * Contributors <%= pkg.contributors %>\n' +
               ' *\n' +
-              ' * Designed and built with all the love in the world by @pikock and @autreplanete.\n' +
+              ' * Designed and built with all the love in the world by @orson and @autreplanete.\n' +
               ' */\n\n',
     jqueryCheck: 'if (typeof jQuery === "undefined") { throw new Error("Bootstrap magic requires jQuery") }\n\n',
 

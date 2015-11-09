@@ -196,7 +196,7 @@ angular.module('bootstrapVariablesEditor.services', []).
     lessEngine.getVariablesToString = function ($scope) {
     	var string = "" +
     	"/*\n"+
-    	"* pikock http://www.pikock.com/ , autreplanete http://www.autreplanete.com/ \n"+
+    	"* orson http://en.orson.io/ , autreplanete http://www.autreplanete.com/ \n"+
     	"*  \n"+
     	"**/\n";
         for (var i = 0; i < $scope.variables.length; i++ ) {
