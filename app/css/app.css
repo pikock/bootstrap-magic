@@ -1,53 +1,53 @@
 /* app css stylesheet */
 @media only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
   .games {
-    background-image: url("../img/ap_icons_black_2x_game-tools.png");
+    background-image: url('../img/ap_icons_black_2x_game-tools.png');
   }
   .interface {
-    background-image: url("../img/ap_icons_black_2x_interface-orientation.png");
+    background-image: url('../img/ap_icons_black_2x_interface-orientation.png');
   }
   .media {
-    background-image: url("../img/ap_icons_black_2x_navigation_media.png");
+    background-image: url('../img/ap_icons_black_2x_navigation_media.png');
   }
   .social {
-    background-image: url("../img/ap_icons_black_2x_social-sport.png");
+    background-image: url('../img/ap_icons_black_2x_social-sport.png');
   }
   .games-white {
-    background-image: url("../img/ap_icons_white_2x_game-tools.png");
+    background-image: url('../img/ap_icons_white_2x_game-tools.png');
   }
   .interface-white {
-    background-image: url("../img/ap_icons_white_2x_interface-orientation.png");
+    background-image: url('../img/ap_icons_white_2x_interface-orientation.png');
   }
   .media-white {
-    background-image: url("../img/ap_icons_white_2x_navigation_media.png");
+    background-image: url('../img/ap_icons_white_2x_navigation_media.png');
   }
   .social-white {
-    background-image: url("../img/ap_icons_white_2x_social-sport.png");
+    background-image: url('../img/ap_icons_white_2x_social-sport.png');
   }
 }
 .games {
-  background-image: url("../img/ap_icons_black_game-tools.png");
+  background-image: url('../img/ap_icons_black_game-tools.png');
 }
 .interface {
-  background-image: url("../img/ap_icons_black_interface-orientation.png");
+  background-image: url('../img/ap_icons_black_interface-orientation.png');
 }
 .media {
-  background-image: url("../img/ap_icons_black_navigation_media.png");
+  background-image: url('../img/ap_icons_black_navigation_media.png');
 }
 .social {
-  background-image: url("../img/ap_icons_black_social-sport.png");
+  background-image: url('../img/ap_icons_black_social-sport.png');
 }
 .games-white {
-  background-image: url("../img/ap_icons_white_game-tools.png");
+  background-image: url('../img/ap_icons_white_game-tools.png');
 }
 .interface-white {
-  background-image: url("../img/ap_icons_white_interface-orientation.png");
+  background-image: url('../img/ap_icons_white_interface-orientation.png');
 }
 .media-white {
-  background-image: url("../img/ap_icons_white_navigation_media.png");
+  background-image: url('../img/ap_icons_white_navigation_media.png');
 }
 .social-white {
-  background-image: url("../img/ap_icons_white_social-sport.png");
+  background-image: url('../img/ap_icons_white_social-sport.png');
 }
 .apico {
   display: inline-block;
@@ -1794,7 +1794,7 @@
   z-index: 1020;
 }
 .pikockContainer {
-  background-image: url("../img/create-website-pikock.jpg");
+  background-image: url('../img/create-website-pikock.jpg');
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
@@ -1811,7 +1811,7 @@
   -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../img/create-website-pikock.jpg', sizingMethod='scale')";
 }
 .pikockContainer .overlayContainer {
-  background: url("../img/background.png");
+  background: url('../img/background.png');
   position: absolute;
   width: 100%;
   height: 100%;
@@ -1878,14 +1878,14 @@
 }
 /* @loader  */
 .isViewLoading {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
   z-index: 1;
-  background: url("../img/geometry.png");
+  background: url('../img/geometry.png');
 }
 .isViewLoading h1 {
   text-align: center;
@@ -1907,7 +1907,7 @@
   width: 20px;
   height: 20px;
   background: #999999;
-  text-shadow: 0 1px 2px #F6F6F6;
+  text-shadow: 0 1px 2px #f6f6f6;
   position: absolute;
   top: 40px;
   left: 40px;
@@ -1931,7 +1931,7 @@
 .bar4 {
   -moz-transform: rotate(135deg) translate(0, -40px);
   -webkit-transform: rotate(135deg) translate(0, -40px);
-  opacity: 0.50;
+  opacity: 0.5;
 }
 .bar5 {
   -moz-transform: rotate(180deg) translate(0, -40px);
@@ -2013,17 +2013,17 @@ div.colorpicker div.colorpicker-hue {
 /* @end */
 .groupNameTitle {
   color: #555555;
-  text-shadow: 0 1px 1px #F6F6F6;
+  text-shadow: 0 1px 1px #f6f6f6;
 }
 .labelTitle {
   line-height: 1.42857143;
   font-size: 14px;
   font-weight: normal;
   color: #555555;
-  text-shadow: 0 1px 1px #F6F6F6;
+  text-shadow: 0 1px 1px #f6f6f6;
 }
 .protected {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: #333;
@@ -3874,9 +3874,6 @@ fieldset[disabled] .protected .btn-link:focus {
 .protected .socialButtons li {
   margin-left: 5px;
 }
-.protected .socialButtons li.twitter {
-  margin-right: -25px;
-}
 .protected .introHeader {
   padding: 180px 90px;
 }
@@ -3905,7 +3902,10 @@ fieldset[disabled] .protected .btn-link:focus {
 }
 .protected .importantContainer a,
 .protected .importantContainer a:hover {
-  color: #F6F6F6;
+  color: #f6f6f6;
+}
+.protected .importantContainer .alert-success {
+  background-color: transparent;
 }
 .protected .importantContainer .alert-success a {
   color: #3c763d;
@@ -3976,13 +3976,13 @@ fieldset[disabled] .protected .btn-link:focus {
   padding-right: 10px;
   padding-top: 10px;
 }
-.protected [class^="icon-"],
-.protected [class*=" icon-"] {
+.protected [class^='icon-'],
+.protected [class*=' icon-'] {
   vertical-align: middle;
   margin: 0 4px 4px 0;
 }
-.protected .btn-large [class^="icon-"],
-.protected .btn-large [class*=" icon-"] {
+.protected .btn-large [class^='icon-'],
+.protected .btn-large [class*=' icon-'] {
   margin-top: 0px;
 }
 .protected .footer {
