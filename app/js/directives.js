@@ -4,20 +4,12 @@
 
 angular
   .module('bootstrapVariablesEditor.directives', [])
-  .directive('appVersion', [
-    'version',
-    function(version) {
-      return function(scope, elm, attrs) {
-        elm.text(version)
-      }
-    }
-  ])
   .directive('colorPickerApply', [
     function() {
       return {
         link: function(scope, element, attrs) {
           element.bind('change', function() {
-            if (scope.variable.value.charAt(0) == '#') {
+            if (scope.variable.value.charAt(0) === '#') {
               element.colorpicker('setValue', scope.variable.value)
             }
           })

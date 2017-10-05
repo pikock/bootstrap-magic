@@ -27,9 +27,10 @@
         <div class="col-md-4">
           <div ng-repeat="variable in group.data" class="protected form-group">
             <label class="labelTitle">{{variable.key}}</label></td>
-            <div class="input {' ap-color-picker: variable.value': colorpicker(variable.type)}" data-color="{{ color(variable.type, variable.value) }}"
+            <div class="input {' ap-color-picker: variable.value': colorpicker(variable.type)} input-group" data-color="{{ color(variable.type, variable.value) }}"
               data-color-format="hex" ng-class="{'input-group color colorpicker' : colorpicker(variable.type)}" color-picker-apply="">
               <input id="" type="text" data-ng-model="variable.value" class="sassVariable form-control" ng-change="autoApplySass()">
+              <span class="input-group-addon reset" ng-click="resetBaseVariable(variable)">X</span>
               <span class="input-group-addon" ng-class="{ 'hidden' : !colorpicker(variable.type)}"><i></i></span>
             </div>
           </div>
