@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-multi-bootstrap-debug</title>
+  
+
+  <script src="../../../angular.js"></script>
+  <script src="controller.js"></script>
+  
+
+  
+</head>
+<body ng-app="multi-bootstrap">
+  <script src="../../../angular.js"></script>
+<div ng-controller="BrokenTable">
+  <table>
+  <tr>
+    <th ng-repeat="heading in headings">{{heading}}</th>
+  </tr>
+  <tr ng-repeat="filling in fillings">
+    <td ng-repeat="fill in filling">{{fill}}</td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

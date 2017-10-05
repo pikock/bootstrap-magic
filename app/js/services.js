@@ -1023,37 +1023,88 @@ angular.module('data', []).service('data', [
     ]
 
     var sass_function_keys = [
-      'escape(@string)',
-      'percentage(@number)',
-      'rgb(@r, @g, @b)',
-      'rgba(@r, @g, @b, @a)',
-      'hsl(@hue, @saturation, @lightness)',
-      'hsla(@hue, @saturation, @lightness, @alpha)',
-      'hsv(@hue, @saturation, @value)',
-      'hsva(@hue, @saturation, @value, @alpha)',
-      'saturate(@color, 10%)',
-      'desaturate(@color, 10%)',
-      'lighten(@color, 10%)',
-      'darken(@color, 10%)',
-      'fadein(@color, 10%)',
-      'fadeout(@color, 10%)',
-      'fade(@color, 50%)',
-      'spin(@color, 10)',
-      'mix(@color1, @color2, [@weight: 50%])',
-      'greyscale(@color)',
-      'contrast(@color1, [@darkcolor: black], [@lightcolor: white], [@threshold: 43%])',
-      'multiply(@color1, @color2)',
-      'screen(@color1, @color2)',
-      'overlay(@color1, @color2)',
-      'softlight(@color1, @color2)',
-      'hardlight(@color1, @color2)',
-      'difference(@color1, @color2)',
-      'exclusion(@color1, @color2)',
-      'average(@color1, @color2)',
-      'negation(@color1, @color2)',
-      'ceil(@number)',
-      'floor(@number)',
-      'percentage(@number)'
+      'rgb($red, $green, $blue)',
+      'rgba($red, $green, $blue, $alpha)',
+      'red($color)',
+      'green($color)',
+      'blue($color)',
+      'mix($color1, $color2, [$weight])',
+      'hsl($hue, $saturation, $lightness)',
+      'hsla($hue, $saturation, $lightness, $alpha)',
+      'hue($color)',
+      'saturation($color)',
+      'lightness($color)',
+      'adjust-hue($color, $degrees)',
+      'lighten($color, $amount)',
+      'darken($color, $amount)',
+      'saturate($color, $amount)',
+      'desaturate($color, $amount)',
+      'grayscale($color)',
+      'complement($color)',
+      'invert($color, [$weight])',
+      'alpha($color) / opacity($color)',
+      'rgba($color, $alpha)',
+      'opacify($color, $amount) / fade-in($color, $amount)',
+      'transparentize($color, $amount) / fade-out($color, $amount)',
+      'adjust-color($color, [$red], [$green], [$blue], [$hue], [$saturation], [$lightness], [$alpha])',
+      'scale-color($color, [$red], [$green], [$blue], [$saturation], [$lightness], [$alpha])',
+      'change-color($color, [$red], [$green], [$blue], [$hue], [$saturation], [$lightness], [$alpha])',
+      'ie-hex-str($color)',
+      'unquote($string)',
+      'quote($string)',
+      'str-length($string)',
+      'str-insert($string, $insert, $index)',
+      'str-index($string, $substring)',
+      'str-slice($string, $start-at, [$end-at])',
+      'to-upper-case($string)',
+      'to-lower-case($string)',
+      'percentage($number)',
+      'round($number)',
+      'ceil($number)',
+      'floor($number)',
+      'abs($number)',
+      'min($numbers...)',
+      'max($numbers...)',
+      'random([$limit])',
+      'length($list)',
+      'nth($list, $n)',
+      'set-nth($list, $n, $value)',
+      'join($list1, $list2, [$separator, $bracketed])',
+      'append($list1, $val, [$separator])',
+      'zip($lists...)',
+      'index($list, $value)',
+      'list-separator($list)',
+      'is-bracketed($list)',
+      'map-get($map, $key)',
+      'map-merge($map1, $map2)',
+      'map-remove($map, $keys...)',
+      'map-keys($map)',
+      'map-values($map)',
+      'map-has-key($map, $key)',
+      'keywords($args)',
+      'selector-nest($selectors...)',
+      'selector-append($selectors...)',
+      'selector-extend($selector, $extendee, $extender)',
+      'selector-replace($selector, $original, $replacement)',
+      'selector-unify($selector1, $selector2)',
+      'is-superselector($super, $sub)',
+      'simple-selectors($selector)',
+      'selector-parse($selector)',
+      'feature-exists($feature)',
+      'variable-exists($name)',
+      'global-variable-exists($name)',
+      'function-exists($name)',
+      'mixin-exists($name)',
+      'content-exists()',
+      'inspect($value)',
+      'type-of($value)',
+      'unit($number)',
+      'unitless($number)',
+      'comparable($number1, $number2)',
+      'call($function, $args...)',
+      'get-function($name, $css',
+      'if($condition, $if-true, $if-false)',
+      'unique-id()'
     ]
 
     return {
@@ -1111,7 +1162,7 @@ angular.module('apSass', []).factory('apSass', [
 
       sass.writeFile('toAddScss.scss', scss)
 
-      sass.preloadFiles(base, directory, files, function callback(test) {
+      sass.preloadFiles(base, directory, files, function() {
         var t0 = performance.now()
 
         sass.readFile('bootstrap.scss', function callback(bootstrapContent) {
@@ -1295,23 +1346,9 @@ angular.module('apSass', []).factory('apSass', [
     }
 
     function saveCSS($scope) {
-      var parser = new less.Parser({
-        paths: ['../twitter-bootstrap/less/'], // Specify search paths for @import directives
-        filename: 'bootstrap.less' // Specify a filename, for better error messages
-      })
-      $(document).load($('#twitterBootstrapLess').attr('href'), function(data) {
-        var vars = lessEngine.getVariables($scope).variables
-        for (name in vars) {
-          data += (name.slice(0, 1) === '@' ? '' : '@') + name + ': ' + (vars[name].slice(-1) === ';' ? vars[name] : vars[name] + ';')
-        }
-        console.log(vars)
-        parser.parse(data, function(err, tree) {
-          if (err) {
-            return console.error(err)
-          }
-          var type = $scope.minified ? 'mincss' : 'css'
-          var css = tree.toCSS({ compress: $scope.minified })
-          console.log(css)
+      sass.readFile('bootstrap.scss', function callback(bootstrapContent) {
+        sass.compile("@import 'functions'; @import 'toAddScss';" + bootstrapContent, function(result) {
+          var type = $scope.minified ? 'min.css' : 'css'
           var $form = $('<form>')
             .attr('method', 'POST')
             .attr('action', 'http://www.pikock-unis.com/tools/download.php')
@@ -1319,7 +1356,7 @@ angular.module('apSass', []).factory('apSass', [
               $('<input>')
                 .attr('type', 'hidden')
                 .attr('name', 'data')
-                .attr('value', css)
+                .attr('value', result.text)
             )
             .append(
               $('<input>')

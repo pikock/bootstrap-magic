@@ -1,0 +1,138 @@
+<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/Angular.js?message=docs(ngApp)%3A%20describe%20your%20change...#L1205' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/Angular.js#L1205' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">ngApp</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+<div class="api-profile-description">
+  <p>Use this directive to <strong>auto-bootstrap</strong> an AngularJS application. The <code>ngApp</code> directive
+designates the <strong>root element</strong> of the application and is typically placed near the root element
+of the page - e.g. on the <code>&lt;body&gt;</code> or <code>&lt;html&gt;</code> tags.</p>
+<p>Only one AngularJS application can be auto-bootstrapped per HTML document. The first <code>ngApp</code>
+found in the document will be used to define the root element to auto-bootstrap as an
+application. To run multiple applications in an HTML document you must manually bootstrap them using
+<a href="api/ng/function/angular.bootstrap"><code>angular.bootstrap</code></a> instead. AngularJS applications cannot be nested within each other.</p>
+<p>You can specify an <strong>AngularJS module</strong> to be used as the root module for the application.  This
+module will be loaded into the <a href="api/auto/service/$injector"><code>$injector</code></a> when the application is bootstrapped and
+should contain the application code needed or have dependencies on other modules that will
+contain the code. See <a href="api/ng/function/angular.module"><code>angular.module</code></a> for more information.</p>
+<p>In the example below if the <code>ngApp</code> directive were not placed on the <code>html</code> element then the
+document would not be compiled, the <code>AppController</code> would not be instantiated and the <code>{{ a+b }}</code>
+would not be resolved to <code>3</code>.</p>
+<p><code>ngApp</code> is the easiest, and most common, way to bootstrap an application.</p>
+<p> 
+
+<div>
+  <a ng-click="openPlunkr('examples/example-example39')" class="btn pull-right">
+    <i class="glyphicon glyphicon-edit">&nbsp;</i>
+    Edit in Plunker</a>
+
+  <div class="runnable-example"
+      path="examples/example-example39"
+      module="ngAppDemo">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ngAppDemoController&quot;&gt;&#10;I can add: {{a}} + {{b}} =  {{ a+b }}&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;ngAppDemo&#39;, []).controller(&#39;ngAppDemoController&#39;, function($scope) {&#10;$scope.a = 1;&#10;$scope.b = 2;&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" src="examples/example-example39/index.html" name="example-example39"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2>Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 0.</li>
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <ul>
+    <li>as attribute:
+        <pre><code>&lt;ANY&#10;  ng-app=&quot;&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+      </li>
+    
+  </div>
+  
+<section class="api-section">
+  <h3>Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        ngApp
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-angular">angular.Module</a>
+      </td>
+      <td>
+        <p>an optional application
+  <a href="api/ng/function/angular.module">module</a> name to load.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+
+
+  
+</div>
+
+

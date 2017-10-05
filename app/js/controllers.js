@@ -59,7 +59,6 @@ function SassCtrl($scope, $http, apSass, $timeout) {
         $colorpicker.colorpicker().on('hide', function(ev) {
           var color = angular.element(this).scope().variable
           if (this.dataset.color !== color.value) {
-            console.error('Wrong fucking color which is not apply because this is shit')
           }
         })
         $('.sassVariable').each(function(index) {
