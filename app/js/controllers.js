@@ -19,7 +19,8 @@ function SassCtrl($scope, $http, apSass, $timeout) {
     importSassVariables: importSassVariables,
     saveCSS: saveCSS,
     resetSassVariables: resetSassVariables,
-    saveSassVariables: saveSassVariables
+    saveSassVariables: saveSassVariables,
+    resetBaseVariable: resetBaseVariable
   }
 
   $scope.$on('$routeChangeStart', function() {
@@ -36,22 +37,12 @@ function SassCtrl($scope, $http, apSass, $timeout) {
 
   function initSassVariables() {
     $http.get('scss/variables.json').success(function(data) {
-      if (window.localStorage) {
-        // TODO: strange af
-        for (var key in window.localStorage) {
-          var url = 'http://pikock.github.io/bootstrap-magic/twitter-bootstrap/less/bootstrap.less:timestamp'
-          if (key === url) {
-            delete window.localStorage[key]
-          }
-        }
-      }
-
       $scope.variables = data
       $scope.applySass(false)
 
-      var keys = apSass.getKeys($scope)
-      var icons = apSass.getUrls()
-      var font = apSass.getFonts()
+      var variables_keys = apSass.getKeys($scope)
+      var icons_keys = apSass.getUrls()
+      var fonts_keys = apSass.getFonts()
 
       $timeout(function() {
         var $colorpicker = $('.colorpicker')
@@ -65,20 +56,27 @@ function SassCtrl($scope, $http, apSass, $timeout) {
             }
           }, 500)
         })
+        $colorpicker.colorpicker().on('hide', function(ev) {
+          var color = angular.element(this).scope().variable
+          if (this.dataset.color !== color.value) {
+            console.error('Wrong fucking color which is not apply because this is shit')
+          }
+        })
         $('.sassVariable').each(function(index) {
           var scope = angular.element(this).scope()
           switch (scope.variable.type) {
             case 'icons':
-              var src = icons
+              var src = icons_keys
               break
-
             case 'font':
-              var src = font
+              var src = fonts_keys
               break
-
+            case 'boolean':
+              var src = ['true', 'false']
+              break
             case 'color':
             default:
-              var src = keys
+              var src = variables_keys
           }
           $(this).typeahead({
             source: src,
@@ -94,19 +92,16 @@ function SassCtrl($scope, $http, apSass, $timeout) {
 
   function autoApplySass(event) {
     if ($scope.autoapplysass) {
-      var vars = apSass.getVariables($scope, false)
-      less.modifyVars(vars.variables)
-
-      WebFont.load({
-        google: {
-          families: vars.fonts
-        }
-      })
+      apSass.applySass($scope)
     }
   }
 
   function applySass(applyAll) {
     apSass.applySass($scope)
+  }
+
+  function resetBaseVariable(variable) {
+    variable.value = variable.default
   }
 
   function colorpicker(type) {
