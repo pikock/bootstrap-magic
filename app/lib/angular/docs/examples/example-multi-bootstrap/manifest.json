@@ -1,0 +1,8 @@
+{
+  "name": "example-multi-bootstrap",
+  "files": [
+    "index-production.html",
+    "controller.js",
+    "protractor.js"
+  ]
+}
