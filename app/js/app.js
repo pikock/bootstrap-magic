@@ -5,7 +5,8 @@ angular
     'bootstrapVariablesEditor.filters',
     'bootstrapVariablesEditor.services',
     'bootstrapVariablesEditor.directives',
-    'ngRoute'
+    'ngRoute',
+    'ui.codemirror'
   ])
   .config(function($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('!')

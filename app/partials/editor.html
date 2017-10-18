@@ -2,20 +2,48 @@
   <div class="navbar navbar-fixed-bottom" id="menuBottom" class="isEditor">
     <form action="" class="form-horizontal">
       <ul class="pull-left">
-        <li><button class="btn btn-primary" ng-click="applySass(false)">Apply</button></li>
-        <li><label class="checkbox"><input type="checkbox" name="cssAutoapplySass" data-ng-model="autoapplysass">Auto</label></li>
-        <li><button class="btn" ng-click="saveSassVariables()">Save Sass Variables</button></li>
-        <li><button class="btn" data-toggle="modal" href="#thankYou" ng-click="saveCSS()">Save CSS</button></li>
-        <li><label class="checkbox"><input type="checkbox" name="cssMinified" data-ng-model="minified">Minified</label></li>
-        <li><button data-toggle="modal" href="#myModal" class="btn">Import Sass Variables</button></li>
-        <li><button class="btn" ng-click="resetSassVariables()">Reset</button></li>
+        <li>
+          <button class="btn btn-primary" ng-click="applySass(false)">Apply</button>
+        </li>
+        <li>
+          <label class="checkbox">
+            <input type="checkbox" name="cssAutoapplySass" data-ng-model="autoapplysass">Auto</label>
+        </li>
+        <li>
+          <button class="btn" ng-click="saveSassVariables()">Save Sass Variables</button>
+        </li>
+        <li>
+          <button class="btn" data-toggle="modal" href="#thankYou" ng-click="saveCSS()">Save CSS</button>
+        </li>
+        <li>
+          <label class="checkbox">
+            <input type="checkbox" name="cssMinified" data-ng-model="minified">Minified</label>
+        </li>
+        <li>
+          <button data-toggle="modal" href="#myModal" class="btn">Import Sass Variables</button>
+        </li>
+        <li>
+          <button class="btn" ng-click="resetSassVariables()">Reset</button>
+        </li>
       </ul>
     </form>
-    <span class="sign">Handmade by <a href="http://en.orson.io/17/build-responsive-website-without-coding/?utm_source=Bootstrap%20Magic%20&utm_medium=referral&utm_content=Footer&utm_campaign=Bootstrap" title="create your website easily">Orson Website Builder</a> x <a href="http://www.autreplanete.com/" title="web agency paris">Autre planète</a> in Paris.</span>
+    <span class="sign">Handmade by
+      <a href="http://en.orson.io/17/build-responsive-website-without-coding/?utm_source=Bootstrap%20Magic%20&utm_medium=referral&utm_content=Footer&utm_campaign=Bootstrap"
+        title="create your website easily">Orson Website Builder</a> x
+      <a href="http://www.autreplanete.com/" title="web agency paris">Autre planète</a> in Paris.</span>
   </div>
 </div>
 
 <div class="container">
+  <div ui-codemirror="{ onLoad : codemirrorLoaded }" ng-model="x"></div>
+  <button ng-click="format()">Format</button>
+  <div class="col-md-12">
+    <div class="bd-example" data-example-id="editor">
+      For example,
+      <code>&lt;section&gt;</code> should be wrapped as inline.
+    </div>
+  </div>
+
   <form class="piEditor">
     <section ng-repeat="group in variables" class="{{ group.name }}">
       <div class="row protected">
@@ -26,12 +54,15 @@
       <div class="row">
         <div class="col-md-4">
           <div ng-repeat="variable in group.data" class="protected form-group">
-            <label class="labelTitle">{{variable.key}}</label></td>
+            <label class="labelTitle">{{variable.key}}</label>
+            </td>
             <div class="input {' ap-color-picker: variable.value': colorpicker(variable.type)} input-group" data-color="{{ color(variable.type, variable.value) }}"
               data-color-format="hex" ng-class="{'input-group color colorpicker' : colorpicker(variable.type)}" color-picker-apply="">
               <input id="" type="text" data-ng-model="variable.value" class="sassVariable form-control" ng-change="autoApplySass()">
               <span class="input-group-addon reset" ng-click="resetBaseVariable(variable)">X</span>
-              <span class="input-group-addon" ng-class="{ 'hidden' : !colorpicker(variable.type)}"><i></i></span>
+              <span class="input-group-addon" ng-class="{ 'hidden' : !colorpicker(variable.type)}">
+                <i></i>
+              </span>
             </div>
           </div>
         </div>
@@ -49,7 +80,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 id="myModalLabel"><span class="apico games apico-cloud-upload"></span>Import your Sass Variables</h4>
+          <h4 id="myModalLabel">
+            <span class="apico games apico-cloud-upload"></span>Import your Sass Variables</h4>
         </div>
         <div class="modal-body">
           <p>Add your Sass variables to Bootstrap Magic.</p>
@@ -72,7 +104,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 id="myModalLabel"><span class="apico games apico-cloud-upload"></span>Thanks you for using Bootstrap Magic.</h4>
+          <h4 id="myModalLabel">
+            <span class="apico games apico-cloud-upload"></span>Thanks you for using Bootstrap Magic.</h4>
         </div>
         <div class="modal-body">
           <p>Thanks you for using Bootstrap Magic. Just wait a little bit. We are compiling your CSS.
@@ -83,7 +116,9 @@
                         <img class="img-responsive" style="margin: 0 auto" src="https://cc6f218bd2ea04cb4973-fc9c6b9d141db7665c9530be5d7ac377.ssl.cf1.rackcdn.com/files/5668663fb2a7161287000036/size_4_site-orson-producthunt-redpng.png">
                     </a> -->
             <a class="" href="http://en.orson.io/17/build-responsive-website-without-coding/?utm_source=Bootstrap%20Magic%20&utm_medium=referral&utm_content=Footer&utm_campaign=Bootstrap"
-              target="_blank" title="Try Orson website builder"><img src="../app/img/orson-website-ad.jpg" class="img-responsive" alt="Create responsive website without coding"></a>
+              target="_blank" title="Try Orson website builder">
+              <img src="../app/img/orson-website-ad.jpg" class="img-responsive" alt="Create responsive website without coding">
+            </a>
           </div>
         </div>
         <div class="modal-footer">

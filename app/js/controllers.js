@@ -6,7 +6,21 @@ function SassCtrl($scope, $http, apSass, $timeout) {
     fonts: {},
     autoapplysass: false,
     isViewLoading: false,
-    minified: false
+    minified: false,
+    editorOptions: {
+      lineWrapping: true,
+      lineNumbers: true,
+      mode: {
+        name: 'text/html'
+      },
+      onKeyEvent: function(e, s) {
+        if (s.type == 'keyup') {
+          CodeMirror.showHint(e)
+        }
+      },
+      extraKeys: { 'Ctrl-Space': 'autocomplete' }
+    },
+    x: ``
   }
 
   var scopeFunction = {
@@ -20,7 +34,9 @@ function SassCtrl($scope, $http, apSass, $timeout) {
     saveCSS: saveCSS,
     resetSassVariables: resetSassVariables,
     saveSassVariables: saveSassVariables,
-    resetBaseVariable: resetBaseVariable
+    resetBaseVariable: resetBaseVariable,
+    codemirrorLoaded: codemirrorLoaded,
+    format: format
   }
 
   $scope.$on('$routeChangeStart', function() {
@@ -34,6 +50,30 @@ function SassCtrl($scope, $http, apSass, $timeout) {
   })
 
   angular.extend($scope, scopeVar, scopeFunction)
+
+  CodeMirror.commands.autocomplete = function(cm) {
+    CodeMirror.showHint(cm, CodeMirror.hint.html)
+  }
+
+  function codemirrorLoaded(editor) {
+    $scope.editor = editor
+    var modification = 0
+    var doc = editor.getDoc()
+    editor.focus()
+    editor.setValue($scope.x)
+    editor.setOption($scope.editorOptions)
+    doc.markClean()
+
+    editor.on('change', function() {
+      var html = editor.getValue()
+      var code = document.querySelector('div[data-example-id="editor"]')
+      code.innerHTML = html
+    })
+  }
+
+  function format() {
+    $scope.editor.setValue(html_beautify($scope.editor.getValue()))
+  }
 
   function initSassVariables() {
     $http.get('scss/variables.json').success(function(data) {

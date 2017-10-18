@@ -4060,4 +4060,7 @@ fieldset[disabled] .protected .btn-link:focus {
     margin: 0px;
   }
 }
+.highlight {
+  display: none !important;
+}
 /*# sourceMappingURL=app.css.map */
