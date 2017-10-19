@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="820" height="461" viewBox="0 0 820 461">
+  <defs>
+    <rect id="b" width="56.4" height="19.2" x=".4" y=".2" rx="2.4"/>
+    <filter id="a" width="130.1%" height="188.5%" x="-15.1%" y="-33.9%" filterUnits="objectBoundingBox">
+      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2.5"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+    </filter>
+    <rect id="d" width="219.84" height="284.16" rx="1.92"/>
+    <filter id="c" width="124.1%" height="118.7%" x="-12.1%" y="-8.6%" filterUnits="objectBoundingBox">
+      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="8.5"/>
+      <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.0660734589 0 0 0 0 0.236553997 0 0 0 0 0.223372512 0 0 0 1 0"/>
+    </filter>
+    <rect id="e" width="183.36" height="38.4" y="26.88"/>
+    <rect id="f" width="144" height="38.4" y="26.88"/>
+    <rect id="g" width="172.8" height="38.4" y="26.88"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(33 10)">
+    <rect width="666" height="442" x="108" fill="#0F1023" stroke="#2C354F" stroke-width="1.2" rx="2.4"/>
+    <rect width="664" height="218" x="109" y="1" fill="#222339"/>
+    <path fill="#10111E" d="M112.4,1 L770.6,1 L770.6,1 C771.925483,1 773,2.0745166 773,3.4 L773,27 L110,27 L110,3.4 L110,3.4 C110,2.0745166 111.074517,1 112.4,1 Z"/>
+    <rect width="32" height="5" x="128" y="12" fill="#444563" rx="2.4"/>
+    <rect width="32" height="5" x="168" y="12" fill="#444563" rx="2.4"/>
+    <rect width="32" height="5" x="208" y="12" fill="#444563" rx="2.4"/>
+    <rect width="32" height="5" x="248" y="12" fill="#B60958" rx="2.4"/>
+    <g fill="#18192F" fill-rule="nonzero" transform="translate(215 54)">
+      <path d="M511.477855,19.0932836 C503.641057,12.3022388 487.967459,12.3022388 480.13066,19.0932836 L343,106.5 C340.937685,108.129851 337.63798,108.129851 335.575664,106.771642 L225.934732,43.5 C217.68547,37.5238806 203.249262,37.5238806 195,43.5 L7,132 C2.87536908,134.98806 0.400590521,138.791045 0.400590521,142.865672 L0.600885781,158.480597 C0.600885781,162.01194 5.1379798,165 10.5,165 L555,165 C561.009465,165 558.911111,164.127801 558.911111,158.717164 L558.911111,63.9141791 C558.911111,60.3828358 557.261259,56.8514925 553.549091,53.8634328 L511.477855,19.0932836 Z"/>
+      <ellipse cx="87.531" cy="14.5" rx="14.531" ry="14.5"/>
+    </g>
+    <g transform="translate(253 239)">
+      <rect width="157" height="137.301" fill="#23253C"/>
+      <g transform="translate(177)">
+        <g transform="translate(0 120)">
+          <use fill="black" filter="url(#a)" xlink:href="#b"/>
+          <use fill="#B60958" xlink:href="#b"/>
+          <text fill="#FFFFFF" font-family="OpenSans-Semibold, Open Sans" font-size="10" font-weight="500" letter-spacing="-.15">
+            <tspan x="13" y="13">Morbi </tspan>
+          </text>
+        </g>
+        <text fill="#8082A0" font-family="OpenSans-Bold, Open Sans" font-size="15" font-weight="bold" letter-spacing="-.15">
+          <tspan x="0" y="16">Phasellus arcu</tspan>
+        </text>
+        <text fill="#8082A0" font-family="OpenSans-Semibold, Open Sans" font-size="10" font-weight="500" letter-spacing="-.15">
+          <tspan x="0" y="41">Morbi molestie justo et finibus auctor. </tspan> <tspan x="0" y="55">Nunc accumsan leo vel metus sollicitudin </tspan> <tspan x="0" y="69">dapibus. Praesent rutrum nibh tincidunt </tspan> <tspan x="0" y="83">sagittis mattis.</tspan>
+        </text>
+      </g>
+      <path fill="#18192F" fill-rule="nonzero" d="M128.5,49 C126.298967,44.6635497 121.896901,44.6635497 119.695868,49 C90.9514356,88.24486 76.3861461,107.578193 76,107 L52,72.5 C49.6831232,68.6839238 45.6285889,68.6839238 43.3117121,72.5 C14.5122436,105.917071 0.112509323,123.492897 0.112509323,125.227477 L0.168763985,135.198454 C0.168763985,137.453408 -0.505969896,139.5 1,139.5 L156,139.5 C157.50597,139.5 156.975035,137.604469 156.975035,135.349514 L157,88.8800845 C157,86.6251304 156.536625,84.3701762 155.49403,82.4621381 L128.5,49 Z"/>
+      <circle cx="29.503" cy="43" r="9" fill="#18192F" fill-rule="nonzero"/>
+      <g transform="translate(0 162)">
+        <rect width="157" height="40" fill="#23253C"/>
+        <g fill="#8082A0" letter-spacing="-.15" transform="translate(176)">
+          <text font-family="OpenSans-Bold, Open Sans" font-size="15" font-weight="bold">
+            <tspan x="1" y="16">Metus sollicitudin</tspan>
+          </text>
+          <text font-family="OpenSans-Semibold, Open Sans" font-size="10" font-weight="500">
+            <tspan x="0" y="37">Morbi molestie justo et finibus auctor. </tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(0 77)">
+      <use fill="black" filter="url(#c)" xlink:href="#d"/>
+      <use fill="#0F1023" xlink:href="#d"/>
+      <rect width="218.88" height="283.2" x=".48" y=".48" stroke="#11D3C4" stroke-width=".96" rx="1.92"/>
+      <g transform="translate(18.24 24.96)">
+        <text fill="#FFFFFF" font-family="Amiko-Regular, Amiko" font-size="13.44" letter-spacing=".016">
+          <tspan x="0" y="15">@font-family</tspan>
+        </text>
+        <use fill="#030413" xlink:href="#e"/>
+        <rect width="182.76" height="37.8" x=".3" y="27.18" stroke="#E6E6E6" stroke-width=".6"/>
+        <text fill="#FFFFFF" font-family="OpenSans, Open Sans" font-size="13.44" letter-spacing=".016">
+          <tspan x="9.6" y="50.48">Open sans</tspan>
+        </text>
+        <g transform="translate(0 84.48)">
+          <text fill="#FFFFFF" font-family="Amiko-Regular, Amiko" font-size="13.44" letter-spacing=".016">
+            <tspan x="0" y="15">@brand-primary</tspan>
+          </text>
+          <use fill="#030413" xlink:href="#f"/>
+          <rect width="143.4" height="37.8" x=".3" y="27.18" stroke="#E6E6E6" stroke-width=".6"/>
+          <text fill="#FFFFFF" font-family="OpenSans, Open Sans" font-size="13.44" letter-spacing=".016">
+            <tspan x="9.6" y="50.48">#B60958</tspan>
+          </text>
+          <circle cx="167.52" cy="45.6" r="12.96" fill="#B60958"/>
+        </g>
+        <g transform="translate(0 168.96)">
+          <text fill="#FFFFFF" font-family="Amiko-Regular, Amiko" font-size="13.44" letter-spacing=".016">
+            <tspan x="0" y="15">@btn-info-border</tspan>
+          </text>
+          <use fill="#030413" xlink:href="#g"/>
+          <rect width="172.2" height="37.8" x=".3" y="27.18" stroke="#E6E6E6" stroke-width=".6"/>
+          <text fill="#FFFFFF" font-family="OpenSans, Open Sans" font-size="13.44" letter-spacing=".016">
+            <tspan x="9.6" y="50.48">darken(@btn-info-bg, 5%)</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
