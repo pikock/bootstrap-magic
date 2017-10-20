@@ -1,7 +1,7 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/docs/content/error/$rootScope/infdig.ngdoc?message=docs(error%2Finfdig)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/error/$rootScope/infdig.ngdoc?message=docs(error%2Finfdig)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
-<h1>Error: error:infdig
+<h1>Error: $rootScope:infdig
   <div><span class='hint'>Infinite $digest Loop</span></div>
 </h1>
 
@@ -17,7 +17,7 @@ Watchers fired in the last 5 iterations: {1}</pre>
 Angular detects this situation and prevents an infinite loop from causing the browser to become unresponsive.</p>
 <p>For example, the situation can occur by setting up a watch on a path and subsequently updating the same path when the value changes.</p>
 <pre><code>$scope.$watch(&#39;foo&#39;, function() {
-$scope.foo = $scope.foo + 1;
+  $scope.foo = $scope.foo + 1;
 });
 </code></pre>
 <p>One common mistake is binding to a function which generates a new array every time it is called.  For example:</p>

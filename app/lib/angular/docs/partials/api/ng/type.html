@@ -42,11 +42,28 @@ such as being valid/invalid or dirty/pristine.</p>
       
       <tr>
         <td><a href="api/ng/type/ngModel.NgModelController">ngModel.NgModelController</a></td>
-        <td><p><code>NgModelController</code> provides API for the <code>ng-model</code> directive. The controller contains
-services for data-binding, validation, CSS updates, and value formatting and parsing. It
-purposefully does not contain any logic which deals with DOM rendering or listening to
-DOM events. Such DOM related logic should be provided by other directives which make use of
-<code>NgModelController</code> for data-binding.</p>
+        <td><p><code>NgModelController</code> provides API for the <a href="api/ng/directive/ngModel"><code>ngModel</code></a> directive.
+The controller contains services for data-binding, validation, CSS updates, and value formatting
+and parsing. It purposefully does not contain any logic which deals with DOM rendering or
+listening to DOM events.
+Such DOM related logic should be provided by other directives which make use of
+<code>NgModelController</code> for data-binding to control elements.
+Angular provides this DOM logic for most <a href="api/ng/directive/input"><code>input</code></a> elements.
+At the end of this page you can find a <a href="api/ng/type/ngModel.NgModelController#custom-control-example">custom control example</a> that uses <code>ngModelController</code> to bind to <code>contenteditable</code> elements.</p>
+</td>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ng/type/ModelOptions">ModelOptions</a></td>
+        <td><p>A container for the options set by the <a href="api/ng/directive/ngModelOptions"><code>ngModelOptions</code></a> directive</p>
+</td>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ng/type/select.SelectController">select.SelectController</a></td>
+        <td><p>The controller for the <a href="api/ng/directive/select">select</a> directive. The controller exposes
+a few utility methods that can be used to augment the behavior of a regular or an
+<a href="api/ng/directive/ngOptions">ngOptions</a> select element.</p>
 </td>
       </tr>
       
@@ -55,7 +72,8 @@ DOM events. Such DOM related logic should be provided by other directives which 
         <td><p>A root scope can be retrieved using the <a href="api/ng/service/$rootScope">$rootScope</a> key from the
 <a href="api/auto/service/$injector">$injector</a>. Child scopes are created using the
 <a href="api/ng/type/$rootScope.Scope#$new">$new()</a> method. (Most scopes are created automatically when
-compiled HTML template is executed.)</p>
+compiled HTML template is executed.) See also the <a href="guide/scope">Scopes guide</a> for
+an in-depth introduction and usage examples.</p>
 </td>
       </tr>
       

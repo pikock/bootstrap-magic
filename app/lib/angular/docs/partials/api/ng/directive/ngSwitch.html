@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/directive/ngSwitch.js?message=docs(ngSwitch)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/ngSwitch.js?message=docs(ngSwitch)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/directive/ngSwitch.js#L3' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/ngSwitch.js#L3' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -16,6 +16,8 @@
     </li>
   </ol>
 </header>
+
+
 
 
 
@@ -49,7 +51,8 @@ value of the expression <code>$scope.someVal</code>.
   <h2>Directive Info</h2>
   <ul>
     <li>This directive creates new scope.</li>
-    <li>This directive executes at priority level 800.</li>
+    <li>This directive executes at priority level 1200.</li>
+    
   </ul>
 
   
@@ -57,20 +60,15 @@ value of the expression <code>$scope.someVal</code>.
   <div class="usage">
   
     <pre><code>&lt;ANY ng-switch=&quot;expression&quot;&gt;
-&lt;ANY ng-switch-when=&quot;matchValue1&quot;&gt;...&lt;/ANY&gt;
-&lt;ANY ng-switch-when=&quot;matchValue2&quot;&gt;...&lt;/ANY&gt;
-&lt;ANY ng-switch-default&gt;...&lt;/ANY&gt;
+  &lt;ANY ng-switch-when=&quot;matchValue1&quot;&gt;...&lt;/ANY&gt;
+  &lt;ANY ng-switch-when=&quot;matchValue2&quot;&gt;...&lt;/ANY&gt;
+  &lt;ANY ng-switch-default&gt;...&lt;/ANY&gt;
 &lt;/ANY&gt;
 </code></pre>
 
   
   </div>
   
-  <h2>Animations</h2>
-  <p>enter - happens after the ngSwitch contents change and the matched child element is placed inside the container
-leave - happens just after the ngSwitch contents change and just before the former contents are removed from the DOM</p>
-
-  <a href="api/ngAnimate/service/$animate">Click here</a> to learn more about the steps involved in the animation.
 <section class="api-section">
   <h3>Arguments</h3>
 
@@ -94,12 +92,16 @@ leave - happens just after the ngSwitch contents change and just before the form
         <a href="" class="label type-hint type-hint-object">*</a>
       </td>
       <td>
-        <p>expression to match against <tt>ng-switch-when</tt>.
+        <p>expression to match against <code>ng-switch-when</code>.
 On child elements add:</p>
 <ul>
 <li><code>ngSwitchWhen</code>: the case statement to match against. If match then this
 case will be displayed. If the same match appears multiple times, all the
-elements will be displayed.</li>
+elements will be displayed. It is possible to associate multiple values to
+the same <code>ngSwitchWhen</code> by defining the optional attribute
+<code>ngSwitchWhenSeparator</code>. The separator will be used to split the value of
+the <code>ngSwitchWhen</code> attribute into multiple tokens, and the element will show
+if any of the <code>ngSwitch</code> evaluates to any of these tokens.</li>
 <li><code>ngSwitchDefault</code>: the default case when no other case match. If there
 are multiple default cases, all of them will be displayed when no other
 case match.</li>
@@ -114,53 +116,72 @@ case match.</li>
 
 </section>
   
+  <h2 id="animations">Animations</h2>
+  <table>
+<thead>
+<tr>
+<th>Animation</th>
+<th>Occurs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="api/ng/service/$animate#enter">enter</a></td>
+<td>after the ngSwitch contents change and the matched child element is placed inside the container</td>
+</tr>
+<tr>
+<td><a href="api/ng/service/$animate#leave">leave</a></td>
+<td>after the ngSwitch contents change and just before the former contents are removed from the DOM</td>
+</tr>
+</tbody>
+</table>
 
+  <a href="api/ngAnimate/service/$animate">Click here</a> to learn more about the steps involved in the animation.
 
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example83')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ng-switch"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example83"
+      path="examples/example-ng-switch"
       module="switchExample"
       deps="angular-animate.js"
-      animations="true">
+      animations="true"
+      name="ng-switch">
 
   
     <div class="runnable-example-file" 
       name="index.html"
       language="html"
       type="html">
-      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;select ng-model=&quot;selection&quot; ng-options=&quot;item for item in items&quot;&gt;&#10;  &lt;/select&gt;&#10;  &lt;tt&gt;selection={{selection}}&lt;/tt&gt;&#10;  &lt;hr/&gt;&#10;  &lt;div class=&quot;animate-switch-container&quot;&#10;    ng-switch on=&quot;selection&quot;&gt;&#10;      &lt;div class=&quot;animate-switch&quot; ng-switch-when=&quot;settings&quot;&gt;Settings Div&lt;/div&gt;&#10;      &lt;div class=&quot;animate-switch&quot; ng-switch-when=&quot;home&quot;&gt;Home Span&lt;/div&gt;&#10;      &lt;div class=&quot;animate-switch&quot; ng-switch-default&gt;default&lt;/div&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;select ng-model=&quot;selection&quot; ng-options=&quot;item for item in items&quot;&gt;&#10;  &lt;/select&gt;&#10;  &lt;code&gt;selection={{selection}}&lt;/code&gt;&#10;  &lt;hr/&gt;&#10;  &lt;div class=&quot;animate-switch-container&quot;&#10;    ng-switch on=&quot;selection&quot;&gt;&#10;      &lt;div class=&quot;animate-switch&quot; ng-switch-when=&quot;settings|options&quot; ng-switch-when-separator=&quot;|&quot;&gt;Settings Div&lt;/div&gt;&#10;      &lt;div class=&quot;animate-switch&quot; ng-switch-when=&quot;home&quot;&gt;Home Span&lt;/div&gt;&#10;      &lt;div class=&quot;animate-switch&quot; ng-switch-default&gt;default&lt;/div&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
     </div>
   
     <div class="runnable-example-file" 
       name="script.js"
       language="js"
       type="js">
-      <pre><code>angular.module(&#39;switchExample&#39;, [&#39;ngAnimate&#39;])&#10;  .controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;    $scope.items = [&#39;settings&#39;, &#39;home&#39;, &#39;other&#39;];&#10;    $scope.selection = $scope.items[0];&#10;  }]);</code></pre>
+      <pre><code>angular.module(&#39;switchExample&#39;, [&#39;ngAnimate&#39;])&#10;.controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.items = [&#39;settings&#39;, &#39;home&#39;, &#39;options&#39;, &#39;other&#39;];&#10;  $scope.selection = $scope.items[0];&#10;}]);</code></pre>
     </div>
   
     <div class="runnable-example-file" 
       name="animations.css"
       language="css"
       type="css">
-      <pre><code>.animate-switch-container {&#10;  position:relative;&#10;  background:white;&#10;  border:1px solid black;&#10;  height:40px;&#10;  overflow:hidden;&#10;}&#10;&#10;.animate-switch {&#10;  padding:10px;&#10;}&#10;&#10;.animate-switch.ng-animate {&#10;  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;&#10;  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;&#10;&#10;  position:absolute;&#10;  top:0;&#10;  left:0;&#10;  right:0;&#10;  bottom:0;&#10;}&#10;&#10;.animate-switch.ng-leave.ng-leave-active,&#10;.animate-switch.ng-enter {&#10;  top:-50px;&#10;}&#10;.animate-switch.ng-leave,&#10;.animate-switch.ng-enter.ng-enter-active {&#10;  top:0;&#10;}</code></pre>
+      <pre><code>.animate-switch-container {&#10;  position:relative;&#10;  background:white;&#10;  border:1px solid black;&#10;  height:40px;&#10;  overflow:hidden;&#10;}&#10;&#10;.animate-switch {&#10;  padding:10px;&#10;}&#10;&#10;.animate-switch.ng-animate {&#10;  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;&#10;&#10;  position:absolute;&#10;  top:0;&#10;  left:0;&#10;  right:0;&#10;  bottom:0;&#10;}&#10;&#10;.animate-switch.ng-leave.ng-leave-active,&#10;.animate-switch.ng-enter {&#10;  top:-50px;&#10;}&#10;.animate-switch.ng-leave,&#10;.animate-switch.ng-enter.ng-enter-active {&#10;  top:0;&#10;}</code></pre>
     </div>
   
     <div class="runnable-example-file" 
       name="protractor.js"
       type="protractor"
       language="js">
-      <pre><code>var switchElem = element(by.css(&#39;[ng-switch]&#39;));&#10;var select = element(by.model(&#39;selection&#39;));&#10;&#10;it(&#39;should start in settings&#39;, function() {&#10;  expect(switchElem.getText()).toMatch(/Settings Div/);&#10;});&#10;it(&#39;should change to home&#39;, function() {&#10;  select.all(by.css(&#39;option&#39;)).get(1).click();&#10;  expect(switchElem.getText()).toMatch(/Home Span/);&#10;});&#10;it(&#39;should select default&#39;, function() {&#10;  select.all(by.css(&#39;option&#39;)).get(2).click();&#10;  expect(switchElem.getText()).toMatch(/default/);&#10;});</code></pre>
+      <pre><code>var switchElem = element(by.css(&#39;[ng-switch]&#39;));&#10;var select = element(by.model(&#39;selection&#39;));&#10;&#10;it(&#39;should start in settings&#39;, function() {&#10;  expect(switchElem.getText()).toMatch(/Settings Div/);&#10;});&#10;it(&#39;should change to home&#39;, function() {&#10;  select.all(by.css(&#39;option&#39;)).get(1).click();&#10;  expect(switchElem.getText()).toMatch(/Home Span/);&#10;});&#10;it(&#39;should change to settings via &quot;options&quot;&#39;, function() {&#10;  select.all(by.css(&#39;option&#39;)).get(2).click();&#10;  expect(switchElem.getText()).toMatch(/Settings Div/);&#10;});&#10;it(&#39;should select default&#39;, function() {&#10;  select.all(by.css(&#39;option&#39;)).get(3).click();&#10;  expect(switchElem.getText()).toMatch(/default/);&#10;});</code></pre>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example83/index.html" name="example-example83"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ng-switch')}}" name="example-ng-switch"></iframe>
   </div>
 </div>
 

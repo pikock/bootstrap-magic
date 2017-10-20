@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ngTouch/directive/ngSwipe.js?message=docs(ngSwipeRight)%3A%20describe%20your%20change...#L38' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ngTouch/directive/ngSwipe.js?message=docs(ngSwipeRight)%3A%20describe%20your%20change...#L41' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ngTouch/directive/ngSwipe.js#L38' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ngTouch/directive/ngSwipe.js#L41' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -16,6 +16,8 @@
     </li>
   </ol>
 </header>
+
+
 
 
 
@@ -39,6 +41,7 @@ too.</p>
   <ul>
     
     <li>This directive executes at priority level 0.</li>
+    
   </ul>
 
   
@@ -46,8 +49,12 @@ too.</p>
   <div class="usage">
   
     <ul>
+    
+      <li>as element:
+      <pre><code>&lt;ng-swipe-right&#10;  ng-swipe-right=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ng-swipe-right&gt;</code></pre>
+      </li>
     <li>as attribute:
-        <pre><code>&lt;ANY&#10;  ng-swipe-right=&quot;&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+        <pre><code>&lt;ANY&#10;  ng-swipe-right=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
       </li>
     
   </div>
@@ -88,19 +95,17 @@ upon right swipe. (Event object is available as <code>$event</code>)</p>
 </section>
   
 
-
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example106')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ng-swipe-right"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example106"
+      path="examples/example-ng-swipe-right"
       module="ngSwipeRightExample"
-      deps="angular-touch.js">
+      deps="angular-touch.js"
+      name="ng-swipe-right">
 
   
     <div class="runnable-example-file" 
@@ -118,7 +123,7 @@ upon right swipe. (Event object is available as <code>$event</code>)</p>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example106/index.html" name="example-example106"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ng-swipe-right')}}" name="example-ng-swipe-right"></iframe>
   </div>
 </div>
 

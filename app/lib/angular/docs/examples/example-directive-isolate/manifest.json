@@ -1,0 +1,8 @@
+{
+  "name": "example-directive-isolate",
+  "files": [
+    "index-production.html",
+    "script.js",
+    "my-customer-iso.html"
+  ]
+}

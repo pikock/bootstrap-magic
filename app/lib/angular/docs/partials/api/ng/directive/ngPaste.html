@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/directive/ngEventDirs.js?message=docs(ngPaste)%3A%20describe%20your%20change...#L465' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/ngEventDirs.js?message=docs(ngPaste)%3A%20describe%20your%20change...#L466' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/directive/ngEventDirs.js#L465' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/ngEventDirs.js#L466' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -16,6 +16,8 @@
     </li>
   </ol>
 </header>
+
+
 
 
 
@@ -35,6 +37,7 @@
   <ul>
     
     <li>This directive executes at priority level 0.</li>
+    
   </ul>
 
   
@@ -42,8 +45,12 @@
   <div class="usage">
   
     <ul>
+    
+      <li>as element:
+      <pre><code>&lt;ng-paste&#10;  ng-paste=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ng-paste&gt;</code></pre>
+      </li>
     <li>as attribute:
-        <pre><code>&lt;window, input, select, textarea, a&#10;  ng-paste=&quot;&quot;&gt;&#10;...&#10;&lt;/window, input, select, textarea, a&gt;</code></pre>
+        <pre><code>&lt;window, input, select, textarea, a&#10;  ng-paste=&quot;expression&quot;&gt;&#10;...&#10;&lt;/window, input, select, textarea, a&gt;</code></pre>
       </li>
     
   </div>
@@ -84,17 +91,15 @@ paste. (<a href="guide/expression#-event-">Event object is available as <code>$e
 </section>
   
 
-
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example73')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ng-paste"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example73">
+      path="examples/example-ng-paste"
+      name="ng-paste">
 
   
     <div class="runnable-example-file" 
@@ -105,7 +110,7 @@ paste. (<a href="guide/expression#-event-">Event object is available as <code>$e
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example73/index.html" name="example-example73"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ng-paste')}}" name="example-ng-paste"></iframe>
   </div>
 </div>
 

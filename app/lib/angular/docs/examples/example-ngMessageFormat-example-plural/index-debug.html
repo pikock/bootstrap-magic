@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ngMessageFormat-example-plural-debug</title>
+  
+
+  <script src="../../../angular.js"></script>
+  <script src="../../../angular-message-format.js"></script>
+  <script src="script.js"></script>
+  
+
+  
+</head>
+<body ng-app="msgFmtExample">
+  <div ng-controller="AppController">
+ <button ng-click="recipients.pop()" id="decreaseRecipients">decreaseRecipients</button><br>
+ Select recipients:<br>
+ <select multiple size=5 ng-model="recipients" ng-options="person as person.name for person in people">
+ </select><br>
+  <p>{{recipients.length, plural, offset:1
+          =0    {{{sender.name}} gave no gifts (\#=#)}
+          =1    {{{sender.name}} gave a gift to {{recipients[0].name}} (\#=#)}
+          one   {{{sender.name}} gave {{recipients[0].name}} and one other person a gift (\#=#)}
+          other {{{sender.name}} gave {{recipients[0].name}} and # other people a gift (\#=#)}
+        }}</p>
+</div>
+</body>
+</html>

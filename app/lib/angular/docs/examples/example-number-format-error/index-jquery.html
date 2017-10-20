@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-number-format-error-jquery</title>
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  <script src="app.js"></script>
+  
+
+  
+</head>
+<body ng-app="numfmt-error-module">
+  <table>
+  <tr ng-repeat="x in ['0', '1']">
+    <td>
+      <input type="number" string-to-number ng-model="x" /> {{ x }} : {{ typeOf(x) }}
+    </td>
+  </tr>
+</table>
+</body>
+</html>

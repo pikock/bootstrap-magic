@@ -1,19 +1,20 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/docs/content/api/index.ngdoc?message=docs(API Reference)%3A%20describe%20your%20change...#L1' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/api/index.ngdoc?message=docs(API Reference)%3A%20describe%20your%20change...#L1' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 <h1 id="angularjs-api-docs">AngularJS API Docs</h1>
 <p>Welcome to the AngularJS API docs page. These pages contain the AngularJS reference materials for version <strong ng-bind="version"></strong>.</p>
 <p>The documentation is organized into <strong><a href="guide/module">modules</a></strong> which contain various components of an AngularJS application.
 These components are <a href="guide/directive">directives</a>, <a href="guide/services">services</a>, <a href="guide/filter">filters</a>, <a href="guide/providers">providers</a>, <a href="guide/templates">templates</a>, global APIs, and testing mocks.</p>
+<p>There is also a <a href="guide/index">guide</a> with articles on various topics, and a list of external resources.</p>
 <div class="alert alert-info">
-<strong>Angular Namespaces <code>$</code> and <code>$$</code></strong>
+<strong>Angular Prefixes <code>$</code> and <code>$$</code></strong>:
 
 To prevent accidental name collisions with your code,
 Angular prefixes names of public objects with <code>$</code> and names of private objects with <code>$$</code>.
 Please do not use the <code>$</code> or <code>$$</code> prefix in your code.
 </div>
 
-<h2 id="angular-namespace">Angular Namespace</h2>
+<h2 id="angular-modules">Angular Modules</h2>
 <h2 id="-link-ng-ng-core-module-"><a href="api/ng">ng (core module)</a></h2>
 <p>This module is provided by default and contains the core components of AngularJS.</p>
 <table class="definition-table spaced">
@@ -130,7 +131,7 @@ or JavaScript callbacks.</p>
       <a href="api/ngAnimate#service">Services / Factories</a>
     </td>
     <td>
-      Use <a href="api/ngAnimate/service/$animate">$animate</a> to trigger animation operations within your directive code.
+      Use <a href="api/ng/service/$animate">$animate</a> to trigger animation operations within your directive code.
     </td>
   </tr>
   <tr>
@@ -151,6 +152,25 @@ or JavaScript callbacks.</p>
   </tr>
 </table>
 
+<h2 id="-link-ngaria-ngaria-"><a href="api/ngAria">ngAria</a></h2>
+<p>Use ngAria to inject common accessibility attributes into directives and improve the experience for users with disabilities.</p>
+<div class="alert alert-info">Include the <strong>angular-aria.js</strong> file and set ngAria as a dependency for this to work in your application.</div>
+
+<table class="definition-table spaced">
+  <tr>
+    <td>
+      <a href="api/ngAria#service">Services</a>
+    </td>
+    <td>
+      <p>
+          The <a href="api/ngAria/service/$aria">$aria</a> service contains helper methods for applying ARIA attributes to HTML.
+      <p>
+      <p>
+          <a href="api/ngAria/provider/$ariaProvider">$ariaProvider</a> is used for configuring ARIA attributes.
+      </p>
+    </td>
+  </tr>
+</table>
 
 <h2 id="-link-ngresource-ngresource-"><a href="api/ngResource">ngResource</a></h2>
 <p>Use the ngResource module when querying and posting data to a REST API.</p>
@@ -224,7 +244,7 @@ or JavaScript callbacks.</p>
   </tr>
   <tr>
     <td>
-      <a href="api/ngTouch#filter">Filters</a>
+      <a href="api/ngSanitize#filter">Filters</a>
     </td>
     <td>
       The <a href="api/ngSanitize/filter/linky">linky filter</a> is used to turn URLs into HTML links within the provided string.
@@ -233,7 +253,7 @@ or JavaScript callbacks.</p>
 </table>
 
 <h2 id="-link-ngmock-ngmock-"><a href="api/ngMock">ngMock</a></h2>
-<p>Use ngMock to inject and mock modules, factories, services and providers within your unit tests</p>
+<p>Use ngMock to inject and mock modules, factories, services and providers within your unit tests.</p>
 <div class="alert alert-info">Include the <strong>angular-mocks.js</strong> file into your test runner for this to work.</div>
 
 <table class="definition-table spaced">

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-filter-uppercase-jquery</title>
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  
+
+  
+</head>
+<body ng-app="uppercaseFilterExample">
+  <script>
+  angular.module('uppercaseFilterExample', [])
+    .controller('ExampleController', ['$scope', function($scope) {
+      $scope.title = 'This is a title';
+    }]);
+</script>
+<div ng-controller="ExampleController">
+  <!-- This title should be formatted normally -->
+  <h1>{{title}}</h1>
+  <!-- This title should be capitalized -->
+  <h1>{{title | uppercase}}</h1>
+</div>
+</body>
+</html>

@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/filter/filters.js?message=docs(json)%3A%20describe%20your%20change...#L439' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/filter/filters.js?message=docs(json)%3A%20describe%20your%20change...#L654' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/filter/filters.js#L439' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/filter/filters.js#L654' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -16,6 +16,8 @@
     </li>
   </ol>
 </header>
+
+
 
 
 
@@ -36,11 +38,11 @@
   <h2>Usage</h2>
   <h3>In HTML Template Binding</h3>
   
-    <pre><code>{{ json_expression | json}}</code></pre>
+    <pre><code>{{ json_expression | json : spacing}}</code></pre>
   
 
   <h3>In JavaScript</h3>
-  <pre><code>$filter(&#39;json&#39;)(object)</code></pre>
+  <pre><code>$filter(&#39;json&#39;)(object, spacing)</code></pre>
 
   
 <section class="api-section">
@@ -72,6 +74,22 @@
       </td>
     </tr>
     
+    <tr>
+      <td>
+        spacing
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-number">number</a>
+      </td>
+      <td>
+        <p>The number of spaces to use per indentation, defaults to 2.</p>
+
+        
+      </td>
+    </tr>
+    
   </tbody>
 </table>
 
@@ -88,33 +106,32 @@
 
 
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example92')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-filter-json"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example92">
+      path="examples/example-filter-json"
+      name="filter-json">
 
   
     <div class="runnable-example-file" 
       name="index.html"
       language="html"
       type="html">
-      <pre><code>&lt;pre&gt;{{ {&#39;name&#39;:&#39;value&#39;} | json }}&lt;/pre&gt;</code></pre>
+      <pre><code>&lt;pre id=&quot;default-spacing&quot;&gt;{{ {&#39;name&#39;:&#39;value&#39;} | json }}&lt;/pre&gt;&#10;&lt;pre id=&quot;custom-spacing&quot;&gt;{{ {&#39;name&#39;:&#39;value&#39;} | json:4 }}&lt;/pre&gt;</code></pre>
     </div>
   
     <div class="runnable-example-file" 
       name="protractor.js"
       type="protractor"
       language="js">
-      <pre><code>it(&#39;should jsonify filtered objects&#39;, function() {&#10;  expect(element(by.binding(&quot;{&#39;name&#39;:&#39;value&#39;}&quot;)).getText()).toMatch(/\{\n  &quot;name&quot;: ?&quot;value&quot;\n}/);&#10;});</code></pre>
+      <pre><code>it(&#39;should jsonify filtered objects&#39;, function() {&#10;  expect(element(by.id(&#39;default-spacing&#39;)).getText()).toMatch(/\{\n {2}&quot;name&quot;: ?&quot;value&quot;\n}/);&#10;  expect(element(by.id(&#39;custom-spacing&#39;)).getText()).toMatch(/\{\n {4}&quot;name&quot;: ?&quot;value&quot;\n}/);&#10;});</code></pre>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example92/index.html" name="example-example92"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-filter-json')}}" name="example-filter-json"></iframe>
   </div>
 </div>
 

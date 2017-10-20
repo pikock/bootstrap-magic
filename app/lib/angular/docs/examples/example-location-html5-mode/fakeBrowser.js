@@ -1,3 +1,5 @@
+(function(angular) {
+  'use strict';
 angular.module('fake-browser', [])
 
 .config(function($provide) {
@@ -22,3 +24,4 @@ angular.module('fake-browser', [])
    return $delegate;
  });
 });
+})(window.angular);

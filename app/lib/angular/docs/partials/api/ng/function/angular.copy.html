@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/Angular.js?message=docs(angular.copy)%3A%20describe%20your%20change...#L719' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/Angular.js?message=docs(angular.copy)%3A%20describe%20your%20change...#L822' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/Angular.js#L719' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/Angular.js#L822' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -19,16 +19,22 @@
 
 
 
+
+
 <div class="api-profile-description">
   <p>Creates a deep copy of <code>source</code>, which should be an object or an array.</p>
 <ul>
 <li>If no destination is supplied, a copy of the object or array is created.</li>
-<li>If a destination is provided, all of its elements (for array) or properties (for objects)
+<li>If a destination is provided, all of its elements (for arrays) or properties (for objects)
 are deleted and then all elements/properties from the source are copied to it.</li>
 <li>If <code>source</code> is not an object or array (inc. <code>null</code> and <code>undefined</code>), <code>source</code> is returned.</li>
-<li>If <code>source</code> is identical to &#39;destination&#39; an exception will be thrown.</li>
+<li>If <code>source</code> is identical to <code>destination</code> an exception will be thrown.</li>
 </ul>
-
+<p><br /></p>
+<div class="alert alert-warning">
+  Only enumerable properties are taken into account. Non-enumerable properties (both on <code>source</code>
+  and on <code>destination</code>) will be ignored.
+</div>
 </div>
 
 
@@ -37,7 +43,7 @@ are deleted and then all elements/properties from the source are copied to it.</
 <div>
   
 
-    
+  
 
   <h2 id="usage">Usage</h2>
     
@@ -115,27 +121,33 @@ are deleted and then all elements/properties from the source are copied to it.</
 
 
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example38')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-angular-copy"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example38"
-      module="copyExample">
+      path="examples/example-angular-copy"
+      module="copyExample"
+      name="angular-copy">
 
   
     <div class="runnable-example-file" 
       name="index.html"
       language="html"
       type="html">
-      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;&lt;form novalidate class=&quot;simple-form&quot;&gt;&#10;Name: &lt;input type=&quot;text&quot; ng-model=&quot;user.name&quot; /&gt;&lt;br /&gt;&#10;E-mail: &lt;input type=&quot;email&quot; ng-model=&quot;user.email&quot; /&gt;&lt;br /&gt;&#10;Gender: &lt;input type=&quot;radio&quot; ng-model=&quot;user.gender&quot; value=&quot;male&quot; /&gt;male&#10;&lt;input type=&quot;radio&quot; ng-model=&quot;user.gender&quot; value=&quot;female&quot; /&gt;female&lt;br /&gt;&#10;&lt;button ng-click=&quot;reset()&quot;&gt;RESET&lt;/button&gt;&#10;&lt;button ng-click=&quot;update(user)&quot;&gt;SAVE&lt;/button&gt;&#10;&lt;/form&gt;&#10;&lt;pre&gt;form = {{user | json}}&lt;/pre&gt;&#10;&lt;pre&gt;master = {{master | json}}&lt;/pre&gt;&#10;&lt;/div&gt;&#10;&#10;&lt;script&gt;&#10; angular.module(&#39;copyExample&#39;, [])&#10;   .controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;     $scope.master= {};&#10;&#10;     $scope.update = function(user) {&#10;       // Example with 1 argument&#10;       $scope.master= angular.copy(user);&#10;     };&#10;&#10;     $scope.reset = function() {&#10;       // Example with 2 arguments&#10;       angular.copy($scope.master, $scope.user);&#10;     };&#10;&#10;     $scope.reset();&#10;   }]);&#10;&lt;/script&gt;</code></pre>
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;form novalidate class=&quot;simple-form&quot;&gt;&#10;    &lt;label&gt;Name: &lt;input type=&quot;text&quot; ng-model=&quot;user.name&quot; /&gt;&lt;/label&gt;&lt;br /&gt;&#10;    &lt;label&gt;Age:  &lt;input type=&quot;number&quot; ng-model=&quot;user.age&quot; /&gt;&lt;/label&gt;&lt;br /&gt;&#10;    Gender: &lt;label&gt;&lt;input type=&quot;radio&quot; ng-model=&quot;user.gender&quot; value=&quot;male&quot; /&gt;male&lt;/label&gt;&#10;            &lt;label&gt;&lt;input type=&quot;radio&quot; ng-model=&quot;user.gender&quot; value=&quot;female&quot; /&gt;female&lt;/label&gt;&lt;br /&gt;&#10;    &lt;button ng-click=&quot;reset()&quot;&gt;RESET&lt;/button&gt;&#10;    &lt;button ng-click=&quot;update(user)&quot;&gt;SAVE&lt;/button&gt;&#10;  &lt;/form&gt;&#10;  &lt;pre&gt;form = {{user | json}}&lt;/pre&gt;&#10;  &lt;pre&gt;master = {{master | json}}&lt;/pre&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>// Module: copyExample&#10;angular.&#10;  module(&#39;copyExample&#39;, []).&#10;  controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;    $scope.master = {};&#10;&#10;    $scope.reset = function() {&#10;      // Example with 1 argument&#10;      $scope.user = angular.copy($scope.master);&#10;    };&#10;&#10;    $scope.update = function(user) {&#10;      // Example with 2 arguments&#10;      angular.copy(user, $scope.master);&#10;    };&#10;&#10;    $scope.reset();&#10;  }]);</code></pre>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example38/index.html" name="example-example38"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-angular-copy')}}" name="example-angular-copy"></iframe>
   </div>
 </div>
 

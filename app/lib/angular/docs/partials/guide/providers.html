@@ -1,4 +1,4 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/docs/content/guide/providers.ngdoc?message=docs(guide%2FProviders)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/guide/providers.ngdoc?message=docs(guide%2FProviders)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 <h1 id="providers">Providers</h1>
@@ -38,13 +38,13 @@ myApp.value(&#39;clientId&#39;, &#39;a12345654321x&#39;);
 contains a &quot;recipe&quot; for constructing the <code>clientId</code> service, which is a simple string in this case.</p>
 <p>And this is how you would display it via Angular&#39;s data-binding:</p>
 <pre><code class="lang-javascript">myApp.controller(&#39;DemoController&#39;, [&#39;clientId&#39;, function DemoController(clientId) {
-this.clientId = clientId;
+  this.clientId = clientId;
 }]);
 </code></pre>
 <pre><code class="lang-html">&lt;html ng-app=&quot;myApp&quot;&gt;
-&lt;body ng-controller=&quot;DemoController as demo&quot;&gt;
-  Client ID: {{demo.clientId}}
-&lt;/body&gt;
+  &lt;body ng-controller=&quot;DemoController as demo&quot;&gt;
+    Client ID: {{demo.clientId}}
+  &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
 <p>In this example, we&#39;ve used the Value recipe to define the value to provide when <code>DemoController</code>
@@ -67,7 +67,7 @@ once to create the object. The injector then caches the reference for all future
 <p>Since a Factory is a more powerful version of the Value recipe, the same service can be constructed with it.
 Using our previous <code>clientId</code> Value recipe example, we can rewrite it as a Factory recipe like this:</p>
 <pre><code class="lang-javascript">myApp.factory(&#39;clientId&#39;, function clientIdFactory() {
-return &#39;a12345654321x&#39;;
+  return &#39;a12345654321x&#39;;
 });
 </code></pre>
 <p>But given that the token is just a string literal, sticking with the Value recipe is still more
@@ -76,15 +76,15 @@ appropriate as it makes the code easier to follow.</p>
 authentication against a remote API. This token will be called <code>apiToken</code> and will be computed
 based on the <code>clientId</code> value and a secret stored in the browser&#39;s local storage:</p>
 <pre><code class="lang-javascript">myApp.factory(&#39;apiToken&#39;, [&#39;clientId&#39;, function apiTokenFactory(clientId) {
-var encrypt = function(data1, data2) {
-  // NSA-proof encryption algorithm:
-  return (data1 + &#39;:&#39; + data2).toUpperCase();
-};
+  var encrypt = function(data1, data2) {
+    // NSA-proof encryption algorithm:
+    return (data1 + &#39;:&#39; + data2).toUpperCase();
+  };
 
-var secret = window.localStorage.getItem(&#39;myApp.secret&#39;);
-var apiToken = encrypt(clientId, secret);
+  var secret = window.localStorage.getItem(&#39;myApp.secret&#39;);
+  var apiToken = encrypt(clientId, secret);
 
-return apiToken;
+  return apiToken;
 }]);
 </code></pre>
 <p>In the code above, we see how the <code>apiToken</code> service is defined via the Factory recipe that depends
@@ -104,18 +104,18 @@ could launch a unicorn into space via our <code>unicornLauncher</code> service w
 custom type:</p>
 <pre><code class="lang-javascript">function UnicornLauncher(apiToken) {
 
-this.launchedCount = 0;
-this.launch = function() {
-  // Make a request to the remote API and include the apiToken
-  ...
-  this.launchedCount++;
-}
+  this.launchedCount = 0;
+  this.launch = function() {
+    // Make a request to the remote API and include the apiToken
+    ...
+    this.launchedCount++;
+  }
 }
 </code></pre>
 <p>We are now ready to launch unicorns, but notice that UnicornLauncher depends on our <code>apiToken</code>.
 We can satisfy this dependency on <code>apiToken</code> using the Factory recipe:</p>
 <pre><code class="lang-javascript">myApp.factory(&#39;unicornLauncher&#39;, [&quot;apiToken&quot;, function(apiToken) {
-return new UnicornLauncher(apiToken);
+  return new UnicornLauncher(apiToken);
 }]);
 </code></pre>
 <p>This is, however, exactly the use-case that the Service recipe is the most suitable for.</p>
@@ -150,24 +150,24 @@ intergalactic trip, otherwise they would burn while passing through the atmosphe
 be great if we could configure the launcher to use the tinfoil shielding for each launch in apps
 that need it. We can make it configurable like so:</p>
 <pre><code class="lang-javascript">myApp.provider(&#39;unicornLauncher&#39;, function UnicornLauncherProvider() {
-var useTinfoilShielding = false;
+  var useTinfoilShielding = false;
 
-this.useTinfoilShielding = function(value) {
-  useTinfoilShielding = !!value;
-};
+  this.useTinfoilShielding = function(value) {
+    useTinfoilShielding = !!value;
+  };
 
-this.$get = [&quot;apiToken&quot;, function unicornLauncherFactory(apiToken) {
+  this.$get = [&quot;apiToken&quot;, function unicornLauncherFactory(apiToken) {
 
-  // let&#39;s assume that the UnicornLauncher constructor was also changed to
-  // accept and use the useTinfoilShielding argument
-  return new UnicornLauncher(apiToken, useTinfoilShielding);
-}];
+    // let&#39;s assume that the UnicornLauncher constructor was also changed to
+    // accept and use the useTinfoilShielding argument
+    return new UnicornLauncher(apiToken, useTinfoilShielding);
+  }];
 });
 </code></pre>
 <p>To turn the tinfoil shielding on in our app, we need to create a config function via the module
 API and have the UnicornLauncherProvider injected into it:</p>
 <pre><code class="lang-javascript">myApp.config([&quot;unicornLauncherProvider&quot;, function(unicornLauncherProvider) {
-unicornLauncherProvider.useTinfoilShielding(true);
+  unicornLauncherProvider.useTinfoilShielding(true);
 }]);
 </code></pre>
 <p>Notice that the unicorn provider is injected into the config function. This injection is done by a
@@ -194,23 +194,23 @@ We can then define the planet name as a constant like this:</p>
 </code></pre>
 <p>We could then configure the unicornLauncherProvider like this:</p>
 <pre><code class="lang-javascript">myApp.config([&#39;unicornLauncherProvider&#39;, &#39;planetName&#39;, function(unicornLauncherProvider, planetName) {
-unicornLauncherProvider.useTinfoilShielding(true);
-unicornLauncherProvider.stampText(planetName);
+  unicornLauncherProvider.useTinfoilShielding(true);
+  unicornLauncherProvider.stampText(planetName);
 }]);
 </code></pre>
 <p>And since Constant recipe makes the value also available at runtime just like the Value recipe, we
 can also use it in our controller and template:</p>
 <pre><code class="lang-javascript">myApp.controller(&#39;DemoController&#39;, [&quot;clientId&quot;, &quot;planetName&quot;, function DemoController(clientId, planetName) {
-this.clientId = clientId;
-this.planetName = planetName;
+  this.clientId = clientId;
+  this.planetName = planetName;
 }]);
 </code></pre>
 <pre><code class="lang-html">&lt;html ng-app=&quot;myApp&quot;&gt;
-&lt;body ng-controller=&quot;DemoController as demo&quot;&gt;
- Client ID: {{demo.clientId}}
- &lt;br&gt;
- Planet Name: {{demo.planetName}}
-&lt;/body&gt;
+  &lt;body ng-controller=&quot;DemoController as demo&quot;&gt;
+   Client ID: {{demo.clientId}}
+   &lt;br&gt;
+   Planet Name: {{demo.planetName}}
+  &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
 <h2 id="special-purpose-objects">Special Purpose Objects</h2>
@@ -224,19 +224,19 @@ on the <code>planetName</code> constant we&#39;ve just defined and displays the 
 &quot;Planet Name: Greasy Giant&quot;.</p>
 <p>Since the directives are registered via the Factory recipe, we can use the same syntax as with factories.</p>
 <pre><code class="lang-javascript">myApp.directive(&#39;myPlanet&#39;, [&#39;planetName&#39;, function myPlanetDirectiveFactory(planetName) {
-// directive definition object
-return {
-  restrict: &#39;E&#39;,
-  scope: {},
-  link: function($scope, $element) { $element.text(&#39;Planet: &#39; + planetName); }
-}
+  // directive definition object
+  return {
+    restrict: &#39;E&#39;,
+    scope: {},
+    link: function($scope, $element) { $element.text(&#39;Planet: &#39; + planetName); }
+  }
 }]);
 </code></pre>
 <p>We can then use the component like this:</p>
 <pre><code class="lang-html">&lt;html ng-app=&quot;myApp&quot;&gt;
-&lt;body&gt;
- &lt;my-planet&gt;&lt;/my-planet&gt;
-&lt;/body&gt;
+  &lt;body&gt;
+   &lt;my-planet&gt;&lt;/my-planet&gt;
+  &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
 <p>Using Factory recipes, you can also define Angular&#39;s filters and animations, but the controllers
@@ -244,7 +244,7 @@ are a bit special. You create a controller as a custom type that declares its de
 arguments for its constructor function. This constructor is then registered with a module. Let&#39;s
 take a look at the <code>DemoController</code>, created in one of the early examples:</p>
 <pre><code class="lang-javascript">myApp.controller(&#39;DemoController&#39;, [&#39;clientId&#39;, function DemoController(clientId) {
-this.clientId = clientId;
+  this.clientId = clientId;
 }]);
 </code></pre>
 <p>The DemoController is instantiated via its constructor, every time the app needs an instance of

@@ -1,0 +1,7 @@
+{
+  "name": "example-forms-async-validation",
+  "files": [
+    "index-production.html",
+    "script.js"
+  ]
+}

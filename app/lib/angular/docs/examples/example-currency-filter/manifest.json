@@ -1,0 +1,7 @@
+{
+  "name": "example-currency-filter",
+  "files": [
+    "index-production.html",
+    "protractor.js"
+  ]
+}

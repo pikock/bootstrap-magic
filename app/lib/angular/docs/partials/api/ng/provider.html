@@ -12,10 +12,16 @@
       </tr>
       
       <tr>
+        <td><a href="api/ng/provider/$anchorScrollProvider">$anchorScrollProvider</a></td>
+        <td><p>Use <code>$anchorScrollProvider</code> to disable automatic scrolling whenever
+<a href="api/ng/service/$location#hash">$location.hash()</a> changes.</p>
+</td>
+      </tr>
+      
+      <tr>
         <td><a href="api/ng/provider/$animateProvider">$animateProvider</a></td>
         <td><p>Default implementation of $animate that doesn&#39;t perform any animations, instead just
-synchronously performs DOM
-updates and calls done() callbacks.</p>
+synchronously performs DOM updates and resolves the returned runner promise.</p>
 </td>
       </tr>
       
@@ -71,6 +77,11 @@ annotated with dependencies and is responsible for creating a filter function.</
       </tr>
       
       <tr>
+        <td><a href="api/ng/provider/$qProvider">$qProvider</a></td>
+        <td></td>
+      </tr>
+      
+      <tr>
         <td><a href="api/ng/provider/$rootScopeProvider">$rootScopeProvider</a></td>
         <td><p>Provider for the $rootScope service.</p>
 </td>
@@ -78,9 +89,7 @@ annotated with dependencies and is responsible for creating a filter function.</
       
       <tr>
         <td><a href="api/ng/provider/$sceDelegateProvider">$sceDelegateProvider</a></td>
-        <td><p>The <code>$sceDelegateProvider</code> provider allows developers to configure the <a href="api/ng/service/$sceDelegate">$sceDelegate</a> service.  This allows one to get/set the whitelists and blacklists used to ensure
-that the URLs used for sourcing Angular templates are safe.  Refer <a href="api/ng/provider/$sceDelegateProvider#resourceUrlWhitelist">$sceDelegateProvider.resourceUrlWhitelist</a> and
-<a href="api/ng/provider/$sceDelegateProvider#resourceUrlBlacklist">$sceDelegateProvider.resourceUrlBlacklist</a></p>
+        <td><p>The <code>$sceDelegateProvider</code> provider allows developers to configure the <a href="api/ng/service/$sceDelegate">$sceDelegate service</a>, used as a delegate for <a href="api/ng/service/$sce">Strict Contextual Escaping (SCE)</a>.</p>
 </td>
       </tr>
       
@@ -91,6 +100,12 @@ that the URLs used for sourcing Angular templates are safe.  Refer <a href="api/
 <li>enable/disable Strict Contextual Escaping (SCE) in a module</li>
 <li>override the default implementation with a custom delegate</li>
 </ul>
+</td>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ng/provider/$templateRequestProvider">$templateRequestProvider</a></td>
+        <td><p>Used to configure the options passed to the <a href="api/ng/service/$http"><code>$http</code></a> service when making a template request.</p>
 </td>
       </tr>
       

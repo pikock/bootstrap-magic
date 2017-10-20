@@ -1,0 +1,278 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/jsonpCallbacks.js?message=docs($jsonpCallbacks)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/jsonpCallbacks.js#L3' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">$jsonpCallbacks</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+  
+
+    <li>
+      - service in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>This service handles the lifecycle of callbacks to handle JSONP requests.
+Override this service if you wish to customise where the callbacks are stored and
+how they vary compared to the requested url.</p>
+
+</div>
+
+
+
+
+<div>
+  
+  <h2 id="dependencies">Dependencies</h2>
+  <ul>
+    <li><a href="api/ng/service/$window"><code>$window</code></a></li>
+  </ul>
+  
+
+  
+
+  
+
+  
+<h2>Methods</h2>
+<ul class="methods">
+  <li id="createCallback">
+    <h3><p><code>createCallback(url);</code></p>
+
+</h3>
+    <div><p><a href="api/ng/service/$httpBackend"><code>$httpBackend</code></a> calls this method to create a callback and get hold of the path to the callback
+to pass to the server, which will be used to call the callback with its payload in the JSONP response.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        url
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>the url of the JSONP request</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-string">string</a></td>
+    <td><p>the callback path to send to the server as part of the JSONP request</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li id="wasCalled">
+    <h3><p><code>wasCalled(callbackPath);</code></p>
+
+</h3>
+    <div><p><a href="api/ng/service/$httpBackend"><code>$httpBackend</code></a> calls this method to find out whether the JSONP response actually called the
+callback that was passed in the request.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        callbackPath
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>the path to the callback that was sent in the JSONP request</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-boolean">boolean</a></td>
+    <td><p>whether the callback has been called, as a result of the JSONP response</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li id="getResponse">
+    <h3><p><code>getResponse(callbackPath);</code></p>
+
+</h3>
+    <div><p><a href="api/ng/service/$httpBackend"><code>$httpBackend</code></a> calls this method to get hold of the data that was provided to the callback
+in the JSONP response.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        callbackPath
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>the path to the callback that was sent in the JSONP request</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-object">*</a></td>
+    <td><p>the data received from the response via the registered callback</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li id="removeCallback">
+    <h3><p><code>removeCallback(callbackPath);</code></p>
+
+</h3>
+    <div><p><a href="api/ng/service/$httpBackend"><code>$httpBackend</code></a> calls this method to remove the callback after the JSONP request has
+completed or timed-out.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        callbackPath
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>the path to the callback that was sent in the JSONP request</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    </li>
+  </ul>
+  
+  
+
+
+
+  
+</div>
+
+

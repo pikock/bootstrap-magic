@@ -1,0 +1,8 @@
+{
+  "name": "example-ng-show-simple",
+  "files": [
+    "index-production.html",
+    "animations.css",
+    "protractor.js"
+  ]
+}

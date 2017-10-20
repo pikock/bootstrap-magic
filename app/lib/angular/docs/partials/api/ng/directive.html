@@ -12,6 +12,14 @@
       </tr>
       
       <tr>
+        <td><a href="api/ng/directive/ngJq">ngJq</a></td>
+        <td><p>Use this directive to force the angular.element library.  This should be
+used to force either jqLite by leaving ng-jq blank or setting the name of
+the jquery variable under window (eg. jQuery).</p>
+</td>
+      </tr>
+      
+      <tr>
         <td><a href="api/ng/directive/ngApp">ngApp</a></td>
         <td><p>Use this directive to <strong>auto-bootstrap</strong> an AngularJS application. The <code>ngApp</code> directive
 designates the <strong>root element</strong> of the application and is typically placed near the root element
@@ -21,7 +29,7 @@ of the page - e.g. on the <code>&lt;body&gt;</code> or <code>&lt;html&gt;</code>
       
       <tr>
         <td><a href="api/ng/directive/a">a</a></td>
-        <td><p>Modifies the default behavior of the html A tag so that the default action is prevented when
+        <td><p>Modifies the default behavior of the html a tag so that the default action is prevented when
 the href attribute is empty.</p>
 </td>
       </tr>
@@ -57,59 +65,35 @@ text <code>{{hash}}</code> until Angular replaces the expression inside
       
       <tr>
         <td><a href="api/ng/directive/ngDisabled">ngDisabled</a></td>
-        <td><p>We shouldn&#39;t do this, because it will make the button enabled on Chrome/Firefox but not on IE8 and older IEs:</p>
-<pre><code class="lang-html">&lt;div ng-init=&quot;scope = { isDisabled: false }&quot;&gt;
-&lt;button disabled=&quot;{{scope.isDisabled}}&quot;&gt;Disabled&lt;/button&gt;
-&lt;/div&gt;
-</code></pre>
+        <td><p>This directive sets the <code>disabled</code> attribute on the element (typically a form control,
+e.g. <code>input</code>, <code>button</code>, <code>select</code> etc.) if the
+<a href="guide/expression">expression</a> inside <code>ngDisabled</code> evaluates to truthy.</p>
 </td>
       </tr>
       
       <tr>
         <td><a href="api/ng/directive/ngChecked">ngChecked</a></td>
-        <td><p>The HTML specification does not require browsers to preserve the values of boolean attributes
-such as checked. (Their presence means true and their absence means false.)
-If we put an Angular interpolation expression into such an attribute then the
-binding information would be lost when the browser removes the attribute.
-The <code>ngChecked</code> directive solves this problem for the <code>checked</code> attribute.
-This complementary directive is not removed by the browser and so provides
-a permanent reliable place to store the binding information.</p>
+        <td><p>Sets the <code>checked</code> attribute on the element, if the expression inside <code>ngChecked</code> is truthy.</p>
 </td>
       </tr>
       
       <tr>
         <td><a href="api/ng/directive/ngReadonly">ngReadonly</a></td>
-        <td><p>The HTML specification does not require browsers to preserve the values of boolean attributes
-such as readonly. (Their presence means true and their absence means false.)
-If we put an Angular interpolation expression into such an attribute then the
-binding information would be lost when the browser removes the attribute.
-The <code>ngReadonly</code> directive solves this problem for the <code>readonly</code> attribute.
-This complementary directive is not removed by the browser and so provides
-a permanent reliable place to store the binding information.</p>
+        <td><p>Sets the <code>readonly</code> attribute on the element, if the expression inside <code>ngReadonly</code> is truthy.
+Note that <code>readonly</code> applies only to <code>input</code> elements with specific types. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly">See the input docs on
+MDN</a> for more information.</p>
 </td>
       </tr>
       
       <tr>
         <td><a href="api/ng/directive/ngSelected">ngSelected</a></td>
-        <td><p>The HTML specification does not require browsers to preserve the values of boolean attributes
-such as selected. (Their presence means true and their absence means false.)
-If we put an Angular interpolation expression into such an attribute then the
-binding information would be lost when the browser removes the attribute.
-The <code>ngSelected</code> directive solves this problem for the <code>selected</code> attribute.
-This complementary directive is not removed by the browser and so provides
-a permanent reliable place to store the binding information.</p>
+        <td><p>Sets the <code>selected</code> attribute on the element, if the expression inside <code>ngSelected</code> is truthy.</p>
 </td>
       </tr>
       
       <tr>
         <td><a href="api/ng/directive/ngOpen">ngOpen</a></td>
-        <td><p>The HTML specification does not require browsers to preserve the values of boolean attributes
-such as open. (Their presence means true and their absence means false.)
-If we put an Angular interpolation expression into such an attribute then the
-binding information would be lost when the browser removes the attribute.
-The <code>ngOpen</code> directive solves this problem for the <code>open</code> attribute.
-This complementary directive is not removed by the browser and so provides
-a permanent reliable place to store the binding information.</p>
+        <td><p>Sets the <code>open</code> attribute on the element, if the expression inside <code>ngOpen</code> is truthy.</p>
 </td>
       </tr>
       
@@ -138,41 +122,15 @@ properties of this element are exactly the same as those of the
       
       <tr>
         <td><a href="api/ng/directive/input">input</a></td>
-        <td><p>HTML input element control with angular data-binding. Input control follows HTML5 input types
-and polyfills the HTML5 validation behavior for older browsers.</p>
-</td>
-      </tr>
-      
-      <tr>
-        <td><a href="api/ng/directive/ngModel">ngModel</a></td>
-        <td><p>The <code>ngModel</code> directive binds an <code>input</code>,<code>select</code>, <code>textarea</code> (or custom form control) to a
-property on the scope using <a href="api/ng/type/ngModel.NgModelController">NgModelController</a>,
-which is created and exposed by this directive.</p>
-</td>
-      </tr>
-      
-      <tr>
-        <td><a href="api/ng/directive/ngChange">ngChange</a></td>
-        <td><p>Evaluate the given expression when the user changes the input.
-The expression is evaluated immediately, unlike the JavaScript onchange event
-which only triggers at the end of a change (usually, when the user leaves the
-form element or presses the return key).
-The expression is not evaluated when the value change is coming from the model.</p>
-</td>
-      </tr>
-      
-      <tr>
-        <td><a href="api/ng/directive/ngList">ngList</a></td>
-        <td><p>Text input that converts between a delimited string and an array of strings. The delimiter
-can be a fixed string (by default a comma) or a regular expression.</p>
+        <td><p>HTML input element control. When used together with <a href="api/ng/directive/ngModel"><code>ngModel</code></a>, it provides data-binding,
+input state control, and validation.
+Input control follows HTML5 input types and polyfills the HTML5 validation behavior for older browsers.</p>
 </td>
       </tr>
       
       <tr>
         <td><a href="api/ng/directive/ngValue">ngValue</a></td>
-        <td><p>Binds the given expression to the value of <code>input[select]</code> or <code>input[radio]</code>, so
-that when the element is selected, the <code>ngModel</code> of that element is set to the
-bound value.</p>
+        <td><p>Binds the given expression to the value of the element.</p>
 </td>
       </tr>
       
@@ -197,11 +155,19 @@ expressions. This directive is needed since some HTML elements
       
       <tr>
         <td><a href="api/ng/directive/ngBindHtml">ngBindHtml</a></td>
-        <td><p>Creates a binding that will innerHTML the result of evaluating the <code>expression</code> into the current
-element in a secure way.  By default, the innerHTML-ed content will be sanitized using the <a href="api/ngSanitize/service/$sanitize">$sanitize</a> service.  To utilize this functionality, ensure that <code>$sanitize</code>
-is available, for example, by including <a href="api/ngSanitize"><code>ngSanitize</code></a> in your module&#39;s dependencies (not in
-core Angular). In order to use <a href="api/ngSanitize"><code>ngSanitize</code></a> in your module&#39;s dependencies, you need to
-include &quot;angular-sanitize.js&quot; in your application.</p>
+        <td><p>Evaluates the expression and inserts the resulting HTML into the element in a secure way. By default,
+the resulting HTML content will be sanitized using the <a href="api/ngSanitize/service/$sanitize">$sanitize</a> service.
+To utilize this functionality, ensure that <code>$sanitize</code> is available, for example, by including <a href="api/ngSanitize"><code>ngSanitize</code></a> in your module&#39;s dependencies (not in core Angular). In order to use <a href="api/ngSanitize"><code>ngSanitize</code></a>
+in your module&#39;s dependencies, you need to include &quot;angular-sanitize.js&quot; in your application.</p>
+</td>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ng/directive/ngChange">ngChange</a></td>
+        <td><p>Evaluate the given expression when the user changes the input.
+The expression is evaluated immediately, unlike the JavaScript onchange event
+which only triggers at the end of a change (usually, when the user leaves the
+form element or presses the return key).</p>
 </td>
       </tr>
       
@@ -245,7 +211,8 @@ supports the principles behind the Model-View-Controller design pattern.</p>
       
       <tr>
         <td><a href="api/ng/directive/ngCsp">ngCsp</a></td>
-        <td><p>Enables <a href="https://developer.mozilla.org/en/Security/CSP">CSP (Content Security Policy)</a> support.</p>
+        <td><p>Angular has some features that can conflict with certain restrictions that are applied when using
+<a href="https://developer.mozilla.org/en/Security/CSP">CSP (Content Security Policy)</a> rules.</p>
 </td>
       </tr>
       
@@ -375,11 +342,43 @@ current scope.</p>
       </tr>
       
       <tr>
+        <td><a href="api/ng/directive/ngList">ngList</a></td>
+        <td><p>Text input that converts between a delimited string and an array of strings. The default
+delimiter is a comma followed by a space - equivalent to <code>ng-list=&quot;, &quot;</code>. You can specify a custom
+delimiter as the value of the <code>ngList</code> attribute - for example, <code>ng-list=&quot; | &quot;</code>.</p>
+</td>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ng/directive/ngModel">ngModel</a></td>
+        <td><p>The <code>ngModel</code> directive binds an <code>input</code>,<code>select</code>, <code>textarea</code> (or custom form control) to a
+property on the scope using <a href="api/ng/type/ngModel.NgModelController">NgModelController</a>,
+which is created and exposed by this directive.</p>
+</td>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ng/directive/ngModelOptions">ngModelOptions</a></td>
+        <td><p>This directive allows you to modify the behaviour of <a href="api/ng/directive/ngModel"><code>ngModel</code></a> directives within your
+application. You can specify an <code>ngModelOptions</code> directive on any element. All <a href="api/ng/directive/ngModel"><code>ngModel</code></a>
+directives will use the options of their nearest <code>ngModelOptions</code> ancestor.</p>
+</td>
+      </tr>
+      
+      <tr>
         <td><a href="api/ng/directive/ngNonBindable">ngNonBindable</a></td>
         <td><p>The <code>ngNonBindable</code> directive tells Angular not to compile or bind the contents of the current
 DOM element. This is useful if the element contains what appears to be Angular directives and
 bindings but which should be ignored by Angular. This could be the case if you have a site that
 displays snippets of code, for instance.</p>
+</td>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ng/directive/ngOptions">ngOptions</a></td>
+        <td><p>The <code>ngOptions</code> attribute can be used to dynamically generate a list of <code>&lt;option&gt;</code>
+elements for the <code>&lt;select&gt;</code> element using the array or object obtained by evaluating the
+<code>ngOptions</code> comprehension expression.</p>
 </td>
       </tr>
       
@@ -404,21 +403,15 @@ and <code>$index</code> is set to the item index or key.</p>
       
       <tr>
         <td><a href="api/ng/directive/ngShow">ngShow</a></td>
-        <td><p>The <code>ngShow</code> directive shows or hides the given HTML element based on the expression
-provided to the <code>ngShow</code> attribute. The element is shown or hidden by removing or adding
-the <code>.ng-hide</code> CSS class onto the element. The <code>.ng-hide</code> CSS class is predefined
-in AngularJS and sets the display style to none (using an !important flag).
-For CSP mode please add <code>angular-csp.css</code> to your html file (see <a href="api/ng/directive/ngCsp">ngCsp</a>).</p>
+        <td><p>The <code>ngShow</code> directive shows or hides the given HTML element based on the expression provided to
+the <code>ngShow</code> attribute.</p>
 </td>
       </tr>
       
       <tr>
         <td><a href="api/ng/directive/ngHide">ngHide</a></td>
-        <td><p>The <code>ngHide</code> directive shows or hides the given HTML element based on the expression
-provided to the <code>ngHide</code> attribute. The element is shown or hidden by removing or adding
-the <code>ng-hide</code> CSS class onto the element. The <code>.ng-hide</code> CSS class is predefined
-in AngularJS and sets the display style to none (using an !important flag).
-For CSP mode please add <code>angular-csp.css</code> to your html file (see <a href="api/ng/directive/ngCsp">ngCsp</a>).</p>
+        <td><p>The <code>ngHide</code> directive shows or hides the given HTML element based on the expression provided to
+the <code>ngHide</code> attribute.</p>
 </td>
       </tr>
       
@@ -454,7 +447,36 @@ assigned through the element&#39;s <code>id</code>, which can then be used as a 
       
       <tr>
         <td><a href="api/ng/directive/select">select</a></td>
-        <td><p>HTML <code>SELECT</code> element with angular data-binding.</p>
+        <td><p>HTML <code>select</code> element with angular data-binding.</p>
+</td>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ng/directive/ngRequired">ngRequired</a></td>
+        <td><p>ngRequired adds the required <a href="api/ng/type/ngModel.NgModelController#$validators"><code>validator</code></a> to <a href="api/ng/directive/ngModel"><code>ngModel</code></a>.
+It is most often used for <a href="api/ng/directive/input"><code>input</code></a> and <a href="api/ng/directive/select"><code>select</code></a> controls, but can also be
+applied to custom controls.</p>
+</td>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ng/directive/ngPattern">ngPattern</a></td>
+        <td><p>ngPattern adds the pattern <a href="api/ng/type/ngModel.NgModelController#$validators"><code>validator</code></a> to <a href="api/ng/directive/ngModel"><code>ngModel</code></a>.
+It is most often used for text-based <a href="api/ng/directive/input"><code>input</code></a> controls, but can also be applied to custom text-based controls.</p>
+</td>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ng/directive/ngMaxlength">ngMaxlength</a></td>
+        <td><p>ngMaxlength adds the maxlength <a href="api/ng/type/ngModel.NgModelController#$validators"><code>validator</code></a> to <a href="api/ng/directive/ngModel"><code>ngModel</code></a>.
+It is most often used for text-based <a href="api/ng/directive/input"><code>input</code></a> controls, but can also be applied to custom text-based controls.</p>
+</td>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ng/directive/ngMinlength">ngMinlength</a></td>
+        <td><p>ngMinlength adds the minlength <a href="api/ng/type/ngModel.NgModelController#$validators"><code>validator</code></a> to <a href="api/ng/directive/ngModel"><code>ngModel</code></a>.
+It is most often used for text-based <a href="api/ng/directive/input"><code>input</code></a> controls, but can also be applied to custom text-based controls.</p>
 </td>
       </tr>
       

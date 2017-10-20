@@ -34,6 +34,15 @@ $provide.value("$locale", {
       "Liduva lyannyano na mavili",
       "Liduva litandi"
     ],
+    "ERANAMES": [
+      "Akanapawa Yesu",
+      "Nankuida Yesu"
+    ],
+    "ERAS": [
+      "AY",
+      "NY"
+    ],
+    "FIRSTDAYOFWEEK": 0,
     "MONTH": [
       "Mwedi Ntandi",
       "Mwedi wa Pili",
@@ -71,14 +80,32 @@ $provide.value("$locale", {
       "Nov",
       "Des"
     ],
+    "STANDALONEMONTH": [
+      "Mwedi Ntandi",
+      "Mwedi wa Pili",
+      "Mwedi wa Tatu",
+      "Mwedi wa Nchechi",
+      "Mwedi wa Nnyano",
+      "Mwedi wa Nnyano na Umo",
+      "Mwedi wa Nnyano na Mivili",
+      "Mwedi wa Nnyano na Mitatu",
+      "Mwedi wa Nnyano na Nchechi",
+      "Mwedi wa Nnyano na Nnyano",
+      "Mwedi wa Nnyano na Nnyano na U",
+      "Mwedi wa Nnyano na Nnyano na M"
+    ],
+    "WEEKENDRANGE": [
+      5,
+      6
+    ],
     "fullDate": "EEEE, d MMMM y",
     "longDate": "d MMMM y",
-    "medium": "d MMM y h:mm:ss a",
+    "medium": "d MMM y HH:mm:ss",
     "mediumDate": "d MMM y",
-    "mediumTime": "h:mm:ss a",
-    "short": "dd/MM/y h:mm a",
+    "mediumTime": "HH:mm:ss",
+    "short": "dd/MM/y HH:mm",
     "shortDate": "dd/MM/y",
-    "shortTime": "h:mm a"
+    "shortTime": "HH:mm"
   },
   "NUMBER_FORMATS": {
     "CURRENCY_SYM": "TSh",
@@ -99,10 +126,10 @@ $provide.value("$locale", {
       {
         "gSize": 3,
         "lgSize": 3,
-        "maxFrac": 2,
-        "minFrac": 2,
+        "maxFrac": 0,
+        "minFrac": 0,
         "minInt": 1,
-        "negPre": "\u00a4-",
+        "negPre": "-\u00a4",
         "negSuf": "",
         "posPre": "\u00a4",
         "posSuf": ""
@@ -110,6 +137,7 @@ $provide.value("$locale", {
     ]
   },
   "id": "kde-tz",
-  "pluralCat": function (n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+  "localeID": "kde_TZ",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
 });
 }]);

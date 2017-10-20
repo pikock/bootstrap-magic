@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/loader.js?message=docs(angular.Module)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/loader.js?message=docs(angular.Module)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/loader.js#L3' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/loader.js#L3' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -19,6 +19,8 @@
 
 
 
+
+
 <div class="api-profile-description">
   <p>Interface for configuring angular <a href="api/ng/function/angular.module">modules</a>.</p>
 
@@ -30,19 +32,88 @@
 <div>
   
 
-    
+  
 
   
 
   
 <h2>Methods</h2>
 <ul class="methods">
+  <li id="info">
+    <h3><p><code>info([info]);</code></p>
+
+</h3>
+    <div><p>Read and write custom information about this module.
+For example you could put the version of the module in here.</p>
+<pre><code class="lang-js">angular.module(&#39;myModule&#39;, []).info({ version: &#39;1.0.0&#39; });
+</code></pre>
+<p>The version could then be read back out by accessing the module elsewhere:</p>
+<pre><code>var version = angular.module(&#39;myModule&#39;).info().version;
+</code></pre>
+<p>You can also retrieve this information during runtime via the
+<a href="api/auto/service/$injector#modules"><code>$injector.modules</code></a> property:</p>
+<pre><code class="lang-js">var version = $injector.modules[&#39;myModule&#39;].info().version;
+</code></pre>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        info
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">Object</a>
+      </td>
+      <td>
+        <p>Information about the module</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-object">Object</a><a href="" class="label type-hint type-hint-module">Module</a></td>
+    <td><p>The current info object for this module if called as a getter,
+                         or <code>this</code> if called as a setter.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
   <li id="provider">
     <h3><p><code>provider(name, providerType);</code></p>
 
 </h3>
     <div><p>See <a href="api/auto/service/$provide#provider">$provide.provider()</a>.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -96,10 +167,8 @@
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="factory">
     <h3><p><code>factory(name, providerFunction);</code></p>
@@ -107,6 +176,8 @@
 </h3>
     <div><p>See <a href="api/auto/service/$provide#factory">$provide.factory()</a>.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -159,10 +230,8 @@
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="service">
     <h3><p><code>service(name, constructor);</code></p>
@@ -170,6 +239,8 @@
 </h3>
     <div><p>See <a href="api/auto/service/$provide#service">$provide.service()</a>.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -222,10 +293,8 @@
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="value">
     <h3><p><code>value(name, object);</code></p>
@@ -233,6 +302,8 @@
 </h3>
     <div><p>See <a href="api/auto/service/$provide#value">$provide.value()</a>.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -285,18 +356,18 @@
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="constant">
     <h3><p><code>constant(name, object);</code></p>
 
 </h3>
-    <div><p>Because the constant are fixed, they get applied before other provide methods.
+    <div><p>Because the constants are fixed, they get applied before other provide methods.
 See <a href="api/auto/service/$provide#constant">$provide.constant()</a>.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -349,10 +420,72 @@ See <a href="api/auto/service/$provide#constant">$provide.constant()</a>.</p>
     
 
     
-    
+
+    </li>
+  
+  <li id="decorator">
+    <h3><p><code>decorator(name, decorFn);</code></p>
+
+</h3>
+    <div><p>See <a href="api/auto/service/$provide#decorator">$provide.decorator()</a>.</p>
+</div>
+
     
 
-  </li>
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        name
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>The name of the service to decorate.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        decorFn
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-function">Function</a>
+      </td>
+      <td>
+        <p>This function will be invoked when the service needs to be
+                          instantiated and should return the decorated service instance.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    </li>
   
   <li id="animation">
     <h3><p><code>animation(name, animationFactory);</code></p>
@@ -360,22 +493,24 @@ See <a href="api/auto/service/$provide#constant">$provide.constant()</a>.</p>
 </h3>
     <div><p><strong>NOTE</strong>: animations take effect only if the <strong>ngAnimate</strong> module is loaded.</p>
 <p>Defines an animation hook that can be later used with
-<a href="api/ngAnimate/service/$animate">$animate</a> service and directives that use this service.</p>
+<a href="api/ng/service/$animate">$animate</a> service and directives that use this service.</p>
 <pre><code class="lang-js">module.animation(&#39;.animation-name&#39;, function($inject1, $inject2) {
-return {
-  eventName : function(element, done) {
-    //code to run the animation
-    //once complete, then run done()
-    return function cancellationFunction(element) {
-      //code to cancel the animation
+  return {
+    eventName : function(element, done) {
+      //code to run the animation
+      //once complete, then run done()
+      return function cancellationFunction(element) {
+        //code to cancel the animation
+      }
     }
   }
-}
 })
 </code></pre>
-<p>See <a href="api/ngAnimate/provider/$animateProvider#register">$animateProvider.register()</a> and
+<p>See <a href="api/ng/provider/$animateProvider#register">$animateProvider.register()</a> and
 <a href="api/ngAnimate">ngAnimate module</a> for more information.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -429,17 +564,22 @@ return {
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="filter">
     <h3><p><code>filter(name, filterFactory);</code></p>
 
 </h3>
     <div><p>See <a href="api/ng/provider/$filterProvider#register">$filterProvider.register()</a>.</p>
-</div>
+<div class="alert alert-warning">
+<strong>Note:</strong> Filter names must be valid angular <a href="guide/expression"><code>Expressions</code></a> identifiers, such as <code>uppercase</code> or <code>orderBy</code>.
+Names with special characters, such as hyphens and dots, are not allowed. If you wish to namespace
+your filters, then you can use capitalization (<code>myappSubsectionFilterx</code>) or underscores
+(<code>myapp_subsection_filterx</code>).
+</div></div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -464,7 +604,7 @@ return {
         <a href="" class="label type-hint type-hint-string">string</a>
       </td>
       <td>
-        <p>Filter name.</p>
+        <p>Filter name - this must be a valid angular expression identifier</p>
 
         
       </td>
@@ -492,10 +632,8 @@ return {
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="controller">
     <h3><p><code>controller(name, constructor);</code></p>
@@ -503,6 +641,8 @@ return {
 </h3>
     <div><p>See <a href="api/ng/provider/$controllerProvider#register">$controllerProvider.register()</a>.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -556,10 +696,8 @@ return {
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="directive">
     <h3><p><code>directive(name, directiveFactory);</code></p>
@@ -567,6 +705,8 @@ return {
 </h3>
     <div><p>See <a href="api/ng/provider/$compileProvider#directive">$compileProvider.directive()</a>.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -621,10 +761,72 @@ directives.</p>
     
 
     
-    
+
+    </li>
+  
+  <li id="component">
+    <h3><p><code>component(name, options);</code></p>
+
+</h3>
+    <div><p>See <a href="api/ng/provider/$compileProvider#component">$compileProvider.component()</a>.</p>
+</div>
+
     
 
-  </li>
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        name
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Name of the component in camel-case (i.e. myComp which will match as my-comp)</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        options
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">Object</a>
+      </td>
+      <td>
+        <p>Component definition object (a simplified
+   <a href="api/ng/service/$compile#directive-definition-object">directive definition object</a>)</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    </li>
   
   <li id="config">
     <h3><p><code>config(configFn);</code></p>
@@ -632,8 +834,10 @@ directives.</p>
 </h3>
     <div><p>Use this method to register work which needs to be performed on module loading.
 For more about how to configure services, see
-<a href="guide/providers#providers_provider-recipe">Provider Recipe</a>.</p>
+<a href="guide/providers#provider-recipe">Provider Recipe</a>.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -671,10 +875,8 @@ For more about how to configure services, see
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="run">
     <h3><p><code>run(initializationFn);</code></p>
@@ -683,6 +885,8 @@ For more about how to configure services, see
     <div><p>Use this method to register work which should be performed when the injector is done
 loading all modules.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -720,10 +924,8 @@ loading all modules.</p>
     
 
     
-    
-    
 
-  </li>
+    </li>
   </ul>
   
   
@@ -739,6 +941,7 @@ loaded.</p>
 </td>
   </tr>
 </table>
+    
   </li>
   
   <li id="name">
@@ -750,6 +953,7 @@ loaded.</p>
 </td>
   </tr>
 </table>
+    
   </li>
   </ul>
 

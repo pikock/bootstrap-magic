@@ -1,5 +1,5 @@
 it('should data-bind and become invalid', function() {
-  if (browser.params.browser == 'safari' || browser.params.browser == 'firefox') {
+  if (browser.params.browser === 'safari' || browser.params.browser === 'firefox') {
     // SafariDriver can't handle contenteditable
     // and Firefox driver can't clear contenteditables very well
     return;

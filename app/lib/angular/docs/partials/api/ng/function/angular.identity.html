@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/Angular.js?message=docs(angular.identity)%3A%20describe%20your%20change...#L391' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/Angular.js?message=docs(angular.identity)%3A%20describe%20your%20change...#L498' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/Angular.js#L391' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/Angular.js#L498' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -19,12 +19,23 @@
 
 
 
+
+
 <div class="api-profile-description">
   <p>A function that returns its first argument. This function is useful when writing code in the
 functional style.</p>
 <pre><code class="lang-js">function transformer(transformationFn, value) {
   return (transformationFn || angular.identity)(value);
 };
+
+// E.g.
+function getResult(fn, input) {
+  return (fn || angular.identity)(input);
+};
+
+getResult(function(n) { return n * 2; }, 21);   // returns 42
+getResult(null, 21);                            // returns 21
+getResult(undefined, 21);                       // returns 21
 </code></pre>
 
 </div>
@@ -35,7 +46,7 @@ functional style.</p>
 <div>
   
 
-    
+  
 
   <h2 id="usage">Usage</h2>
     

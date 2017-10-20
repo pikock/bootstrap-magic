@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/docs/content/guide/scope.ngdoc?message=docs(guide%2FScopes)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/guide/scope.ngdoc?message=docs(guide%2FScopes)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 <h1 id="what-are-scopes-">What are Scopes?</h1>
-<p><a href="api/ng/type/$rootScope.Scope">scope</a> is an object that refers to the application
+<p><a href="api/ng/type/$rootScope.Scope">Scope</a> is an object that refers to the application
 model. It is an execution context for <a href="guide/expression">expressions</a>. Scopes are
 arranged in hierarchical structure which mimic the DOM structure of the application. Scopes can
 watch <a href="guide/expression">expressions</a> and propagate events.</p>
@@ -18,7 +18,7 @@ realm&quot; (controllers, services, Angular event handlers).</p>
 <li><p>Scopes can be nested to limit access to the properties of application components while providing
 access to shared model properties. Nested scopes are either &quot;child scopes&quot; or &quot;isolate scopes&quot;.
 A &quot;child scope&quot; (prototypically) inherits properties from its parent scope. An &quot;isolate scope&quot;
-does not. See <a href="guide/directive#creating-custom-directives_demo_isolating-the-scope-of-a-directive">isolated
+does not. See <a href="guide/directive#isolating-the-scope-of-a-directive">isolated
 scopes</a> for more information.</p>
 </li>
 <li><p>Scopes provide context against which <a href="guide/expression">expressions</a> are evaluated. For
@@ -38,20 +38,19 @@ the applications.</p>
 <p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example33')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-scope-data-model"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example33"
-      module="scopeExample">
+      path="examples/example-scope-data-model"
+      module="scopeExample"
+      name="scope-data-model">
 
   
     <div class="runnable-example-file" 
       name="script.js"
       language="js"
       type="js">
-      <pre><code>angular.module(&#39;scopeExample&#39;, [])&#10;  .controller(&#39;MyController&#39;, [&#39;$scope&#39;, function($scope) {&#10;    $scope.username = &#39;World&#39;;&#10;&#10;    $scope.sayHello = function() {&#10;      $scope.greeting = &#39;Hello &#39; + $scope.username + &#39;!&#39;;&#10;    };&#10;  }]);</code></pre>
+      <pre><code>angular.module(&#39;scopeExample&#39;, [])&#10;.controller(&#39;MyController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.username = &#39;World&#39;;&#10;&#10;  $scope.sayHello = function() {&#10;    $scope.greeting = &#39;Hello &#39; + $scope.username + &#39;!&#39;;&#10;  };&#10;}]);</code></pre>
     </div>
   
     <div class="runnable-example-file" 
@@ -62,7 +61,7 @@ the applications.</p>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example33/index.html" name="example-example33"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-scope-data-model')}}" name="example-scope-data-model"></iframe>
   </div>
 </div>
 
@@ -118,27 +117,26 @@ a diagram depicting the scope boundaries.</p>
 <p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example34')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-scope-hierarchies"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example34"
-      module="scopeExample">
+      path="examples/example-scope-hierarchies"
+      module="scopeExample"
+      name="scope-hierarchies">
 
   
     <div class="runnable-example-file" 
       name="index.html"
       language="html"
       type="html">
-      <pre><code>&lt;div class=&quot;show-scope-demo&quot;&gt;&#10;&lt;div ng-controller=&quot;GreetController&quot;&gt;&#10;  Hello {{name}}!&#10;&lt;/div&gt;&#10;&lt;div ng-controller=&quot;ListController&quot;&gt;&#10;  &lt;ol&gt;&#10;    &lt;li ng-repeat=&quot;name in names&quot;&gt;{{name}} from {{department}}&lt;/li&gt;&#10;  &lt;/ol&gt;&#10;&lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+      <pre><code>&lt;div class=&quot;show-scope-demo&quot;&gt;&#10;  &lt;div ng-controller=&quot;GreetController&quot;&gt;&#10;    Hello {{name}}!&#10;  &lt;/div&gt;&#10;  &lt;div ng-controller=&quot;ListController&quot;&gt;&#10;    &lt;ol&gt;&#10;      &lt;li ng-repeat=&quot;name in names&quot;&gt;{{name}} from {{department}}&lt;/li&gt;&#10;    &lt;/ol&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
     </div>
   
     <div class="runnable-example-file" 
       name="script.js"
       language="js"
       type="js">
-      <pre><code>angular.module(&#39;scopeExample&#39;, [])&#10;  .controller(&#39;GreetController&#39;, [&#39;$scope&#39;, &#39;$rootScope&#39;, function($scope, $rootScope) {&#10;    $scope.name = &#39;World&#39;;&#10;    $rootScope.department = &#39;Angular&#39;;&#10;  }])&#10;  .controller(&#39;ListController&#39;, [&#39;$scope&#39;, function($scope) {&#10;    $scope.names = [&#39;Igor&#39;, &#39;Misko&#39;, &#39;Vojta&#39;];&#10;  }]);</code></pre>
+      <pre><code>angular.module(&#39;scopeExample&#39;, [])&#10;.controller(&#39;GreetController&#39;, [&#39;$scope&#39;, &#39;$rootScope&#39;, function($scope, $rootScope) {&#10;  $scope.name = &#39;World&#39;;&#10;  $rootScope.department = &#39;Angular&#39;;&#10;}])&#10;.controller(&#39;ListController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.names = [&#39;Igor&#39;, &#39;Misko&#39;, &#39;Vojta&#39;];&#10;}]);</code></pre>
     </div>
   
     <div class="runnable-example-file" 
@@ -149,7 +147,7 @@ a diagram depicting the scope boundaries.</p>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example34/index.html" name="example-example34"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-scope-hierarchies')}}" name="example-scope-hierarchies"></iframe>
   </div>
 </div>
 
@@ -185,20 +183,19 @@ variable.</p>
 <p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example35')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-scope-events-propagation"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example35"
-      module="eventExample">
+      path="examples/example-scope-events-propagation"
+      module="eventExample"
+      name="scope-events-propagation">
 
   
     <div class="runnable-example-file" 
       name="script.js"
       language="js"
       type="js">
-      <pre><code>angular.module(&#39;eventExample&#39;, [])&#10;  .controller(&#39;EventController&#39;, [&#39;$scope&#39;, function($scope) {&#10;    $scope.count = 0;&#10;    $scope.$on(&#39;MyEvent&#39;, function() {&#10;      $scope.count++;&#10;    });&#10;  }]);</code></pre>
+      <pre><code>angular.module(&#39;eventExample&#39;, [])&#10;.controller(&#39;EventController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.count = 0;&#10;  $scope.$on(&#39;MyEvent&#39;, function() {&#10;    $scope.count++;&#10;  });&#10;}]);</code></pre>
     </div>
   
     <div class="runnable-example-file" 
@@ -209,7 +206,7 @@ variable.</p>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example35/index.html" name="example-example35"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-scope-events-propagation')}}" name="example-scope-events-propagation"></iframe>
   </div>
 </div>
 
@@ -230,7 +227,7 @@ of the <code>$watch</code> expressions and compares them with the previous value
 asynchronously. This means that assignment such as <code>$scope.username=&quot;angular&quot;</code> will not
 immediately cause a <code>$watch</code> to be notified, instead the <code>$watch</code> notification is delayed until
 the <code>$digest</code> phase. This delay is desirable, since it coalesces multiple model updates into one
-<code>$watch</code> notification as well as it guarantees that during the <code>$watch</code> notification no other
+<code>$watch</code> notification as well as guarantees that during the <code>$watch</code> notification no other
 <code>$watch</code>es are running. If a <code>$watch</code> changes the value of the model, it will force additional
 <code>$digest</code> cycle.</p>
 <ol>
@@ -240,11 +237,11 @@ bootstrap by the <a href="api/auto/service/$injector">$injector</a>. During temp
 linking, some directives create new child scopes.</p>
 </li>
 <li><p><strong>Watcher registration</strong></p>
-<p>During template linking directives register <a href="api/ng/type/$rootScope.Scope#$watch">watches</a> on the scope. These watches will be
+<p>During template linking, directives register <a href="api/ng/type/$rootScope.Scope#$watch">watches</a> on the scope. These watches will be
 used to propagate model values to the DOM.</p>
 </li>
 <li><p><strong>Model mutation</strong></p>
-<p>For mutations to be properly observed, you should make them only within the <a href="api/ng/type/$rootScope.Scope#$apply">scope.$apply()</a>. (Angular APIs do this
+<p>For mutations to be properly observed, you should make them only within the <a href="api/ng/type/$rootScope.Scope#$apply">scope.$apply()</a>. Angular APIs do this
 implicitly, so no extra <code>$apply</code> call is needed when doing synchronous work in controllers,
 or asynchronous work with <a href="api/ng/service/$http">$http</a>, <a href="api/ng/service/$timeout">$timeout</a>
 or <a href="api/ng/service/$interval">$interval</a> services.</p>
@@ -280,7 +277,7 @@ correctly.</p>
 but do not create new instances of scope. However, some directives, such as <a href="api/ng/directive/ngController">ng-controller</a> and <a href="api/ng/directive/ngRepeat">ng-repeat</a>, create new child scopes
 and attach the child scope to the corresponding DOM element. You can retrieve a scope for any DOM
 element by using an <code>angular.element(aDomElement).scope()</code> method call.
-See the <a href="guide/directive#creating-custom-directives_demo_isolating-the-scope-of-a-directive">directives guide</a> for more information about isolate scopes.</p>
+See the <a href="guide/directive#isolating-the-scope-of-a-directive">directives guide</a> for more information about isolate scopes.</p>
 <h3 id="controllers-and-scopes">Controllers and Scopes</h3>
 <p>Scopes and controllers interact with each other in the following situations:</p>
 <ul>
@@ -303,7 +300,7 @@ access on JavaScript object.</p>
 <p><img class="pull-right" style="padding-left: 3em; padding-bottom: 1em;" src="img/guide/concepts-scope-watch-strategies.png"></p>
 <p>Dirty checking can be done with three strategies: By reference, by collection contents, and by value. The strategies differ in the kinds of changes they detect, and in their performance characteristics.</p>
 <ul>
-<li>Watching <em>by reference</em> (<a href="api/ng/type/$rootScope.Scope#$watch">scope.$watch</a> <code>(watchExpression, listener)</code>) detects a change when the whole value returned by the watch expression switches to a new value. If the value is an array or an object, changes inside it are not detected. This is the most efficient stategy.</li>
+<li>Watching <em>by reference</em> (<a href="api/ng/type/$rootScope.Scope#$watch">scope.$watch</a> <code>(watchExpression, listener)</code>) detects a change when the whole value returned by the watch expression switches to a new value. If the value is an array or an object, changes inside it are not detected. This is the most efficient strategy.</li>
 <li>Watching <em>collection contents</em> (<a href="api/ng/type/$rootScope.Scope#$watchCollection">scope.$watchCollection</a> <code>(watchExpression, listener)</code>) detects changes that occur inside an array or an object: When items are added, removed, or reordered. The detection is shallow - it does not reach into nested collections. Watching collection contents is more expensive than watching by reference, because copies of the collection contents need to be maintained. However, the strategy attempts to minimize the amount of copying required.</li>
 <li>Watching <em>by value</em> (<a href="api/ng/type/$rootScope.Scope#$watch">scope.$watch</a> <code>(watchExpression, listener, true)</code>) detects any change in an arbitrarily nested data structure. It is the most powerful change detection strategy, but also the most expensive. A full traversal of the nested data structure is needed on each digest, and a full copy of it needs to be held in memory.</li>
 </ul>
@@ -340,7 +337,7 @@ each event.</li>
 <li>The <a href="api/ng/type/$rootScope.Scope#$watch">$watch</a> list is a set of expressions
 which may have changed since last iteration. If a change is detected then the <code>$watch</code>
 function is called which typically updates the DOM with the new value.</li>
-<li>Once the Angular <a href="api/ng/type/$rootScope.Scope#$digest">$digest</a> loop finishes
+<li>Once the Angular <a href="api/ng/type/$rootScope.Scope#$digest">$digest</a> loop finishes,
 the execution leaves the Angular and JavaScript context. This is followed by the browser
 re-rendering the DOM to reflect any changes.</li>
 </ol>
@@ -366,7 +363,7 @@ on the <code>name</code> property and notifies the <a href="api/ng/service/$inte
 which in turn updates the DOM.</li>
 <li>Angular exits the execution context, which in turn exits the <code>keydown</code> event and with it
 the JavaScript execution context.</li>
-<li>The browser re-renders the view with update text.</li>
+<li>The browser re-renders the view with the updated text.</li>
 </ol>
 </li>
 </ol>

@@ -1,4 +1,67 @@
-<div class="protected">
+<div class="protected editor">
+  <header class="">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-indigo editor-open">
+      <div class="responsive-submenu">
+        <a class="navbar-brand" href="/">
+          <img src="/app/img/logo-boostrapmagic.svg" width="22.6" height="22.8" alt="logo">
+        </a>
+        <span class="navbar-text rs">
+          <a href="https://twitter.com/share" data-url="http://pikock.github.io/bootstrap-magic/" data-text="Bootstrap Magic feat Bootstrap 3.1 : Awesome theme generator with live preview"
+            data-lang="en" data-hashtags="bootstrap, angularjs">
+            <img src="/app/img/twitter-icn.svg" width="24" height="24" alt=" ">
+          </a>
+          <div data-href="http://pikock.github.io/bootstrap-magic/ " data-send="false " data-layout="button_count" data-width="24"
+            data-show-faces="false " data-action="like ">
+            <img src="/app/img/fb-icn.svg " width="24 " height="24" alt="">
+          </div>
+          <div data-size="medium" data-href="http://pikock.github.io/bootstrap-magic/">
+            <img src="/app/img/g-icn.svg" width="24" height="24" alt=" ">
+          </div>
+        </span>
+      </div>
+
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <div class="dual-button">
+              <a class="nav-link">Variables</a>
+              <a class="nav-link">Html</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link">Prévisualiser</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Example</a>
+          </li>
+        </ul>
+      </div>
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" ng-click="resetSassVariables()">Reset</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fancy-button is-boring" ng-click="importSassVariables()">Import</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fancy-button" ng-click="applySass()">Save</a>
+        </li>
+      </ul>
+
+    </nav>
+  </header>
+</div>
+
+
+<!-- <div class="protected">
   <div class="navbar navbar-fixed-bottom" id="menuBottom" class="isEditor">
     <form action="" class="form-horizontal">
       <ul class="pull-left">
@@ -32,19 +95,41 @@
         title="create your website easily">Orson Website Builder</a> x
       <a href="http://www.autreplanete.com/" title="web agency paris">Autre planète</a> in Paris.</span>
   </div>
-</div>
+</div> -->
 
-<div class="container">
-  <div ui-codemirror="{ onLoad : codemirrorLoaded }" ng-model="x"></div>
+<div class="editor protected container-fluid p-0">
+  <div class="row m-0">
+    <div class="variables-container">
+      <div ng-repeat="group in variables">
+        <section class="category {{ group.name }}" ng-click="toggle(group)">
+          <span ng-bind="group.name"></span>
+          <span class="arrow is-left">></span>
+        </section>
+        <section class="variables protected" ng-hide="group.hidden">
+          <div class="form-group" ng-repeat="variable in group.data">
+            <label for="{{variable.key}}" ng-bind="variable.key"></label>
+            <input type="text" class="form-control" id="{{variable.key}}" aria-describedby="@font-family-sans-serif" ng-model="variable.value"
+              ng-change="autoApplySass()">
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="html">
+      <div class="preview">
+        <span ng-bind-html="customHtml"></span>
+      </div>
+    </div>
+  </div>
+  <!-- <div ui-codemirror="{ onLoad : codemirrorLoaded }" ng-model="x"></div>
   <button ng-click="format()">Format</button>
   <div class="col-md-12">
     <div class="bd-example" data-example-id="editor">
       For example,
       <code>&lt;section&gt;</code> should be wrapped as inline.
     </div>
-  </div>
+  </div> -->
 
-  <form class="piEditor">
+  <!-- <form class="piEditor">
     <section ng-repeat="group in variables" class="{{ group.name }}">
       <div class="row protected">
         <div class="col-md-12">
@@ -71,7 +156,7 @@
         </div>
       </div>
     </section>
-  </form>
+  </form> -->
 </div>
 
 <div class="protected">

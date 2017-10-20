@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/directive/ngBind.js?message=docs(ngBind)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/ngBind.js?message=docs(ngBind)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/directive/ngBind.js#L3' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/ngBind.js#L3' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -16,6 +16,8 @@
     </li>
   </ol>
 </header>
+
+
 
 
 
@@ -44,6 +46,7 @@ element attribute, it makes the bindings invisible to the user while the page is
   <ul>
     
     <li>This directive executes at priority level 0.</li>
+    
   </ul>
 
   
@@ -52,10 +55,10 @@ element attribute, it makes the bindings invisible to the user while the page is
   
     <ul>
     <li>as attribute:
-        <pre><code>&lt;ANY&#10;  ng-bind=&quot;&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+        <pre><code>&lt;ANY&#10;  ng-bind=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
       </li>
     <li>as CSS class:
-        <pre><code>&lt;ANY class=&quot;ng-bind: ;&quot;&gt; ... &lt;/ANY&gt;</code></pre>
+        <pre><code>&lt;ANY class=&quot;ng-bind: expression;&quot;&gt; ... &lt;/ANY&gt;</code></pre>
       </li>
     
   </div>
@@ -95,26 +98,24 @@ element attribute, it makes the bindings invisible to the user while the page is
 </section>
   
 
-
   
-  <h2 id="example">Example</h2><p>Enter a name in the Live Preview text box; the greeting below the text box changes instantly.
+  <h2 id="example">Examples</h2><p>Enter a name in the Live Preview text box; the greeting below the text box changes instantly.
    
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example51')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ng-bind"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example51"
-      module="bindExample">
+      path="examples/example-ng-bind"
+      module="bindExample"
+      name="ng-bind">
 
   
     <div class="runnable-example-file" 
       name="index.html"
       language="html"
       type="html">
-      <pre><code>&lt;script&gt;&#10;  angular.module(&#39;bindExample&#39;, [])&#10;    .controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;      $scope.name = &#39;Whirled&#39;;&#10;    }]);&#10;&lt;/script&gt;&#10;&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  Enter name: &lt;input type=&quot;text&quot; ng-model=&quot;name&quot;&gt;&lt;br&gt;&#10;  Hello &lt;span ng-bind=&quot;name&quot;&gt;&lt;/span&gt;!&#10;&lt;/div&gt;</code></pre>
+      <pre><code>&lt;script&gt;&#10;  angular.module(&#39;bindExample&#39;, [])&#10;    .controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;      $scope.name = &#39;Whirled&#39;;&#10;    }]);&#10;&lt;/script&gt;&#10;&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;label&gt;Enter name: &lt;input type=&quot;text&quot; ng-model=&quot;name&quot;&gt;&lt;/label&gt;&lt;br&gt;&#10;  Hello &lt;span ng-bind=&quot;name&quot;&gt;&lt;/span&gt;!&#10;&lt;/div&gt;</code></pre>
     </div>
   
     <div class="runnable-example-file" 
@@ -125,7 +126,7 @@ element attribute, it makes the bindings invisible to the user while the page is
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example51/index.html" name="example-example51"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ng-bind')}}" name="example-ng-bind"></iframe>
   </div>
 </div>
 

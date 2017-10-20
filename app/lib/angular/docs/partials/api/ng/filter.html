@@ -56,17 +56,18 @@ symbol for current locale is used.</p>
       
       <tr>
         <td><a href="api/ng/filter/limitTo">limitTo</a></td>
-        <td><p>Creates a new array or string containing only a specified number of elements. The elements
-are taken from either the beginning or the end of the source array or string, as specified by
-the value and sign (positive or negative) of <code>limit</code>.</p>
+        <td><p>Creates a new array or string containing only a specified number of elements. The elements are
+taken from either the beginning or the end of the source array, string or number, as specified by
+the value and sign (positive or negative) of <code>limit</code>. Other array-like objects are also supported
+(e.g. array subclasses, NodeLists, jqLite/jQuery collections etc). If a number is used as input,
+it is converted to a string.</p>
 </td>
       </tr>
       
       <tr>
         <td><a href="api/ng/filter/orderBy">orderBy</a></td>
-        <td><p>Orders a specified <code>array</code> by the <code>expression</code> predicate. It is ordered alphabetically
-for strings and numerically for numbers. Note: if you notice numbers are not being sorted
-correctly, make sure they are actually being saved as numbers and not strings.</p>
+        <td><p>Returns an array containing the items from the specified <code>collection</code>, ordered by a <code>comparator</code>
+function based on the values computed using the <code>expression</code> predicate.</p>
 </td>
       </tr>
       

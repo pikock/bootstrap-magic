@@ -1,0 +1,7 @@
+{
+  "name": "example-ng-selected",
+  "files": [
+    "index-production.html",
+    "protractor.js"
+  ]
+}

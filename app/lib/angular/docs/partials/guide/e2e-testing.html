@@ -1,4 +1,4 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/docs/content/guide/e2e-testing.ngdoc?message=docs(guide%2FE2E Testing)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/guide/e2e-testing.ngdoc?message=docs(guide%2FE2E Testing)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 <h1 id="e2e-testing">E2E Testing</h1>
@@ -9,7 +9,7 @@ is now in maintenance mode.
 </div>
 
 <p>As applications grow in size and complexity, it becomes unrealistic to rely on manual testing to
-verify the correctness of new features, catch bugs and notice regressions. End to end tests
+verify the correctness of new features, catch bugs and notice regressions. Unit tests
 are the first line of defense for catching bugs, but sometimes issues come up with integration
 between components which can&#39;t be captured in a unit test. End-to-end tests are made to find
 these problems.</p>
@@ -37,23 +37,23 @@ each <code>it</code> block regardless of whether the block passes or fails.</p>
 code in the <code>it</code> blocks.</p>
 <p>Here is an example of a simple test:</p>
 <pre><code class="lang-js">describe(&#39;TODO list&#39;, function() {
-it(&#39;should filter results&#39;, function() {
+  it(&#39;should filter results&#39;, function() {
 
-  // Find the element with ng-model=&quot;user&quot; and type &quot;jacksparrow&quot; into it
-  element(by.model(&#39;user&#39;)).sendKeys(&#39;jacksparrow&#39;);
+    // Find the element with ng-model=&quot;user&quot; and type &quot;jacksparrow&quot; into it
+    element(by.model(&#39;user&#39;)).sendKeys(&#39;jacksparrow&#39;);
 
-  // Find the first (and only) button on the page and click it
-  element(by.css(&#39;:button&#39;)).click();
+    // Find the first (and only) button on the page and click it
+    element(by.css(&#39;:button&#39;)).click();
 
-  // Verify that there are 10 tasks
-  expect(element.all(by.repeater(&#39;task in tasks&#39;)).count()).toEqual(10);
+    // Verify that there are 10 tasks
+    expect(element.all(by.repeater(&#39;task in tasks&#39;)).count()).toEqual(10);
 
-  // Enter &#39;groceries&#39; into the element with ng-model=&quot;filterText&quot;
-  element(by.model(&#39;filterText&#39;)).sendKeys(&#39;groceries&#39;);
+    // Enter &#39;groceries&#39; into the element with ng-model=&quot;filterText&quot;
+    element(by.model(&#39;filterText&#39;)).sendKeys(&#39;groceries&#39;);
 
-  // Verify that now there is only one item in the task list
-  expect(element.all(by.repeater(&#39;task in tasks&#39;)).count()).toEqual(1);
-});
+    // Verify that now there is only one item in the task list
+    expect(element.all(by.repeater(&#39;task in tasks&#39;)).count()).toEqual(1);
+  });
 });
 </code></pre>
 <p>This test describes the requirements of a ToDo list, specifically, that it should be able to

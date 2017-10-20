@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/directive/ngEventDirs.js?message=docs(ngDblclick)%3A%20describe%20your%20change...#L78' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/ngEventDirs.js?message=docs(ngDblclick)%3A%20describe%20your%20change...#L79' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/directive/ngEventDirs.js#L78' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/ngEventDirs.js#L79' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -16,6 +16,8 @@
     </li>
   </ol>
 </header>
+
+
 
 
 
@@ -35,6 +37,7 @@
   <ul>
     
     <li>This directive executes at priority level 0.</li>
+    
   </ul>
 
   
@@ -42,8 +45,12 @@
   <div class="usage">
   
     <ul>
+    
+      <li>as element:
+      <pre><code>&lt;ng-dblclick&#10;  ng-dblclick=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ng-dblclick&gt;</code></pre>
+      </li>
     <li>as attribute:
-        <pre><code>&lt;ANY&#10;  ng-dblclick=&quot;&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+        <pre><code>&lt;ANY&#10;  ng-dblclick=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
       </li>
     
   </div>
@@ -84,17 +91,15 @@ a dblclick. (The Event object is available as <code>$event</code>)</p>
 </section>
   
 
-
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example60')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ng-dblclick"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example60">
+      path="examples/example-ng-dblclick"
+      name="ng-dblclick">
 
   
     <div class="runnable-example-file" 
@@ -105,7 +110,7 @@ a dblclick. (The Event object is available as <code>$event</code>)</p>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example60/index.html" name="example-example60"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ng-dblclick')}}" name="example-ng-dblclick"></iframe>
   </div>
 </div>
 

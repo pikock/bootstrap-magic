@@ -4,8 +4,8 @@ var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "
 $provide.value("$locale", {
   "DATETIME_FORMATS": {
     "AMPMS": [
-      "AM",
-      "PM"
+      "a.m.",
+      "p.m."
     ],
     "DAY": [
       "dimanche",
@@ -16,6 +16,15 @@ $provide.value("$locale", {
       "vendredi",
       "samedi"
     ],
+    "ERANAMES": [
+      "avant J\u00e9sus-Christ",
+      "apr\u00e8s J\u00e9sus-Christ"
+    ],
+    "ERAS": [
+      "av. J.-C.",
+      "ap. J.-C."
+    ],
+    "FIRSTDAYOFWEEK": 5,
     "MONTH": [
       "janvier",
       "f\u00e9vrier",
@@ -40,18 +49,36 @@ $provide.value("$locale", {
       "sam."
     ],
     "SHORTMONTH": [
-      "janv.",
-      "f\u00e9vr.",
-      "mars",
+      "jan.",
+      "f\u00e9v.",
+      "mar.",
       "avr.",
       "mai",
-      "juin",
+      "jui.",
       "juil.",
       "ao\u00fbt",
       "sept.",
       "oct.",
       "nov.",
       "d\u00e9c."
+    ],
+    "STANDALONEMONTH": [
+      "janvier",
+      "f\u00e9vrier",
+      "mars",
+      "avril",
+      "mai",
+      "juin",
+      "juillet",
+      "ao\u00fbt",
+      "septembre",
+      "octobre",
+      "novembre",
+      "d\u00e9cembre"
+    ],
+    "WEEKENDRANGE": [
+      4,
+      5
     ],
     "fullDate": "EEEE d MMMM y",
     "longDate": "d MMMM y",
@@ -65,7 +92,7 @@ $provide.value("$locale", {
   "NUMBER_FORMATS": {
     "CURRENCY_SYM": "dh",
     "DECIMAL_SEP": ",",
-    "GROUP_SEP": "\u00a0",
+    "GROUP_SEP": ".",
     "PATTERNS": [
       {
         "gSize": 3,
@@ -92,6 +119,7 @@ $provide.value("$locale", {
     ]
   },
   "id": "fr-ma",
-  "pluralCat": function (n, opt_precision) {  var i = n | 0;  if (i == 0 || i == 1) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+  "localeID": "fr_MA",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  if (i == 0 || i == 1) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
 });
 }]);

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" ng-app="docsApp" ng-controller="DocsController">
+<html lang="en" ng-app="docsApp" ng-strict-di ng-controller="DocsController">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="Description"
         content="AngularJS is what HTML would have been, had it been designed for building web-apps.
                  Declarative templates with data-binding, MVC, dependency injection and great
@@ -27,13 +27,13 @@
 
 
       addTag('link', {rel: 'stylesheet', href: 'components/bootstrap-3.1.1/css/bootstrap.min.css', type: 'text/css'});
-      addTag('link', {rel: 'stylesheet', href: 'components/open-sans-fontface-1.0.4/open-sans.css', type: 'text/css'});
       addTag('link', {rel: 'stylesheet', href: 'css/prettify-theme.css', type: 'text/css'});
+      addTag('link', {rel: 'stylesheet', href: 'css/angular-topnav.css', type: 'text/css'});
       addTag('link', {rel: 'stylesheet', href: 'css/docs.css', type: 'text/css'});
       addTag('link', {rel: 'stylesheet', href: 'css/animations.css', type: 'text/css'});
       
 
-      addTag('script', {src: 'components/jquery-2.1.1/jquery.js' }, sync);
+      addTag('script', {src: 'components/jquery-3.2.1/jquery.js' }, sync);
       addTag('script', {src: '../angular.min.js' }, sync);
       addTag('script', {src: '../angular-resource.min.js' }, sync);
       addTag('script', {src: '../angular-route.min.js' }, sync);
@@ -41,15 +41,16 @@
       addTag('script', {src: '../angular-sanitize.min.js' }, sync);
       addTag('script', {src: '../angular-touch.min.js' }, sync);
       addTag('script', {src: '../angular-animate.min.js' }, sync);
-      addTag('script', {src: 'components/marked-0.3.2/lib/marked.js' }, sync);
-      addTag('script', {src: 'js/angular-bootstrap/bootstrap.min.js' }, sync);
+      addTag('script', {src: 'components/marked-0.3.6/lib/marked.js' }, sync);
       addTag('script', {src: 'js/angular-bootstrap/dropdown-toggle.min.js' }, sync);
-      addTag('script', {src: 'components/lunr.js-0.4.2/lunr.min.js' }, sync);
+      addTag('script', {src: 'components/lunr-0.7.2/lunr.min.js' }, sync);
       addTag('script', {src: 'components/google-code-prettify-1.0.1/src/prettify.js' }, sync);
       addTag('script', {src: 'components/google-code-prettify-1.0.1/src/lang-css.js' }, sync);
-      addTag('script', {src: 'js/versions-data.js' }, sync);
+      addTag('script', {src: 'js/current-version-data.js' }, sync);
+      addTag('script', {src: 'js/all-versions-data.js' }, sync);
       addTag('script', {src: 'js/pages-data.js' }, sync);
       addTag('script', {src: 'js/nav-data.js' }, sync);
+      addTag('script', {src: 'js/deployment-data-jquery.js' }, sync);
       addTag('script', {src: 'js/docs.min.js' }, sync);
       
 
@@ -89,110 +90,98 @@
     })();
   </script>
 </head>
-<body>
+<body class="homepage">
   <div id="wrapper">
-    <header class="header header-fixed">
-      <section class="navbar navbar-inverse docs-navbar-primary" ng-controller="DocsSearchCtrl">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-9 header-branding">
-              <a class="brand navbar-brand" href="http://angularjs.org">
-                <img width="117" height="30" class="logo" ng-src="img/angularjs-for-header-only.svg">
-              </a>
-              <ul class="nav navbar-nav">
-                <li class="divider-vertical"></li>
-                <li><a href="http://angularjs.org"><i class="icon-home icon-white"></i> Home</a></li>
-                <li class="divider-vertical"></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-eye-open icon-white"></i> Learn <b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="disabled"><a href="http://angularjs.org/">Why AngularJS?</a></li>
-                    <li><a href="http://www.youtube.com/user/angularjs">Watch</a></li>
-                    <li><a href="tutorial">Tutorial</a></li>
-                    <li><a href="http://builtwith.angularjs.org/">Case Studies</a></li>
-                    <li><a href="https://github.com/angular/angular-seed">Seed App project template</a></li>
-                    <li><a href="misc/faq">FAQ</a></li>
-                  </ul>
-                </li>
-                <li class="divider-vertical"></li>
-                <li class="dropdown active">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-book icon-white"></i> Develop <b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a href="tutorial">Tutorial</a></li>
-                    <li><a href="guide">Developer Guide</a></li>
-                    <li><a href="api">API Reference</a></li>
-                    <li><a href="error">Error Reference</a></li>
-                    <li><a href="misc/contribute">Contribute</a></li>
-                    <li><a href="http://code.angularjs.org/">Download</a></li>
-                  </ul>
-                </li>
-                <li class="divider-vertical"></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-comment icon-white"></i> Discuss <b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a href="http://blog.angularjs.org">Blog</a></li>
-                    <li><a href="http://groups.google.com/group/angular">Mailing List</a></li>
-                    <li><a href="http://webchat.freenode.net/?channels=angularjs&uio=d4">Chat Room</a></li>
-                    <li class="divider"></li>
-                    <li><a href="https://twitter.com/#!/angularjs">Twitter</a></li>
-                    <li><a href="https://plus.google.com/110323587230527980117">Google+</a></li>
-                    <li class="divider"></li>
-                    <li><a href="https://github.com/angular/angular.js">GitHub</a></li>
-                    <li><a href="https://github.com/angular/angular.js/issues">Issue Tracker</a></li>
-                  </ul>
-                </li>
-                <li class="divider-vertical"></li>
-              </ul>
-            </div>
-            <form ng-class="{focus:focus}" class="navbar-search col-md-3 docs-search" ng-submit="submit()">
-              <span class="glyphicon glyphicon-search search-icon"></span>
-              <input type="text"
-                     name="as_q"
-                     class="search-query"
-                     placeholder="Click or press / to search"
-                     ng-focus="focus=true"
-                     ng-blur="focus=false"
-                     ng-change="search(q)"
-                     ng-model="q"
-                     docs-search-input
-                     autocomplete="off" />
-            </form>
-          </div>
-        </div>
-        <div class="search-results-container" ng-show="hasResults">
+    <header class="header">
+      <nav id="navbar-main" class="navbar navbar-fixed-top">
+        <div class="navbar-inner" ng-controller="DocsSearchCtrl">
           <div class="container">
-            <a href="" ng-click="hideResults()" class="search-close">
-              <span class="glyphicon glyphicon-remove search-close-icon"></span> Close
-            </a>
-            <div class="search-results-frame">
-              <div ng-repeat="(key, value) in results" class="search-results-group" ng-class="colClassName + ' col-group-' + key">
-                <h4 class="search-results-group-heading">{{ key }}</h4>
-                <div class="search-results">
-                  <div ng-repeat="item in value" class="search-result">
-                    - <a ng-click="hideResults()" ng-href="{{ item.path }}">{{ item.name }}</a>
-                  </div>
+            <h1 class="brand"><a href="http://angularjs.org"><img width="117" height="30" src="img/angularjs-for-header-only.svg" alt="AngularJS"></a></h1>
+
+            <form class="navbar-search" ng-submit="submit()">
+              <i class="glyphicon glyphicon-search search-icon"></i>
+              <input type="text" name="as_q" class="search-query" placeholder="SEARCH"
+                 ng-focus="focus=true"
+                 ng-blur="focus=false"
+                 ng-change="search(q)"
+                 ng-model="q"
+                 ng-model-options="{debounce: 150}"
+                 docs-search-input
+                 autocomplete="off">
+            </form>
+
+            <ul class="nav navbar-nav">
+              <li class="dropdown" uib-dropdown>
+                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>Learn</a>
+                <ul class="dropdown-menu" uib-dropdown-menu>
+                  <li><a href="tutorial">Tutorial</a></li>
+                  <li><a href="misc/faq">FAQ</a></li>
+                  <li><a href="https://www.youtube.com/user/angularjs">Videos</a></li>
+                  <li><a href="http://angular.codeschool.com/">Free Course</a></li>
+                  <li><a href="https://www.madewithangular.com/">Case Studies</a></li>
+                </ul>
+              </li>
+              <li class="dropdown" uib-dropdown>
+                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>Develop</a>
+                <ul class="dropdown-menu" uib-dropdown-menu>
+                  <li><a href="guide">Developer Guide</a></li>
+                  <li><a href="api">API Reference</a></li>
+                  <li><a href="error">Error Reference</a></li>
+                  <li><a href="misc/contribute">Contribute</a></li>
+                  <li><a href="https://github.com/angular/angular-seed">Seed App project template</a></li>
+                  <li><a href="https://github.com/angular/angular.js">GitHub</a></li>
+                  <li><a href="http://code.angularjs.org/">Download</a></li>
+                </ul>
+              </li>
+              <li class="dropdown" uib-dropdown>
+                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>Discuss</a>
+                <ul class="dropdown-menu" uib-dropdown-menu>
+                  <li><a href="http://blog.angularjs.org">Blog</a></li>
+                  <li><a href="https://twitter.com/angular">Twitter</a></li>
+                  <li><a href="https://plus.google.com/110323587230527980117">Google+</a></li>
+                  <li><a href="https://github.com/angular/angular.js/issues">Feature &amp; Bug Tracker</a></li>
+                  <li><a href="http://groups.google.com/group/angular">Mailing List</a></li>
+                  <li><a href="http://webchat.freenode.net/?channels=angularjs&uio=d4">IRC</a></li>
+                  <li><a href="https://gitter.im/angular/angular.js">Gitter</a></li>
+                </ul>
+              </li>
+            </ul>
+
+          </div>
+          <div class="search-results-container" ng-show="hasResults">
+            <div class="container">
+              <div class="search-results-frame">
+                <div ng-repeat="(key, value) in results track by key" class="search-results-group" ng-class="colClassName + ' col-group-' + key" ng-show="value.length > 0">
+                  <h4 class="search-results-group-heading">{{ key }}</h4>
+                  <ul class="search-results">
+                    <li ng-repeat="item in value" class="search-result"><a ng-click="hideResults()" ng-href="{{ item.path }}">{{ item.name }}</a></li>
+                  </ul>
                 </div>
               </div>
+              <a href="" ng-click="hideResults()" class="search-close">
+                <span class="glyphicon glyphicon-remove search-close-icon"></span> Close
+              </a>
             </div>
           </div>
         </div>
-      </section>
-      <section class="sup-header">
+      </nav>
+      <nav id="navbar-notice" class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <p class="site-notice visible-phone">
+              This site refers to AngularJS (v1.x). <a href="https://angular.io/">Go to the latest Angular</a>.
+            </p>
+            <p class="site-notice visible-desktop">
+              This site and all of its contents are referring to AngularJS (version 1.x),
+              if you are looking for the latest Angular, please visit <a href="https://angular.io/">angular.io</a>.
+            </p>
+          </div>
+        </div>
+      </nav>
+      <nav id="navbar-sub" class="sup-header navbar navbar-fixed-top" scroll-y-offset-element>
         <div class="container main-grid main-header-grid">
           <div class="grid-left">
-            <div ng-controller="DocsVersionsCtrl" class="picker version-picker">
-              <select ng-options="v as ('v' + v.version + (v.isSnapshot ? ' (snapshot)' : '')) group by getGroupName(v) for v in docs_versions"
-                      ng-model="docs_version"
-                      ng-change="jumpToDocsVersion(docs_version)"
-                      class="docs-version-jump">
-              </select>
-            </div>
+            <version-picker></version-picker>
           </div>
           <div class="grid-right">
             <ul class="nav-breadcrumb">
@@ -203,7 +192,7 @@
             </ul>
           </div>
         </div>
-      </section>
+      </nav>
     </header>
 
     <section role="main" class="container main-body">
@@ -241,18 +230,17 @@
         <p class="pull-right"><a back-to-top>Back to top</a></p>
 
         <p>
-          Super-powered by Google  ©2010-2014
-          ( <a id="version"
+          Super-powered by Google ©2010-2017
+          (<a id="version"
                ng-href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md#{{versionNumber}}"
-               ng-bind-template="v{{version}}">
-            </a>
-          )
+               ng-bind-template="v{{version}}" title="Changelog of this version of Angular JS">
+           </a>)
         </p>
         <p>
-          Code licensed under the
-          <a href="https://github.com/angular/angular.js/blob/master/LICENSE" target="_blank">The
-            MIT License</a>. Documentation licensed under <a
-              href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+          Code licensed under
+          <a href="https://github.com/angular/angular.js/blob/master/LICENSE" target="_blank">The MIT License</a>.
+          Documentation licensed under
+          <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.
         </p>
       </div>
     </footer>

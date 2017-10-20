@@ -10,17 +10,37 @@ function SassCtrl($scope, $http, apSass, $timeout) {
     editorOptions: {
       lineWrapping: true,
       lineNumbers: true,
-      mode: {
-        name: 'text/html'
-      },
+      mode: 'text/html',
       onKeyEvent: function(e, s) {
-        if (s.type == 'keyup') {
-          CodeMirror.showHint(e)
+        if (s.type === 'keyup') {
+          window.CodeMirror.showHint(e)
         }
       },
       extraKeys: { 'Ctrl-Space': 'autocomplete' }
     },
-    x: ``
+    myHTML:
+      'I am an <code>HTML</code>string with ' + '<a href="#">links!</a> and other <em>stuff</em>',
+    customHtml: `<div class="bd-example" data-example-id="">
+      <div class="p-4 mb-2 bg-primary text-white">.bg-primary</div>
+      <div class="p-4 mb-2 bg-secondary text-white">.bg-secondary</div>
+      <div class="p-4 mb-2 bg-success text-white">.bg-success</div>
+      <div class="p-4 mb-2 bg-danger text-white">.bg-danger</div>
+      <div class="p-4 mb-2 bg-warning text-white">.bg-warning</div>
+      <div class="p-4 mb-2 bg-info text-white">.bg-info</div>
+      <div class="p-4 mb-2 bg-light text-gray-dark">.bg-light</div>
+      <div class="p-4 mb-2 bg-dark text-white">.bg-dark</div>
+      <div class="p-4 mb-2 bg-white text-gray-dark">.bg-white</div>
+      <div class="p-4 mb-2 swatch-100">.swatch-100</div>
+      <div class="p-4 mb-2 swatch-200">.swatch-200</div>
+      <div class="p-4 mb-2 swatch-300">.swatch-300</div>
+      <div class="p-4 mb-2 swatch-400">.swatch-400</div>
+      <div class="p-4 mb-2 swatch-500">.swatch-500</div>
+      <div class="p-4 mb-2 swatch-600">.swatch-600</div>
+      <div class="p-4 mb-2 swatch-700">.swatch-700</div>
+      <div class="p-4 mb-2 swatch-800">.swatch-800</div>
+      <div class="p-4 mb-2 swatch-900">.swatch-900</div>
+    </div>
+    `
   }
 
   var scopeFunction = {
@@ -36,7 +56,8 @@ function SassCtrl($scope, $http, apSass, $timeout) {
     saveSassVariables: saveSassVariables,
     resetBaseVariable: resetBaseVariable,
     codemirrorLoaded: codemirrorLoaded,
-    format: format
+    format: format,
+    toggle: toggle
   }
 
   $scope.$on('$routeChangeStart', function() {
@@ -51,13 +72,17 @@ function SassCtrl($scope, $http, apSass, $timeout) {
 
   angular.extend($scope, scopeVar, scopeFunction)
 
-  CodeMirror.commands.autocomplete = function(cm) {
-    CodeMirror.showHint(cm, CodeMirror.hint.html)
+  window.CodeMirror.commands.autocomplete = function(cm) {
+    window.CodeMirror.showHint(cm, window.CodeMirror.hint.html)
+  }
+
+  function toggle(group) {
+    group.hidden = !group.hidden
   }
 
   function codemirrorLoaded(editor) {
     $scope.editor = editor
-    var modification = 0
+    // var modification = 0
     var doc = editor.getDoc()
     editor.focus()
     editor.setValue($scope.x)
@@ -72,12 +97,18 @@ function SassCtrl($scope, $http, apSass, $timeout) {
   }
 
   function format() {
-    $scope.editor.setValue(html_beautify($scope.editor.getValue()))
+    $scope.editor.setValue(window.html_beautify($scope.editor.getValue()))
   }
 
   function initSassVariables() {
-    $http.get('scss/variables.json').success(function(data) {
-      $scope.variables = data
+    $http({
+      method: 'GET',
+      url: 'scss/variables.json'
+    }).then(function(response) {
+      $scope.variables = response.data.map(function(d) {
+        d.hidden = true
+        return d
+      })
       $scope.applySass(false)
 
       var variables_keys = apSass.getKeys($scope)
@@ -144,11 +175,11 @@ function SassCtrl($scope, $http, apSass, $timeout) {
   }
 
   function colorpicker(type) {
-    return type == 'color' ? true : false
+    return type === 'color'
   }
 
   function color(type, value) {
-    return type == 'color' && /^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(value) ? value : '#ffffff'
+    return type === 'color' && /^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(value) ? value : '#ffffff'
   }
 
   function setIsViewLoading(val) {

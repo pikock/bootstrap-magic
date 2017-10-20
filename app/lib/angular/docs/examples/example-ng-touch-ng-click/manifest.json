@@ -1,0 +1,7 @@
+{
+  "name": "example-ng-touch-ng-click",
+  "files": [
+    "index-production.html",
+    "script.js"
+  ]
+}

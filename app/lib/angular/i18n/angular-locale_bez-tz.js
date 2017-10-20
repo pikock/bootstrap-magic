@@ -34,6 +34,15 @@ $provide.value("$locale", {
       "pa hihanu",
       "pa shahulembela"
     ],
+    "ERANAMES": [
+      "Kabla ya Mtwaa",
+      "Baada ya Mtwaa"
+    ],
+    "ERAS": [
+      "KM",
+      "BM"
+    ],
+    "FIRSTDAYOFWEEK": 0,
     "MONTH": [
       "pa mwedzi gwa hutala",
       "pa mwedzi gwa wuvili",
@@ -71,14 +80,32 @@ $provide.value("$locale", {
       "Kmj",
       "Kmb"
     ],
+    "STANDALONEMONTH": [
+      "pa mwedzi gwa hutala",
+      "pa mwedzi gwa wuvili",
+      "pa mwedzi gwa wudatu",
+      "pa mwedzi gwa wutai",
+      "pa mwedzi gwa wuhanu",
+      "pa mwedzi gwa sita",
+      "pa mwedzi gwa saba",
+      "pa mwedzi gwa nane",
+      "pa mwedzi gwa tisa",
+      "pa mwedzi gwa kumi",
+      "pa mwedzi gwa kumi na moja",
+      "pa mwedzi gwa kumi na mbili"
+    ],
+    "WEEKENDRANGE": [
+      5,
+      6
+    ],
     "fullDate": "EEEE, d MMMM y",
     "longDate": "d MMMM y",
-    "medium": "d MMM y h:mm:ss a",
+    "medium": "d MMM y HH:mm:ss",
     "mediumDate": "d MMM y",
-    "mediumTime": "h:mm:ss a",
-    "short": "dd/MM/y h:mm a",
+    "mediumTime": "HH:mm:ss",
+    "short": "dd/MM/y HH:mm",
     "shortDate": "dd/MM/y",
-    "shortTime": "h:mm a"
+    "shortTime": "HH:mm"
   },
   "NUMBER_FORMATS": {
     "CURRENCY_SYM": "TSh",
@@ -99,8 +126,8 @@ $provide.value("$locale", {
       {
         "gSize": 3,
         "lgSize": 3,
-        "maxFrac": 2,
-        "minFrac": 2,
+        "maxFrac": 0,
+        "minFrac": 0,
         "minInt": 1,
         "negPre": "-",
         "negSuf": "\u00a4",
@@ -110,6 +137,7 @@ $provide.value("$locale", {
     ]
   },
   "id": "bez-tz",
-  "pluralCat": function (n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+  "localeID": "bez_TZ",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
 });
 }]);

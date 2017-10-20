@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-select-ngvalue-production</title>
+  
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <script src="app.js"></script>
+  
+
+  
+</head>
+<body ng-app="ngvalueSelect">
+  <div ng-controller="ExampleController">
+  <form name="myForm">
+    <label for="ngvalueselect"> ngvalue select: </label>
+    <select size="6" name="ngvalueselect" ng-model="data.model" multiple>
+      <option ng-repeat="option in data.availableOptions" ng-value="option.value">{{option.name}}</option>
+    </select>
+  </form>
+  <hr>
+  <pre>model = {{data.model | json}}</pre><br/>
+</div>
+</body>
+</html>

@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/auto/injector.js?message=docs(angular.injector)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/auto/injector.js?message=docs(angular.injector)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/auto/injector.js#L3' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/auto/injector.js#L3' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -19,6 +19,8 @@
 
 
 
+
+
 <div class="api-profile-description">
   <p>Creates an injector object that can be used for retrieving services as well as for
 dependency injection (see <a href="guide/di">dependency injection</a>).</p>
@@ -31,11 +33,11 @@ dependency injection (see <a href="guide/di">dependency injection</a>).</p>
 <div>
   
 
-    
+  
 
   <h2 id="usage">Usage</h2>
     
-      <p><code>angular.injector(modules);</code></p>
+      <p><code>angular.injector(modules, [strictDi]);</code></p>
 
 
     
@@ -65,9 +67,26 @@ dependency injection (see <a href="guide/di">dependency injection</a>).</p>
       </td>
       <td>
         <p>A list of module functions or their aliases. See
-       <a href="api/ng/function/angular.module"><code>angular.module</code></a>. The <code>ng</code> module must be explicitly added.</p>
+    <a href="api/ng/function/angular.module"><code>angular.module</code></a>. The <code>ng</code> module must be explicitly added.</p>
 
         
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        strictDi
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-boolean">boolean</a>
+      </td>
+      <td>
+        <p>Whether the injector should be in strict mode, which
+    disallows argument name annotation inference.</p>
+
+        <p><em>(default: false)</em></p>
       </td>
     </tr>
     
@@ -92,13 +111,13 @@ dependency injection (see <a href="guide/di">dependency injection</a>).</p>
 
 
   
-  <h2 id="example">Example</h2><p>Typical usage</p>
+  <h2 id="example">Examples</h2><p>Typical usage</p>
 <pre><code class="lang-js">// create an injector
 var $injector = angular.injector([&#39;ng&#39;]);
 
 // use the injector to kick off your application
 // use the type inference to auto inject arguments, or use implicit injection
-$injector.invoke(function($rootScope, $compile, $document){
+$injector.invoke(function($rootScope, $compile, $document) {
   $compile($document)($rootScope);
   $rootScope.$digest();
 });

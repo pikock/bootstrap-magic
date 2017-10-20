@@ -34,6 +34,15 @@ $provide.value("$locale", {
       "Arjuma",
       "Sibiti"
     ],
+    "ERANAMES": [
+      "Ari\u014buu Yeesu",
+      "Atoo\u014be Yeesu"
+    ],
+    "ERAS": [
+      "ArY",
+      "AtY"
+    ],
+    "FIRSTDAYOFWEEK": 0,
     "MONTH": [
       "Sanvie",
       "F\u00e9birie",
@@ -71,6 +80,24 @@ $provide.value("$locale", {
       "No",
       "De"
     ],
+    "STANDALONEMONTH": [
+      "Sanvie",
+      "F\u00e9birie",
+      "Mars",
+      "Aburil",
+      "Mee",
+      "Sue\u014b",
+      "S\u00fauyee",
+      "Ut",
+      "Settembar",
+      "Oktobar",
+      "Novembar",
+      "Disambar"
+    ],
+    "WEEKENDRANGE": [
+      5,
+      6
+    ],
     "fullDate": "EEEE d MMMM y",
     "longDate": "d MMMM y",
     "medium": "d MMM y HH:mm:ss",
@@ -99,8 +126,8 @@ $provide.value("$locale", {
       {
         "gSize": 3,
         "lgSize": 3,
-        "maxFrac": 2,
-        "minFrac": 2,
+        "maxFrac": 0,
+        "minFrac": 0,
         "minInt": 1,
         "negPre": "-",
         "negSuf": "\u00a0\u00a4",
@@ -110,6 +137,7 @@ $provide.value("$locale", {
     ]
   },
   "id": "dyo-sn",
-  "pluralCat": function (n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+  "localeID": "dyo_SN",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
 });
 }]);

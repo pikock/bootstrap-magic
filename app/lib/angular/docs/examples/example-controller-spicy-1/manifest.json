@@ -1,0 +1,7 @@
+{
+  "name": "example-controller-spicy-1",
+  "files": [
+    "index-production.html",
+    "app.js"
+  ]
+}

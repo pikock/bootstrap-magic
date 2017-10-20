@@ -34,6 +34,15 @@ $provide.value("$locale", {
       "Wa katano",
       "Wa thanthat\u0169"
     ],
+    "ERANAMES": [
+      "Mbee wa Yes\u0169",
+      "\u0128tina wa Yes\u0169"
+    ],
+    "ERAS": [
+      "MY",
+      "IY"
+    ],
+    "FIRSTDAYOFWEEK": 6,
     "MONTH": [
       "Mwai wa mbee",
       "Mwai wa kel\u0129",
@@ -71,14 +80,32 @@ $provide.value("$locale", {
       "\u0128km",
       "\u0128kl"
     ],
+    "STANDALONEMONTH": [
+      "Mwai wa mbee",
+      "Mwai wa kel\u0129",
+      "Mwai wa katat\u0169",
+      "Mwai wa kana",
+      "Mwai wa katano",
+      "Mwai wa thanthat\u0169",
+      "Mwai wa muonza",
+      "Mwai wa nyaanya",
+      "Mwai wa kenda",
+      "Mwai wa \u0129kumi",
+      "Mwai wa \u0129kumi na \u0129mwe",
+      "Mwai wa \u0129kumi na il\u0129"
+    ],
+    "WEEKENDRANGE": [
+      5,
+      6
+    ],
     "fullDate": "EEEE, d MMMM y",
     "longDate": "d MMMM y",
-    "medium": "d MMM y h:mm:ss a",
+    "medium": "d MMM y HH:mm:ss",
     "mediumDate": "d MMM y",
-    "mediumTime": "h:mm:ss a",
-    "short": "dd/MM/y h:mm a",
+    "mediumTime": "HH:mm:ss",
+    "short": "dd/MM/y HH:mm",
     "shortDate": "dd/MM/y",
-    "shortTime": "h:mm a"
+    "shortTime": "HH:mm"
   },
   "NUMBER_FORMATS": {
     "CURRENCY_SYM": "Ksh",
@@ -102,7 +129,7 @@ $provide.value("$locale", {
         "maxFrac": 2,
         "minFrac": 2,
         "minInt": 1,
-        "negPre": "\u00a4-",
+        "negPre": "-\u00a4",
         "negSuf": "",
         "posPre": "\u00a4",
         "posSuf": ""
@@ -110,6 +137,7 @@ $provide.value("$locale", {
     ]
   },
   "id": "kam",
-  "pluralCat": function (n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+  "localeID": "kam",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
 });
 }]);

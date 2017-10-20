@@ -1,7 +1,7 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/docs/content/error/$rootScope/inprog.ngdoc?message=docs(error%2Finprog)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/error/$rootScope/inprog.ngdoc?message=docs(error%2Finprog)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
-<h1>Error: error:inprog
+<h1>Error: $rootScope:inprog
   <div><span class='hint'>Action Already In Progress</span></div>
 </h1>
 
@@ -27,18 +27,18 @@ in a block of code that will run <code>$digest</code> when the code completes.</
 <p>You wrap Angular code in a block that will be followed by a <code>$digest</code> by calling <code>$apply</code> on a scope
 object.  So, in pseudo-code, the process looks like this:</p>
 <pre><code>element.on(&#39;mouseup&#39;, function() {
-scope.$apply(function() {
-  $scope.doStuff();
-});
+  scope.$apply(function() {
+    $scope.doStuff();
+  });
 });
 </code></pre>
 <p>where <code>$apply()</code> looks something like:</p>
 <pre><code>$apply = function(fn) {
-try {
-  fn();
-} finally() {
-  $digest();
-}
+  try {
+    fn();
+  } finally() {
+    $digest();
+  }
 }
 </code></pre>
 <h2 id="digest-phases">Digest Phases</h2>
@@ -64,11 +64,11 @@ this error through no fault of your own.</p>
 may be making an asynchronous call to a server, it accepts a callback function, which will be called
 when the data arrives.</p>
 <pre><code>function MyController($scope, thirdPartyComponent) {
-thirdPartyComponent.getData(function(someData) {
-  $scope.$apply(function() {
-    $scope.someData = someData;
+  thirdPartyComponent.getData(function(someData) {
+    $scope.$apply(function() {
+      $scope.someData = someData;
+    });
   });
-});
 }
 </code></pre>
 <p>We expect that our callback will be called asynchronously, and so from outside Angular. Therefore, we
@@ -81,12 +81,12 @@ handler is trying to enter a new <code>$apply</code> block from within one.</p>
 <p>This is not an ideal design choice on the part of the 3rd party library.</p>
 <p>To resolve this type of issue, either fix the api to be always synchronous or asynchronous or force
 your callback handler to always run asynchronously by using the <code>$timeout</code> service.</p>
-<pre><code>function MyController($scope, thirdPartyComponent) {
-thirdPartyComponent.getData(function(someData) {
-  $timeout(function() {
-    $scope.someData = someData;
-  }, 0);
-});
+<pre><code>function MyController($scope, $timeout, thirdPartyComponent) {
+  thirdPartyComponent.getData(function(someData) {
+    $timeout(function() {
+      $scope.someData = someData;
+    }, 0);
+  });
 }
 </code></pre>
 <p>Here we have used <code>$timeout</code> to schedule the changes to the scope in a future call stack.
@@ -98,13 +98,13 @@ programmatically (from within Angular), which is normally called by an external 
 <p>For example, consider a directive that will set focus on an input control when a value in the scope
 is true:</p>
 <pre><code>myApp.directive(&#39;setFocusIf&#39;, function() {
-return {
-  link: function($scope, $element, $attr) {
-    $scope.$watch($attr.setFocusIf, function(value) {
-      if ( value ) { $element[0].focus(); }
-    });
-  }
-};
+  return {
+    link: function($scope, $element, $attr) {
+      $scope.$watch($attr.setFocusIf, function(value) {
+        if ( value ) { $element[0].focus(); }
+      });
+    }
+  };
 });
 </code></pre>
 <p>If we applied this directive to an input which also used the <code>ngFocus</code> directive to trigger some
@@ -131,24 +131,24 @@ work when the element receives focus we will have a problem:</p>
 <p>In this second scenario, we are already inside a <code>$digest</code> when the ngFocus directive makes another
 call to <code>$apply()</code>, causing this error to be thrown.</p>
 <p>It is possible to workaround this problem by moving the call to set the focus outside of the digest,
-by using <code>$timeout(fn, 0, false)</code>, where the <code>false</code> value tells Angular not to wrap this <code>fn</code> in a
+by using <code>$timeout(fn, 0, false)</code>, where the <code>false</code> value tells Angular not to wrap this <code>fn</code> in an
 <code>$apply</code> block:</p>
 <pre><code>myApp.directive(&#39;setFocusIf&#39;, function($timeout) {
-return {
-  link: function($scope, $element, $attr) {
-    $scope.$watch($attr.setFocusIf, function(value) {
-      if ( value ) {
-        $timeout(function() {
-          // We must reevaluate the value in case it was changed by a subsequent
-          // watch handler in the digest.
-          if ( $scope.$eval($attr.setFocusIf) ) {
-            $element[0].focus();
-          }
-        }, 0, false);
-      }
-    });
+  return {
+    link: function($scope, $element, $attr) {
+      $scope.$watch($attr.setFocusIf, function(value) {
+        if ( value ) {
+          $timeout(function() {
+            // We must reevaluate the value in case it was changed by a subsequent
+            // watch handler in the digest.
+            if ( $scope.$eval($attr.setFocusIf) ) {
+              $element[0].focus();
+            }
+          }, 0, false);
+        }
+      });
+    }
   }
-}
 });
 </code></pre>
 <h2 id="diagnosing-this-error">Diagnosing This Error</h2>
@@ -166,7 +166,7 @@ the top of the call stack.</p>
 <p>Once you have identified this call you work your way up the stack to see what the problem is.</p>
 <ul>
 <li><p>If the second call was made in your application code then you should look at why this code has been
-called from within a <code>$apply</code>/<code>$digest</code>.  It may be a simple oversight or maybe it fits with the
+called from within an <code>$apply</code>/<code>$digest</code>.  It may be a simple oversight or maybe it fits with the
 sync/async scenario described earlier.</p>
 </li>
 <li><p>If the second call was made inside an Angular directive then it is likely that it matches the second
@@ -181,9 +181,7 @@ value of its attribute becomes true.</p>
 <p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-error-$rootScope-inprog')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-error-$rootScope-inprog"></plnkr-opener>
 
   <div class="runnable-example"
       path="examples/example-error-$rootScope-inprog"
@@ -202,11 +200,11 @@ value of its attribute becomes true.</p>
       name="app.js"
       language="js"
       type="js">
-      <pre><code>angular.module(&#39;app&#39;, []).directive(&#39;setFocusIf&#39;, function() {&#10;  return function link($scope, $element, $attr) {&#10;    $scope.$watch($attr.setFocusIf, function(value) {&#10;      if ( value ) { $element[0].focus(); }&#10;    });&#10;  };&#10;});</code></pre>
+      <pre><code>angular.module(&#39;app&#39;, []).directive(&#39;setFocusIf&#39;, function() {&#10;  return function link($scope, $element, $attr) {&#10;    $scope.$watch($attr.setFocusIf, function(value) {&#10;      if (value) { $element[0].focus(); }&#10;    });&#10;  };&#10;});</code></pre>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-error-$rootScope-inprog/index.html" name="example-error-$rootScope-inprog"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-error-$rootScope-inprog')}}" name="example-error-$rootScope-inprog"></iframe>
   </div>
 </div>
 
@@ -215,16 +213,16 @@ value of its attribute becomes true.</p>
 <p>When you click on the button to cause the focus to occur we get our <code>$rootScope:inprog</code> error. The
 stacktrace looks like this:</p>
 <pre><code>Error: [$rootScope:inprog]
-at Error (native)
-at angular.min.js:6:467
-at n (angular.min.js:105:60)
-at g.$get.g.$apply (angular.min.js:113:195)
-at HTMLInputElement.&lt;anonymous&gt; (angular.min.js:198:401)
-at angular.min.js:32:32
-at Array.forEach (native)
-at q (angular.min.js:7:295)
-at HTMLInputElement.c (angular.min.js:32:14)
-at Object.fn (app.js:12:38) angular.js:10111
+    at Error (native)
+    at angular.min.js:6:467
+    at n (angular.min.js:105:60)
+    at g.$get.g.$apply (angular.min.js:113:195)
+    at HTMLInputElement.&lt;anonymous&gt; (angular.min.js:198:401)
+    at angular.min.js:32:32
+    at Array.forEach (native)
+    at q (angular.min.js:7:295)
+    at HTMLInputElement.c (angular.min.js:32:14)
+    at Object.fn (app.js:12:38) angular.js:10111
 (anonymous function) angular.js:10111
 $get angular.js:7412
 $get.g.$apply angular.js:12738                   &lt;--- $apply

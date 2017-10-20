@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/directive/ngBind.js?message=docs(ngBindTemplate)%3A%20describe%20your%20change...#L70' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/ngBind.js?message=docs(ngBindTemplate)%3A%20describe%20your%20change...#L71' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/directive/ngBind.js#L70' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/ngBind.js#L71' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -16,6 +16,8 @@
     </li>
   </ol>
 </header>
+
+
 
 
 
@@ -40,6 +42,7 @@ expressions. This directive is needed since some HTML elements
   <ul>
     
     <li>This directive executes at priority level 0.</li>
+    
   </ul>
 
   
@@ -47,8 +50,12 @@ expressions. This directive is needed since some HTML elements
   <div class="usage">
   
     <ul>
+    
+      <li>as element:
+      <pre><code>&lt;ng-bind-template&#10;  ng-bind-template=&quot;string&quot;&gt;&#10;...&#10;&lt;/ng-bind-template&gt;</code></pre>
+      </li>
     <li>as attribute:
-        <pre><code>&lt;ANY&#10;  ng-bind-template=&quot;&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+        <pre><code>&lt;ANY&#10;  ng-bind-template=&quot;string&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
       </li>
     
   </div>
@@ -89,26 +96,24 @@ expressions. This directive is needed since some HTML elements
 </section>
   
 
-
   
-  <h2 id="example">Example</h2><p>Try it here: enter text in text box and watch the greeting change.
+  <h2 id="example">Examples</h2><p>Try it here: enter text in text box and watch the greeting change.
    
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example52')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ng-bind-template"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example52"
-      module="bindExample">
+      path="examples/example-ng-bind-template"
+      module="bindExample"
+      name="ng-bind-template">
 
   
     <div class="runnable-example-file" 
       name="index.html"
       language="html"
       type="html">
-      <pre><code>&lt;script&gt;&#10;  angular.module(&#39;bindExample&#39;, [])&#10;    .controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function ($scope) {&#10;      $scope.salutation = &#39;Hello&#39;;&#10;      $scope.name = &#39;World&#39;;&#10;    }]);&#10;&lt;/script&gt;&#10;&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10; Salutation: &lt;input type=&quot;text&quot; ng-model=&quot;salutation&quot;&gt;&lt;br&gt;&#10; Name: &lt;input type=&quot;text&quot; ng-model=&quot;name&quot;&gt;&lt;br&gt;&#10; &lt;pre ng-bind-template=&quot;{{salutation}} {{name}}!&quot;&gt;&lt;/pre&gt;&#10;&lt;/div&gt;</code></pre>
+      <pre><code>&lt;script&gt;&#10;  angular.module(&#39;bindExample&#39;, [])&#10;    .controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;      $scope.salutation = &#39;Hello&#39;;&#10;      $scope.name = &#39;World&#39;;&#10;    }]);&#10;&lt;/script&gt;&#10;&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10; &lt;label&gt;Salutation: &lt;input type=&quot;text&quot; ng-model=&quot;salutation&quot;&gt;&lt;/label&gt;&lt;br&gt;&#10; &lt;label&gt;Name: &lt;input type=&quot;text&quot; ng-model=&quot;name&quot;&gt;&lt;/label&gt;&lt;br&gt;&#10; &lt;pre ng-bind-template=&quot;{{salutation}} {{name}}!&quot;&gt;&lt;/pre&gt;&#10;&lt;/div&gt;</code></pre>
     </div>
   
     <div class="runnable-example-file" 
@@ -119,7 +124,7 @@ expressions. This directive is needed since some HTML elements
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example52/index.html" name="example-example52"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ng-bind-template')}}" name="example-ng-bind-template"></iframe>
   </div>
 </div>
 

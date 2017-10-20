@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/directive/booleanAttrs.js?message=docs(ngOpen)%3A%20describe%20your%20change...#L306' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/attrs.js?message=docs(ngOpen)%3A%20describe%20your%20change...#L305' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/directive/booleanAttrs.js#L306' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/attrs.js#L305' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -19,14 +19,15 @@
 
 
 
+
+
 <div class="api-profile-description">
-  <p>The HTML specification does not require browsers to preserve the values of boolean attributes
-such as open. (Their presence means true and their absence means false.)
-If we put an Angular interpolation expression into such an attribute then the
-binding information would be lost when the browser removes the attribute.
-The <code>ngOpen</code> directive solves this problem for the <code>open</code> attribute.
-This complementary directive is not removed by the browser and so provides
-a permanent reliable place to store the binding information.</p>
+  <p>Sets the <code>open</code> attribute on the element, if the expression inside <code>ngOpen</code> is truthy.</p>
+<p>A special directive is necessary because we cannot use interpolation inside the <code>open</code>
+attribute. See the <a href="guide/interpolation">interpolation guide</a> for more info.</p>
+<h2 id="a-note-about-browser-compatibility">A note about browser compatibility</h2>
+<p>Internet Explorer and Edge do not support the <code>details</code> element, it is
+recommended to use <a href="api/ng/directive/ngShow"><code>ngShow</code></a> and <a href="api/ng/directive/ngHide"><code>ngHide</code></a> instead.</p>
 
 </div>
 
@@ -41,6 +42,7 @@ a permanent reliable place to store the binding information.</p>
   <ul>
     
     <li>This directive executes at priority level 100.</li>
+    
   </ul>
 
   
@@ -49,7 +51,7 @@ a permanent reliable place to store the binding information.</p>
   
     <ul>
     <li>as attribute:
-        <pre><code>&lt;DETAILS&#10;  ng-open=&quot;&quot;&gt;&#10;...&#10;&lt;/DETAILS&gt;</code></pre>
+        <pre><code>&lt;DETAILS&#10;  ng-open=&quot;expression&quot;&gt;&#10;...&#10;&lt;/DETAILS&gt;</code></pre>
       </li>
     
   </div>
@@ -90,24 +92,22 @@ a permanent reliable place to store the binding information.</p>
 </section>
   
 
-
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example48')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ng-open"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example48">
+      path="examples/example-ng-open"
+      name="ng-open">
 
   
     <div class="runnable-example-file" 
       name="index.html"
       language="html"
       type="html">
-      <pre><code>Check me check multiple: &lt;input type=&quot;checkbox&quot; ng-model=&quot;open&quot;&gt;&lt;br/&gt;&#10;&lt;details id=&quot;details&quot; ng-open=&quot;open&quot;&gt;&#10;   &lt;summary&gt;Show/Hide me&lt;/summary&gt;&#10;&lt;/details&gt;</code></pre>
+      <pre><code>&lt;label&gt;Toggle details: &lt;input type=&quot;checkbox&quot; ng-model=&quot;open&quot;&gt;&lt;/label&gt;&lt;br/&gt;&#10;&lt;details id=&quot;details&quot; ng-open=&quot;open&quot;&gt;&#10;   &lt;summary&gt;List&lt;/summary&gt;&#10;   &lt;ul&gt;&#10;     &lt;li&gt;Apple&lt;/li&gt;&#10;     &lt;li&gt;Orange&lt;/li&gt;&#10;     &lt;li&gt;Durian&lt;/li&gt;&#10;   &lt;/ul&gt;&#10;&lt;/details&gt;</code></pre>
     </div>
   
     <div class="runnable-example-file" 
@@ -118,7 +118,7 @@ a permanent reliable place to store the binding information.</p>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example48/index.html" name="example-example48"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ng-open')}}" name="example-ng-open"></iframe>
   </div>
 </div>
 

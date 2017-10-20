@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ng-bind-template-jquery</title>
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  
+
+  
+</head>
+<body ng-app="bindExample">
+  <script>
+  angular.module('bindExample', [])
+    .controller('ExampleController', ['$scope', function($scope) {
+      $scope.salutation = 'Hello';
+      $scope.name = 'World';
+    }]);
+</script>
+<div ng-controller="ExampleController">
+ <label>Salutation: <input type="text" ng-model="salutation"></label><br>
+ <label>Name: <input type="text" ng-model="name"></label><br>
+ <pre ng-bind-template="{{salutation}} {{name}}!"></pre>
+</div>
+</body>
+</html>

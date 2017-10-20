@@ -1,0 +1,29 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/error/$compile/badrestrict.ngdoc?message=docs(error%2Fbadrestrict)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>Error: $compile:badrestrict
+  <div><span class='hint'>Invalid Directive Restrict</span></div>
+</h1>
+
+<div>
+    <pre class="minerr-errmsg" error-display="Restrict property '{0}' of directive '{1}' is invalid">Restrict property '{0}' of directive '{1}' is invalid</pre>
+</div>
+
+<h2>Description</h2>
+<div class="description">
+  <p>This error occurs when the restrict property of a directive is not valid.</p>
+<p>The directive restrict property must be a string including one or more of the following characters:</p>
+<ul>
+<li>E (element)</li>
+<li>A (attribute)</li>
+<li>C (class)</li>
+<li>M (comment)</li>
+</ul>
+<p>For example:</p>
+<pre><code class="lang-javascript">restrict: &#39;E&#39;
+restrict: &#39;EAC&#39;
+</code></pre>
+
+</div>
+
+

@@ -34,6 +34,15 @@ $provide.value("$locale", {
       "S\u1e0disass",
       "Sayass"
     ],
+    "ERANAMES": [
+      "send talalit n \u0190isa",
+      "seld talalit n \u0190isa"
+    ],
+    "ERAS": [
+      "snd. T.\u0190",
+      "sld. T.\u0190"
+    ],
+    "FIRSTDAYOFWEEK": 5,
     "MONTH": [
       "Yennayer",
       "Fu\u1e5bar",
@@ -71,14 +80,32 @@ $provide.value("$locale", {
       "Nun",
       "Du\u01e7"
     ],
+    "STANDALONEMONTH": [
+      "Yennayer",
+      "Fu\u1e5bar",
+      "Me\u0263res",
+      "Yebrir",
+      "Mayyu",
+      "Yunyu",
+      "Yulyu",
+      "\u0194uct",
+      "Ctembe\u1e5b",
+      "Tube\u1e5b",
+      "Nunembe\u1e5b",
+      "Du\u01e7embe\u1e5b"
+    ],
+    "WEEKENDRANGE": [
+      4,
+      5
+    ],
     "fullDate": "EEEE d MMMM y",
     "longDate": "d MMMM y",
-    "medium": "d MMM, y HH:mm:ss",
+    "medium": "d MMM, y h:mm:ss a",
     "mediumDate": "d MMM, y",
-    "mediumTime": "HH:mm:ss",
-    "short": "d/M/y HH:mm",
+    "mediumTime": "h:mm:ss a",
+    "short": "d/M/y h:mm a",
     "shortDate": "d/M/y",
-    "shortTime": "HH:mm"
+    "shortTime": "h:mm a"
   },
   "NUMBER_FORMATS": {
     "CURRENCY_SYM": "din",
@@ -110,6 +137,7 @@ $provide.value("$locale", {
     ]
   },
   "id": "kab",
-  "pluralCat": function (n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+  "localeID": "kab",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
 });
 }]);

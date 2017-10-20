@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/cacheFactory.js?message=docs($templateCache)%3A%20describe%20your%20change...#L354' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/cacheFactory.js?message=docs($templateCache)%3A%20describe%20your%20change...#L357' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/cacheFactory.js#L354' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/cacheFactory.js#L357' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -21,6 +21,8 @@
 
 
 
+
+
 <div class="api-profile-description">
   <p>The first time a template is used, it is loaded in the template cache for quick retrieval. You
 can load templates directly into the cache in a <code>script</code> tag, or by consuming the
@@ -33,16 +35,18 @@ can load templates directly into the cache in a <code>script</code> tag, or by c
 <p><strong>Note:</strong> the <code>script</code> tag containing the template does not need to be included in the <code>head</code> of
 the document, but it must be a descendent of the <a href="api/ng/service/$rootElement">$rootElement</a> (IE,
 element with ng-app attribute), otherwise the template will be ignored.</p>
-<p>Adding via the $templateCache service:</p>
+<p>Adding via the <code>$templateCache</code> service:</p>
 <pre><code class="lang-js">var myApp = angular.module(&#39;myApp&#39;, []);
 myApp.run(function($templateCache) {
   $templateCache.put(&#39;templateId.html&#39;, &#39;This is the content of the template&#39;);
 });
 </code></pre>
-<p>To retrieve the template later, simply use it in your HTML:</p>
-<pre><code class="lang-html">&lt;div ng-include=&quot; &#39;templateId.html&#39; &quot;&gt;&lt;/div&gt;
+<p>To retrieve the template later, simply use it in your component:</p>
+<pre><code class="lang-js">myApp.component(&#39;myComponent&#39;, {
+   templateUrl: &#39;templateId.html&#39;
+});
 </code></pre>
-<p>or get it via Javascript:</p>
+<p>or get it via the <code>$templateCache</code> service:</p>
 <pre><code class="lang-js">$templateCache.get(&#39;templateId.html&#39;)
 </code></pre>
 <p>See <a href="api/ng/service/$cacheFactory">$cacheFactory</a>.</p>
@@ -55,7 +59,7 @@ myApp.run(function($templateCache) {
 <div>
   
 
-    
+  
 
   
 

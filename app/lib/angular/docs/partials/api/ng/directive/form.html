@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/directive/form.js?message=docs(form)%3A%20describe%20your%20change...#L228' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/form.js?message=docs(form)%3A%20describe%20your%20change...#L354' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/directive/form.js#L228' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/form.js#L354' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -19,26 +19,27 @@
 
 
 
+
+
 <div class="api-profile-description">
   <p>Directive that instantiates
 <a href="api/ng/type/form.FormController">FormController</a>.</p>
 <p>If the <code>name</code> attribute is specified, the form controller is published onto the current scope under
 this name.</p>
 <h1 id="alias-link-ng-directive-ngform-ngform-">Alias: <a href="api/ng/directive/ngForm"><code>ngForm</code></a></h1>
-<p>In Angular forms can be nested. This means that the outer form is valid when all of the child
+<p>In Angular, forms can be nested. This means that the outer form is valid when all of the child
 forms are valid as well. However, browsers do not allow nesting of <code>&lt;form&gt;</code> elements, so
-Angular provides the <a href="api/ng/directive/ngForm"><code>ngForm</code></a> directive which behaves identically to
-<code>&lt;form&gt;</code> but can be nested.  This allows you to have nested forms, which is very useful when
-using Angular validation directives in forms that are dynamically generated using the
-<a href="api/ng/directive/ngRepeat"><code>ngRepeat</code></a> directive. Since you cannot dynamically generate the <code>name</code>
-attribute of input elements using interpolation, you have to wrap each set of repeated inputs in an
-<code>ngForm</code> directive and nest these in an outer <code>form</code> element.</p>
+Angular provides the <a href="api/ng/directive/ngForm"><code>ngForm</code></a> directive, which behaves identically to
+<code>form</code> but can be nested. Nested forms can be useful, for example, if the validity of a sub-group
+of controls needs to be determined.</p>
 <h1 id="css-classes">CSS classes</h1>
 <ul>
 <li><code>ng-valid</code> is set if the form is valid.</li>
 <li><code>ng-invalid</code> is set if the form is invalid.</li>
+<li><code>ng-pending</code> is set if the form is pending.</li>
 <li><code>ng-pristine</code> is set if the form is pristine.</li>
 <li><code>ng-dirty</code> is set if the form is dirty.</li>
+<li><code>ng-submitted</code> is set if the form was submitted.</li>
 </ul>
 <p>Keep in mind that ngAnimate can detect each of these classes when added and removed.</p>
 <h1 id="submitting-a-form-and-preventing-the-default-action">Submitting a form and preventing the default action</h1>
@@ -67,6 +68,9 @@ doesn&#39;t trigger submit</li>
 hitting enter in any of the input fields will trigger the click handler on the <em>first</em> button or
 input[type=submit] (<code>ngClick</code>) <em>and</em> a submit handler on the enclosing form (<code>ngSubmit</code>)</li>
 </ul>
+<p>Any pending <code>ngModelOptions</code> changes will take place immediately when an enclosing form is
+submitted. Note that <code>ngClick</code> events will occur before the model is updated. Use <code>ngSubmit</code>
+to have access to the updated model.</p>
 <h2 id="animation-hooks">Animation Hooks</h2>
 <p>Animations in ngForm are triggered when any of the associated CSS classes are added and removed.
 These classes are: <code>.ng-pristine</code>, <code>.ng-dirty</code>, <code>.ng-invalid</code> and <code>.ng-valid</code> as well as any
@@ -100,6 +104,7 @@ that has been rendered as invalid after it has been validated:</p>
   <ul>
     
     <li>This directive executes at priority level 0.</li>
+    
   </ul>
 
   
@@ -109,8 +114,7 @@ that has been rendered as invalid after it has been validated:</p>
     <ul>
     
       <li>as element:
-      
-      <pre><code>&lt;form&#10;  [name=&quot;&quot;]&gt;&#10;...&#10;&lt;/form&gt;</code></pre>
+      <pre><code>&lt;form&#10;  [name=&quot;string&quot;]&gt;&#10;...&#10;&lt;/form&gt;</code></pre>
       </li>
     
   </div>
@@ -151,17 +155,15 @@ that has been rendered as invalid after it has been validated:</p>
 </section>
   
 
-
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example49')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ng-form"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example49"
+      path="examples/example-ng-form"
+      name="ng-form"
       deps="angular-animate.js"
       animations="true"
       fixBase="true"
@@ -172,7 +174,7 @@ that has been rendered as invalid after it has been validated:</p>
       name="index.html"
       language="html"
       type="html">
-      <pre><code>&lt;script&gt;&#10;  angular.module(&#39;formExample&#39;, [])&#10;    .controller(&#39;FormController&#39;, [&#39;$scope&#39;, function($scope) {&#10;      $scope.userType = &#39;guest&#39;;&#10;    }]);&#10;&lt;/script&gt;&#10;&lt;style&gt;&#10; .my-form {&#10;   -webkit-transition:all linear 0.5s;&#10;   transition:all linear 0.5s;&#10;   background: transparent;&#10; }&#10; .my-form.ng-invalid {&#10;   background: red;&#10; }&#10;&lt;/style&gt;&#10;&lt;form name=&quot;myForm&quot; ng-controller=&quot;FormController&quot; class=&quot;my-form&quot;&gt;&#10;  userType: &lt;input name=&quot;input&quot; ng-model=&quot;userType&quot; required&gt;&#10;  &lt;span class=&quot;error&quot; ng-show=&quot;myForm.input.$error.required&quot;&gt;Required!&lt;/span&gt;&lt;br&gt;&#10;  &lt;tt&gt;userType = {{userType}}&lt;/tt&gt;&lt;br&gt;&#10;  &lt;tt&gt;myForm.input.$valid = {{myForm.input.$valid}}&lt;/tt&gt;&lt;br&gt;&#10;  &lt;tt&gt;myForm.input.$error = {{myForm.input.$error}}&lt;/tt&gt;&lt;br&gt;&#10;  &lt;tt&gt;myForm.$valid = {{myForm.$valid}}&lt;/tt&gt;&lt;br&gt;&#10;  &lt;tt&gt;myForm.$error.required = {{!!myForm.$error.required}}&lt;/tt&gt;&lt;br&gt;&#10; &lt;/form&gt;</code></pre>
+      <pre><code>&lt;script&gt;&#10;  angular.module(&#39;formExample&#39;, [])&#10;    .controller(&#39;FormController&#39;, [&#39;$scope&#39;, function($scope) {&#10;      $scope.userType = &#39;guest&#39;;&#10;    }]);&#10;&lt;/script&gt;&#10;&lt;style&gt;&#10; .my-form {&#10;   transition:all linear 0.5s;&#10;   background: transparent;&#10; }&#10; .my-form.ng-invalid {&#10;   background: red;&#10; }&#10;&lt;/style&gt;&#10;&lt;form name=&quot;myForm&quot; ng-controller=&quot;FormController&quot; class=&quot;my-form&quot;&gt;&#10;  userType: &lt;input name=&quot;input&quot; ng-model=&quot;userType&quot; required&gt;&#10;  &lt;span class=&quot;error&quot; ng-show=&quot;myForm.input.$error.required&quot;&gt;Required!&lt;/span&gt;&lt;br&gt;&#10;  &lt;code&gt;userType = {{userType}}&lt;/code&gt;&lt;br&gt;&#10;  &lt;code&gt;myForm.input.$valid = {{myForm.input.$valid}}&lt;/code&gt;&lt;br&gt;&#10;  &lt;code&gt;myForm.input.$error = {{myForm.input.$error}}&lt;/code&gt;&lt;br&gt;&#10;  &lt;code&gt;myForm.$valid = {{myForm.$valid}}&lt;/code&gt;&lt;br&gt;&#10;  &lt;code&gt;myForm.$error.required = {{!!myForm.$error.required}}&lt;/code&gt;&lt;br&gt;&#10; &lt;/form&gt;</code></pre>
     </div>
   
     <div class="runnable-example-file" 
@@ -183,7 +185,7 @@ that has been rendered as invalid after it has been validated:</p>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example49/index.html" name="example-example49"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ng-form')}}" name="example-ng-form"></iframe>
   </div>
 </div>
 

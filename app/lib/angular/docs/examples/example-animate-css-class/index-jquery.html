@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-animate-css-class-jquery</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  <script src="../../../angular-animate.js"></script>
+  
+
+  
+</head>
+<body ng-app="ngAnimate">
+  <p>
+  <button ng-click="myCssVar='css-class'">Set</button>
+  <button ng-click="myCssVar=''">Clear</button>
+  <br>
+  <span ng-class="myCssVar">CSS-Animated Text</span>
+</p>
+</body>
+</html>

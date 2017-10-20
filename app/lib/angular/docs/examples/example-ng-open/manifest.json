@@ -1,0 +1,7 @@
+{
+  "name": "example-ng-open",
+  "files": [
+    "index-production.html",
+    "protractor.js"
+  ]
+}

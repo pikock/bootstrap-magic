@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ngTouch/directive/ngClick.js?message=docs(ngClick)%3A%20describe%20your%20change...#L5' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ngTouch/directive/ngClick.js?message=docs(ngClick)%3A%20describe%20your%20change...#L7' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ngTouch/directive/ngClick.js#L5' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ngTouch/directive/ngClick.js#L7' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -16,6 +16,22 @@
     </li>
   </ol>
 </header>
+
+
+
+<div class="alert alert-danger deprecation">
+  <div class="title"><strong>Deprecated:</strong>
+    <span class="since">(since v1.5.0) </span>
+    
+  </div>
+  <p>This directive is deprecated and <strong>disabled</strong> by default.
+The directive will receive no further support and might be removed from future releases.
+If you need the directive, you can enable it with the <a href="api/ngTouch/provider/$touchProvider">$touchProvider#ngClickOverrideEnabled</a>
+function. We also recommend that you migrate to <a href="https://github.com/ftlabs/fastclick">FastClick</a>.
+To learn more about the 300ms delay, this <a href="http://developer.telerik.com/featured/300-ms-click-delay-ios-8/">Telerik article</a>
+gives a good overview.</p>
+
+</div>
 
 
 
@@ -43,6 +59,7 @@ down (by a mouse click or touch) so you can restyle the depressed element if you
   <ul>
     
     <li>This directive executes at priority level 0.</li>
+    
   </ul>
 
   
@@ -50,8 +67,12 @@ down (by a mouse click or touch) so you can restyle the depressed element if you
   <div class="usage">
   
     <ul>
+    
+      <li>as element:
+      <pre><code>&lt;ng-click&#10;  ng-click=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ng-click&gt;</code></pre>
+      </li>
     <li>as attribute:
-        <pre><code>&lt;ANY&#10;  ng-click=&quot;&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+        <pre><code>&lt;ANY&#10;  ng-click=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
       </li>
     
   </div>
@@ -92,19 +113,17 @@ upon tap. (Event object is available as <code>$event</code>)</p>
 </section>
   
 
-
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example104')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ng-touch-ng-click"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example104"
+      path="examples/example-ng-touch-ng-click"
       module="ngClickExample"
-      deps="angular-touch.js">
+      deps="angular-touch.js"
+      name="ng-touch-ng-click">
 
   
     <div class="runnable-example-file" 
@@ -122,7 +141,7 @@ upon tap. (Event object is available as <code>$event</code>)</p>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example104/index.html" name="example-example104"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ng-touch-ng-click')}}" name="example-ng-touch-ng-click"></iframe>
   </div>
 </div>
 

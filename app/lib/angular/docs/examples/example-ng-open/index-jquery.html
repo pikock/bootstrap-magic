@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ng-open-jquery</title>
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  
+
+  
+</head>
+<body ng-app="">
+  <label>Toggle details: <input type="checkbox" ng-model="open"></label><br/>
+<details id="details" ng-open="open">
+   <summary>List</summary>
+   <ul>
+     <li>Apple</li>
+     <li>Orange</li>
+     <li>Durian</li>
+   </ul>
+</details>
+</body>
+</html>

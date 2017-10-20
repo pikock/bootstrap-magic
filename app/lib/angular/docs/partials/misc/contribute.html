@@ -1,9 +1,9 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/docs/content/misc/contribute.ngdoc?message=docs(misc%2FDevelop)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/misc/contribute.ngdoc?message=docs(misc%2FDevelop)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 <h1 id="building-and-testing-angularjs">Building and Testing AngularJS</h1>
 <p>This document describes how to set up your development environment to build and test AngularJS, and
-explains the basic mechanics of using <code>git</code>, <code>node</code>, <code>npm</code>, <code>grunt</code>, and <code>bower</code>.</p>
+explains the basic mechanics of using <code>git</code>, <code>node</code>, <code>yarn</code>, <code>grunt</code>, and <code>bower</code>.</p>
 <p>See the <a href="https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md">contributing guidelines</a>
 for how to contribute your own code to AngularJS.</p>
 <ol>
@@ -21,25 +21,25 @@ machine:</p>
 <li><p><a href="http://git-scm.com/">Git</a>: The <a href="https://help.github.com/articles/set-up-git">Github Guide to
 Installing Git</a> is a good source of information.</p>
 </li>
-<li><p><a href="http://nodejs.org">Node.js</a>: We use Node to generate the documentation, run a
-development web server, run tests, and generate distributable files. Depending on your system, you can install Node either from source or as a
-pre-packaged bundle.</p>
+<li><p><a href="http://nodejs.org">Node.js v6.x (LTS)</a>: We use Node to generate the documentation, run a
+development web server, run tests, and generate distributable files. Depending on your system,
+you can install Node either from source or as a pre-packaged bundle.</p>
+<p>We recommend using <a href="https://github.com/creationix/nvm">nvm</a> (or <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a>)
+to manage and install Node.js, which makes it easy to change the version of Node.js per project.</p>
+</li>
+<li><p><a href="https://yarnpkg.com">Yarn</a>: We use Yarn to install our Node.js module dependencies (rather than using npm).
+There are detailed installation instructions available at <a href="https://yarnpkg.com/en/docs/install">https://yarnpkg.com/en/docs/install</a>.</p>
 </li>
 <li><p><a href="http://www.java.com">Java</a>: We minify JavaScript using our
-<a href="https://developers.google.com/closure/">Closure Tools</a> jar. Make sure you have Java (version 7 or higher) installed
-and included in your <a href="http://docs.oracle.com/javase/tutorial/essential/environment/paths.html">PATH</a> variable.</p>
+<a href="https://developers.google.com/closure/">Closure Tools</a> jar. Make sure you have Java (version 7 or higher)
+installed and included in your <a href="http://docs.oracle.com/javase/tutorial/essential/environment/paths.html">PATH</a>
+variable.</p>
 </li>
 <li><p><a href="http://gruntjs.com">Grunt</a>: We use Grunt as our build system. Install the grunt command-line tool globally with:</p>
-<pre><code class="lang-shell">npm install -g grunt-cli
-</code></pre>
-</li>
-<li><p><a href="http://bower.io/">Bower</a>: We use Bower to manage client-side packages for the docs. Install the <code>bower</code> command-line tool globally with:</p>
-<pre><code class="lang-shell">npm install -g bower
+<pre><code class="lang-shell">yarn global add grunt-cli
 </code></pre>
 </li>
 </ul>
-<p><strong>Note:</strong> You may need to use sudo (for OSX, *nix, BSD etc) or run your command shell as Administrator (for Windows) to install Grunt &amp;
-Bower globally.</p>
 <h2 id="forking-angular-on-github">Forking Angular on Github</h2>
 <p>To create a Github account, follow the instructions <a href="https://github.com/signup/free">here</a>.
 Afterwards, go ahead and <a href="http://help.github.com/forking">fork</a> the <a href="https://github.com/angular/angular.js">main AngularJS repository</a>.</p>
@@ -47,7 +47,7 @@ Afterwards, go ahead and <a href="http://help.github.com/forking">fork</a> the <
 <p>To build AngularJS, you clone the source code repository and use Grunt to generate the non-minified and
 minified AngularJS files:</p>
 <pre><code class="lang-shell"># Clone your Github repository:
-git clone &quot;git@github.com:&lt;github username&gt;/angular.js.git&quot;
+git clone https://github.com/&lt;github username&gt;/angular.js.git
 
 # Go to the AngularJS directory:
 cd angular.js
@@ -56,12 +56,9 @@ cd angular.js
 git remote add upstream &quot;https://github.com/angular/angular.js.git&quot;
 
 # Install node.js dependencies:
-npm install
+yarn install
 
-# Install bower components:
-bower install
-
-# Build AngularJS:
+# Build AngularJS (which will install `bower` dependencies automatically):
 grunt package
 </code></pre>
 <div class="alert alert-warning">
@@ -70,11 +67,11 @@ Administrator). This is because <code>grunt package</code> creates some symbolic
 </div>
 
 <div class="alert alert-warning">
-<strong>Note:</strong> If you&#39;re using Linux, and npm install fails with the message
-&#39;Please try running this command again as root/Administrator.&#39;, you may need to globally install grunt and bower:
+<strong>Note:</strong> If you&#39;re using Linux, and <code>yarn install</code> fails with the message
+&#39;Please try running this command again as root/Administrator.&#39;, you may need to globally install <code>grunt</code> and <code>bower</code>:
 <ul>
-<li>sudo npm install -g grunt-cli</li>
-<li>sudo npm install -g bower</li>
+<li>sudo yarn global add grunt-cli</li>
+<li>sudo yarn global add bower</li>
 </ul>
 
 </div>
@@ -121,11 +118,11 @@ made available a local web server based on Node.js.</p>
 tests once on Chrome run:</p>
 <pre><code class="lang-shell">grunt test:unit
 </code></pre>
-<p>To run the tests on other browsers (Chrome, ChromeCanary, Firefox, Opera and Safari are pre-configured) use:</p>
-<pre><code class="lang-shell">grunt test:unit --browsers Opera,Firefox
+<p>To run the tests on other browsers (Chrome, ChromeCanary, Firefox and Safari are pre-configured) use:</p>
+<pre><code class="lang-shell">grunt test:unit --browsers=Chrome,Firefox
 </code></pre>
-<p>Note there should be <em>no spaces between browsers</em>. <code>Opera, Firefox</code> is INVALID.</p>
-<p>During development it&#39;s however more productive to continuously run unit tests every time the source or test files
+<p>Note there should be <em>no spaces between browsers</em>. <code>Chrome, Firefox</code> is INVALID.</p>
+<p>During development, however, it&#39;s more productive to continuously run unit tests every time the source or test files
 change. To execute tests in this mode run:</p>
 <ol>
 <li><p>To start the Karma server, capture Chrome browser and run unit tests, run:</p>

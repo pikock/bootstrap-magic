@@ -34,6 +34,15 @@ $provide.value("$locale", {
       "mab\u00e1g\u00e1 m\u00e1 sukul",
       "s\u00e1sadi"
     ],
+    "ERANAMES": [
+      "B\u00f3 Lahl\u025b\u0304",
+      "Pfi\u025b Bur\u012b"
+    ],
+    "ERAS": [
+      "BL",
+      "PB"
+    ],
+    "FIRSTDAYOFWEEK": 0,
     "MONTH": [
       "ngw\u025bn mat\u00e1hra",
       "ngw\u025bn \u0144mba",
@@ -71,6 +80,24 @@ $provide.value("$locale", {
       "ng11",
       "kris"
     ],
+    "STANDALONEMONTH": [
+      "ngw\u025bn mat\u00e1hra",
+      "ngw\u025bn \u0144mba",
+      "ngw\u025bn \u0144lal",
+      "ngw\u025bn \u0144na",
+      "ngw\u025bn \u0144tan",
+      "ngw\u025bn \u0144tu\u00f3",
+      "ngw\u025bn h\u025bmbu\u025br\u00ed",
+      "ngw\u025bn l\u0254mbi",
+      "ngw\u025bn r\u025bbvu\u00e2",
+      "ngw\u025bn wum",
+      "ngw\u025bn wum nav\u01d4r",
+      "kr\u00edsimin"
+    ],
+    "WEEKENDRANGE": [
+      5,
+      6
+    ],
     "fullDate": "EEEE d MMMM y",
     "longDate": "d MMMM y",
     "medium": "d MMM y HH:mm:ss",
@@ -99,8 +126,8 @@ $provide.value("$locale", {
       {
         "gSize": 3,
         "lgSize": 3,
-        "maxFrac": 2,
-        "minFrac": 2,
+        "maxFrac": 0,
+        "minFrac": 0,
         "minInt": 1,
         "negPre": "-",
         "negSuf": "\u00a0\u00a4",
@@ -110,6 +137,7 @@ $provide.value("$locale", {
     ]
   },
   "id": "nmg-cm",
-  "pluralCat": function (n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+  "localeID": "nmg_CM",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
 });
 }]);

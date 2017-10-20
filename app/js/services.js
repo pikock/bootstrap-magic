@@ -1166,12 +1166,15 @@ angular.module('apSass', []).factory('apSass', [
         var t0 = performance.now()
 
         sass.readFile('bootstrap.scss', function callback(bootstrapContent) {
-          sass.compile("@import 'functions'; @import 'toAddScss';" + bootstrapContent, function(result) {
-            console.log(result)
-            addStyle(result.text)
-            var t1 = performance.now()
-            console.log('Call to doSomething took ' + (t1 - t0) / 1000 + ' seconds.')
-          })
+          sass.compile(
+            ".preview { @import 'functions'; @import 'toAddScss';" + bootstrapContent + '}',
+            function(result) {
+              console.log(result)
+              addStyle(result.text)
+              var t1 = performance.now()
+              console.log('Call to doSomething took ' + (t1 - t0) / 1000 + ' seconds.')
+            }
+          )
         })
       })
     }
@@ -1208,9 +1211,7 @@ angular.module('apSass', []).factory('apSass', [
         var lines = data.split(/\r\n|\r|\n/)
         lines.forEach(function(line) {
           if (regex.comment.test(line)) {
-            return
           } else if (regex.emptyLine.test(line)) {
-            return
           } else if (regex.variable.test(line)) {
             var match = line.match(regex.variable)
             variables[match[1]] = match[2]
@@ -1302,7 +1303,8 @@ angular.module('apSass', []).factory('apSass', [
     function getFonts($scope) {
       var keys = data.font_keys
       $.ajax({
-        url: 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBb_pLbXGeesG8wE32FMtywG4Vsfq6Uk_8',
+        url:
+          'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBb_pLbXGeesG8wE32FMtywG4Vsfq6Uk_8',
         type: 'GET',
         dataType: 'JSONP',
         success: function(data) {
@@ -1315,11 +1317,17 @@ angular.module('apSass', []).factory('apSass', [
     }
 
     function getVariablesToString($scope) {
-      var string = '' + '/*\n' + '* Orson http://en.orson.io , autreplanete http://www.autreplanete.com/ \n' + '*  \n' + '**/\n'
+      var string =
+        '' +
+        '/*\n' +
+        '* Orson http://en.orson.io , autreplanete http://www.autreplanete.com/ \n' +
+        '*  \n' +
+        '**/\n'
       for (var i = 0; i < $scope.variables.length; i++) {
         string += '\n\n// ' + $scope.variables[i].name + '\n'
         for (var j = 0; j < $scope.variables[i].data.length; j++) {
-          string += $scope.variables[i].data[j].key + ': ' + $scope.variables[i].data[j].value + ';\n'
+          string +=
+            $scope.variables[i].data[j].key + ': ' + $scope.variables[i].data[j].value + ';\n'
         }
       }
       return string
@@ -1347,7 +1355,9 @@ angular.module('apSass', []).factory('apSass', [
 
     function saveCSS($scope) {
       sass.readFile('bootstrap.scss', function callback(bootstrapContent) {
-        sass.compile("@import 'functions'; @import 'toAddScss';" + bootstrapContent, function(result) {
+        sass.compile("@import 'functions'; @import 'toAddScss';" + bootstrapContent, function(
+          result
+        ) {
           var type = $scope.minified ? 'min.css' : 'css'
           var $form = $('<form>')
             .attr('method', 'POST')

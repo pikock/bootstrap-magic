@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/cacheFactory.js?message=docs($cacheFactory)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/cacheFactory.js?message=docs($cacheFactory)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/cacheFactory.js#L3' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/cacheFactory.js#L3' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -18,6 +18,8 @@
     </li>
   </ol>
 </header>
+
+
 
 
 
@@ -43,7 +45,7 @@ expect(cache.info()).toEqual({id: &#39;cacheId&#39;, size: 2});
 <div>
   
 
-    
+  
 
   <h2 id="usage">Usage</h2>
     
@@ -137,7 +139,9 @@ it.</li>
     
 
     
+
     
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
@@ -149,9 +153,7 @@ it.</li>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="get">
     <h3><p><code>get(cacheId);</code></p>
@@ -159,6 +161,8 @@ it.</li>
 </h3>
     <div><p>Get access to a cache object by the <code>cacheId</code> used when it was created.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -195,7 +199,7 @@ it.</li>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
@@ -205,9 +209,7 @@ it.</li>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   </ul>
   
   
@@ -215,16 +217,15 @@ it.</li>
 
 
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example41')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-cache-factory"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example41"
-      module="cacheExampleApp">
+      path="examples/example-cache-factory"
+      module="cacheExampleApp"
+      name="cache-factory">
 
   
     <div class="runnable-example-file" 
@@ -238,7 +239,7 @@ it.</li>
       name="script.js"
       language="js"
       type="js">
-      <pre><code>angular.module(&#39;cacheExampleApp&#39;, []).&#10;  controller(&#39;CacheController&#39;, [&#39;$scope&#39;, &#39;$cacheFactory&#39;, function($scope, $cacheFactory) {&#10;    $scope.keys = [];&#10;    $scope.cache = $cacheFactory(&#39;cacheId&#39;);&#10;    $scope.put = function(key, value) {&#10;      if ($scope.cache.get(key) === undefined) {&#10;        $scope.keys.push(key);&#10;      }&#10;      $scope.cache.put(key, value === undefined ? null : value);&#10;    };&#10;  }]);</code></pre>
+      <pre><code>angular.module(&#39;cacheExampleApp&#39;, []).&#10;controller(&#39;CacheController&#39;, [&#39;$scope&#39;, &#39;$cacheFactory&#39;, function($scope, $cacheFactory) {&#10;  $scope.keys = [];&#10;  $scope.cache = $cacheFactory(&#39;cacheId&#39;);&#10;  $scope.put = function(key, value) {&#10;    if (angular.isUndefined($scope.cache.get(key))) {&#10;      $scope.keys.push(key);&#10;    }&#10;    $scope.cache.put(key, angular.isUndefined(value) ? null : value);&#10;  };&#10;}]);</code></pre>
     </div>
   
     <div class="runnable-example-file" 
@@ -249,7 +250,7 @@ it.</li>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example41/index.html" name="example-example41"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-cache-factory')}}" name="example-cache-factory"></iframe>
   </div>
 </div>
 

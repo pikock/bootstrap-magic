@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-select-unknown-value-error-jquery</title>
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  <script src="app.js"></script>
+  
+
+  
+</head>
+<body ng-app="staticSelect">
+  <div ng-controller="ExampleController">
+  <form name="myForm">
+    <label for="testSelect"> Single select: </label><br>
+    <select name="testSelect" ng-model="selected" unknown-value-error>
+      <option value="option-1">Option 1</option>
+      <option value="option-2">Option 2</option>
+    </select><br>
+    <span ng-if="myForm.testSelect.$error.unknownValue">Error: The current model doesn't match any option</span>
+
+    <button ng-click="forceUnknownOption()">Force unknown option</button><br>
+  </form>
+</div>
+</body>
+</html>

@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/compile.js?message=docs($compile.directive.Attributes)%3A%20describe%20your%20change...#L2030' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/compile.js?message=docs($compile.directive.Attributes)%3A%20describe%20your%20change...#L3669' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/compile.js#L2030' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/compile.js#L3669' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -16,6 +16,8 @@
     </li>
   </ol>
 </header>
+
+
 
 
 
@@ -34,7 +36,7 @@ needed since all of these are treated as equivalent in Angular:</p>
 <div>
   
 
-    
+  
 
   
 
@@ -50,6 +52,8 @@ needed since all of these are treated as equivalent in Angular:</p>
 <p>Also there is special case for Moz prefix starting with upper case letter.</p>
 <p>For further information check out the guide on <a href="guide/directive#matching-directives">Matching Directives</a></p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -86,10 +90,8 @@ needed since all of these are treated as equivalent in Angular:</p>
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="$addClass">
     <h3><p><code>$addClass(classVal);</code></p>
@@ -98,6 +100,8 @@ needed since all of these are treated as equivalent in Angular:</p>
     <div><p>Adds the CSS class value specified by the classVal parameter to the element. If animations
 are enabled then an animation will be triggered for the class addition.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -134,10 +138,8 @@ are enabled then an animation will be triggered for the class addition.</p>
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="$removeClass">
     <h3><p><code>$removeClass(classVal);</code></p>
@@ -146,6 +148,8 @@ are enabled then an animation will be triggered for the class addition.</p>
     <div><p>Removes the CSS class value specified by the classVal parameter from the element. If
 animations are enabled then an animation will be triggered for the class removal.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -182,10 +186,8 @@ animations are enabled then an animation will be triggered for the class removal
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="$updateClass">
     <h3><p><code>$updateClass(newClasses, oldClasses);</code></p>
@@ -194,6 +196,8 @@ animations are enabled then an animation will be triggered for the class removal
     <div><p>Adds and removes the appropriate CSS class values to the element based on the difference
 between the new and old CSS class values (specified as newClasses and oldClasses).</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -246,10 +250,8 @@ between the new and old CSS class values (specified as newClasses and oldClasses
     
 
     
-    
-    
 
-  </li>
+    </li>
   
   <li id="$observe">
     <h3><p><code>$observe(key, fn);</code></p>
@@ -260,6 +262,8 @@ between the new and old CSS class values (specified as newClasses and oldClasses
 compilation. The observer is then invoked whenever the interpolated value
 changes.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -302,7 +306,8 @@ changes.</p>
       <td>
         <p>Function that will be called whenever
                 the interpolated value of the attribute changes.
-       See the <a href="guide/directive#Attributes">Directives</a> guide for more info.</p>
+       See the <a href="guide/interpolation#how-text-and-attribute-bindings-work">Interpolation
+       guide</a> for more info.</p>
 
         
       </td>
@@ -314,19 +319,17 @@ changes.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-function">function()</a></td>
-    <td><p>the <code>fn</code> parameter.</p>
+    <td><p>Returns a deregistration function for this observer.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="$set">
     <h3><p><code>$set(name, value);</code></p>
@@ -334,6 +337,8 @@ changes.</p>
 </h3>
     <div><p>Set DOM element attribute value.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -388,10 +393,8 @@ changes.</p>
     
 
     
-    
-    
 
-  </li>
+    </li>
   </ul>
   
   
@@ -407,6 +410,7 @@ needed to do reverse lookup from normalized name back to actual name.</p>
 </td>
   </tr>
 </table>
+    
   </li>
   </ul>
 

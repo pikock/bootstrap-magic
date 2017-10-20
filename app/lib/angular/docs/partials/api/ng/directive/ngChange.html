@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/directive/input.js?message=docs(ngChange)%3A%20describe%20your%20change...#L1384' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/ngChange.js?message=docs(ngChange)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/directive/input.js#L1384' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/ngChange.js#L3' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -19,12 +19,21 @@
 
 
 
+
+
 <div class="api-profile-description">
   <p>Evaluate the given expression when the user changes the input.
 The expression is evaluated immediately, unlike the JavaScript onchange event
 which only triggers at the end of a change (usually, when the user leaves the
-form element or presses the return key).
-The expression is not evaluated when the value change is coming from the model.</p>
+form element or presses the return key).</p>
+<p>The <code>ngChange</code> expression is only evaluated when a change in the input value causes
+a new value to be committed to the model.</p>
+<p>It will not be evaluated:</p>
+<ul>
+<li>if the value returned from the <code>$parsers</code> transformation pipeline has not changed</li>
+<li>if the input has continued to be invalid since the model will stay <code>null</code></li>
+<li>if the model is changed programmatically and not by a change to the input value</li>
+</ul>
 <p>Note, this directive requires <code>ngModel</code> to be present.</p>
 
 </div>
@@ -40,6 +49,7 @@ The expression is not evaluated when the value change is coming from the model.<
   <ul>
     
     <li>This directive executes at priority level 0.</li>
+    
   </ul>
 
   
@@ -47,8 +57,12 @@ The expression is not evaluated when the value change is coming from the model.<
   <div class="usage">
   
     <ul>
+    
+      <li>as element:
+      <pre><code>&lt;ng-change&#10;  ng-change=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ng-change&gt;</code></pre>
+      </li>
     <li>as attribute:
-        <pre><code>&lt;input&#10;  ng-change=&quot;&quot;&gt;&#10;...&#10;&lt;/input&gt;</code></pre>
+        <pre><code>&lt;input&#10;  ng-change=&quot;expression&quot;&gt;&#10;...&#10;&lt;/input&gt;</code></pre>
       </li>
     
   </div>
@@ -89,14 +103,11 @@ in input value.</p>
 </section>
   
 
-
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-ngChange-directive')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ngChange-directive"></plnkr-opener>
 
   <div class="runnable-example"
       path="examples/example-ngChange-directive"
@@ -119,7 +130,7 @@ in input value.</p>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-ngChange-directive/index.html" name="example-ngChange-directive"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ngChange-directive')}}" name="example-ngChange-directive"></iframe>
   </div>
 </div>
 

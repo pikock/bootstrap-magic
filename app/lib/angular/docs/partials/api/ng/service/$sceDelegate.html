@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/sce.js?message=docs($sceDelegate)%3A%20describe%20your%20change...#L65' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/sce.js?message=docs($sceDelegate)%3A%20describe%20your%20change...#L85' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/sce.js#L65' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/sce.js#L85' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -23,9 +23,20 @@
 
 
 
+
+
 <div class="api-profile-description">
   <p><code>$sceDelegate</code> is a service that is used by the <code>$sce</code> service to provide <a href="api/ng/service/$sce">Strict
 Contextual Escaping (SCE)</a> services to AngularJS.</p>
+<p>For an overview of this service and the functionnality it provides in AngularJS, see the main
+page for <a href="api/ng/service/$sce">SCE</a>. The current page is targeted for developers who need to alter how
+SCE works in their application, which shouldn&#39;t be needed in most cases.</p>
+<div class="alert alert-danger">
+AngularJS strongly relies on contextual escaping for the security of bindings: disabling or
+modifying this might cause cross site scripting (XSS) vulnerabilities. For libraries owners,
+changes to this service will also influence users, so be extra careful and document your changes.
+</div>
+
 <p>Typically, you would configure or override the <a href="api/ng/service/$sceDelegate">$sceDelegate</a> instead of
 the <code>$sce</code> service to customize the way Strict Contextual Escaping works in AngularJS.  This is
 because, while the <code>$sce</code> provides numerous shorthand methods, etc., you really only need to
@@ -46,7 +57,7 @@ templates.  Refer <a href="api/ng/provider/$sceDelegateProvider#resourceUrlWhite
 <div>
   
 
-    
+  
 
   <h2 id="usage">Usage</h2>
     
@@ -66,12 +77,20 @@ templates.  Refer <a href="api/ng/provider/$sceDelegateProvider#resourceUrlWhite
     <h3><p><code>trustAs(type, value);</code></p>
 
 </h3>
-    <div><p>Returns an object that is trusted by angular for use in specified strict
-contextual escaping contexts (such as ng-bind-html, ng-include, any src
-attribute interpolation, any dom event binding attribute interpolation
-such as for onclick,  etc.) that uses the provided value.
-See <a href="api/ng/service/$sce">$sce</a> for enabling strict contextual escaping.</p>
+    <div><p>Returns a trusted representation of the parameter for the specified context. This trusted
+object will later on be used as-is, without any security check, by bindings or directives
+that require this security context.
+For instance, marking a string as trusted for the <code>$sce.HTML</code> context will entirely bypass
+the potential <code>$sanitize</code> call in corresponding <code>$sce.HTML</code> bindings or directives, such as
+<code>ng-bind-html</code>. Note that in most cases you won&#39;t need to call this function: if you have the
+sanitizer loaded, passing the value itself will render all the HTML that does not pose a
+security risk.</p>
+<p>See <a href="api/ng/service/$sceDelegate#getTrusted">getTrusted</a> for the function that will consume those
+trusted values, and <a href="api/ng/service/$sce">$sce</a> for general documentation about strict contextual
+escaping.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -96,8 +115,8 @@ See <a href="api/ng/service/$sce">$sce</a> for enabling strict contextual escapi
         <a href="" class="label type-hint type-hint-string">string</a>
       </td>
       <td>
-        <p>The kind of context in which this value is safe for use.  e.g. url,
-  resourceUrl, html, js and css.</p>
+        <p>The context in which this value is safe for use, e.g. <code>$sce.URL</code>,
+    <code>$sce.RESOURCE_URL</code>, <code>$sce.HTML</code>, <code>$sce.JS</code> or <code>$sce.CSS</code>.</p>
 
         
       </td>
@@ -113,7 +132,7 @@ See <a href="api/ng/service/$sce">$sce</a> for enabling strict contextual escapi
         <a href="" class="label type-hint type-hint-object">*</a>
       </td>
       <td>
-        <p>The value that that should be considered trusted/safe.</p>
+        <p>The value that should be considered trusted.</p>
 
         
       </td>
@@ -125,28 +144,27 @@ See <a href="api/ng/service/$sce">$sce</a> for enabling strict contextual escapi
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-object">*</a></td>
-    <td><p>A value that can be used to stand in for the provided <code>value</code> in places
-where Angular expects a $sce.trustAs() return value.</p>
+    <td><p>A trusted representation of value, that can be used in the given context.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="valueOf">
     <h3><p><code>valueOf(value);</code></p>
 
 </h3>
     <div><p>If the passed parameter had been returned by a prior call to <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a>, returns the value that had been passed to <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a>.</p>
-<p>If the passed parameter is not a value that had been returned by <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a>, returns it as-is.</p>
+<p>If the passed parameter is not a value that had been returned by <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a>, it must be returned as-is.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -172,7 +190,7 @@ where Angular expects a $sce.trustAs() return value.</p>
       </td>
       <td>
         <p>The result of a prior <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a>
-     call or anything else.</p>
+    call or anything else.</p>
 
         
       </td>
@@ -184,7 +202,7 @@ where Angular expects a $sce.trustAs() return value.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
@@ -195,18 +213,22 @@ where Angular expects a $sce.trustAs() return value.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="getTrusted">
     <h3><p><code>getTrusted(type, maybeTrusted);</code></p>
 
 </h3>
-    <div><p>Takes the result of a <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a> call and
-returns the originally supplied value if the queried context type is a supertype of the
-created type.  If this condition isn&#39;t satisfied, throws an exception.</p>
+    <div><p>Takes any input, and either returns a value that&#39;s safe to use in the specified context, or
+throws an exception.</p>
+<p>In practice, there are several cases. When given a string, this function runs checks
+and sanitization to make it safe without prior assumptions. When given the result of a <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a> call, it returns the originally supplied
+value if that value&#39;s context is valid for this call&#39;s context. Finally, this function can
+also throw when there is no way to turn <code>maybeTrusted</code> in a safe value (e.g., no sanitization
+is available or possible.)</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -231,7 +253,7 @@ created type.  If this condition isn&#39;t satisfied, throws an exception.</p>
         <a href="" class="label type-hint type-hint-string">string</a>
       </td>
       <td>
-        <p>The kind of context in which this value is to be used.</p>
+        <p>The context in which this value is to be used (such as <code>$sce.HTML</code>).</p>
 
         
       </td>
@@ -247,7 +269,7 @@ created type.  If this condition isn&#39;t satisfied, throws an exception.</p>
         <a href="" class="label type-hint type-hint-object">*</a>
       </td>
       <td>
-        <p>The result of a prior <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a> call.</p>
+        <p>The result of a prior <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a> call, or anything else (which will not be considered trusted.)</p>
 
         
       </td>
@@ -259,19 +281,18 @@ created type.  If this condition isn&#39;t satisfied, throws an exception.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-object">*</a></td>
-    <td><p>The value the was originally provided to <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a> if valid in this context.  Otherwise, throws an exception.</p>
+    <td><p>A version of the value that&#39;s safe to use in the given context, or throws an
+    exception if this is impossible.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   </ul>
   
   

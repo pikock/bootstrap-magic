@@ -1,0 +1,5 @@
+li.warn { color: yellow; }
+li.error { color: red; }
+li.info { color: blue }
+li.log { color: black }
+li.debug { color: green }

@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/Angular.js?message=docs(angular.bootstrap)%3A%20describe%20your%20change...#L1295' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/Angular.js?message=docs(angular.bootstrap)%3A%20describe%20your%20change...#L1742' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/Angular.js#L1295' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/Angular.js#L1742' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -19,56 +19,45 @@
 
 
 
+
+
 <div class="api-profile-description">
   <p>Use this function to manually start up angular application.</p>
-<p>See: <a href="guide/bootstrap">Bootstrap</a></p>
-<p>Note that ngScenario-based end-to-end tests cannot use this function to bootstrap manually.
-They must use <a href="api/ng/directive/ngApp">ngApp</a>.</p>
+<p>For more information, see the <a href="guide/bootstrap">Bootstrap guide</a>.</p>
 <p>Angular will detect if it has been loaded into the browser more than once and only allow the
 first loaded script to be bootstrapped and will report a warning to the browser console for
 each of the subsequent scripts. This prevents strange results in applications, where otherwise
 multiple instances of Angular try to work on the DOM.</p>
-<p>
-
-<div>
-  <a ng-click="openPlunkr('examples/example-multi-bootstrap')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
-
-  <div class="runnable-example"
-      path="examples/example-multi-bootstrap"
-      name="multi-bootstrap"
-      module="multi-bootstrap">
-
-  
-    <div class="runnable-example-file" 
-      name="index.html"
-      language="html"
-      type="html">
-      <pre><code>&lt;script src=&quot;../../../angular.js&quot;&gt;&lt;/script&gt;&#10;&lt;div ng-controller=&quot;BrokenTable&quot;&gt;&#10;  &lt;table&gt;&#10;  &lt;tr&gt;&#10;    &lt;th ng-repeat=&quot;heading in headings&quot;&gt;{{heading}}&lt;/th&gt;&#10;  &lt;/tr&gt;&#10;  &lt;tr ng-repeat=&quot;filling in fillings&quot;&gt;&#10;    &lt;td ng-repeat=&quot;fill in filling&quot;&gt;{{fill}}&lt;/td&gt;&#10;  &lt;/tr&gt;&#10;&lt;/table&gt;&#10;&lt;/div&gt;</code></pre>
-    </div>
-  
-    <div class="runnable-example-file" 
-      name="controller.js"
-      language="js"
-      type="js">
-      <pre><code>var app = angular.module(&#39;multi-bootstrap&#39;, [])&#10;&#10;.controller(&#39;BrokenTable&#39;, function($scope) {&#10;    $scope.headings = [&#39;One&#39;, &#39;Two&#39;, &#39;Three&#39;];&#10;    $scope.fillings = [[1, 2, 3], [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], [7, 8, 9]];&#10;});</code></pre>
-    </div>
-  
-    <div class="runnable-example-file" 
-      name="protractor.js"
-      type="protractor"
-      language="js">
-      <pre><code>it(&#39;should only insert one table cell for each item in $scope.fillings&#39;, function() {&#10;expect(element.all(by.css(&#39;td&#39;)).count())&#10;    .toBe(9);&#10;});</code></pre>
-    </div>
-  
-
-    <iframe class="runnable-example-frame" src="examples/example-multi-bootstrap/index.html" name="example-multi-bootstrap"></iframe>
-  </div>
+<div class="alert alert-warning">
+<strong>Note:</strong> Protractor based end-to-end tests cannot use this function to bootstrap manually.
+They must use <a href="api/ng/directive/ngApp">ngApp</a>.
 </div>
 
+<div class="alert alert-warning">
+<strong>Note:</strong> Do not bootstrap the app on an element with a directive that uses <a href="api/ng/service/$compile#transclusion">transclusion</a>,
+such as <a href="api/ng/directive/ngIf"><code>ngIf</code></a>, <a href="api/ng/directive/ngInclude"><code>ngInclude</code></a> and <a href="api/ngRoute/directive/ngView"><code>ngView</code></a>.
+Doing this misplaces the app <a href="api/ng/service/$rootElement"><code>$rootElement</code></a> and the app&#39;s <a href="api/auto/service/$injector">injector</a>,
+causing animations to stop working and making the injector inaccessible from outside the app.
+</div>
 
-</p>
+<pre><code class="lang-html">&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;div ng-controller=&quot;WelcomeController&quot;&gt;
+  {{greeting}}
+&lt;/div&gt;
+
+&lt;script src=&quot;angular.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  var app = angular.module(&#39;demo&#39;, [])
+  .controller(&#39;WelcomeController&#39;, function($scope) {
+      $scope.greeting = &#39;Welcome!&#39;;
+  });
+  angular.bootstrap(document, [&#39;demo&#39;]);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 </div>
 
@@ -78,11 +67,11 @@ multiple instances of Angular try to work on the DOM.</p>
 <div>
   
 
-    
+  
 
   <h2 id="usage">Usage</h2>
     
-      <p><code>angular.bootstrap(element, [modules]);</code></p>
+      <p><code>angular.bootstrap(element, [modules], [config]);</code></p>
 
 
     
@@ -129,8 +118,29 @@ multiple instances of Angular try to work on the DOM.</p>
       <td>
         <p>an array of modules to load into the application.
     Each item in the array should be the name of a predefined module or a (DI annotated)
-    function that will be invoked by the injector as a run block.
+    function that will be invoked by the injector as a <code>config</code> block.
     See: <a href="api/ng/function/angular.module">modules</a></p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        config
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">Object</a>
+      </td>
+      <td>
+        <p>an object for defining configuration options for the application. The
+    following keys are supported:</p>
+<ul>
+<li><code>strictDi</code> - disable automatic function annotation for the application. This is meant to
+assist in finding bugs which break minified code. Defaults to <code>false</code>.</li>
+</ul>
 
         
       </td>

@@ -1,0 +1,7 @@
+{
+  "name": "example-ng-non-bindable",
+  "files": [
+    "index-production.html",
+    "protractor.js"
+  ]
+}

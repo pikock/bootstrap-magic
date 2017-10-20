@@ -1,0 +1,12 @@
+.content-area {
+  border: 1px solid black;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.sample-show-hide {
+  transition: all linear 0.5s;
+}
+.sample-show-hide.ng-hide {
+  opacity: 0;
+}

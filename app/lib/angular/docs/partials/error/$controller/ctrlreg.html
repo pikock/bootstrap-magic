@@ -1,0 +1,33 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/error/$controller/ctrlreg.ngdoc?message=docs(error%2Fctrlreg)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>Error: $controller:ctrlreg
+  <div><span class='hint'>A controller with this name is not registered.</span></div>
+</h1>
+
+<div>
+    <pre class="minerr-errmsg" error-display="The controller with the name '{0}' is not registered.">The controller with the name '{0}' is not registered.</pre>
+</div>
+
+<h2>Description</h2>
+<div class="description">
+  <p>This error occurs when the <a href="api/ng/service/$controller"><code>$controller()</code></a> service is called
+with a string that does not match any of the registered controllers. The controller service may have
+been invoked directly, or indirectly, for example through the <a href="api/ng/directive/ngController"><code>ngController</code></a> directive,
+or inside a <a href="api/ng/type/angular.Module#component">component</a> / <a href="api/ng/type/angular.Module#directive">directive</a> /
+<a href="api/ngRoute/provider/$routeProvider#when">route</a> definition (when using a string for the controller property).
+Third-party modules can also instantiate controllers with the <a href="api/ng/service/$controller"><code>$controller()</code></a> service.</p>
+<p>Causes for this error can be:</p>
+<ol>
+<li>Your reference to the controller has a typo. For example, in
+the <a href="api/ng/directive/ngController"><code>ngController</code></a> directive attribute, in a <a href="api/ng/type/angular.Module#component">component</a>
+definition&#39;s controller property, or in the call to <a href="api/ng/service/$controller"><code>$controller()</code></a>.</li>
+<li>You have not registered the controller (neither via <a href="api/ng/type/angular.Module#controller"><code>Module.controller</code></a>
+nor <a href="api/ng/provider/$controllerProvider#register"><code>$controllerProvider.register()</code></a>.</li>
+<li>You have a typo in the <em>registered</em> controller name.</li>
+</ol>
+<p>Please consult the <a href="api/ng/service/$controller">$controller</a> service api docs to learn more.</p>
+
+</div>
+
+

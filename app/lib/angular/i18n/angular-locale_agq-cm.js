@@ -34,6 +34,15 @@ $provide.value("$locale", {
       "tsu\u0294ugh\u0268\u0302m",
       "tsu\u0294ndz\u0268k\u0254\u0294\u0254"
     ],
+    "ERANAMES": [
+      "S\u011be K\u0268\u0300lesto",
+      "B\u01cea K\u0268\u0300lesto"
+    ],
+    "ERAS": [
+      "SK",
+      "BK"
+    ],
+    "FIRSTDAYOFWEEK": 0,
     "MONTH": [
       "ndz\u0254\u0300\u014b\u0254\u0300n\u00f9m",
       "ndz\u0254\u0300\u014b\u0254\u0300k\u0197\u0300z\u00f9\u0294",
@@ -71,6 +80,24 @@ $provide.value("$locale", {
       "kaa",
       "fwo"
     ],
+    "STANDALONEMONTH": [
+      "ndz\u0254\u0300\u014b\u0254\u0300n\u00f9m",
+      "ndz\u0254\u0300\u014b\u0254\u0300k\u0197\u0300z\u00f9\u0294",
+      "ndz\u0254\u0300\u014b\u0254\u0300t\u0197\u0300d\u0289\u0300gh\u00e0",
+      "ndz\u0254\u0300\u014b\u0254\u0300t\u01ceaf\u0289\u0304gh\u0101",
+      "ndz\u0254\u0300\u014b\u00e8s\u00e8e",
+      "ndz\u0254\u0300\u014b\u0254\u0300nz\u00f9gh\u00f2",
+      "ndz\u0254\u0300\u014b\u0254\u0300d\u00f9mlo",
+      "ndz\u0254\u0300\u014b\u0254\u0300kw\u00eef\u0254\u0300e",
+      "ndz\u0254\u0300\u014b\u0254\u0300t\u0197\u0300f\u0289\u0300gh\u00e0dzugh\u00f9",
+      "ndz\u0254\u0300\u014b\u0254\u0300gh\u01d4uwel\u0254\u0300m",
+      "ndz\u0254\u0300\u014b\u0254\u0300chwa\u0294\u00e0kaa wo",
+      "ndz\u0254\u0300\u014b\u00e8fw\u00f2o"
+    ],
+    "WEEKENDRANGE": [
+      5,
+      6
+    ],
     "fullDate": "EEEE d MMMM y",
     "longDate": "d MMMM y",
     "medium": "d MMM, y HH:mm:ss",
@@ -99,8 +126,8 @@ $provide.value("$locale", {
       {
         "gSize": 3,
         "lgSize": 3,
-        "maxFrac": 2,
-        "minFrac": 2,
+        "maxFrac": 0,
+        "minFrac": 0,
         "minInt": 1,
         "negPre": "-",
         "negSuf": "\u00a4",
@@ -110,6 +137,7 @@ $provide.value("$locale", {
     ]
   },
   "id": "agq-cm",
-  "pluralCat": function (n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+  "localeID": "agq_CM",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
 });
 }]);

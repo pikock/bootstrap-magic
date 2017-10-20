@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/directive/input.js?message=docs(ngValue)%3A%20describe%20your%20change...#L1577' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/input.js?message=docs(ngValue)%3A%20describe%20your%20change...#L2082' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/directive/input.js#L1577' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/input.js#L2082' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -19,12 +19,16 @@
 
 
 
+
+
 <div class="api-profile-description">
-  <p>Binds the given expression to the value of <code>input[select]</code> or <code>input[radio]</code>, so
-that when the element is selected, the <code>ngModel</code> of that element is set to the
-bound value.</p>
-<p><code>ngValue</code> is useful when dynamically generating lists of radio buttons using <code>ng-repeat</code>, as
-shown below.</p>
+  <p>Binds the given expression to the value of the element.</p>
+<p>It is mainly used on <a href="api/ng/input/input[radio]"><code>input[radio]</code></a> and option elements,
+so that when the element is selected, the <a href="api/ng/directive/ngModel"><code>ngModel</code></a> of that element (or its
+<a href="api/ng/directive/select"><code>select</code></a> parent element) is set to the bound value. It is especially useful
+for dynamically generated lists using <a href="api/ng/directive/ngRepeat"><code>ngRepeat</code></a>, as shown below.</p>
+<p>It can also be used to achieve one-way binding of a given expression to an input element
+such as an <code>input[text]</code> or a <code>textarea</code>, when that element does not use ngModel.</p>
 
 </div>
 
@@ -39,6 +43,7 @@ shown below.</p>
   <ul>
     
     <li>This directive executes at priority level 0.</li>
+    
   </ul>
 
   
@@ -46,8 +51,12 @@ shown below.</p>
   <div class="usage">
   
     <ul>
+    
+      <li>as element:
+      <pre><code>&lt;ng-value&#10;  [ng-value=&quot;string&quot;]&gt;&#10;...&#10;&lt;/ng-value&gt;</code></pre>
+      </li>
     <li>as attribute:
-        <pre><code>&lt;input&#10;  [ng-value=&quot;&quot;]&gt;&#10;...&#10;&lt;/input&gt;</code></pre>
+        <pre><code>&lt;input&#10;  [ng-value=&quot;string&quot;]&gt;&#10;...&#10;&lt;/input&gt;</code></pre>
       </li>
     
   </div>
@@ -76,7 +85,7 @@ shown below.</p>
       </td>
       <td>
         <p>angular expression, whose value will be bound to the <code>value</code> attribute
-  of the <code>input</code> element</p>
+and <code>value</code> property of the element.</p>
 
         
       </td>
@@ -88,14 +97,11 @@ shown below.</p>
 </section>
   
 
-
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-ngValue-directive')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ngValue-directive"></plnkr-opener>
 
   <div class="runnable-example"
       path="examples/example-ngValue-directive"
@@ -118,7 +124,7 @@ shown below.</p>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-ngValue-directive/index.html" name="example-ngValue-directive"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ngValue-directive')}}" name="example-ngValue-directive"></iframe>
   </div>
 </div>
 

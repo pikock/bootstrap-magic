@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/directive/ngCloak.js?message=docs(ngCloak)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/ngCloak.js?message=docs(ngCloak)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/directive/ngCloak.js#L3' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/ngCloak.js#L3' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -19,6 +19,8 @@
 
 
 
+
+
 <div class="api-profile-description">
   <p>The <code>ngCloak</code> directive is used to prevent the Angular html template from being briefly
 displayed by the browser in its raw (uncompiled) form while your application is loading. Use this
@@ -30,7 +32,7 @@ of the browser view.</p>
 <code>angular.min.js</code>.
 For CSP mode please add <code>angular-csp.css</code> to your html file (see <a href="api/ng/directive/ngCsp">ngCsp</a>).</p>
 <pre><code class="lang-css">[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-display: none !important;
+  display: none !important;
 }
 </code></pre>
 <p>When this css rule is loaded by the browser, all html elements (including their children) that
@@ -40,9 +42,6 @@ the compiled element visible.</p>
 <p>For the best result, the <code>angular.js</code> script must be loaded in the head section of the html
 document; alternatively, the css rule above must be included in the external stylesheet of the
 application.</p>
-<p>Legacy browsers, like IE7, do not provide attribute selector support (added in CSS 2.1) so they
-cannot match the <code>[ng\:cloak]</code> selector. To work around this limitation, you must add the css
-class <code>ng-cloak</code> in addition to the <code>ngCloak</code> directive as shown in the example below.</p>
 
 </div>
 
@@ -57,6 +56,7 @@ class <code>ng-cloak</code> in addition to the <code>ngCloak</code> directive as
   <ul>
     
     <li>This directive executes at priority level 0.</li>
+    
   </ul>
 
   
@@ -75,24 +75,22 @@ class <code>ng-cloak</code> in addition to the <code>ngCloak</code> directive as
   
   
 
-
   
-  <h2 id="example">Example</h2><p>
+  <h2 id="example">Examples</h2><p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example58')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-ng-cloak"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example58">
+      path="examples/example-ng-cloak"
+      name="ng-cloak">
 
   
     <div class="runnable-example-file" 
       name="index.html"
       language="html"
       type="html">
-      <pre><code>&lt;div id=&quot;template1&quot; ng-cloak&gt;{{ &#39;hello&#39; }}&lt;/div&gt;&#10;&lt;div id=&quot;template2&quot; ng-cloak class=&quot;ng-cloak&quot;&gt;{{ &#39;hello IE7&#39; }}&lt;/div&gt;</code></pre>
+      <pre><code>&lt;div id=&quot;template1&quot; ng-cloak&gt;{{ &#39;hello&#39; }}&lt;/div&gt;&#10;&lt;div id=&quot;template2&quot; class=&quot;ng-cloak&quot;&gt;{{ &#39;world&#39; }}&lt;/div&gt;</code></pre>
     </div>
   
     <div class="runnable-example-file" 
@@ -103,7 +101,7 @@ class <code>ng-cloak</code> in addition to the <code>ngCloak</code> directive as
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example58/index.html" name="example-example58"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ng-cloak')}}" name="example-ng-cloak"></iframe>
   </div>
 </div>
 

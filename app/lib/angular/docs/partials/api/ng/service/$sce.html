@@ -1,8 +1,8 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ng/sce.js?message=docs($sce)%3A%20describe%20your%20change...#L395' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/sce.js?message=docs($sce)%3A%20describe%20your%20change...#L457' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 
-<a href='https://github.com/angular/angular.js/tree/v1.2.32/src/ng/sce.js#L395' class='view-source pull-right btn btn-primary'>
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/sce.js#L457' class='view-source pull-right btn btn-primary'>
   <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
 </a>
 
@@ -23,57 +23,68 @@
 
 
 
+
+
 <div class="api-profile-description">
   <p><code>$sce</code> is a service that provides Strict Contextual Escaping services to AngularJS.</p>
 <h1 id="strict-contextual-escaping">Strict Contextual Escaping</h1>
-<p>Strict Contextual Escaping (SCE) is a mode in which AngularJS requires bindings in certain
-contexts to result in a value that is marked as safe to use for that context.  One example of
-such a context is binding arbitrary html controlled by the user via <code>ng-bind-html</code>.  We refer
-to these contexts as privileged or SCE contexts.</p>
-<p>As of version 1.2, Angular ships with SCE enabled by default.</p>
-<p>Note:  When enabled (the default), IE8 in quirks mode is not supported.  In this mode, IE8 allows
-one to execute arbitrary javascript by the use of the expression() syntax.  Refer
-<a href="http://blogs.msdn.com/b/ie/archive/2008/10/16/ending-expressions.aspx">http://blogs.msdn.com/b/ie/archive/2008/10/16/ending-expressions.aspx</a> to learn more about them.
-You can ensure your document is in standards mode and not quirks mode by adding <code>&lt;!doctype html&gt;</code>
-to the top of your HTML document.</p>
-<p>SCE assists in writing code in way that (a) is secure by default and (b) makes auditing for
-security vulnerabilities such as XSS, clickjacking, etc. a lot easier.</p>
+<p>Strict Contextual Escaping (SCE) is a mode in which AngularJS constrains bindings to only render
+trusted values. Its goal is to assist in writing code in a way that (a) is secure by default, and
+(b) makes auditing for security vulnerabilities such as XSS, clickjacking, etc. a lot easier.</p>
+<h2 id="overview">Overview</h2>
+<p>To systematically block XSS security bugs, AngularJS treats all values as untrusted by default in
+HTML or sensitive URL bindings. When binding untrusted values, AngularJS will automatically
+run security checks on them (sanitizations, whitelists, depending on context), or throw when it
+cannot guarantee the security of the result. That behavior depends strongly on contexts: HTML
+can be sanitized, but template URLs cannot, for instance.</p>
+<p>To illustrate this, consider the <code>ng-bind-html</code> directive. It renders its value directly as HTML:
+we call that the <em>context</em>. When given an untrusted input, AngularJS will attempt to sanitize it
+before rendering if a sanitizer is available, and throw otherwise. To bypass sanitization and
+render the input as-is, you will need to mark it as trusted for that context before attempting
+to bind it.</p>
+<p>As of version 1.2, AngularJS ships with SCE enabled by default.</p>
+<h2 id="in-practice">In practice</h2>
 <p>Here&#39;s an example of a binding in a privileged context:</p>
-<pre><code>&lt;input ng-model=&quot;userHtml&quot;&gt;
+<pre><code>&lt;input ng-model=&quot;userHtml&quot; aria-label=&quot;User input&quot;&gt;
 &lt;div ng-bind-html=&quot;userHtml&quot;&gt;&lt;/div&gt;
 </code></pre>
 <p>Notice that <code>ng-bind-html</code> is bound to <code>userHtml</code> controlled by the user.  With SCE
-disabled, this application allows the user to render arbitrary HTML into the DIV.
-In a more realistic example, one may be rendering user comments, blog articles, etc. via
-bindings.  (HTML is just one example of a context where rendering user controlled input creates
-security vulnerabilities.)</p>
+disabled, this application allows the user to render arbitrary HTML into the DIV, which would
+be an XSS security bug. In a more realistic example, one may be rendering user comments, blog
+articles, etc. via bindings. (HTML is just one example of a context where rendering user
+controlled input creates security vulnerabilities.)</p>
 <p>For the case of HTML, you might use a library, either on the client side, or on the server side,
 to sanitize unsafe HTML before binding to the value and rendering it in the document.</p>
 <p>How would you ensure that every place that used these types of bindings was bound to a value that
 was sanitized by your library (or returned as safe for rendering by your server?)  How can you
 ensure that you didn&#39;t accidentally delete the line that sanitized the value, or renamed some
 properties/fields and forgot to update the binding to the sanitized value?</p>
-<p>To be secure by default, you want to ensure that any such bindings are disallowed unless you can
-determine that something explicitly says it&#39;s safe to use a value for binding in that
-context.  You can then audit your code (a simple grep would do) to ensure that this is only done
-for those values that you can easily tell are safe - because they were received from your server,
-sanitized by your library, etc.  You can organize your codebase to help with this - perhaps
-allowing only the files in a specific directory to do this.  Ensuring that the internal API
-exposed by that code doesn&#39;t markup arbitrary values as safe then becomes a more manageable task.</p>
+<p>To be secure by default, AngularJS makes sure bindings go through that sanitization, or
+any similar validation process, unless there&#39;s a good reason to trust the given value in this
+context.  That trust is formalized with a function call. This means that as a developer, you
+can assume all untrusted bindings are safe. Then, to audit your code for binding security issues,
+you just need to ensure the values you mark as trusted indeed are safe - because they were
+received from your server, sanitized by your library, etc. You can organize your codebase to
+help with this - perhaps allowing only the files in a specific directory to do this.
+Ensuring that the internal API exposed by that code doesn&#39;t markup arbitrary values as safe then
+becomes a more manageable task.</p>
 <p>In the case of AngularJS&#39; SCE service, one uses <a href="api/ng/service/$sce#trustAs">$sce.trustAs</a>
 (and shorthand methods such as <a href="api/ng/service/$sce#trustAsHtml">$sce.trustAsHtml</a>, etc.) to
-obtain values that will be accepted by SCE / privileged contexts.</p>
+build the trusted versions of your values.</p>
 <h2 id="how-does-it-work-">How does it work?</h2>
-<p>In privileged contexts, directives and code will bind to the result of <a href="api/ng/service/$sce#getTrusted">$sce.getTrusted(context, value)</a> rather than to the value directly.  Directives use <a href="api/ng/service/$sce#parse">$sce.parseAs</a> rather than <code>$parse</code> to watch attribute bindings, which performs the
-<a href="api/ng/service/$sce#getTrusted">$sce.getTrusted</a> behind the scenes on non-constant literals.</p>
+<p>In privileged contexts, directives and code will bind to the result of <a href="api/ng/service/$sce#getTrusted">$sce.getTrusted(context, value)</a> rather than to the value directly.  Think of this function as
+a way to enforce the required security context in your data sink. Directives use <a href="api/ng/service/$sce#parseAs">$sce.parseAs</a> rather than <code>$parse</code> to watch attribute bindings, which performs
+the <a href="api/ng/service/$sce#getTrusted">$sce.getTrusted</a> behind the scenes on non-constant literals. Also,
+when binding without directives, AngularJS will understand the context of your bindings
+automatically.</p>
 <p>As an example, <a href="api/ng/directive/ngBindHtml">ngBindHtml</a> uses <a href="api/ng/service/$sce#parseAsHtml">$sce.parseAsHtml(binding expression)</a>.  Here&#39;s the actual code (slightly
 simplified):</p>
 <pre><code>var ngBindHtmlDirective = [&#39;$sce&#39;, function($sce) {
-return function(scope, element, attr) {
-  scope.$watch($sce.parseAsHtml(attr.ngBindHtml), function(value) {
-    element.html(value || &#39;&#39;);
-  });
-};
+  return function(scope, element, attr) {
+    scope.$watch($sce.parseAsHtml(attr.ngBindHtml), function(value) {
+      element.html(value || &#39;&#39;);
+    });
+  };
 }];
 </code></pre>
 <h2 id="impact-on-loading-templates">Impact on loading templates</h2>
@@ -81,7 +92,7 @@ return function(scope, element, attr) {
 <code>templateUrl</code>&#39;s specified by <a href="guide/directive">directives</a>.</p>
 <p>By default, Angular only loads templates from the same domain and protocol as the application
 document.  This is done by calling <a href="api/ng/service/$sce#getTrustedResourceUrl">$sce.getTrustedResourceUrl</a> on the template URL.  To load templates from other domains and/or
-protocols, you may either either <a href="api/ng/provider/$sceDelegateProvider#resourceUrlWhitelist">whitelist
+protocols, you may either <a href="api/ng/provider/$sceDelegateProvider#resourceUrlWhitelist">whitelist
 them</a> or <a href="api/ng/service/$sce#trustAsResourceUrl">wrap it</a> into a trusted value.</p>
 <p><em>Please note</em>:
 The browser&#39;s
@@ -91,13 +102,15 @@ policy apply in addition to this and may further restrict whether the template i
 loaded.  This means that without the right CORS policy, loading templates from a different domain
 won&#39;t work on all browsers.  Also, loading templates from <code>file://</code> URL does not work on some
 browsers.</p>
-<h2 id="this-feels-like-too-much-overhead-for-the-developer-">This feels like too much overhead for the developer?</h2>
+<h2 id="this-feels-like-too-much-overhead">This feels like too much overhead</h2>
 <p>It&#39;s important to remember that SCE only applies to interpolation expressions.</p>
 <p>If your expressions are constant literals, they&#39;re automatically trusted and you don&#39;t need to
-call <code>$sce.trustAs</code> on them (remember to include the <code>ngSanitize</code> module) (e.g.
-<code>&lt;div ng-bind-html=&quot;&#39;&lt;b&gt;implicitly trusted&lt;/b&gt;&#39;&quot;&gt;&lt;/div&gt;</code>) just works.</p>
-<p>Additionally, <code>a[href]</code> and <code>img[src]</code> automatically sanitize their URLs and do not pass them
-through <a href="api/ng/service/$sce#getTrusted">$sce.getTrusted</a>.  SCE doesn&#39;t play a role here.</p>
+call <code>$sce.trustAs</code> on them (e.g.
+<code>&lt;div ng-bind-html=&quot;&#39;&lt;b&gt;implicitly trusted&lt;/b&gt;&#39;&quot;&gt;&lt;/div&gt;</code>) just works. The <code>$sceDelegate</code> will
+also use the <code>$sanitize</code> service if it is available when binding untrusted values to
+<code>$sce.HTML</code> context. AngularJS provides an implementation in <code>angular-sanitize.js</code>, and if you
+wish to use it, you will also need to depend on the <a href="api/ngSanitize"><code>ngSanitize</code></a> module in
+your application.</p>
 <p>The included <a href="api/ng/service/$sceDelegate">$sceDelegate</a> comes with sane defaults to allow you to load
 templates in <code>ng-include</code> from your application&#39;s domain without having to even know about SCE.
 It blocks loading templates from other domains or loading templates over http from an https
@@ -117,26 +130,30 @@ security onto an application later.</p>
 <tbody>
 <tr>
 <td><code>$sce.HTML</code></td>
-<td>For HTML that&#39;s safe to source into the application.  The <a href="api/ng/directive/ngBindHtml">ngBindHtml</a> directive uses this context for bindings. If an unsafe value is encountered and the <a href="api/ngSanitize">$sanitize</a> module is present this will sanitize the value instead of throwing an error.</td>
+<td>For HTML that&#39;s safe to source into the application.  The <a href="api/ng/directive/ngBindHtml">ngBindHtml</a> directive uses this context for bindings. If an unsafe value is encountered, and the <a href="api/ngSanitize/service/$sanitize">$sanitize</a> service is available (implemented by the <a href="api/ngSanitize">ngSanitize</a> module) this will sanitize the value instead of throwing an error.</td>
 </tr>
 <tr>
 <td><code>$sce.CSS</code></td>
-<td>For CSS that&#39;s safe to source into the application.  Currently unused.  Feel free to use it in your own directives.</td>
+<td>For CSS that&#39;s safe to source into the application.  Currently, no bindings require this context. Feel free to use it in your own directives.</td>
 </tr>
 <tr>
 <td><code>$sce.URL</code></td>
-<td>For URLs that are safe to follow as links.  Currently unused (<code>&lt;a href=</code> and <code>&lt;img src=</code> sanitize their urls and don&#39;t constitute an SCE context.</td>
+<td>For URLs that are safe to follow as links.  Currently unused (<code>&lt;a href=</code>, <code>&lt;img src=</code>, and some others sanitize their urls and don&#39;t constitute an SCE context.)</td>
 </tr>
 <tr>
 <td><code>$sce.RESOURCE_URL</code></td>
-<td>For URLs that are not only safe to follow as links, but whose contents are also safe to include in your application.  Examples include <code>ng-include</code>, <code>src</code> / <code>ngSrc</code> bindings for tags other than <code>IMG</code> (e.g. <code>IFRAME</code>, <code>OBJECT</code>, etc.)  <br><br>Note that <code>$sce.RESOURCE_URL</code> makes a stronger statement about the URL than <code>$sce.URL</code> does and therefore contexts requiring values trusted for <code>$sce.RESOURCE_URL</code> can be used anywhere that values trusted for <code>$sce.URL</code> are required.</td>
+<td>For URLs that are not only safe to follow as links, but whose contents are also safe to include in your application.  Examples include <code>ng-include</code>, <code>src</code> / <code>ngSrc</code> bindings for tags other than <code>IMG</code>, <code>VIDEO</code>, <code>AUDIO</code>, <code>SOURCE</code>, and <code>TRACK</code> (e.g. <code>IFRAME</code>, <code>OBJECT</code>, etc.)  <br><br>Note that <code>$sce.RESOURCE_URL</code> makes a stronger statement about the URL than <code>$sce.URL</code> does (it&#39;s not just the URL that matters, but also what is at the end of it), and therefore contexts requiring values trusted for <code>$sce.RESOURCE_URL</code> can be used anywhere that values trusted for <code>$sce.URL</code> are required.</td>
 </tr>
 <tr>
 <td><code>$sce.JS</code></td>
-<td>For JavaScript that is safe to execute in your application&#39;s context.  Currently unused.  Feel free to use it in your own directives.</td>
+<td>For JavaScript that is safe to execute in your application&#39;s context.  Currently, no bindings require this context.  Feel free to use it in your own directives.</td>
 </tr>
 </tbody>
 </table>
+<p>Be aware that <code>a[href]</code> and <code>img[src]</code> automatically sanitize their URLs and do not pass them
+through <a href="api/ng/service/$sce#getTrusted">$sce.getTrusted</a>. There&#39;s no CSS-, URL-, or JS-context bindings
+in AngularJS currently, so their corresponding <code>$sce.trustAs</code> functions aren&#39;t useful yet. This
+might evolve.</p>
 <h2 id="format-of-items-in-link-ng-scedelegateprovider-resourceurlwhitelist-resourceurlwhitelist-link-ng-scedelegateprovider-resourceurlblacklist-blacklist-a-name-resourceurlpatternitem-a-">Format of items in <a href="api/ng/provider/$sceDelegateProvider#resourceUrlWhitelist">resourceUrlWhitelist</a>/<a href="api/ng/provider/$sceDelegateProvider#resourceUrlBlacklist">Blacklist</a> <a name="resourceUrlPatternItem"></a></h2>
 <p> Each element in these arrays must be one of the following:</p>
 <ul>
@@ -151,10 +168,10 @@ being tested (substring matches are not good enough.)</li>
 <li>There are exactly <strong>two wildcard sequences</strong> - <code>*</code> and <code>**</code>.  All other characters
 match themselves.</li>
 <li><code>*</code>: matches zero or more occurrences of any character other than one of the following 6
-characters: &#39;<code>:</code>&#39;, &#39;<code>/</code>&#39;, &#39;<code>.</code>&#39;, &#39;<code>?</code>&#39;, &#39;<code>&amp;</code>&#39; and &#39;;&#39;.  It&#39;s a useful wildcard for use
+characters: &#39;<code>:</code>&#39;, &#39;<code>/</code>&#39;, &#39;<code>.</code>&#39;, &#39;<code>?</code>&#39;, &#39;<code>&amp;</code>&#39; and &#39;<code>;</code>&#39;.  It&#39;s a useful wildcard for use
 in a whitelist.</li>
 <li><code>**</code>: matches zero or more occurrences of <em>any</em> character.  As such, it&#39;s not
-not appropriate to use in for a scheme, domain, etc. as it would match too much.  (e.g.
+appropriate for use in a scheme, domain, etc. as it would match too much.  (e.g.
 <a href="http://**.example.com/">http://**.example.com/</a> would match <a href="http://evil.com/?ignore=.example.com/">http://evil.com/?ignore=.example.com/</a> and that might
 not have been the intention.)  Its usage at the very end of the path is ok.  (e.g.
 <a href="http://foo.example.com/templates/**">http://foo.example.com/templates/**</a>).</li>
@@ -164,11 +181,11 @@ not have been the intention.)  Its usage at the very end of the path is ok.  (e.
 <li><em>Caveat</em>:  While regular expressions are powerful and offer great flexibility,  their syntax
 (and all the inevitable escaping) makes them <em>harder to maintain</em>.  It&#39;s easy to
 accidentally introduce a bug when one updates a complex expression (imho, all regexes should
-have good test coverage.).  For instance, the use of <code>.</code> in the regex is correct only in a
+have good test coverage).  For instance, the use of <code>.</code> in the regex is correct only in a
 small number of cases.  A <code>.</code> character in the regex used when matching the scheme or a
 subdomain could be matched against a <code>:</code> or literal <code>.</code> that was likely not intended.   It
 is highly recommended to use the string patterns and only fall back to regular expressions
-if they as a last resort.</li>
+as a last resort.</li>
 <li>The regular expression must be an instance of RegExp (i.e. not a string.)  It is
 matched against the <strong>entire</strong> <em>normalized / absolute URL</em> of the resource being tested
 (even when the RegExp did not have the <code>^</code> and <code>$</code> codes.)  In addition, any flags
@@ -178,7 +195,7 @@ recommended, e.g. in issue <a href="https://github.com/angular/angular.js/issues
 remember to escape your regular expression (and be aware that you might need more than
 one level of escaping depending on your templating engine and the way you interpolated
 the value.)  Do make use of your platform&#39;s escaping mechanism as it might be good
-enough before coding your own.  e.g. Ruby has
+enough before coding your own.  E.g. Ruby has
 <a href="http://www.ruby-doc.org/core-2.0.0/Regexp.html#method-c-escape">Regexp.escape(str)</a>
 and Python has <a href="http://docs.python.org/library/re.html#re.escape">re.escape</a>.
 Javascript lacks a similar built in function for escaping.  Take a look at Google
@@ -191,46 +208,45 @@ Closure library&#39;s <a href="http://docs.closure-library.googlecode.com/git/cl
 <p>
 
 <div>
-  <a ng-click="openPlunkr('examples/example-example100')" class="btn pull-right">
-    <i class="glyphicon glyphicon-edit">&nbsp;</i>
-    Edit in Plunker</a>
+  <plnkr-opener example-path="examples/example-sce-service"></plnkr-opener>
 
   <div class="runnable-example"
-      path="examples/example-example100"
+      path="examples/example-sce-service"
       module="mySceApp"
-      deps="angular-sanitize.js">
+      deps="angular-sanitize.js"
+      name="sce-service">
 
   
     <div class="runnable-example-file" 
       name="index.html"
       language="html"
       type="html">
-      <pre><code>&lt;div ng-controller=&quot;myAppController as myCtrl&quot;&gt;&#10;&lt;i ng-bind-html=&quot;myCtrl.explicitlyTrustedHtml&quot; id=&quot;explicitlyTrustedHtml&quot;&gt;&lt;/i&gt;&lt;br&gt;&lt;br&gt;&#10;&lt;b&gt;User comments&lt;/b&gt;&lt;br&gt;&#10;By default, HTML that isn&#39;t explicitly trusted (e.g. Alice&#39;s comment) is sanitized when&#10;$sanitize is available.  If $sanitize isn&#39;t available, this results in an error instead of an&#10;exploit.&#10;&lt;div class=&quot;well&quot;&gt;&#10;  &lt;div ng-repeat=&quot;userComment in myCtrl.userComments&quot;&gt;&#10;    &lt;b&gt;{{userComment.name}}&lt;/b&gt;:&#10;    &lt;span ng-bind-html=&quot;userComment.htmlComment&quot; class=&quot;htmlComment&quot;&gt;&lt;/span&gt;&#10;    &lt;br&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+      <pre><code>&lt;div ng-controller=&quot;AppController as myCtrl&quot;&gt;&#10;  &lt;i ng-bind-html=&quot;myCtrl.explicitlyTrustedHtml&quot; id=&quot;explicitlyTrustedHtml&quot;&gt;&lt;/i&gt;&lt;br&gt;&lt;br&gt;&#10;  &lt;b&gt;User comments&lt;/b&gt;&lt;br&gt;&#10;  By default, HTML that isn&#39;t explicitly trusted (e.g. Alice&#39;s comment) is sanitized when&#10;  $sanitize is available.  If $sanitize isn&#39;t available, this results in an error instead of an&#10;  exploit.&#10;  &lt;div class=&quot;well&quot;&gt;&#10;    &lt;div ng-repeat=&quot;userComment in myCtrl.userComments&quot;&gt;&#10;      &lt;b&gt;{{userComment.name}}&lt;/b&gt;:&#10;      &lt;span ng-bind-html=&quot;userComment.htmlComment&quot; class=&quot;htmlComment&quot;&gt;&lt;/span&gt;&#10;      &lt;br&gt;&#10;    &lt;/div&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
     </div>
   
     <div class="runnable-example-file" 
       name="script.js"
       language="js"
       type="js">
-      <pre><code>var mySceApp = angular.module(&#39;mySceApp&#39;, [&#39;ngSanitize&#39;]);&#10;&#10;mySceApp.controller(&quot;myAppController&quot;, function myAppController($http, $templateCache, $sce) {&#10;  var self = this;&#10;  $http.get(&quot;test_data.json&quot;, {cache: $templateCache}).success(function(userComments) {&#10;    self.userComments = userComments;&#10;  });&#10;  self.explicitlyTrustedHtml = $sce.trustAsHtml(&#10;      &#39;&lt;span onmouseover=&quot;this.textContent=&amp;quot;Explicitly trusted HTML bypasses &#39; +&#10;      &#39;sanitization.&amp;quot;&quot;&gt;Hover over this text.&lt;/span&gt;&#39;);&#10;});</code></pre>
+      <pre><code>angular.module(&#39;mySceApp&#39;, [&#39;ngSanitize&#39;])&#10;.controller(&#39;AppController&#39;, [&#39;$http&#39;, &#39;$templateCache&#39;, &#39;$sce&#39;,&#10;  function AppController($http, $templateCache, $sce) {&#10;    var self = this;&#10;    $http.get(&#39;test_data.json&#39;, {cache: $templateCache}).then(function(response) {&#10;      self.userComments = response.data;&#10;    });&#10;    self.explicitlyTrustedHtml = $sce.trustAsHtml(&#10;        &#39;&lt;span onmouseover=&quot;this.textContent=&amp;quot;Explicitly trusted HTML bypasses &#39; +&#10;        &#39;sanitization.&amp;quot;&quot;&gt;Hover over this text.&lt;/span&gt;&#39;);&#10;  }]);</code></pre>
     </div>
   
     <div class="runnable-example-file" 
       name="test_data.json"
       language="json"
       type="json">
-      <pre><code>[&#10;{ &quot;name&quot;: &quot;Alice&quot;,&#10;  &quot;htmlComment&quot;:&#10;      &quot;&lt;span onmouseover=&#39;this.textContent=\&quot;PWN3D!\&quot;&#39;&gt;Is &lt;i&gt;anyone&lt;/i&gt; reading this?&lt;/span&gt;&quot;&#10;},&#10;{ &quot;name&quot;: &quot;Bob&quot;,&#10;  &quot;htmlComment&quot;: &quot;&lt;i&gt;Yes!&lt;/i&gt;  Am I the only other one?&quot;&#10;}&#10;]</code></pre>
+      <pre><code>[&#10;  { &quot;name&quot;: &quot;Alice&quot;,&#10;    &quot;htmlComment&quot;:&#10;        &quot;&lt;span onmouseover=&#39;this.textContent=\&quot;PWN3D!\&quot;&#39;&gt;Is &lt;i&gt;anyone&lt;/i&gt; reading this?&lt;/span&gt;&quot;&#10;  },&#10;  { &quot;name&quot;: &quot;Bob&quot;,&#10;    &quot;htmlComment&quot;: &quot;&lt;i&gt;Yes!&lt;/i&gt;  Am I the only other one?&quot;&#10;  }&#10;]</code></pre>
     </div>
   
     <div class="runnable-example-file" 
       name="protractor.js"
       type="protractor"
       language="js">
-      <pre><code>describe(&#39;SCE doc demo&#39;, function() {&#10;it(&#39;should sanitize untrusted values&#39;, function() {&#10;  expect(element.all(by.css(&#39;.htmlComment&#39;)).first().getInnerHtml())&#10;      .toBe(&#39;&lt;span&gt;Is &lt;i&gt;anyone&lt;/i&gt; reading this?&lt;/span&gt;&#39;);&#10;});&#10;&#10;it(&#39;should NOT sanitize explicitly trusted values&#39;, function() {&#10;  expect(element(by.id(&#39;explicitlyTrustedHtml&#39;)).getInnerHtml()).toBe(&#10;      &#39;&lt;span onmouseover=&quot;this.textContent=&amp;quot;Explicitly trusted HTML bypasses &#39; +&#10;      &#39;sanitization.&amp;quot;&quot;&gt;Hover over this text.&lt;/span&gt;&#39;);&#10;});&#10;});</code></pre>
+      <pre><code>describe(&#39;SCE doc demo&#39;, function() {&#10;  it(&#39;should sanitize untrusted values&#39;, function() {&#10;    expect(element.all(by.css(&#39;.htmlComment&#39;)).first().getAttribute(&#39;innerHTML&#39;))&#10;        .toBe(&#39;&lt;span&gt;Is &lt;i&gt;anyone&lt;/i&gt; reading this?&lt;/span&gt;&#39;);&#10;  });&#10;&#10;  it(&#39;should NOT sanitize explicitly trusted values&#39;, function() {&#10;    expect(element(by.id(&#39;explicitlyTrustedHtml&#39;)).getAttribute(&#39;innerHTML&#39;)).toBe(&#10;        &#39;&lt;span onmouseover=&quot;this.textContent=&amp;quot;Explicitly trusted HTML bypasses &#39; +&#10;        &#39;sanitization.&amp;quot;&quot;&gt;Hover over this text.&lt;/span&gt;&#39;);&#10;  });&#10;});</code></pre>
     </div>
   
 
-    <iframe class="runnable-example-frame" src="examples/example-example100/index.html" name="example-example100"></iframe>
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-sce-service')}}" name="example-sce-service"></iframe>
   </div>
 </div>
 
@@ -241,12 +257,13 @@ Closure library&#39;s <a href="http://docs.closure-library.googlecode.com/git/cl
 for little coding overhead.  It will be much harder to take an SCE disabled application and
 either secure it on your own or enable SCE at a later stage.  It might make sense to disable SCE
 for cases where you have a lot of existing code that was written before SCE was introduced and
-you&#39;re migrating them a module at a time.</p>
+you&#39;re migrating them a module at a time. Also do note that this is an app-wide setting, so if
+you are writing a library, you will cause security bugs applications using it.</p>
 <p>That said, here&#39;s how you can completely disable SCE:</p>
 <pre><code>angular.module(&#39;myAppWithSceDisabledmyApp&#39;, []).config(function($sceProvider) {
-// Completely disable SCE.  For demonstration purposes only!
-// Do not use in new projects.
-$sceProvider.enabled(false);
+  // Completely disable SCE.  For demonstration purposes only!
+  // Do not use in new projects or libraries.
+  $sceProvider.enabled(false);
 });
 </code></pre>
 
@@ -258,7 +275,7 @@ $sceProvider.enabled(false);
 <div>
   
 
-    
+  
 
   <h2 id="usage">Usage</h2>
     
@@ -284,20 +301,20 @@ $sceProvider.enabled(false);
     
 
     
+
     
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-boolean">Boolean</a></td>
-    <td><p>true if SCE is enabled, false otherwise.  If you want to set the value, you
-have to do it at module config time on <a href="api/ng/provider/$sceProvider">$sceProvider</a>.</p>
+    <td><p>True if SCE is enabled, false otherwise.  If you want to set the value, you
+    have to do it at module config time on <a href="api/ng/provider/$sceProvider">$sceProvider</a>.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="parseAs">
     <h3><p><code>parseAs(type, expression);</code></p>
@@ -307,6 +324,8 @@ have to do it at module config time on <a href="api/ng/provider/$sceProvider">$s
 wraps the expression in a call to <a href="api/ng/service/$sce#getTrusted">$sce.getTrusted(<em>type</em>,
 <em>result</em>)</a></p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -331,7 +350,7 @@ wraps the expression in a call to <a href="api/ng/service/$sce#getTrusted">$sce.
         <a href="" class="label type-hint type-hint-string">string</a>
       </td>
       <td>
-        <p>The kind of SCE context in which this result will be used.</p>
+        <p>The SCE context in which this result will be used.</p>
 
         
       </td>
@@ -359,37 +378,36 @@ wraps the expression in a call to <a href="api/ng/service/$sce#getTrusted">$sce.
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-function">function(context, locals)</a></td>
-    <td><p>a function which represents the compiled expression:</p>
+    <td><p>A function which represents the compiled expression:</p>
 <ul>
-<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the strings
-are evaluated against (typically a scope object).</li>
-<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values in
-<code>context</code>.</li>
+<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the
+strings are evaluated against (typically a scope object).</li>
+<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values
+in <code>context</code>.</li>
 </ul>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="trustAs">
     <h3><p><code>trustAs(type, value);</code></p>
 
 </h3>
-    <div><p>Delegates to <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a>.  As such,
-returns an object that is trusted by angular for use in specified strict contextual
-escaping contexts (such as ng-bind-html, ng-include, any src attribute
-interpolation, any dom event binding attribute interpolation such as for onclick,  etc.)
-that uses the provided value.  See * <a href="api/ng/service/$sce">$sce</a> for enabling strict contextual
-escaping.</p>
+    <div><p>Delegates to <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs</code></a>. As such, returns a
+wrapped object that represents your value, and the trust you have in its safety for the given
+context. AngularJS can then use that value as-is in bindings of the specified secure context.
+This is used in bindings for <code>ng-bind-html</code>, <code>ng-include</code>, and most <code>src</code> attribute
+interpolations. See <a href="api/ng/service/$sce">$sce</a> for strict contextual escaping.</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -414,8 +432,8 @@ escaping.</p>
         <a href="" class="label type-hint type-hint-string">string</a>
       </td>
       <td>
-        <p>The kind of context in which this value is safe for use.  e.g. url,
-  resource_url, html, js and css.</p>
+        <p>The context in which this value is safe for use, e.g. <code>$sce.URL</code>,
+    <code>$sce.RESOURCE_URL</code>, <code>$sce.HTML</code>, <code>$sce.JS</code> or <code>$sce.CSS</code>.</p>
 
         
       </td>
@@ -431,7 +449,7 @@ escaping.</p>
         <a href="" class="label type-hint type-hint-object">*</a>
       </td>
       <td>
-        <p>The value that that should be considered trusted/safe.</p>
+        <p>The value that that should be considered trusted.</p>
 
         
       </td>
@@ -443,20 +461,18 @@ escaping.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-object">*</a></td>
-    <td><p>A value that can be used to stand in for the provided <code>value</code> in places
-where Angular expects a $sce.trustAs() return value.</p>
+    <td><p>A wrapped version of value that can be used as a trusted variant of your <code>value</code>
+    in the context you specified.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="trustAsHtml">
     <h3><p><code>trustAsHtml(value);</code></p>
@@ -467,6 +483,8 @@ where Angular expects a $sce.trustAs() return value.</p>
 </div>
 
     
+
+    
     <h4>Parameters</h4>
     
 <table class="variables-matrix input-arguments">
@@ -489,7 +507,7 @@ where Angular expects a $sce.trustAs() return value.</p>
         <a href="" class="label type-hint type-hint-object">*</a>
       </td>
       <td>
-        <p>The value to trustAs.</p>
+        <p>The value to mark as trusted for <code>$sce.HTML</code> context.</p>
 
         
       </td>
@@ -501,21 +519,77 @@ where Angular expects a $sce.trustAs() return value.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-object">*</a></td>
-    <td><p>An object that can be passed to <a href="api/ng/service/$sce#getTrustedHtml">$sce.getTrustedHtml(value)</a> to obtain the original value.  (privileged directives
-    only accept expressions that are either literal constants or are the
-    return value of <a href="api/ng/service/$sce#trustAs">$sce.trustAs</a>.)</p>
+    <td><p>A wrapped version of value that can be used as a trusted variant of your <code>value</code>
+    in <code>$sce.HTML</code> context (like <code>ng-bind-html</code>).</p>
 </td>
   </tr>
 </table>
+    </li>
+  
+  <li id="trustAsCss">
+    <h3><p><code>trustAsCss(value);</code></p>
+
+</h3>
+    <div><p>Shorthand method.  <code>$sce.trustAsCss(value)</code> →
+    <a href="api/ng/service/$sceDelegate#trustAs"><code>$sceDelegate.trustAs($sce.CSS, value)</code></a></p>
+</div>
+
     
 
-  </li>
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        value
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">*</a>
+      </td>
+      <td>
+        <p>The value to mark as trusted for <code>$sce.CSS</code> context.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-object">*</a></td>
+    <td><p>A wrapped version of value that can be used as a trusted variant
+    of your <code>value</code> in <code>$sce.CSS</code> context. This context is currently unused, so there are
+    almost no reasons to use this function so far.</p>
+</td>
+  </tr>
+</table>
+    </li>
   
   <li id="trustAsUrl">
     <h3><p><code>trustAsUrl(value);</code></p>
@@ -526,6 +600,8 @@ where Angular expects a $sce.trustAs() return value.</p>
 </div>
 
     
+
+    
     <h4>Parameters</h4>
     
 <table class="variables-matrix input-arguments">
@@ -548,7 +624,7 @@ where Angular expects a $sce.trustAs() return value.</p>
         <a href="" class="label type-hint type-hint-object">*</a>
       </td>
       <td>
-        <p>The value to trustAs.</p>
+        <p>The value to mark as trusted for <code>$sce.URL</code> context.</p>
 
         
       </td>
@@ -560,21 +636,19 @@ where Angular expects a $sce.trustAs() return value.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-object">*</a></td>
-    <td><p>An object that can be passed to <a href="api/ng/service/$sce#getTrustedUrl">$sce.getTrustedUrl(value)</a> to obtain the original value.  (privileged directives
-    only accept expressions that are either literal constants or are the
-    return value of <a href="api/ng/service/$sce#trustAs">$sce.trustAs</a>.)</p>
+    <td><p>A wrapped version of value that can be used as a trusted variant of your <code>value</code>
+    in <code>$sce.URL</code> context. That context is currently unused, so there are almost no reasons
+    to use this function so far.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="trustAsResourceUrl">
     <h3><p><code>trustAsResourceUrl(value);</code></p>
@@ -585,6 +659,8 @@ where Angular expects a $sce.trustAs() return value.</p>
 </div>
 
     
+
+    
     <h4>Parameters</h4>
     
 <table class="variables-matrix input-arguments">
@@ -607,7 +683,7 @@ where Angular expects a $sce.trustAs() return value.</p>
         <a href="" class="label type-hint type-hint-object">*</a>
       </td>
       <td>
-        <p>The value to trustAs.</p>
+        <p>The value to mark as trusted for <code>$sce.RESOURCE_URL</code> context.</p>
 
         
       </td>
@@ -619,21 +695,19 @@ where Angular expects a $sce.trustAs() return value.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-object">*</a></td>
-    <td><p>An object that can be passed to <a href="api/ng/service/$sce#getTrustedResourceUrl">$sce.getTrustedResourceUrl(value)</a> to obtain the original value.  (privileged directives
-    only accept expressions that are either literal constants or are the return
-    value of <a href="api/ng/service/$sce#trustAs">$sce.trustAs</a>.)</p>
+    <td><p>A wrapped version of value that can be used as a trusted variant of your <code>value</code>
+    in <code>$sce.RESOURCE_URL</code> context (template URLs in <code>ng-include</code>, most <code>src</code> attribute
+    bindings, ...)</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="trustAsJs">
     <h3><p><code>trustAsJs(value);</code></p>
@@ -644,6 +718,8 @@ where Angular expects a $sce.trustAs() return value.</p>
 </div>
 
     
+
+    
     <h4>Parameters</h4>
     
 <table class="variables-matrix input-arguments">
@@ -666,7 +742,7 @@ where Angular expects a $sce.trustAs() return value.</p>
         <a href="" class="label type-hint type-hint-object">*</a>
       </td>
       <td>
-        <p>The value to trustAs.</p>
+        <p>The value to mark as trusted for <code>$sce.JS</code> context.</p>
 
         
       </td>
@@ -678,31 +754,33 @@ where Angular expects a $sce.trustAs() return value.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-object">*</a></td>
-    <td><p>An object that can be passed to <a href="api/ng/service/$sce#getTrustedJs">$sce.getTrustedJs(value)</a> to obtain the original value.  (privileged directives
-    only accept expressions that are either literal constants or are the
-    return value of <a href="api/ng/service/$sce#trustAs">$sce.trustAs</a>.)</p>
+    <td><p>A wrapped version of value that can be used as a trusted variant of your <code>value</code>
+    in <code>$sce.JS</code> context. That context is currently unused, so there are almost no reasons to
+    use this function so far.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="getTrusted">
     <h3><p><code>getTrusted(type, maybeTrusted);</code></p>
 
 </h3>
     <div><p>Delegates to <a href="api/ng/service/$sceDelegate#getTrusted"><code>$sceDelegate.getTrusted</code></a>.  As such,
-takes the result of a <a href="api/ng/service/$sce#trustAs"><code>$sce.trustAs</code></a>() call and returns the
-originally supplied value if the queried context type is a supertype of the created type.
-If this condition isn&#39;t satisfied, throws an exception.</p>
+takes any input, and either returns a value that&#39;s safe to use in the specified context,
+or throws an exception. This function is aware of trusted values created by the <code>trustAs</code>
+function and its shorthands, and when contexts are appropriate, returns the unwrapped value
+as-is. Finally, this function can also throw when there is no way to turn <code>maybeTrusted</code> in a
+safe value (e.g., no sanitization is available or possible.)</p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -727,7 +805,7 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
         <a href="" class="label type-hint type-hint-string">string</a>
       </td>
       <td>
-        <p>The kind of context in which this value is to be used.</p>
+        <p>The context in which this value is to be used.</p>
 
         
       </td>
@@ -743,8 +821,7 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
         <a href="" class="label type-hint type-hint-object">*</a>
       </td>
       <td>
-        <p>The result of a prior <a href="api/ng/service/$sce#trustAs"><code>$sce.trustAs</code></a>
-                        call.</p>
+        <p>The result of a prior <a href="api/ng/service/$sce#trustAs"><code>$sce.trustAs</code></a> call, or anything else (which will not be considered trusted.)</p>
 
         
       </td>
@@ -756,21 +833,18 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-object">*</a></td>
-    <td><p>The value the was originally provided to
-             <a href="api/ng/service/$sce#trustAs"><code>$sce.trustAs</code></a> if valid in this context.
-             Otherwise, throws an exception.</p>
+    <td><p>A version of the value that&#39;s safe to use in the given context, or throws an
+    exception if this is impossible.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="getTrustedHtml">
     <h3><p><code>getTrustedHtml(value);</code></p>
@@ -781,6 +855,8 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
 </div>
 
     
+
+    
     <h4>Parameters</h4>
     
 <table class="variables-matrix input-arguments">
@@ -815,7 +891,7 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
@@ -825,9 +901,7 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="getTrustedCss">
     <h3><p><code>getTrustedCss(value);</code></p>
@@ -838,6 +912,8 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
 </div>
 
     
+
+    
     <h4>Parameters</h4>
     
 <table class="variables-matrix input-arguments">
@@ -872,7 +948,7 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
@@ -882,9 +958,7 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="getTrustedUrl">
     <h3><p><code>getTrustedUrl(value);</code></p>
@@ -895,6 +969,8 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
 </div>
 
     
+
+    
     <h4>Parameters</h4>
     
 <table class="variables-matrix input-arguments">
@@ -929,7 +1005,7 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
@@ -939,9 +1015,7 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="getTrustedResourceUrl">
     <h3><p><code>getTrustedResourceUrl(value);</code></p>
@@ -950,6 +1024,8 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
     <div><p>Shorthand method.  <code>$sce.getTrustedResourceUrl(value)</code> →
     <a href="api/ng/service/$sceDelegate#getTrusted"><code>$sceDelegate.getTrusted($sce.RESOURCE_URL, value)</code></a></p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -986,7 +1062,7 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
@@ -996,9 +1072,7 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="getTrustedJs">
     <h3><p><code>getTrustedJs(value);</code></p>
@@ -1007,6 +1081,8 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
     <div><p>Shorthand method.  <code>$sce.getTrustedJs(value)</code> →
     <a href="api/ng/service/$sceDelegate#getTrusted"><code>$sceDelegate.getTrusted($sce.JS, value)</code></a></p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -1043,7 +1119,7 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
@@ -1053,17 +1129,17 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="parseAsHtml">
     <h3><p><code>parseAsHtml(expression);</code></p>
 
 </h3>
     <div><p>Shorthand method.  <code>$sce.parseAsHtml(expression string)</code> →
-    <a href="api/ng/service/$sce#parse"><code>$sce.parseAs($sce.HTML, value)</code></a></p>
+    <a href="api/ng/service/$sce#parseAs"><code>$sce.parseAs($sce.HTML, value)</code></a></p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -1100,33 +1176,33 @@ If this condition isn&#39;t satisfied, throws an exception.</p>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-function">function(context, locals)</a></td>
-    <td><p>a function which represents the compiled expression:</p>
+    <td><p>A function which represents the compiled expression:</p>
 <ul>
-<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the strings
-are evaluated against (typically a scope object).</li>
-<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values in
-<code>context</code>.</li>
+<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the
+strings are evaluated against (typically a scope object).</li>
+<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values
+in <code>context</code>.</li>
 </ul>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="parseAsCss">
     <h3><p><code>parseAsCss(expression);</code></p>
 
 </h3>
     <div><p>Shorthand method.  <code>$sce.parseAsCss(value)</code> →
-    <a href="api/ng/service/$sce#parse"><code>$sce.parseAs($sce.CSS, value)</code></a></p>
+    <a href="api/ng/service/$sce#parseAs"><code>$sce.parseAs($sce.CSS, value)</code></a></p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -1163,33 +1239,33 @@ are evaluated against (typically a scope object).</li>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-function">function(context, locals)</a></td>
-    <td><p>a function which represents the compiled expression:</p>
+    <td><p>A function which represents the compiled expression:</p>
 <ul>
-<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the strings
-are evaluated against (typically a scope object).</li>
-<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values in
-<code>context</code>.</li>
+<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the
+strings are evaluated against (typically a scope object).</li>
+<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values
+in <code>context</code>.</li>
 </ul>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="parseAsUrl">
     <h3><p><code>parseAsUrl(expression);</code></p>
 
 </h3>
     <div><p>Shorthand method.  <code>$sce.parseAsUrl(value)</code> →
-    <a href="api/ng/service/$sce#parse"><code>$sce.parseAs($sce.URL, value)</code></a></p>
+    <a href="api/ng/service/$sce#parseAs"><code>$sce.parseAs($sce.URL, value)</code></a></p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -1226,33 +1302,33 @@ are evaluated against (typically a scope object).</li>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-function">function(context, locals)</a></td>
-    <td><p>a function which represents the compiled expression:</p>
+    <td><p>A function which represents the compiled expression:</p>
 <ul>
-<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the strings
-are evaluated against (typically a scope object).</li>
-<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values in
-<code>context</code>.</li>
+<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the
+strings are evaluated against (typically a scope object).</li>
+<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values
+in <code>context</code>.</li>
 </ul>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="parseAsResourceUrl">
     <h3><p><code>parseAsResourceUrl(expression);</code></p>
 
 </h3>
     <div><p>Shorthand method.  <code>$sce.parseAsResourceUrl(value)</code> →
-    <a href="api/ng/service/$sce#parse"><code>$sce.parseAs($sce.RESOURCE_URL, value)</code></a></p>
+    <a href="api/ng/service/$sce#parseAs"><code>$sce.parseAs($sce.RESOURCE_URL, value)</code></a></p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -1289,33 +1365,33 @@ are evaluated against (typically a scope object).</li>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-function">function(context, locals)</a></td>
-    <td><p>a function which represents the compiled expression:</p>
+    <td><p>A function which represents the compiled expression:</p>
 <ul>
-<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the strings
-are evaluated against (typically a scope object).</li>
-<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values in
-<code>context</code>.</li>
+<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the
+strings are evaluated against (typically a scope object).</li>
+<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values
+in <code>context</code>.</li>
 </ul>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   
   <li id="parseAsJs">
     <h3><p><code>parseAsJs(expression);</code></p>
 
 </h3>
     <div><p>Shorthand method.  <code>$sce.parseAsJs(value)</code> →
-    <a href="api/ng/service/$sce#parse"><code>$sce.parseAs($sce.JS, value)</code></a></p>
+    <a href="api/ng/service/$sce#parseAs"><code>$sce.parseAs($sce.JS, value)</code></a></p>
 </div>
+
+    
 
     
     <h4>Parameters</h4>
@@ -1352,25 +1428,23 @@ are evaluated against (typically a scope object).</li>
     
 
     
-    
+
     
     <h4>Returns</h4>
     <table class="variables-matrix return-arguments">
   <tr>
     <td><a href="" class="label type-hint type-hint-function">function(context, locals)</a></td>
-    <td><p>a function which represents the compiled expression:</p>
+    <td><p>A function which represents the compiled expression:</p>
 <ul>
-<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the strings
-are evaluated against (typically a scope object).</li>
-<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values in
-<code>context</code>.</li>
+<li><code>context</code> – <code>{object}</code> – an object against which any expressions embedded in the
+strings are evaluated against (typically a scope object).</li>
+<li><code>locals</code> – <code>{object=}</code> – local variables context object, useful for overriding values
+in <code>context</code>.</li>
 </ul>
 </td>
   </tr>
 </table>
-    
-
-  </li>
+    </li>
   </ul>
   
   

@@ -1,7 +1,7 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/docs/content/error/$injector/pget.ngdoc?message=docs(error%2Fpget)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/error/$injector/pget.ngdoc?message=docs(error%2Fpget)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
-<h1>Error: error:pget
+<h1>Error: $injector:pget
   <div><span class='hint'>Provider Missing $get</span></div>
 </h1>
 
@@ -19,10 +19,10 @@ angular.module(&quot;myApp&quot;, [])
 </code></pre>
 <p>To fix the error, fill in the <code>$get</code> method on the provider like so:</p>
 <pre><code>function GoodProvider() {
-this.$get = angular.noop;
+  this.$get = angular.noop;
 }
 angular.module(&quot;myApp&quot;, [])
-.provider(&#39;good&#39;, GoodProvider);
+  .provider(&#39;good&#39;, GoodProvider);
 </code></pre>
 <p>For more information, refer to the <a href="api/auto/service/$provide#provider">$provide.provider</a> api doc.</p>
 

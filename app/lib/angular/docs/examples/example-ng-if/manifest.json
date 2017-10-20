@@ -1,0 +1,7 @@
+{
+  "name": "example-ng-if",
+  "files": [
+    "index-production.html",
+    "animations.css"
+  ]
+}

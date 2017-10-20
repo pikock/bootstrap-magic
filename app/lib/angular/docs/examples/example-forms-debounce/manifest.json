@@ -1,0 +1,7 @@
+{
+  "name": "example-forms-debounce",
+  "files": [
+    "index-production.html",
+    "script.js"
+  ]
+}

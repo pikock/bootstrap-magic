@@ -1,9 +1,48 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/src/ngRoute/route.js?message=docs(ngRoute)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ngRoute/route.js?message=docs(ngRoute)%3A%20describe%20your%20change...#L12' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
 <h1>
   <code>ngRoute</code>
 </h1>
+
+
+
+<h2>Installation</h2>
+
+
+  <p>First, get the file:</p>
+  <ul>
+    <li>
+      <a href="https://developers.google.com/speed/libraries/devguide#angularjs">Google CDN</a> e.g.
+      <pre><code>&quot;//ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-route.js&quot;</code></pre>
+    </li>
+    <li>
+      <a href="https://www.npmjs.com/">NPM</a> e.g.
+      <pre><code>npm install --save angular-route@X.Y.Z</code></pre>
+      or
+      <pre><code>yarn add angular-route@X.Y.Z</code></pre>
+    </li>
+    <li>
+      <a href="http://bower.io">Bower</a> e.g.
+      <pre><code>bower install angular-route#X.Y.Z</code></pre>
+    </li>
+    <li>
+      <a href="https://code.angularjs.org/">code.angularjs.org</a>
+      (discouraged for production use) e.g.
+      <pre><code>&quot;//code.angularjs.org/X.Y.Z/angular-route.js&quot;</code></pre>
+    </li>
+  </ul>
+  <p>where X.Y.Z is the AngularJS version you are running.</p>
+
+  <p>Then, include <code>angular-route.js</code> in your HTML:</p>
+
+  <pre><code>&lt;script src=&quot;path/to/angular.js&quot;&gt;&lt;/script&gt;&#10;&lt;script src=&quot;path/to/angular-route.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+  <p>Finally, load the module in your application by adding it as a dependent module:</p>
+  <pre><code>angular.module(&#39;app&#39;, [&#39;ngRoute&#39;]);</code></pre>
+
+  <p>With that you&apos;re ready to get started!</p>
+
 
 <h1 id="ngroute">ngRoute</h1>
 <p>The <code>ngRoute</code> module provides routing and deeplinking services and directives for angular apps.</p>
@@ -12,32 +51,7 @@
 <div doc-module-components="ngRoute"></div>
 
 
-  <h2>Installation</h2>
 
-  <p>First include <code>angular-route.js</code> in your HTML:</p>
-
-  <pre><code>    &lt;script src=&quot;angular.js&quot;&gt;&#10;    &lt;script src=&quot;angular-route.js&quot;&gt;</code></pre>
-
-  <p>You can download this file from the following places:</p>
-  <ul>
-    <li>
-      <a href="https://developers.google.com/speed/libraries/devguide#angularjs">Google CDN</a><br>
-      e.g. <code>//ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-route.js</code>
-    </li>
-    <li>
-      <a href="http://bower.io">Bower</a><br>
-      e.g. <pre><code>bower install angular-route@X.Y.Z</code></pre>
-    </li>
-    <li>
-      <a href="http://code.angularjs.org/">code.angularjs.org</a><br>
-      e.g. <pre><code>&quot;//code.angularjs.org/X.Y.Z/angular-route.js&quot;</code></pre>
-    </li>
-  </ul>
-  <p>where X.Y.Z is the AngularJS version you are running.</p>
-  <p>Then load the module in your application by adding it as a dependent module:</p>
-  <pre><code>  angular.module(&#39;app&#39;, [&#39;ngRoute&#39;]);</code></pre>
-
-  <p>With that you&apos;re ready to get started!</p>
 
 
 <div class="component-breakdown">
@@ -106,6 +120,7 @@ It watches <code>$location.url()</code> and tries to map the path to an existing
   </div>
   
 </div>
+
 
 
 

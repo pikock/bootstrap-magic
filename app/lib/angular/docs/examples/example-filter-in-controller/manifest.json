@@ -1,0 +1,7 @@
+{
+  "name": "example-filter-in-controller",
+  "files": [
+    "index-production.html",
+    "script.js"
+  ]
+}

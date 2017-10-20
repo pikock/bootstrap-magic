@@ -1,7 +1,7 @@
-<a href='https://github.com/angular/angular.js/edit/v1.2.x/docs/content/error/ng/areq.ngdoc?message=docs(error%2Fareq)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/error/ng/areq.ngdoc?message=docs(error%2Fareq)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
 
 
-<h1>Error: error:areq
+<h1>Error: ng:areq
   <div><span class='hint'>Bad Argument</span></div>
 </h1>
 
@@ -11,9 +11,11 @@
 
 <h2>Description</h2>
 <div class="description">
-  <p>AngularJS often asserts that certain values will be present and truthy using a
-helper function. If the assertion fails, this error is thrown. To fix this problem,
-make sure that the value the assertion expects is defined and truthy.</p>
+  <p>AngularJS often asserts that certain values will be present and truthy using a helper function. If
+the assertion fails, this error is thrown. To fix this problem, make sure that the value the
+assertion expects is defined and matches the type mentioned in the error.</p>
+<p>If the type is <code>undefined</code>, make sure any newly added controllers/directives/services are properly
+defined and included in the script(s) loaded by your page.</p>
 
 </div>
 

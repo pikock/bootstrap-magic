@@ -1,0 +1,17 @@
+custom-checkbox {
+  cursor: pointer;
+  display: inline-block;
+}
+
+custom-checkbox .icon:before {
+  content: '\2610';
+  display: inline-block;
+  font-size: 2em;
+  line-height: 1;
+  speak: none;
+  vertical-align: middle;
+}
+
+custom-checkbox.checked .icon:before {
+  content: '\2611';
+}

@@ -1,0 +1,8 @@
+{
+  "name": "example-module-suggested-layout",
+  "files": [
+    "index-production.html",
+    "script.js",
+    "protractor.js"
+  ]
+}
