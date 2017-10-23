@@ -115,7 +115,7 @@
   </div>
   <div class="protected protectedHtml">
     <div class="preview">
-      <iframe ng-src="{{blobUrl}}" frameborder="0" style="{{customCss}}">
+      <iframe ng-src="{{template.blobUrl}}" frameborder="0" style="{{template.css}}">
       </iframe>
     </div>
   </div>
@@ -145,7 +145,9 @@
 
 <div ng-if="show === 'editorHtml'">
   <div class="protected editorHtml">
+    <h3>HTML</h3>
     <div class="code-mirror is-html" data-template="html" ng-init="codemirrorLoaded('html')"></div>
+    <h3>CSS</h3>
     <div class="code-mirror is-css" data-template="css" ng-init="codemirrorLoaded('css')"></div>
   </div>
 </div>

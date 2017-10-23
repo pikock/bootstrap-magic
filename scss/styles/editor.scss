@@ -346,12 +346,16 @@
 .protected.editorHtml {
   margin-top: $editor-menu-height;
 
-  .is-html .CodeMirror {
-    height: calc(50vh - #{$editor-menu-height});
+  h3 {
+    margin: 0;
+    height: 40px;
+    line-height: 50px;
+    background: $indigo;
   }
 
+  .is-html .CodeMirror,
   .is-css .CodeMirror {
-    height: calc(50vh - #{$editor-menu-height});
+    height: calc(50vh - 65px);
   }
 }
 
@@ -401,7 +405,6 @@
   width: $html-width;
   height: $html-height;
   background: $html-bg;
-  padding: 20px;
   position: fixed;
   right: 0;
   top: $editor-menu-height;
