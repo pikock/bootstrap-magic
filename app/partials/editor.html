@@ -1,6 +1,6 @@
 <div class="protected editor">
   <header class="">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-indigo editor-open">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-indigo" ng-class="{ 'editor-open': show === 'variables'}">
       <div class="responsive-submenu">
         <a class="navbar-brand" href="/">
           <img src="/app/img/logo-boostrapmagic.svg" width="22.6" height="22.8" alt="logo">
@@ -20,7 +20,6 @@
         </span>
       </div>
 
-
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -30,20 +29,18 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <div class="dual-button">
-              <a class="nav-link">Variables</a>
-              <a class="nav-link">Html</a>
+              <a class="nav-link" ng-click="goTo('variables')">Variables</a>
+              <a class="nav-link" ng-click="goTo('editorHtml')">Html</a>
             </div>
           </li>
-
           <li class="nav-item">
-            <a class="nav-link">Prévisualiser</a>
+            <a class="nav-link" ng-click="goTo('previewHtml')">Prévisualiser</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">Example</a>
+            <a class="nav-link" ng-click="goTo('templateHtml')">Example</a>
           </li>
         </ul>
       </div>
-
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" ng-click="resetSassVariables()">Reset</a>
@@ -55,108 +52,108 @@
           <a class="nav-link fancy-button" ng-click="applySass()">Save</a>
         </li>
       </ul>
-
     </nav>
   </header>
 </div>
 
-
-<!-- <div class="protected">
-  <div class="navbar navbar-fixed-bottom" id="menuBottom" class="isEditor">
-    <form action="" class="form-horizontal">
-      <ul class="pull-left">
-        <li>
-          <button class="btn btn-primary" ng-click="applySass(false)">Apply</button>
-        </li>
-        <li>
-          <label class="checkbox">
-            <input type="checkbox" name="cssAutoapplySass" data-ng-model="autoapplysass">Auto</label>
-        </li>
-        <li>
-          <button class="btn" ng-click="saveSassVariables()">Save Sass Variables</button>
-        </li>
-        <li>
-          <button class="btn" data-toggle="modal" href="#thankYou" ng-click="saveCSS()">Save CSS</button>
-        </li>
-        <li>
-          <label class="checkbox">
-            <input type="checkbox" name="cssMinified" data-ng-model="minified">Minified</label>
-        </li>
-        <li>
-          <button data-toggle="modal" href="#myModal" class="btn">Import Sass Variables</button>
-        </li>
-        <li>
-          <button class="btn" ng-click="resetSassVariables()">Reset</button>
-        </li>
-      </ul>
-    </form>
-    <span class="sign">Handmade by
-      <a href="http://en.orson.io/17/build-responsive-website-without-coding/?utm_source=Bootstrap%20Magic%20&utm_medium=referral&utm_content=Footer&utm_campaign=Bootstrap"
-        title="create your website easily">Orson Website Builder</a> x
-      <a href="http://www.autreplanete.com/" title="web agency paris">Autre planète</a> in Paris.</span>
-  </div>
-</div> -->
-
-<div class="editor protected container-fluid p-0">
-  <div class="row m-0">
-    <div class="variables-container">
-      <div ng-repeat="group in variables">
-        <section class="category {{ group.name }}" ng-click="toggle(group)">
-          <span ng-bind="group.name"></span>
-          <span class="arrow is-left">></span>
-        </section>
-        <section class="variables protected" ng-hide="group.hidden">
-          <div class="form-group" ng-repeat="variable in group.data">
-            <label for="{{variable.key}}" ng-bind="variable.key"></label>
-            <input type="text" class="form-control" id="{{variable.key}}" aria-describedby="@font-family-sans-serif" ng-model="variable.value"
-              ng-change="autoApplySass()">
-          </div>
-        </section>
-      </div>
-    </div>
-    <div class="html">
-      <div class="preview">
-        <span ng-bind-html="customHtml"></span>
-      </div>
-    </div>
-  </div>
-  <!-- <div ui-codemirror="{ onLoad : codemirrorLoaded }" ng-model="x"></div>
-  <button ng-click="format()">Format</button>
-  <div class="col-md-12">
-    <div class="bd-example" data-example-id="editor">
-      For example,
-      <code>&lt;section&gt;</code> should be wrapped as inline.
-    </div>
-  </div> -->
-
-  <!-- <form class="piEditor">
-    <section ng-repeat="group in variables" class="{{ group.name }}">
-      <div class="row protected">
-        <div class="col-md-12">
-          <h2 class="groupNameTitle" id="{{ group.name }}">{{ group.name }}</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div ng-repeat="variable in group.data" class="protected form-group">
-            <label class="labelTitle">{{variable.key}}</label>
-            </td>
-            <div class="input {' ap-color-picker: variable.value': colorpicker(variable.type)} input-group" data-color="{{ color(variable.type, variable.value) }}"
-              data-color-format="hex" ng-class="{'input-group color colorpicker' : colorpicker(variable.type)}" color-picker-apply="">
-              <input id="" type="text" data-ng-model="variable.value" class="sassVariable form-control" ng-change="autoApplySass()">
-              <span class="input-group-addon reset" ng-click="resetBaseVariable(variable)">X</span>
-              <span class="input-group-addon" ng-class="{ 'hidden' : !colorpicker(variable.type)}">
-                <i></i>
-              </span>
+<div ng-if="show === 'variables'">
+  <div class="editor protected container-fluid p-0">
+    <div class="row m-0">
+      <div class="variables-container">
+        <div ng-repeat="group in variables">
+          <section class="category {{ group.name }}" ng-click="toggle(group)">
+            <span ng-bind="group.name"></span>
+            <span class="arrow is-left">></span>
+          </section>
+          <section class="variables protected" ng-hide="group.hidden">
+            <div class="form-group" ng-repeat="variable in group.data">
+              <label for="{{variable.key}}" ng-bind="variable.key"></label>
+              <input type="text" class="form-control" id="{{variable.key}}" aria-describedby="@font-family-sans-serif" ng-model="variable.value"
+                ng-change="autoApplySass()">
             </div>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div data-ng-include src="getGroupUrl()"></div>
+          </section>
         </div>
       </div>
-    </section>
-  </form> -->
+    </div>
+    <!-- <div ui-codemirror="{ onLoad : codemirrorLoaded }" ng-model="x"></div>
+        <button ng-click="format()">Format</button>
+        <div class="col-md-12">
+          <div class="bd-example" data-example-id="editor">
+            For example,
+            <code>&lt;section&gt;</code> should be wrapped as inline.
+          </div>
+        </div> -->
+
+    <!-- <form class="piEditor">
+          <section ng-repeat="group in variables" class="{{ group.name }}">
+            <div class="row protected">
+              <div class="col-md-12">
+                <h2 class="groupNameTitle" id="{{ group.name }}">{{ group.name }}</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div ng-repeat="variable in group.data" class="protected form-group">
+                  <label class="labelTitle">{{variable.key}}</label>
+                  </td>
+                  <div class="input {' ap-color-picker: variable.value': colorpicker(variable.type)} input-group" data-color="{{ color(variable.type, variable.value) }}"
+                    data-color-format="hex" ng-class="{'input-group color colorpicker' : colorpicker(variable.type)}" color-picker-apply="">
+                    <input id="" type="text" data-ng-model="variable.value" class="sassVariable form-control" ng-change="autoApplySass()">
+                    <span class="input-group-addon reset" ng-click="resetBaseVariable(variable)">X</span>
+                    <span class="input-group-addon" ng-class="{ 'hidden' : !colorpicker(variable.type)}">
+                      <i></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div data-ng-include src="getGroupUrl()"></div>
+              </div>
+            </div>
+          </section>
+        </form> -->
+  </div>
+  <div class="protected protectedHtml">
+    <div class="preview">
+      <iframe ng-src="{{blobUrl}}" frameborder="0" style="{{customCss}}">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<div ng-if="show === 'templateHtml'">
+  <div class="protected templateHtml">
+    <div class="row" ng-repeat="group in templates">
+      <div class="col-12">
+        <h3 ng-bind="group.name"></h3>
+      </div>
+
+      <div class="col" ng-repeat="template in group.data">
+        <div class="card">
+          <img class="card-img" ng-src="{{template.image_url}}" alt="{{template.slug}}">
+          <div class="card-body">
+            <h6 class="card-title" ng-bind="template.name"></h6>
+            <p class="card-text" ng-bind="template.description"></p>
+            <a class="btn btn-primary" ng-click="chooseTemplate(template)">Start</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div ng-if="show === 'editorHtml'">
+  <div class="protected editorHtml">
+    <div class="code-mirror is-html" data-template="html" ng-init="codemirrorLoaded('html')"></div>
+    <div class="code-mirror is-css" data-template="css" ng-init="codemirrorLoaded('css')"></div>
+  </div>
+</div>
+
+<div ng-if="show === 'previewHtml'">
+  <div class="protected previewHtml">
+    previewHtml
+  </div>
 </div>
 
 <div class="protected">
@@ -176,11 +173,8 @@
           <button data-dismiss="modal" aria-hidden="true" class="btn btn-primary" ng-click="importSassVariables(importedVariables)">Import</button>
         </div>
       </div>
-      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
   </div>
-  <!-- /.modal -->
 </div>
 
 <div class="protected">
