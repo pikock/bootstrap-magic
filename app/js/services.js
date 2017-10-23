@@ -5,9 +5,9 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 
-angular.module('data', []).service('data', [
+window.angular.module('data', []).service('data', [
   function data() {
-    var bootstrap_files = [
+    var bootstrapFiles = [
       '_ads.scss',
       '_alert.scss',
       '_algolia.scss',
@@ -163,7 +163,7 @@ angular.module('data', []).service('data', [
         !default;
     `
 
-    var font_keys = [
+    var fontKeys = [
       "'Helvetica Neue', Helvetica, Arial",
       'Georgia',
       "'Courrier New', Consolas",
@@ -1108,25 +1108,25 @@ angular.module('data', []).service('data', [
     ]
 
     return {
-      bootstrap_files: bootstrap_files,
+      bootstrapFiles: bootstrapFiles,
       cssToAdd: cssToAdd,
-      font_keys: font_keys,
+      fontKeys: fontKeys,
       sass_function_keys: sass_function_keys
     }
   }
 ])
 
-angular.module('apSass', []).factory('apSass', [
+window.angular.module('apSass', []).factory('apSass', [
   '$http',
   'data',
-  function($http, data) {
-    console.log(data)
-    Sass.setWorkerUrl('/app/lib/sass/sass.worker.js')
-    var sass = new Sass()
+  '$q',
+  function($http, data, $q) {
+    window.Sass.setWorkerUrl('/app/lib/sass/sass.worker.js')
+    var sass = new window.Sass()
     window.sass = sass
 
     var service = {
-      sass: new Sass(),
+      sass: new window.Sass(),
       importVariables: importVariables,
       getVariables: getVariables,
       setVariables: setVariables,
@@ -1142,58 +1142,56 @@ angular.module('apSass', []).factory('apSass', [
     // public function
 
     function applySass(scope) {
-      var vars = getVariables(scope)
-      var stringvar = getVariablesToString(scope)
+      return $q(function(resolve, reject) {
+        var vars = getVariables(scope)
+        var stringvar = getVariablesToString(scope)
 
-      preloadFile(data.bootstrap_files, stringvar + data.cssToAdd)
-
-      if (typeof vars.fonts !== undefined && vars.fonts.length !== 0) {
-        WebFont.load({
-          google: {
-            families: vars.fonts
-          }
-        })
-      }
-    }
-
-    function preloadFile(files, scss) {
-      var base = '../../scss/'
-      var directory = ''
-
-      sass.writeFile('toAddScss.scss', scss)
-
-      sass.preloadFiles(base, directory, files, function() {
-        var t0 = performance.now()
-
-        sass.readFile('bootstrap.scss', function callback(bootstrapContent) {
-          sass.compile(
-            ".preview { @import 'functions'; @import 'toAddScss';" + bootstrapContent + '}',
-            function(result) {
-              console.log(result)
-              addStyle(result.text)
-              var t1 = performance.now()
-              console.log('Call to doSomething took ' + (t1 - t0) / 1000 + ' seconds.')
+        preloadFile(data.bootstrapFiles, stringvar + data.cssToAdd)
+          .then(function(result) {
+            resolve(result)
+            if (typeof vars.fonts !== 'undefined' && vars.fonts.length !== 0) {
+              window.WebFont.load({
+                google: {
+                  families: vars.fonts
+                }
+              })
             }
-          )
-        })
+          })
+          .catch(function(error) {
+            console.error(error)
+          })
       })
     }
 
-    function addStyle(css) {
-      var head = document.head || document.getElementsByTagName('head')[0]
-      var style = document.createElement('style')
-      var previousStyle = document.querySelector('.previewStyle')
-      if (previousStyle) {
-        previousStyle.remove()
-      }
-      style.type = 'text/css'
-      style.classList.add('previewStyle')
-      style.appendChild(document.createTextNode(css))
+    function preloadFile(files, scss) {
+      return $q(function(resolve, reject) {
+        try {
+          var base = '../../scss/'
+          var directory = ''
 
-      head.appendChild(style)
+          sass.writeFile('toAddScss.scss', scss)
+
+          sass.preloadFiles(base, directory, files, function() {
+            var t0 = performance.now()
+
+            sass.readFile('bootstrap.scss', function callback(bootstrapContent) {
+              sass.compile("@import 'functions'; @import 'toAddScss';" + bootstrapContent, function(
+                result
+              ) {
+                console.log(result)
+                var t1 = performance.now()
+                console.log('Call to preloadFile took ' + (t1 - t0) / 1000 + ' seconds.')
+                resolve(result.text)
+              })
+            })
+          })
+        } catch (e) {
+          reject(e)
+        }
+      })
     }
 
-    preloadFile(data.bootstrap_files)
+    preloadFile(data.bootstrapFiles)
 
     function importVariables($scope, string) {
       var regex = {
@@ -1259,7 +1257,7 @@ angular.module('apSass', []).factory('apSass', [
       var fonts = []
       for (var i = 0; i < $scope.variables.length; i++) {
         for (var j = 0; j < $scope.variables[i].data.length; j++) {
-          if ($scope.variables[i].data[j].type == 'font') {
+          if ($scope.variables[i].data[j].type === 'font') {
             fonts.push($scope.variables[i].data[j].value)
           }
           variables[$scope.variables[i].data[j].key] = $scope.variables[i].data[j].value
@@ -1301,7 +1299,7 @@ angular.module('apSass', []).factory('apSass', [
     }
 
     function getFonts($scope) {
-      var keys = data.font_keys
+      var keys = data.fontKeys
       $.ajax({
         url:
           'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBb_pLbXGeesG8wE32FMtywG4Vsfq6Uk_8',
@@ -1383,4 +1381,6 @@ angular.module('apSass', []).factory('apSass', [
   }
 ])
 
-angular.module('bootstrapVariablesEditor.services', ['apSass', 'data']).value('version', '0.2')
+window.angular
+  .module('bootstrapVariablesEditor.services', ['apSass', 'data'])
+  .value('version', '0.2')

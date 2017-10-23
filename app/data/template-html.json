@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Frameworks",
+    "data": [
+      {
+        "name": "Empty",
+        "slug": "empty",
+        "description": "Nothing",
+        "image_url": ""
+      },
+      {
+        "name": "Starter Template",
+        "slug": "starter-template",
+        "description": "Nothing but the basics: compiled CSS and JavaScript.",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/starter-template.jpg"
+      },
+      {
+        "name": "Grids",
+        "slug": "grids",
+        "description": "Multiple examples of grid layouts with all four tiers, nesting, and more.",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/grid.jpg"
+      },
+      {
+        "name": "Jumbotron",
+        "slug": "jumbotron",
+        "description": "Build around the jumbotron with a navbar and some basic grid columns.",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/jumbotron.jpg"
+      },
+      {
+        "name": "Jumbotron Narrow",
+        "slug": "jumbotron-narrow",
+        "description": "Build a more custom page by narrowing the default container and jumbotron.",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/jumbotron-narrow.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Frameworks 2",
+    "data": [
+      {
+        "name": "Empty",
+        "slug": "empty",
+        "image_url": ""
+      },
+      {
+        "name": "Starter Template",
+        "slug": "starter-template",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/starter-template.jpg"
+      },
+      {
+        "name": "Grids",
+        "slug": "grids",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/grid.jpg"
+      },
+      {
+        "name": "Jumbotron",
+        "slug": "jumbotron",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/jumbotron.jpg"
+      },
+      {
+        "name": "Jumbotron Narrow",
+        "slug": "jumbotron-narrow",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/jumbotron-narrow.jpg"
+      }
+    ]
+  }
+]

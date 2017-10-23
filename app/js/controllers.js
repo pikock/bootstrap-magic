@@ -1,16 +1,20 @@
 /* Controllers */
+var angular = window.angular
 
-function SassCtrl($scope, $http, apSass, $timeout) {
+function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
   var scopeVar = {
     variables: {},
     fonts: {},
-    autoapplysass: false,
+    templates: undefined,
+    autoapplysass: true,
     isViewLoading: false,
-    minified: false,
+    show: 'variables',
     editorOptions: {
-      lineWrapping: true,
+      lineWrapping: false,
       lineNumbers: true,
+      firstLineNumber: 1,
       mode: 'text/html',
+      tabSize: 2,
       onKeyEvent: function(e, s) {
         if (s.type === 'keyup') {
           window.CodeMirror.showHint(e)
@@ -18,29 +22,11 @@ function SassCtrl($scope, $http, apSass, $timeout) {
       },
       extraKeys: { 'Ctrl-Space': 'autocomplete' }
     },
-    myHTML:
-      'I am an <code>HTML</code>string with ' + '<a href="#">links!</a> and other <em>stuff</em>',
-    customHtml: `<div class="bd-example" data-example-id="">
-      <div class="p-4 mb-2 bg-primary text-white">.bg-primary</div>
-      <div class="p-4 mb-2 bg-secondary text-white">.bg-secondary</div>
-      <div class="p-4 mb-2 bg-success text-white">.bg-success</div>
-      <div class="p-4 mb-2 bg-danger text-white">.bg-danger</div>
-      <div class="p-4 mb-2 bg-warning text-white">.bg-warning</div>
-      <div class="p-4 mb-2 bg-info text-white">.bg-info</div>
-      <div class="p-4 mb-2 bg-light text-gray-dark">.bg-light</div>
-      <div class="p-4 mb-2 bg-dark text-white">.bg-dark</div>
-      <div class="p-4 mb-2 bg-white text-gray-dark">.bg-white</div>
-      <div class="p-4 mb-2 swatch-100">.swatch-100</div>
-      <div class="p-4 mb-2 swatch-200">.swatch-200</div>
-      <div class="p-4 mb-2 swatch-300">.swatch-300</div>
-      <div class="p-4 mb-2 swatch-400">.swatch-400</div>
-      <div class="p-4 mb-2 swatch-500">.swatch-500</div>
-      <div class="p-4 mb-2 swatch-600">.swatch-600</div>
-      <div class="p-4 mb-2 swatch-700">.swatch-700</div>
-      <div class="p-4 mb-2 swatch-800">.swatch-800</div>
-      <div class="p-4 mb-2 swatch-900">.swatch-900</div>
-    </div>
-    `
+    template: {
+      blobUrl: undefined,
+      html: undefined,
+      css: undefined
+    }
   }
 
   var scopeFunction = {
@@ -54,10 +40,14 @@ function SassCtrl($scope, $http, apSass, $timeout) {
     saveCSS: saveCSS,
     resetSassVariables: resetSassVariables,
     saveSassVariables: saveSassVariables,
+    initTemplatesVariables: initTemplatesVariables,
     resetBaseVariable: resetBaseVariable,
     codemirrorLoaded: codemirrorLoaded,
     format: format,
-    toggle: toggle
+    toggle: toggle,
+    goTo: goTo,
+    chooseTemplate: chooseTemplate,
+    generatePreviewHtml: generatePreviewHtml
   }
 
   $scope.$on('$routeChangeStart', function() {
@@ -76,23 +66,53 @@ function SassCtrl($scope, $http, apSass, $timeout) {
     window.CodeMirror.showHint(cm, window.CodeMirror.hint.html)
   }
 
+  function goTo(route) {
+    middleware(route)
+  }
+
+  function middleware(route) {
+    if (route === 'show') {
+      generatePreviewHtml()
+    }
+    $scope.show = route || 'show'
+  }
+
   function toggle(group) {
     group.hidden = !group.hidden
   }
 
-  function codemirrorLoaded(editor) {
+  function codemirrorLoaded(selector) {
+    var el = document.querySelector('.code-mirror[data-template="' + selector + '"]')
+    var editor = window.CodeMirror(el, $scope.editorOptions)
     $scope.editor = editor
-    // var modification = 0
     var doc = editor.getDoc()
     editor.focus()
-    editor.setValue($scope.x)
-    editor.setOption($scope.editorOptions)
+    editor.setValue($scope.template[selector])
     doc.markClean()
+
+    window.doc = doc
+    window.editor = editor
 
     editor.on('change', function() {
       var html = editor.getValue()
-      var code = document.querySelector('div[data-example-id="editor"]')
-      code.innerHTML = html
+      $scope.customHtml = html
+    })
+  }
+
+  function chooseTemplate(template) {
+    $http({
+      method: 'GET',
+      url: 'preview/' + template.slug + '.html'
+    }).then(function(templateHtml) {
+      $scope.template.html = templateHtml
+      $http({
+        method: 'GET',
+        url: 'preview/' + template.slug + '.css'
+      }).then(function(templateCss) {
+        $scope.template.css = templateCss.data
+        $scope.show = 'variables'
+        applySass()
+      })
     })
   }
 
@@ -100,24 +120,34 @@ function SassCtrl($scope, $http, apSass, $timeout) {
     $scope.editor.setValue(window.html_beautify($scope.editor.getValue()))
   }
 
+  function initTemplatesVariables() {
+    $http({
+      method: 'GET',
+      url: 'data/template-html.json'
+    }).then(function(response) {
+      $scope.templates = response.data
+    })
+  }
+
   function initSassVariables() {
     $http({
       method: 'GET',
-      url: 'scss/variables.json'
+      url: 'data/scss-variables.json'
     }).then(function(response) {
       $scope.variables = response.data.map(function(d) {
         d.hidden = true
         return d
       })
+
       $scope.applySass(false)
 
-      var variables_keys = apSass.getKeys($scope)
-      var icons_keys = apSass.getUrls()
-      var fonts_keys = apSass.getFonts()
+      var variablesKeys = apSass.getKeys($scope)
+      var iconsKeys = apSass.getUrls()
+      var fontsKeys = apSass.getFonts()
 
       $timeout(function() {
         var $colorpicker = $('.colorpicker')
-        $colorpicker.colorpicker().on('changeColor', function(ev) {
+        $colorpicker.colorpicker().on('cha  ngeColor', function(ev) {
           var scope = angular.element(this).scope()
           scope.variable.value = ev.color.toHex()
 
@@ -132,21 +162,23 @@ function SassCtrl($scope, $http, apSass, $timeout) {
           if (this.dataset.color !== color.value) {
           }
         })
+
         $('.sassVariable').each(function(index) {
+          var src
           var scope = angular.element(this).scope()
           switch (scope.variable.type) {
             case 'icons':
-              var src = icons_keys
+              src = iconsKeys
               break
             case 'font':
-              var src = fonts_keys
+              src = fontsKeys
               break
             case 'boolean':
-              var src = ['true', 'false']
+              src = ['true', 'false']
               break
             case 'color':
             default:
-              var src = variables_keys
+              src = variablesKeys
           }
           $(this).typeahead({
             source: src,
@@ -162,12 +194,38 @@ function SassCtrl($scope, $http, apSass, $timeout) {
 
   function autoApplySass(event) {
     if ($scope.autoapplysass) {
-      apSass.applySass($scope)
+      applySass(event)
     }
   }
 
-  function applySass(applyAll) {
-    apSass.applySass($scope)
+  function generatePreviewHtml(css, html) {
+    var previewCss = css || $scope.customCss
+    var previewHtml = html || $scope.customHtml
+    var generateHtml =
+      '<!doctype html><html lang="en"><head>' +
+      previewCss +
+      '</head><body><div class="preview">' +
+      previewHtml +
+      '</div></body></html>'
+    var blob = new Blob([generateHtml], {
+      type: 'text/html'
+    })
+
+    $timeout(function() {
+      $scope.blobUrl = $sce.trustAsResourceUrl(URL.createObjectURL(blob))
+    }, 0)
+  }
+
+  function applySass() {
+    apSass
+      .applySass($scope)
+      .then(function(result) {
+        $scope.customCss = '<style>' + result + '</style>'
+        generatePreviewHtml()
+      })
+      .catch(function(error) {
+        console.error(error)
+      })
   }
 
   function resetBaseVariable(variable) {
@@ -218,8 +276,7 @@ function SassCtrl($scope, $http, apSass, $timeout) {
   }
 
   initSassVariables()
+  initTemplatesVariables()
 }
-SassCtrl.$inject = ['$scope', '$http', 'apSass', '$timeout']
 
-function PageCtrl($scope, $http, apSass) {}
-PageCtrl.$inject = ['$scope', '$http', 'apSass']
+SassCtrl.$inject = ['$scope', '$http', 'apSass', '$timeout', '$sce', '$q']

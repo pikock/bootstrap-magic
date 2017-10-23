@@ -2,7 +2,7 @@
 
 /* Directives */
 
-angular
+window.angular
   .module('bootstrapVariablesEditor.directives', [])
   .directive('colorPickerApply', [
     function() {
