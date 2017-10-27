@@ -13,9 +13,9 @@
             data-lang="en" data-hashtags="bootstrap, angularjs">
             <img src="../app/img/icn-twitter.svg" width="24" height="24">
           </a>
-          <div data-href="http://pikock.github.io/bootstrap-magic/ " data-send="false " data-layout="button_count" data-width="24"
-            data-show-faces="false " data-action="like ">
-            <img src="../app/img/icn-facebook.svg " width="24" height="24">
+          <div data-href="http://pikock.github.io/bootstrap-magic/" data-send="false" data-layout="button_count" data-width="24" data-show-faces="false"
+            data-action="like">
+            <img src="../app/img/icn-facebook.svg" width="24" height="24">
           </div>
 
         </span>
@@ -29,11 +29,11 @@
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a ng-class="{ 'active': show === 'variables'}" class="nav-link" ng-click="goTo('show', 'variables')">Variables editor</a>
+            <a ng-class="{ 'not-active': show !== 'variables'}" class="nav-link" ng-click="goTo('show', 'variables')">Variables editor</a>
           </li>
 
           <li class="nav-item">
-            <a ng-class="{ 'active': show === 'editorHtml'}" class="nav-link" ng-click="goTo('show', 'editorHtml')">HTML editor</a>
+            <a ng-class="{ 'not-active': show !== 'editorHtml'}" class="nav-link" ng-click="goTo('show', 'editorHtml')">HTML editor</a>
           </li>
         </ul>
       </div>
@@ -67,7 +67,8 @@
               <label for="{{variable.key}}" ng-bind="variable.key"></label>
               <div class="input {' ap-color-picker: variable.value': colorpicker(variable.type)} input-group" data-color="{{ color(variable.type, variable.value) }}"
                 data-color-format="hex" ng-class="{'input-group color colorpicker' : colorpicker(variable.type)}" color-picker-apply="">
-                <input id="{{variable.key}}" type="text" data-ng-model="variable.value" class="sassVariable form-control" ng-change="autoApplySass()">
+                <input id="{{variable.key}}" type="text" data-ng-model="variable.value" class="sassVariable form-control" ng-model-options='{ updateOn: "blur" }'
+                  ng-change="autoApplySass()">
                 <span class="reset" ng-click="resetBaseVariable(variable)" ng-if="variable.value !== variable.default">x</span>
                 <span class="input-group-addon" ng-class="{ 'hidden' : !colorpicker(variable.type)}">
                   <i></i>
@@ -78,84 +79,55 @@
         </div>
       </div>
     </div>
-
-    <!-- <form class="piEditor">
-          <section ng-repeat="group in variables" class="{{ group.name }}">
-            <div class="row protected">
-              <div class="col-md-12">
-                <h2 class="groupNameTitle" id="{{ group.name }}">{{ group.name }}</h2>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <div ng-repeat="variable in group.data" class="protected form-group">
-                  <label class="labelTitle">{{variable.key}}</label>
-                  </td>
-                  <div class="input {' ap-color-picker: variable.value': colorpicker(variable.type)} input-group" data-color="{{ color(variable.type, variable.value) }}"
-                    data-color-format="hex" ng-class="{'input-group color colorpicker' : colorpicker(variable.type)}" color-picker-apply="">
-                    <input id="" type="text" data-ng-model="variable.value" class="sassVariable form-control" ng-change="autoApplySass()">
-                    <span class="input-group-addon reset" ng-click="resetBaseVariable(variable)">X</span>
-                    <span class="input-group-addon" ng-class="{ 'hidden' : !colorpicker(variable.type)}">
-                      <i></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-8">
-                <div data-ng-include src="getGroupUrl()"></div>
-              </div>
-            </div>
-          </section>
-        </form> -->
   </div>
   <div class="protected protectedHtml">
     <div class="blockview is-hidden"></div>
-    <div class="preview">
-      <iframe ng-src="{{template.blobUrl}}" frameborder="0" style="{{template.css}}">
+    <div class="preview protected-css">
+      <iframe class="fixedPreview" ng-src="{{fixedContent.blobUrl}}" frameborder="0">
       </iframe>
     </div>
   </div>
 </div>
 
-<div ng-if="show === 'editorHtml'">
+<div ng-if="show==='editorHtml'">
   <div class="protected editorHtml">
     <div class="sub-bar bg-indigo">
-      <ul class="nav">
-        <li class="nav-item" ng-hide="subRoute !== 'html'">
+      <ul class="nav sub-nav">
+        <li class="nav-item" ng-hide="subRoute !=='html'">
           <label class="form-check-label">
             <input type="checkbox" ng-model="showHTML" class="form-check-input"> HTML
           </label>
         </li>
 
-        <li class="nav-item" ng-hide="subRoute !== 'html'">
+        <li class="nav-item" ng-hide="subRoute !=='html'">
           <label class="form-check-label">
             <input type="checkbox" ng-model="showCSS" class="form-check-input"> CSS
           </label>
         </li>
       </ul>
-      <ul class="nav justify-content-center">
+      <ul class="nav justify-content-center main-nav">
         <li class="nav-item">
-          <a class="nav-link" ng-class="{'active': subRoute === 'html' }" ng-click="goTo('subRoute', 'html')">Content Editor</a>
+          <a class="nav-link" ng-class="{ 'active': subRoute==='html' }" ng-click="goTo( 'subRoute', 'html')">Content Editor</a>
         </li>
         <li class="nav-item">
-          <a ng-class="{ 'active': show === 'templateHtml'}" class="nav-link" ng-click="goTo('subRoute', 'templateHtml')">Examples</a>
+          <a ng-class="{ 'active': subRoute==='templateHtml' }" class="nav-link" ng-click="goTo( 'subRoute','templateHtml')">Examples</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" ng-class="{'active': subRoute === 'preview' }" ng-click="goTo('subRoute', 'preview')">Preview</a>
+          <a class="nav-link" ng-class="{ 'active': subRoute==='preview' }" ng-click="goTo( 'subRoute', 'preview')">Preview</a>
         </li>
       </ul>
     </div>
-    <div ng-show="subRoute === 'html'">
-      <div class="editor-html" ng-if="showHTML" ng-class="{'fullsize': showHTML && !showCSS }">
+    <div ng-if="subRoute==='html'">
+      <div class="editor-html" ng-if="showHTML" ng-class="{ 'fullsize': showHTML && !showCSS }">
         <h3>HTML</h3>
-        <div class="code-mirror is-html" data-template="html" ng-init="codemirrorLoaded('html')"></div>
+        <div class="code-mirror is-html" data-template="html" ng-init="codemirrorLoaded( 'html')"></div>
       </div>
-      <div class="editor-css" ng-if="showCSS" ng-class="{'fullsize': !showHTML && showCSS }">
+      <div class="editor-css" ng-if="showCSS" ng-class="{ 'fullsize': !showHTML && showCSS }">
         <h3>CSS</h3>
         <div class="code-mirror is-css" data-template="css" ng-init="codemirrorLoaded('css')"></div>
       </div>
     </div>
-    <div ng-show="subRoute === 'templateHtml'">
+    <div ng-show="subRoute==='templateHtml'">
       <div class="protected templateHtml">
         <div class="row" ng-repeat="group in templates">
           <div class="col-12 text-center" style="padding: 50px 15px;">
@@ -169,7 +141,7 @@
                 <h6 class="card-title" ng-bind="template.name"></h6>
                 <p class="card-text" ng-bind="template.description"></p>
                 <div class="col text-center mt-4">
-                  <a class="fancy-button is-boring is-green " ng-click="chooseTemplate(template)">Start</a>
+                  <a class="fancy-button is-boring is-green" ng-click="chooseTemplate(template)">Start</a>
                 </div>
 
               </div>
@@ -179,67 +151,13 @@
 
       </div>
     </div>
-    <div ng-show="subRoute === 'preview'">
+    <div ng-if="subRoute==='preview'">
       <div class="protected previewHtml">
-        <iframe ng-src="{{template.blobUrl}}" frameborder="0" style="{{template.css}}">
+        <iframe ng-src="{{template.blobUrl}}" frameborder="0">
         </iframe>
       </div>
     </div>
   </div>
-</div>
-
-
-
-<div class="protected">
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 id="myModalLabel">
-            <span class="apico games apico-cloud-upload"></span>Import your Sass Variables</h4>
-        </div>
-        <div class="modal-body">
-          <p>Add your Sass variables to Bootstrap Magic.</p>
-          <textarea class="form-control" ng-model="importedVariables" rows="3" placeholder="Example @text-color : #242424;" style="height:400px"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button data-dismiss="modal" aria-hidden="true" class="btn btn-primary" ng-click="importSassVariables(importedVariables)">Import</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="protected">
-  <div class="modal fade" id="thankYou" tabindex="-1" role="dialog" aria-labelledby="thankYouLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 id="myModalLabel">
-            <span class="apico games apico-cloud-upload"></span>Thanks you for using Bootstrap Magic.</h4>
-        </div>
-        <div class="modal-body">
-          <p>Thanks you for using Bootstrap Magic. Just wait a little bit. We are compiling your CSS.
-          </p>
-          <br>
-          <div class="text-center">
-            <a class="" href="http://en.orson.io/17/build-responsive-website-without-coding/?utm_source=Bootstrap%20Magic%20&utm_medium=referral&utm_content=Footer&utm_campaign=Bootstrap"
-              target="_blank" title="Try Orson website builder">
-              <img src="../app/img/orson-website-ad.jpg" class="img-responsive" alt="Create responsive website without coding">
-            </a>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button data-dismiss="modal" aria-hidden="true" class="btn">Close</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
 </div>
 
 <div id="scrollTop" scroll-top="">↑</div>

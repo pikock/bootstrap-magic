@@ -1181,6 +1181,7 @@ window.angular.module('apSass', []).factory('apSass', [
                 console.log(result)
                 var t1 = performance.now()
                 console.log('Call to preloadFile took ' + (t1 - t0) / 1000 + ' seconds.')
+                addStyle(result.text)
                 resolve(result.text)
               })
             })
@@ -1189,6 +1190,14 @@ window.angular.module('apSass', []).factory('apSass', [
           reject(e)
         }
       })
+    }
+
+    function addStyle(style) {
+      console.log('AddStyle')
+      var styleContent = $('iframe.fixedPreview')
+        .get(0)
+        .contentWindow.document.querySelector('style')
+      styleContent.innerText = style
     }
 
     preloadFile(data.bootstrapFiles)

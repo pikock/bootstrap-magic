@@ -40,6 +40,11 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
         extraKeys: { 'Ctrl-Space': 'autocomplete' }
       }
     },
+    fixedContent: {
+      blobUrl: '',
+      html: '<h1>H1</h1><h2>H2</h2><h3>H3</h3><h4>H4</h4><h5>H5</h5><h6>H6</h6>',
+      css: ''
+    },
     template: {
       blobUrl: '',
       html: '<h1>H1</h1><h2>H2</h2><h3>H3</h3><h4>H4</h4><h5>H5</h5><h6>H6</h6>',
@@ -65,7 +70,8 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     toggle: toggle,
     goTo: goTo,
     chooseTemplate: chooseTemplate,
-    generatePreviewHtml: generatePreviewHtml
+    generatePreviewHtml: generatePreviewHtml,
+    generateFixedHtml: generateFixedHtml
   }
 
   $scope.$on('$routeChangeStart', function() {
@@ -85,7 +91,7 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
   }
 
   function goTo(routePath, route) {
-    if (route === 'show' || route === 'preview') {
+    if (routePath === 'subRoute' && route === 'preview') {
       generatePreviewHtml()
     }
     $scope[routePath] = route
@@ -122,14 +128,16 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
       method: 'GET',
       url: 'preview/' + template.slug + '.html'
     }).then(function(templateHtml) {
-      $scope.template.html = templateHtml.data
       $http({
         method: 'GET',
         url: 'preview/' + template.slug + '.css'
       }).then(function(templateCss) {
-        $scope.template.css = templateCss.data
-        $scope.show = 'variables'
+        $scope.subRoute = 'preview'
         applySass()
+        $timeout(function() {
+          $scope.template.html = templateHtml.data
+          $scope.template.css = templateCss.data
+        }, 1)
       })
     })
   }
@@ -223,6 +231,25 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     }
   }
 
+  function generateFixedHtml(css, html) {
+    var generatedCss = css || $scope.generatedCss
+    console.log(generatedCss)
+    var templateHtml = html || $scope.fixedContent.html
+    var generateHtml =
+      '<!doctype html><html lang="en"><head>' +
+      '<style>body { display: none }</style>' +
+      '</head><body><div class="preview">' +
+      templateHtml +
+      '</div></body></html>'
+    var blob = new Blob([generateHtml], {
+      type: 'text/html'
+    })
+
+    $timeout(function() {
+      $scope.fixedContent.blobUrl = $sce.trustAsResourceUrl(URL.createObjectURL(blob))
+    }, 0)
+  }
+
   function generatePreviewHtml(css, html) {
     var generatedCss = css || $scope.generatedCss
     var templateHtml = html || $scope.template.html
@@ -239,7 +266,6 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     })
 
     $timeout(function() {
-      // callColorpicker()
       $scope.template.blobUrl = $sce.trustAsResourceUrl(URL.createObjectURL(blob))
     }, 0)
   }
@@ -290,6 +316,7 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
   }
 
   function importSassVariables(string) {
+    // TODO: Open Modal
     $scope = apSass.importVariables($scope, string)
     $scope.applySass()
   }
@@ -307,6 +334,7 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
 
   initSassVariables()
   initTemplatesVariables()
+  generateFixedHtml()
 }
 
 SassCtrl.$inject = ['$scope', '$http', 'apSass', '$timeout', '$sce', '$q']

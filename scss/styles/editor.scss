@@ -289,6 +289,9 @@ footer.protected {
     .nav-link {
       margin: 0 0 0 30px;
       color: white;
+      &.not-active {
+        color: #d4d4d4;
+      }
     }
 
     a {
@@ -299,37 +302,19 @@ footer.protected {
       cursor: pointer;
 
       &.active {
-        color: #adadad;
+        color: #d4d4d4;
       }
     }
 
     .second-navbar .nav-link {
       margin: 0 20px 0 0;
       padding: 0 16px;
+      font-size: 14px;
     }
 
     .navbar-brand {
       float: left;
       line-height: $editor-menu-height;
-    }
-
-    .dual-button {
-      overflow: hidden;
-      border-radius: 2px;
-      border: 1px solid white;
-
-      button,
-      a.nav-link {
-        float: left;
-        margin: 0;
-        border: 1px solid white;
-        height: 28px;
-        line-height: 28px;
-
-        &.active {
-          background: #222339;
-        }
-      }
     }
 
     .responsive-submenu {
@@ -460,16 +445,21 @@ footer.protected {
   display: flex;
   flex-direction: column;
 
-  .sub-bar > .nav:first-child {
-    min-width: 330px;
+  .sub-bar > .sub-nav {
+    min-width: $sub-nav-width;
     margin: 0;
     float: left;
-    height: 40px;
+    height: $sub-bar-height;
     padding: 0px 0 0 6px;
   }
 
+  .sub-bar > .main-nav {
+    padding: 0 $sub-nav-width 0 0;
+    margin: 0;
+  }
+
   label {
-    line-height: 40px;
+    line-height: $sub-bar-height;
     margin: 0 0 0 23px;
   }
 
@@ -482,7 +472,8 @@ footer.protected {
     }
   }
 
-  h3 {
+  .editor-html h3,
+  .editor-css h3 {
     padding: 0 27px;
     margin: 0;
     height: 40px;
@@ -523,8 +514,25 @@ footer.protected {
 .protected.templateHtml {
   @extend .bg-indigo;
   @extend .container-fluid;
-  min-height: calc(100vh - 50px);
-  padding-left: 370px;
+  height: calc(100vh - 90px);
+  padding: 0 50px;
+  box-sizing: border-box;
+  margin: 0;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background-color: $light-indigo;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 30px;
+    background-color: $category-color;
+  }
 
   .card {
     max-width: 230px;
