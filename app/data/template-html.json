@@ -3,12 +3,6 @@
     "name": "Frameworks",
     "data": [
       {
-        "name": "Empty",
-        "slug": "empty",
-        "description": "Nothing",
-        "image_url": ""
-      },
-      {
         "name": "Starter Template",
         "slug": "starter-template",
         "description": "Nothing but the basics: compiled CSS and JavaScript.",
@@ -37,11 +31,6 @@
   {
     "name": "Frameworks 2",
     "data": [
-      {
-        "name": "Empty",
-        "slug": "empty",
-        "image_url": ""
-      },
       {
         "name": "Starter Template",
         "slug": "starter-template",

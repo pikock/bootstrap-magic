@@ -4,14 +4,16 @@ $gray-800: #d1d1d1;
 
 $white: #d4d4d4;
 $purple: #060611;
+$light-indigo: #222339;
 $indigo: #03041a;
+$dark-indigo: #2d2f54;
 $green: #0fd9b7;
 
 $open-sans: 'Open Sans', 'Arial', sans-serif;
 
 $editor-menu-height: 50px;
 
-$category-bg: #222339;
+$category-bg: $light-indigo;
 $category-color: #bebebe;
 
 $variables-padding: 20px;
@@ -38,3 +40,5 @@ $input-border-color: white;
 $input-border-radius: 0px;
 $input-btn-padding-y: 0.6rem;
 $input-btn-padding-x: 0.75rem;
+
+$colorpicker-size: 32px;

@@ -33,7 +33,7 @@
   }
 
   a {
-    color: #83858f;
+    color: $gray-600;
     letter-spacing: -0.21px;
   }
 
@@ -41,6 +41,30 @@
     margin: 34px 0 10px;
   }
 
+  .hidden {
+    display: none;
+  }
+
+  .reset {
+    position: absolute;
+    z-index: 4;
+    right: 0;
+    text-align: center;
+    display: block;
+    line-height: 25px;
+    margin: 8px;
+    height: 25px;
+    color: black;
+    border-radius: 50%;
+    background: #fff;
+    width: 25px;
+  }
+
+  .color .reset {
+    right: 45px;
+  }
+
+  button.fancy-button,
   a.fancy-button {
     background-image: linear-gradient(-80deg, #0be49b 0%, #14cbd9 100%);
     box-shadow: 0 0 25px 0 #0c7563;
@@ -48,12 +72,17 @@
     padding: 11px 20px 9px 23px;
     color: #ffffff;
     letter-spacing: 0.01px;
+    cursor: pointer;
 
     &.is-boring {
       background: transparent;
       border: 1px solid #ffffff;
       box-shadow: 0 0 8px 0 rgba(200, 200, 200, 0.5);
       border-radius: 2px;
+    }
+
+    &.is-green {
+      box-shadow: 0 0 25px 0 #0c7563;
     }
 
     &.is-big {
@@ -79,6 +108,14 @@
 }
 
 // HOME
+footer.protected {
+  border-top: 1px solid $dark-indigo;
+  .rs div,
+  .rs a {
+    width: 100%;
+  }
+}
+
 .protected {
   .rs div,
   .rs a {
@@ -88,17 +125,10 @@
   .logo-header {
     margin: 80px 0 20px;
   }
+
   nav {
     padding: 0.5rem 2rem;
-    border-bottom: 1px solid #2d2f54;
-  }
-
-  &footer {
-    border-top: 1px solid #2d2f54;
-    .rs div,
-    .rs a {
-      width: 100%;
-    }
+    border-bottom: 1px solid $dark-indigo;
   }
 
   .section-cta {
@@ -133,6 +163,13 @@
     input {
       width: 100%;
     }
+
+    @include media-breakpoint-down(xs) {
+      button {
+        margin: 20px 0 0 0;
+        width: 100%;
+      }
+    }
   }
 }
 
@@ -141,7 +178,7 @@
   .paper-plane {
     position: absolute;
     top: 1px;
-    right: 0px;
+    right: -55px;
 
     @include media-breakpoint-up(md) {
       right: 35px;
@@ -237,6 +274,8 @@
 // EDITOR SPECIFIC
 .protected.editor {
   nav {
+    background: $light-indigo;
+    height: $editor-menu-height;
     position: fixed;
     top: 0;
     z-index: 1;
@@ -245,11 +284,28 @@
     color: #ffffff;
     letter-spacing: -0.25px;
     max-height: $editor-menu-height;
-    padding: 8px;
+    padding: 10px 0 10px;
 
     .nav-link {
-      margin: 0 30px 0 0;
+      margin: 0 0 0 30px;
       color: white;
+    }
+
+    a {
+      height: 30px;
+      line-height: 30px;
+      padding: 0;
+      border: 1px solid transparent;
+      cursor: pointer;
+
+      &.active {
+        color: #adadad;
+      }
+    }
+
+    .second-navbar .nav-link {
+      margin: 0 20px 0 0;
+      padding: 0 16px;
     }
 
     .navbar-brand {
@@ -258,23 +314,43 @@
     }
 
     .dual-button {
+      overflow: hidden;
+      border-radius: 2px;
+      border: 1px solid white;
+
       button,
       a.nav-link {
         float: left;
         margin: 0;
-        border: 1px solid #ffffff;
-        border-radius: 2px 0 0 2px;
+        border: 1px solid white;
+        height: 28px;
+        line-height: 28px;
+
+        &.active {
+          background: #222339;
+        }
       }
     }
 
     .responsive-submenu {
-      padding: 13px 0 13px 22px;
+      background: #030413;
+      padding: 13px 0 13px 17px;
       min-width: calc(#{$variables-container-width});
       height: $editor-menu-height;
+      margin: 0 20px 0 0;
 
       * {
         padding: 0;
         line-height: 1;
+      }
+
+      .rs {
+        margin: 0 20px;
+      }
+
+      .rs > a,
+      .rs > div {
+        margin: 0 5px 0 0;
       }
     }
 
@@ -288,6 +364,10 @@
         position: fixed;
         bottom: 0;
         left: 0;
+      }
+
+      .rs {
+        float: right;
       }
     }
   }
@@ -303,9 +383,26 @@
   height: $variables-container-height;
   position: absolute;
   z-index: 1;
-  top: 0;
+  top: $editor-menu-height;
   left: 0;
   overflow: auto;
+
+  span.input-group-addon {
+    width: $colorpicker-size;
+    height: $colorpicker-size;
+    margin: 4px 0 4px 7px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    overflow: hidden;
+
+    i {
+      background-color: rgb(230, 230, 230);
+      display: block;
+      width: 100%;
+      height: $colorpicker-size;
+    }
+  }
 
   .from-group {
     margin: 0;
@@ -341,34 +438,93 @@
     &.is-down {
     }
   }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background-color: $light-indigo;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 30px;
+    background-color: $category-color;
+  }
 }
 
 .protected.editorHtml {
   margin-top: $editor-menu-height;
+  height: calc(100vh - #{$editor-menu-height});
+  display: flex;
+  flex-direction: column;
+
+  .sub-bar > .nav:first-child {
+    min-width: 330px;
+    margin: 0;
+    float: left;
+    height: 40px;
+    padding: 0px 0 0 6px;
+  }
+
+  label {
+    line-height: 40px;
+    margin: 0 0 0 23px;
+  }
+
+  .nav-link {
+    cursor: pointer;
+
+    &.active,
+    &:hover {
+      color: white;
+    }
+  }
 
   h3 {
+    padding: 0 27px;
     margin: 0;
     height: 40px;
     line-height: 50px;
-    background: $indigo;
+    background: #f1f1f1;
+    color: #c1c1c1;
+  }
+
+  .editor-html,
+  .editor-css {
+    flex-grow: 1;
   }
 
   .is-html .CodeMirror,
   .is-css .CodeMirror {
-    height: calc(50vh - 65px);
+    min-height: calc(50vh - 85px);
+  }
+
+  .fullsize .CodeMirror {
+    min-height: calc(100vh - 130px);
   }
 }
 
 .protected.previewHtml {
   @extend .container-fluid;
+  margin: 0;
+  padding: 0;
 
-  margin-top: $editor-menu-height;
+  iframe {
+    width: 100%;
+    height: calc(100vh - 98px);
+    border: 0;
+    padding: 0px 0 0 0;
+    margin: 0;
+  }
 }
 
 .protected.templateHtml {
   @extend .bg-indigo;
   @extend .container-fluid;
-  margin: $editor-menu-height auto auto;
+  min-height: calc(100vh - 50px);
+  padding-left: 370px;
 
   .card {
     max-width: 230px;
@@ -382,7 +538,7 @@
   }
 
   .row {
-    justify-content: start;
+    justify-content: center;
     align-items: end;
   }
 
@@ -412,4 +568,25 @@
     width: 100%;
     height: 100vh;
   }
+  .blockview {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0px;
+    background: transparent;
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+}
+
+.colorpicker.dropdown-menu {
+  min-width: 0;
+  margin: 0;
+  padding: 4px 4px 0;
+}
+
+.colorpicker:after {
+  border-bottom: 6px solid $indigo;
 }
