@@ -9,6 +9,9 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     autoapplysass: true,
     isViewLoading: false,
     show: 'variables',
+    subRoute: 'html',
+    showHTML: true,
+    showCSS: true,
     editorOptions: {
       css: {
         lineWrapping: false,
@@ -81,19 +84,19 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     window.CodeMirror.showHint(cm, window.CodeMirror.hint.html)
   }
 
-  function goTo(route) {
-    middleware(route)
-  }
-
-  function middleware(route) {
-    if (route === 'show') {
+  function goTo(routePath, route) {
+    if (route === 'show' || route === 'preview') {
       generatePreviewHtml()
     }
-    $scope.show = route || 'show'
+    $scope[routePath] = route
   }
 
   function toggle(group) {
-    group.hidden = !group.hidden
+    var value = !group.hidden
+    $scope.variables.forEach(function(g) {
+      g.hidden = true
+    })
+    group.hidden = value
   }
 
   function codemirrorLoaded(selector) {
@@ -135,6 +138,29 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     $scope.editor.setValue(window.html_beautify($scope.editor.getValue()))
   }
 
+  function callColorpicker() {
+    var colorpicker = $('.colorpicker')
+    colorpicker.colorpicker().on('changeColor', function(event) {
+      var scope = angular.element(this).scope()
+      scope.variable.value = event.color.toHex()
+
+      if ($scope.autoapplysass) {
+        $scope.autoApplySass()
+      }
+    })
+
+    colorpicker.colorpicker().on('show', function() {
+      $('.blockview').removeClass('is-hidden')
+    })
+
+    colorpicker.colorpicker().on('hide', function() {
+      $('.blockview').addClass('is-hidden')
+      var color = angular.element(this).scope().variable
+      if (this.dataset.color !== color.value) {
+      }
+    })
+  }
+
   function initTemplatesVariables() {
     $http({
       method: 'GET',
@@ -161,23 +187,7 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
       var fontsKeys = apSass.getFonts()
 
       $timeout(function() {
-        var $colorpicker = $('.colorpicker')
-        $colorpicker.colorpicker().on('cha  ngeColor', function(ev) {
-          var scope = angular.element(this).scope()
-          scope.variable.value = ev.color.toHex()
-
-          $timeout(function() {
-            if ($scope.autoapplysass) {
-              $scope.autoApplySass()
-            }
-          }, 500)
-        })
-        $colorpicker.colorpicker().on('hide', function(ev) {
-          var color = angular.element(this).scope().variable
-          if (this.dataset.color !== color.value) {
-          }
-        })
-
+        callColorpicker()
         $('.sassVariable').each(function(index) {
           var src
           var scope = angular.element(this).scope()
@@ -229,6 +239,7 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     })
 
     $timeout(function() {
+      // callColorpicker()
       $scope.template.blobUrl = $sce.trustAsResourceUrl(URL.createObjectURL(blob))
     }, 0)
   }
@@ -246,7 +257,9 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
   }
 
   function resetBaseVariable(variable) {
-    variable.value = variable.default
+    $timeout(function() {
+      variable.value = variable.default
+    }, 0)
   }
 
   function colorpicker(type) {

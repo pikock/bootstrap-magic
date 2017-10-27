@@ -1,22 +1,23 @@
 <div class="protected editor">
-  <header class="">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-indigo" ng-class="{ 'editor-open': show === 'variables'}">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-indigo">
       <div class="responsive-submenu">
         <a class="navbar-brand" href="/">
-          <img src="/app/img/logo-boostrapmagic.svg" width="22.6" height="22.8" alt="logo">
+          <img src="../app/img/logo-boostrapmagic.svg" width="24" height="24" alt="logo">
         </a>
         <span class="navbar-text rs">
+          <div data-size="medium" data-href="http://pikock.github.io/bootstrap-magic/">
+            <img src="../app/img/icn-github-editor.svg" width="24" height="24">
+          </div>
           <a href="https://twitter.com/share" data-url="http://pikock.github.io/bootstrap-magic/" data-text="Bootstrap Magic feat Bootstrap 3.1 : Awesome theme generator with live preview"
             data-lang="en" data-hashtags="bootstrap, angularjs">
-            <img src="/app/img/twitter-icn.svg" width="24" height="24" alt=" ">
+            <img src="../app/img/icn-twitter.svg" width="24" height="24">
           </a>
           <div data-href="http://pikock.github.io/bootstrap-magic/ " data-send="false " data-layout="button_count" data-width="24"
             data-show-faces="false " data-action="like ">
-            <img src="/app/img/fb-icn.svg " width="24 " height="24" alt="">
+            <img src="../app/img/icn-facebook.svg " width="24" height="24">
           </div>
-          <div data-size="medium" data-href="http://pikock.github.io/bootstrap-magic/">
-            <img src="/app/img/g-icn.svg" width="24" height="24" alt=" ">
-          </div>
+
         </span>
       </div>
 
@@ -27,23 +28,18 @@
 
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <div class="dual-button">
-              <a class="nav-link" ng-click="goTo('variables')">Variables</a>
-              <a class="nav-link" ng-click="goTo('editorHtml')">Html</a>
-            </div>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" ng-click="goTo('previewHtml')">Prévisualiser</a>
+            <a ng-class="{ 'active': show === 'variables'}" class="nav-link" ng-click="goTo('show', 'variables')">Variables editor</a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" ng-click="goTo('templateHtml')">Example</a>
+            <a ng-class="{ 'active': show === 'editorHtml'}" class="nav-link" ng-click="goTo('show', 'editorHtml')">HTML editor</a>
           </li>
         </ul>
       </div>
-      <ul class="navbar-nav mr-auto">
+      <ul class="second-navbar navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" ng-click="resetSassVariables()">Reset</a>
+          <a class="nav-link fancy-button is-boring" ng-click="resetSassVariables()">Reset</a>
         </li>
         <li class="nav-item">
           <a class="nav-link fancy-button is-boring" ng-click="importSassVariables()">Import</a>
@@ -56,7 +52,7 @@
   </header>
 </div>
 
-<div ng-if="show === 'variables'">
+<div ng-hide="show !== 'variables'">
   <div class="editor protected container-fluid p-0">
     <div class="row m-0">
       <div class="variables-container">
@@ -66,23 +62,22 @@
             <span class="arrow is-left">></span>
           </section>
           <section class="variables protected" ng-hide="group.hidden">
-            <div class="form-group" ng-repeat="variable in group.data">
+            <div class="form-group {' ap-color-picker: variable.value': colorpicker(variable.type)}" data-color="{{ color(variable.type, variable.value) }}"
+              ng-repeat="variable in group.data">
               <label for="{{variable.key}}" ng-bind="variable.key"></label>
-              <input type="text" class="form-control" id="{{variable.key}}" aria-describedby="@font-family-sans-serif" ng-model="variable.value"
-                ng-change="autoApplySass()">
+              <div class="input {' ap-color-picker: variable.value': colorpicker(variable.type)} input-group" data-color="{{ color(variable.type, variable.value) }}"
+                data-color-format="hex" ng-class="{'input-group color colorpicker' : colorpicker(variable.type)}" color-picker-apply="">
+                <input id="{{variable.key}}" type="text" data-ng-model="variable.value" class="sassVariable form-control" ng-change="autoApplySass()">
+                <span class="reset" ng-click="resetBaseVariable(variable)" ng-if="variable.value !== variable.default">x</span>
+                <span class="input-group-addon" ng-class="{ 'hidden' : !colorpicker(variable.type)}">
+                  <i></i>
+                </span>
+              </div>
             </div>
           </section>
         </div>
       </div>
     </div>
-    <!-- <div ui-codemirror="{ onLoad : codemirrorLoaded }" ng-model="x"></div>
-        <button ng-click="format()">Format</button>
-        <div class="col-md-12">
-          <div class="bd-example" data-example-id="editor">
-            For example,
-            <code>&lt;section&gt;</code> should be wrapped as inline.
-          </div>
-        </div> -->
 
     <!-- <form class="piEditor">
           <section ng-repeat="group in variables" class="{{ group.name }}">
@@ -114,6 +109,7 @@
         </form> -->
   </div>
   <div class="protected protectedHtml">
+    <div class="blockview is-hidden"></div>
     <div class="preview">
       <iframe ng-src="{{template.blobUrl}}" frameborder="0" style="{{template.css}}">
       </iframe>
@@ -121,42 +117,78 @@
   </div>
 </div>
 
-<div ng-if="show === 'templateHtml'">
-  <div class="protected templateHtml">
-    <div class="row" ng-repeat="group in templates">
-      <div class="col-12">
-        <h3 ng-bind="group.name"></h3>
-      </div>
-
-      <div class="col" ng-repeat="template in group.data">
-        <div class="card">
-          <img class="card-img" ng-src="{{template.image_url}}" alt="{{template.slug}}">
-          <div class="card-body">
-            <h6 class="card-title" ng-bind="template.name"></h6>
-            <p class="card-text" ng-bind="template.description"></p>
-            <a class="btn btn-primary" ng-click="chooseTemplate(template)">Start</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 <div ng-if="show === 'editorHtml'">
   <div class="protected editorHtml">
-    <h3>HTML</h3>
-    <div class="code-mirror is-html" data-template="html" ng-init="codemirrorLoaded('html')"></div>
-    <h3>CSS</h3>
-    <div class="code-mirror is-css" data-template="css" ng-init="codemirrorLoaded('css')"></div>
+    <div class="sub-bar bg-indigo">
+      <ul class="nav">
+        <li class="nav-item" ng-hide="subRoute !== 'html'">
+          <label class="form-check-label">
+            <input type="checkbox" ng-model="showHTML" class="form-check-input"> HTML
+          </label>
+        </li>
+
+        <li class="nav-item" ng-hide="subRoute !== 'html'">
+          <label class="form-check-label">
+            <input type="checkbox" ng-model="showCSS" class="form-check-input"> CSS
+          </label>
+        </li>
+      </ul>
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link" ng-class="{'active': subRoute === 'html' }" ng-click="goTo('subRoute', 'html')">Content Editor</a>
+        </li>
+        <li class="nav-item">
+          <a ng-class="{ 'active': show === 'templateHtml'}" class="nav-link" ng-click="goTo('subRoute', 'templateHtml')">Examples</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" ng-class="{'active': subRoute === 'preview' }" ng-click="goTo('subRoute', 'preview')">Preview</a>
+        </li>
+      </ul>
+    </div>
+    <div ng-show="subRoute === 'html'">
+      <div class="editor-html" ng-if="showHTML" ng-class="{'fullsize': showHTML && !showCSS }">
+        <h3>HTML</h3>
+        <div class="code-mirror is-html" data-template="html" ng-init="codemirrorLoaded('html')"></div>
+      </div>
+      <div class="editor-css" ng-if="showCSS" ng-class="{'fullsize': !showHTML && showCSS }">
+        <h3>CSS</h3>
+        <div class="code-mirror is-css" data-template="css" ng-init="codemirrorLoaded('css')"></div>
+      </div>
+    </div>
+    <div ng-show="subRoute === 'templateHtml'">
+      <div class="protected templateHtml">
+        <div class="row" ng-repeat="group in templates">
+          <div class="col-12 text-center" style="padding: 50px 15px;">
+            <h3 ng-bind="group.name"></h3>
+          </div>
+
+          <div class="col" ng-repeat="template in group.data">
+            <div class="card">
+              <img class="card-img" ng-src="{{template.image_url}}" alt="{{template.slug}}">
+              <div class="card-body">
+                <h6 class="card-title" ng-bind="template.name"></h6>
+                <p class="card-text" ng-bind="template.description"></p>
+                <div class="col text-center mt-4">
+                  <a class="fancy-button is-boring is-green " ng-click="chooseTemplate(template)">Start</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div ng-show="subRoute === 'preview'">
+      <div class="protected previewHtml">
+        <iframe ng-src="{{template.blobUrl}}" frameborder="0" style="{{template.css}}">
+        </iframe>
+      </div>
+    </div>
   </div>
 </div>
 
-<div ng-if="show === 'previewHtml'">
-  <div class="protected previewHtml">
-    previewHtml
-  </div>
-</div>
+
 
 <div class="protected">
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -193,9 +225,6 @@
           </p>
           <br>
           <div class="text-center">
-            <!-- <a href="https://www.producthunt.com/tech" target="_blank">
-                        <img class="img-responsive" style="margin: 0 auto" src="https://cc6f218bd2ea04cb4973-fc9c6b9d141db7665c9530be5d7ac377.ssl.cf1.rackcdn.com/files/5668663fb2a7161287000036/size_4_site-orson-producthunt-redpng.png">
-                    </a> -->
             <a class="" href="http://en.orson.io/17/build-responsive-website-without-coding/?utm_source=Bootstrap%20Magic%20&utm_medium=referral&utm_content=Footer&utm_campaign=Bootstrap"
               target="_blank" title="Try Orson website builder">
               <img src="../app/img/orson-website-ad.jpg" class="img-responsive" alt="Create responsive website without coding">
