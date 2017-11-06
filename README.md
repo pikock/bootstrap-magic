@@ -1,36 +1,22 @@
-Bootstrap magic featuring Bootstrap 3.1
-=======================================
+Bootstrap magic 4.0
+===================
 
-Bootstrap themes generator, featuring Bootstrap 3.1 and AngularJS.
-Update your variables, change it with a smooth colorpicker and get instantly the result.
+### Start project
 
-[Try it out!](http://pikock.github.com/bootstrap-magic/)
+```
+// to compile SCSS
+npm run watch 
 
-If you want to use Bootstrap Magic featuring Bootstrap 2.3.2, it's still available 
-[here](http://pikock.github.com/bootstrap-magic/2.3.2)
-
-### New features
-
-* Bootstrap 3.1 awesomeness
-* Google webfonts included in typehead
-* Better performance
-* Still developed with [AngularJS](http://angularjs.org/) and [LessCSS](http://lesscss.org/) . 
-
-### Contact
-
-* Create your website easily with [Pikock](http://www.pikock.com), try it out on http://www.pikock.com
-* For more information on [Autre planete](http://www.autreplanete.com/)  please check out http://www.autreplanete.com/
-* For more information on [AngularJS](http://angularjs.org/)  please check out http://angularjs.org/
-* For more information on [Twitter Bootstrap](http://twitter.github.com/bootstrap/)  please check out http://twitter.github.com/bootstrap/
-* For more information on [Webfontloader](https://github.com/typekit/webfontloader)  please check out https://github.com/typekit/webfontloader
-
+// In an another terminal
+npm run dev
+```
 
 
 ### License
 
 The MIT License
 
-Copyright (c) 2013 the Autre planete and Pikock Team, http://www.autreplanete.com, http://www.pikock.com,
+Copyright (c) 2013 - 2017 the Autre planete and Orson.io, http://www.autreplanete.com, http://en.orson.io,
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

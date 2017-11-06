@@ -99,10 +99,6 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery'
-    }),
-    new Dotenv({
-      path: path.resolve(__dirname, '..', '.env'),
-      safe: false
     })
   ]
 }

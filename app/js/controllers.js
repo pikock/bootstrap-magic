@@ -8,6 +8,7 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     templates: undefined,
     autoapplysass: true,
     isViewLoading: false,
+    loading: true,
     show: 'variables',
     subRoute: 'html',
     showHTML: true,
@@ -18,36 +19,23 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
         lineNumbers: true,
         firstLineNumber: 1,
         mode: 'css',
-        tabSize: 2,
-        onKeyEvent: function(e, s) {
-          if (s.type === 'keyup') {
-            window.CodeMirror.showHint(e)
-          }
-        },
-        extraKeys: { 'Ctrl-Space': 'autocomplete' }
+        tabSize: 2
       },
       html: {
         lineWrapping: false,
         lineNumbers: true,
         firstLineNumber: 1,
         mode: 'text/html',
-        tabSize: 2,
-        onKeyEvent: function(e, s) {
-          if (s.type === 'keyup') {
-            window.CodeMirror.showHint(e)
-          }
-        },
-        extraKeys: { 'Ctrl-Space': 'autocomplete' }
+        tabSize: 2
       }
     },
     fixedContent: {
-      blobUrl: '',
-      html: '<h1>H1</h1><h2>H2</h2><h3>H3</h3><h4>H4</h4><h5>H5</h5><h6>H6</h6>',
-      css: ''
+      blobUrl: undefined,
+      html: undefined
     },
     template: {
       blobUrl: '',
-      html: '<h1>H1</h1><h2>H2</h2><h3>H3</h3><h4>H4</h4><h5>H5</h5><h6>H6</h6>',
+      html: '<h1>Import your code or use exemple from Bootstrap documentation</h1>',
       css: ''
     }
   }
@@ -71,7 +59,8 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     goTo: goTo,
     chooseTemplate: chooseTemplate,
     generatePreviewHtml: generatePreviewHtml,
-    generateFixedHtml: generateFixedHtml
+    generateFixedHtml: generateFixedHtml,
+    iframeMoveTo: iframeMoveTo
   }
 
   $scope.$on('$routeChangeStart', function() {
@@ -86,10 +75,6 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
 
   angular.extend($scope, scopeVar, scopeFunction)
 
-  window.CodeMirror.commands.autocomplete = function(cm) {
-    window.CodeMirror.showHint(cm, window.CodeMirror.hint.html)
-  }
-
   function goTo(routePath, route) {
     if (routePath === 'subRoute' && route === 'preview') {
       generatePreviewHtml()
@@ -103,43 +88,56 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
       g.hidden = true
     })
     group.hidden = value
+    if (!value) {
+      iframeMoveTo(group.slug)
+    }
   }
 
-  function codemirrorLoaded(selector) {
+  function codemirrorLoaded(selector, noContent) {
     var el = document.querySelector('.code-mirror[data-template="' + selector + '"]')
     var editor = window.CodeMirror(el, $scope.editorOptions[selector])
     $scope.editor = editor
     var doc = editor.getDoc()
     editor.focus()
-    editor.setValue($scope.template[selector])
+    if (!noContent) {
+      editor.setValue($scope.template[selector])
+      editor.on('change', function() {
+        var data = editor.getValue()
+        $scope.template[selector] = data
+      })
+    }
+
     doc.markClean()
-
-    window.doc = doc
-    window.editor = editor
-
-    editor.on('change', function() {
-      var data = editor.getValue()
-      $scope.template[selector] = data
-    })
   }
 
   function chooseTemplate(template) {
+    $scope.loading = true
     $http({
       method: 'GET',
       url: 'preview/' + template.slug + '.html'
-    }).then(function(templateHtml) {
-      $http({
-        method: 'GET',
-        url: 'preview/' + template.slug + '.css'
-      }).then(function(templateCss) {
-        $scope.subRoute = 'preview'
-        applySass()
-        $timeout(function() {
-          $scope.template.html = templateHtml.data
-          $scope.template.css = templateCss.data
-        }, 1)
-      })
     })
+      .then(function(templateHtml) {
+        $http({
+          method: 'GET',
+          url: 'preview/' + template.slug + '.css'
+        })
+          .then(function(templateCss) {
+            $scope.subRoute = 'preview'
+            $timeout(function() {
+              $scope.template.html = templateHtml.data
+              $scope.template.css = templateCss.data
+              generatePreviewHtml()
+            }, 1)
+          })
+          .catch(function(error) {
+            console.error(error)
+            $scope.loading = false
+          })
+      })
+      .catch(function(error) {
+        console.error(error)
+        $scope.loading = false
+      })
   }
 
   function format() {
@@ -179,6 +177,7 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
   }
 
   function initSassVariables() {
+    $scope.loading = true
     $http({
       method: 'GET',
       url: 'data/scss-variables.json'
@@ -225,29 +224,65 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     })
   }
 
+  // saveSassVar,
+  // saveCSS
+
+  function iframeMoveTo(categoryName) {
+    var content = $('iframe.fixedPreview').get(0).contentWindow
+    var category = content.document.querySelector('div[data-category="' + categoryName + '"]')
+
+    if (category) {
+      var categoryHeight = category.getBoundingClientRect().top
+      $(content).scrollTop(categoryHeight)
+    }
+  }
+
   function autoApplySass(event) {
+    $scope.loading = true
     if ($scope.autoapplysass) {
       applySass(event)
     }
   }
 
-  function generateFixedHtml(css, html) {
-    var generatedCss = css || $scope.generatedCss
-    console.log(generatedCss)
-    var templateHtml = html || $scope.fixedContent.html
-    var generateHtml =
-      '<!doctype html><html lang="en"><head>' +
-      '<style>body { display: none }</style>' +
-      '</head><body><div class="preview">' +
-      templateHtml +
-      '</div></body></html>'
-    var blob = new Blob([generateHtml], {
-      type: 'text/html'
+  function getFixedHtml() {
+    return $q(function(resolve, reject) {
+      $http({
+        method: 'GET',
+        url: 'data/fixed-content.html'
+      })
+        .then(function(response) {
+          $scope.fixedContent.html = response.data
+          resolve()
+        })
+        .catch(function(error) {
+          console.error(error)
+          reject(error)
+        })
     })
+  }
 
-    $timeout(function() {
-      $scope.fixedContent.blobUrl = $sce.trustAsResourceUrl(URL.createObjectURL(blob))
-    }, 0)
+  function generateFixedHtml(css, html) {
+    getFixedHtml()
+      .then(function() {
+        var templateHtml = html || $scope.fixedContent.html
+        var generateHtml =
+          '<!doctype html><html lang="en"><head>' +
+          '<style>body { display: none }</style>' +
+          '</head><body><div class="preview">' +
+          templateHtml +
+          '</div>' +
+          '<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>' +
+          '</body></html>'
+        var blob = new Blob([generateHtml], {
+          type: 'text/html'
+        })
+
+        $scope.fixedContent.blobUrl = $sce.trustAsResourceUrl(URL.createObjectURL(blob))
+      })
+      .catch(function(error) {
+        console.error(error)
+        $scope.loading = false
+      })
   }
 
   function generatePreviewHtml(css, html) {
@@ -265,21 +300,24 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
       type: 'text/html'
     })
 
-    $timeout(function() {
-      $scope.template.blobUrl = $sce.trustAsResourceUrl(URL.createObjectURL(blob))
-    }, 0)
+    $scope.template.blobUrl = $sce.trustAsResourceUrl(URL.createObjectURL(blob))
+    $scope.loading = false
   }
 
   function applySass() {
-    apSass
-      .applySass($scope)
-      .then(function(result) {
-        $scope.generatedCss = '<style>' + result + '</style>'
-        generatePreviewHtml()
-      })
-      .catch(function(error) {
-        console.error(error)
-      })
+    $scope.loading = true
+    $timeout(function() {
+      apSass
+        .applySass($scope)
+        .then(function(result) {
+          $scope.generatedCss = '<style>' + result + '</style>'
+          $scope.loading = false
+        })
+        .catch(function(error) {
+          console.error(error)
+          $scope.loading = false
+        })
+    }, 1)
   }
 
   function resetBaseVariable(variable) {
@@ -331,6 +369,10 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
       '.html'
     )
   }
+
+  //
+  // INIT
+  //
 
   initSassVariables()
   initTemplatesVariables()

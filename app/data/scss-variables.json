@@ -1,6 +1,7 @@
 [
   {
     "name": "Brand Colors",
+    "slug": "brand-color",
     "data": [
       { "key": "$blue", "value": "#007bff", "default": "#007bff", "type": "color" },
       { "key": "$indigo", "value": "#6610f2", "default": "#6610f2", "type": "color" },
@@ -50,6 +51,7 @@
   },
   {
     "name": "Options",
+    "slug": "options",
     "data": [
       { "key": "$enable-rounded", "value": "true", "default": "true", "type": "boolean" },
       { "key": "$enable-shadows", "value": "false", "default": "false", "type": "boolean" },
@@ -62,6 +64,7 @@
   },
   {
     "name": "Spacing",
+    "slug": "spacing",
     "data": [
       { "key": "$spacer", "value": "1rem", "default": "1rem", "type": "" },
       {
@@ -75,6 +78,7 @@
   },
   {
     "name": "Body",
+    "slug": "body",
     "data": [
       { "key": "$body-bg", "value": "$white", "default": "$white", "type": "color" },
       { "key": "$body-color", "value": "$gray-900", "default": "$gray-900", "type": "color" }
@@ -82,6 +86,7 @@
   },
   {
     "name": "Links",
+    "slug": "links",
     "data": [
       { "key": "$link-color", "value": "theme-color('primary')", "default": "theme-color('primary')", "type": "color" },
       { "key": "$link-decoration", "value": "none", "default": "none", "type": "" },
@@ -91,6 +96,7 @@
   },
   {
     "name": "Grid",
+    "slug": "grid",
     "data": [
       {
         "key": "$grid-breakpoints",
@@ -110,6 +116,7 @@
   },
   {
     "name": "Components",
+    "slug": "components",
     "data": [
       { "key": "$line-height-lg", "value": "1.5", "default": "1.5", "type": "" },
       { "key": "$line-height-sm", "value": "1.5", "default": "1.5", "type": "" },
@@ -127,6 +134,7 @@
   },
   {
     "name": "Fonts",
+    "slug": "fonts",
     "data": [
       {
         "key": "$font-family-sans-serif",
@@ -186,6 +194,7 @@
   },
   {
     "name": "Tables",
+    "slug": "tables",
     "data": [
       { "key": "$table-cell-padding", "value": "0.75rem", "default": "0.75rem", "type": "" },
       { "key": "$table-cell-padding-sm", "value": "0.3rem", "default": "0.3rem", "type": "" },
@@ -206,6 +215,7 @@
   },
   {
     "name": "Buttons",
+    "slug": "buttons",
     "data": [
       { "key": "$input-btn-padding-y", "value": "0.5rem", "default": "0.5rem", "type": "" },
       { "key": "$input-btn-padding-x", "value": "0.75rem", "default": "0.75rem", "type": "" },
@@ -240,6 +250,7 @@
   },
   {
     "name": "Forms",
+    "slug": "forms",
     "data": [
       { "key": "$input-bg", "value": "$white", "default": "$white", "type": "color" },
       { "key": "$input-disabled-bg", "value": "$gray-200", "default": "$gray-200", "type": "color" },
@@ -421,7 +432,8 @@
     ]
   },
   {
-    "name": "Forms",
+    "name": "Dropdown",
+    "slug": "dropdown",
     "data": [
       { "key": "$dropdown-min-width", "value": "10rem", "default": "10rem", "type": "" },
       { "key": "$dropdown-padding-y", "value": "0.5rem", "default": "0.5rem", "type": "" },
@@ -444,6 +456,7 @@
   },
   {
     "name": "Z Index",
+    "slug": "z-index",
     "data": [
       { "key": "$zindex-dropdown", "value": "1000", "default": "1000", "type": "" },
       { "key": "$zindex-sticky", "value": "1020", "default": "1020", "type": "" },
@@ -456,6 +469,7 @@
   },
   {
     "name": "Navs",
+    "slug": "navs",
     "data": [
       { "key": "$nav-link-padding-y", "value": "0.5rem", "default": "0.5rem", "type": "" },
       { "key": "$nav-link-padding-x", "value": "1rem", "default": "1rem", "type": "" },
@@ -474,6 +488,7 @@
   },
   {
     "name": "Navbar",
+    "slug": "navbar",
     "data": [
       { "key": "$navbar-padding-y", "value": "($spacer / 2)", "default": "($spacer / 2)", "type": "" },
       { "key": "$navbar-padding-x", "value": "$spacer", "default": "$spacer", "type": "" },
@@ -514,6 +529,7 @@
   },
   {
     "name": "Pagination",
+    "slug": "pagination",
     "data": [
       { "key": "$pagination-padding-y", "value": "0.5rem", "default": "0.5rem", "type": "" },
       { "key": "$pagination-padding-x", "value": "0.75rem", "default": "0.75rem", "type": "" },
@@ -539,6 +555,7 @@
   },
   {
     "name": "Jumbotron",
+    "slug": "jumbotron",
     "data": [
       { "key": "$jumbotron-padding", "value": "2rem", "default": "2rem", "type": "" },
       { "key": "$jumbotron-bg", "value": "$gray-200", "default": "2rem", "type": "color" }
@@ -546,6 +563,7 @@
   },
   {
     "name": "Cards",
+    "slug": "cards",
     "data": [
       { "key": "$card-spacer-y", "value": "0.75rem", "default": "0.75rem", "type": "" },
       { "key": "$card-spacer-x", "value": "1.25rem", "default": "1.25rem", "type": "" },
@@ -569,6 +587,7 @@
   },
   {
     "name": "Tooltip",
+    "slug": "tooltip",
     "data": [
       { "key": "$tooltip-max-width", "value": "200px", "default": "200px", "type": "" },
       { "key": "$tooltip-color", "value": "$white", "default": "$white", "type": "color" },
@@ -584,6 +603,7 @@
   },
   {
     "name": "Popovers",
+    "slug": "popovers",
     "data": [
       { "key": "$popover-inner-padding", "value": "1px", "default": "1px", "type": "" },
       { "key": "$popover-bg", "value": "$white", "default": "$white", "type": "color" },
@@ -607,6 +627,7 @@
   },
   {
     "name": "Badges",
+    "slug": "badges",
     "data": [
       { "key": "$badge-color", "value": "$white", "default": "$white", "type": "color" },
       { "key": "$badge-font-size", "value": "75%", "default": "75%", "type": "" },
@@ -619,6 +640,7 @@
   },
   {
     "name": "Modals",
+    "slug": "modals",
     "data": [
       { "key": "$modal-inner-padding", "value": "15px", "default": "15px", "type": "" },
       { "key": "$modal-dialog-margin", "value": "10px", "default": "10px", "type": "" },
@@ -645,6 +667,7 @@
   },
   {
     "name": "Alerts",
+    "slug": "alerts",
     "data": [
       { "key": "$alert-padding-y", "value": "0.75rem", "default": "0.75rem", "type": "" },
       { "key": "$alert-padding-x", "value": "1.25rem", "default": "1.25rem", "type": "" },
@@ -656,6 +679,7 @@
   },
   {
     "name": "Progress bars",
+    "slug": "progress-bars",
     "data": [
       { "key": "$progress-height", "value": "1rem", "default": "1rem", "type": "" },
       { "key": "$progress-font-size", "value": "0.75rem", "default": "0.75rem", "type": "" },
@@ -670,6 +694,7 @@
   },
   {
     "name": "List group",
+    "slug": "list-group",
     "data": [
       { "key": "$list-group-bg", "value": "$white", "default": "$white", "type": "color" },
       { "key": "$list-group-border-color", "value": "rgba($black, 0.125)", "default": "rgba($black, 0.125)", "type": "color" },
@@ -691,6 +716,7 @@
   },
   {
     "name": "Image thumbnails",
+    "slug": "image-thumbnails",
     "data": [
       { "key": "$thumbnail-padding", "value": "0.25rem", "default": "0.25rem", "type": "" },
       { "key": "$thumbnail-bg", "value": "$body-bg", "default": "$body-bg", "type": "color" },
@@ -703,6 +729,7 @@
   },
   {
     "name": "Figures",
+    "slug": "figures",
     "data": [
       { "key": "$figure-caption-font-size", "value": "90%", "type": "" },
       { "key": "$figure-caption-color", "value": "$gray-600", "default": "90%", "type": "color" }
@@ -710,6 +737,7 @@
   },
   {
     "name": "Breadcrumbs",
+    "slug": "breadcrumbs",
     "data": [
       { "key": "$breadcrumb-padding-y", "value": "0.75rem", "default": "0.75rem", "type": "" },
       { "key": "$breadcrumb-padding-x", "value": "1rem", "default": "1rem", "type": "" },
@@ -722,6 +750,7 @@
   },
   {
     "name": "Carousel",
+    "slug": "carousel",
     "data": [
       { "key": "$carousel-control-color", "value": "$white", "default": "$white", "type": "color" },
       { "key": "$carousel-control-width", "value": "15%", "default": "15%", "type": "" },
@@ -738,6 +767,7 @@
   },
   {
     "name": "Close",
+    "slug": "close",
     "data": [
       { "key": "$close-font-size", "value": "$font-size-base * 1.5", "default": "$font-size-base * 1.5", "type": "" },
       { "key": "$close-font-weight", "value": "$font-weight-bold", "default": "$font-weight-bold", "type": "" },
@@ -747,6 +777,7 @@
   },
   {
     "name": "Code",
+    "slug": "code",
     "data": [
       { "key": "$code-font-size", "value": "90%", "default": "90%", "type": "" },
       { "key": "$code-padding-y", "value": "0.2rem", "default": "0.2rem", "type": "" },

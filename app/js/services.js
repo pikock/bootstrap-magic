@@ -1123,10 +1123,9 @@ window.angular.module('apSass', []).factory('apSass', [
   function($http, data, $q) {
     window.Sass.setWorkerUrl('/app/lib/sass/sass.worker.js')
     var sass = new window.Sass()
-    window.sass = sass
 
     var service = {
-      sass: new window.Sass(),
+      sass: sass,
       importVariables: importVariables,
       getVariables: getVariables,
       setVariables: setVariables,
@@ -1193,7 +1192,6 @@ window.angular.module('apSass', []).factory('apSass', [
     }
 
     function addStyle(style) {
-      console.log('AddStyle')
       var styleContent = $('iframe.fixedPreview')
         .get(0)
         .contentWindow.document.querySelector('style')
@@ -1341,23 +1339,14 @@ window.angular.module('apSass', []).factory('apSass', [
     }
 
     function saveSassVar(data) {
-      var $form = $('<form>')
-        .attr('method', 'POST')
-        .attr('action', 'http://www.pikock-unis.com/tools/download.php')
-        .append(
-          $('<input>')
-            .attr('type', 'hidden')
-            .attr('name', 'data')
-            .attr('value', data)
-        )
-        .append(
-          $('<input>')
-            .attr('type', 'hidden')
-            .attr('name', 'type')
-            .attr('value', 'scss')
-        )
-      $('body').append($form)
-      $form.submit()
+      var rightNow = new Date()
+      var res = rightNow.toISOString().slice(0, 10)
+      window.URL = window.URL || window.webkitURL
+      var blob = new Blob([data], { type: 'text/css' })
+      var link = document.createElement('a')
+      link.href = window.URL.createObjectURL(blob)
+      link.download = 'custom-variables-bootstrap' + res + '.scss'
+      link.click()
     }
 
     function saveCSS($scope) {
@@ -1365,24 +1354,14 @@ window.angular.module('apSass', []).factory('apSass', [
         sass.compile("@import 'functions'; @import 'toAddScss';" + bootstrapContent, function(
           result
         ) {
-          var type = $scope.minified ? 'min.css' : 'css'
-          var $form = $('<form>')
-            .attr('method', 'POST')
-            .attr('action', 'http://www.pikock-unis.com/tools/download.php')
-            .append(
-              $('<input>')
-                .attr('type', 'hidden')
-                .attr('name', 'data')
-                .attr('value', result.text)
-            )
-            .append(
-              $('<input>')
-                .attr('type', 'hidden')
-                .attr('name', 'type')
-                .attr('value', type)
-            )
-          $('body').append($form)
-          $form.submit()
+          var rightNow = new Date()
+          var res = rightNow.toISOString().slice(0, 10)
+          window.URL = window.URL || window.webkitURL
+          var blob = new Blob([result.text], { type: 'text/css' })
+          var link = document.createElement('a')
+          link.href = window.URL.createObjectURL(blob)
+          link.download = 'custom-css-bootstrap-magic' + res + '.css'
+          link.click()
         })
       })
     }
