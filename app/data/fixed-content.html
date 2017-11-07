@@ -12,10 +12,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
   crossorigin="anonymous"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+
 <!-- Latest compiled and minified Bootstrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
   crossorigin="anonymous"></script>
-
 <script>
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -23,52 +24,61 @@
   $(function () {
     $('[data-toggle="popover"]').popover()
   })
-
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
 </script>
 
-<div class="container-fluid mb-5 mt-3">
-  <h1>Example of content</h1>
-
+<div class="container-fluid pb-5">
   <!-- Brand color  -->
-  <div class="container-fluid mb-5 mt-3" data-category="brand-color">
-    <h2>Brand color</h2>
-    <div class="p-2 mb-2 bg-primary text-white">.bg-primary</div>
-    <div class="p-2 mb-2 bg-secondary text-white">.bg-secondary</div>
-    <div class="p-2 mb-2 bg-success text-white">.bg-success</div>
-    <div class="p-2 mb-2 bg-danger text-white">.bg-danger</div>
-    <div class="p-2 mb-2 bg-warning text-white">.bg-warning</div>
-    <div class="p-2 mb-2 bg-info text-white">.bg-info</div>
-    <div class="p-2 mb-2 bg-light text-gray-dark">.bg-light</div>
-    <div class="p-2 mb-2 bg-dark text-white">.bg-dark</div>
-    <div class="p-2 mb-2 bg-white text-gray-dark">.bg-white</div>
-    <div class="p-2 mb-2 swatch-100">.swatch-100</div>
-    <div class="p-2 mb-2 swatch-200">.swatch-200</div>
-    <div class="p-2 mb-2 swatch-300">.swatch-300</div>
-    <div class="p-2 mb-2 swatch-400">.swatch-400</div>
-    <div class="p-2 mb-2 swatch-500">.swatch-500</div>
-    <div class="p-2 mb-2 swatch-600">.swatch-600</div>
-    <div class="p-2 mb-2 swatch-700">.swatch-700</div>
-    <div class="p-2 mb-2 swatch-800">.swatch-800</div>
-    <div class="p-2 mb-2 swatch-900">.swatch-900</div>
+  <div class="container-fluid pb-5 mb-5 mt-5" data-category="brand-color">
+    <h1>Brand color</h1>
+
+    <div class="mt-3 mb-5">
+      <h3>Theme colors</h3>
+      <div class="p-2 mb-2 bg-primary text-white">.bg-primary</div>
+      <div class="p-2 mb-2 bg-secondary text-white">.bg-secondary</div>
+      <div class="p-2 mb-2 bg-success text-white">.bg-success</div>
+      <div class="p-2 mb-2 bg-danger text-white">.bg-danger</div>
+      <div class="p-2 mb-2 bg-warning text-white">.bg-warning</div>
+      <div class="p-2 mb-2 bg-info text-white">.bg-info</div>
+      <div class="p-2 mb-2 bg-light text-gray-dark">.bg-light</div>
+      <div class="p-2 mb-2 bg-dark text-white">.bg-dark</div>
+      <div class="p-2 mb-2 bg-white text-gray-dark">.bg-white</div>
+    </div>
+
+    <div class="mt-3 mb-5">
+      <h3>Gradient of grey</h3>
+      <div class="p-2 mb-2 swatch-100">.swatch-100</div>
+      <div class="p-2 mb-2 swatch-200">.swatch-200</div>
+      <div class="p-2 mb-2 swatch-300">.swatch-300</div>
+      <div class="p-2 mb-2 swatch-400">.swatch-400</div>
+      <div class="p-2 mb-2 swatch-500">.swatch-500</div>
+      <div class="p-2 mb-2 swatch-600">.swatch-600</div>
+      <div class="p-2 mb-2 swatch-700">.swatch-700</div>
+      <div class="p-2 mb-2 swatch-800">.swatch-800</div>
+      <div class="p-2 mb-2 swatch-900">.swatch-900</div>
+    </div>
   </div>
 
   <!-- Links  -->
-  <div class="container-fluid mb-5 mt-3" data-category="links">
-    <h2>Links</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="links">
+    <h1>Links</h1>
 
-    <a href="">Exemple link</a>
-    <div class="alert alert-primary" role="alert">
-      This is a primary alert with
-      <a href="" class="alert-link">an example link</a>. Give it a click if you like.
+    <div class="mt-3 mb-5">
+      <h3>Default Link</h3>
+      <a href="">Exemple link</a>
+    </div>
+
+    <div class="mt-3 mb-5">
+      <h3>Link inside an alert</h3>
+      <div class="alert alert-primary" role="alert">
+        This is a primary alert with
+        <a href="" class="alert-link">an example link</a>. Give it a click if you like.
+      </div>
     </div>
   </div>
 
   <!-- Grid  -->
-  <div class="container-fluid mb-5 mt-3" data-category="grid">
-    <h2>Grid</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="grid">
+    <h1>Grid</h1>
 
     <div>
       <div class="bs-example">
@@ -112,14 +122,9 @@
     </div>
   </div>
 
-  <!-- Components  -->
-  <!-- <div class="container-fluid mb-5 mt-3" data-category="components">
-    <h2>Components</h2>
-  </div> -->
-
   <!-- Fonts  -->
-  <div class="container-fluid mb-5 mt-3" data-category="fonts">
-    <h2>Fonts</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="fonts">
+    <h1>Fonts</h1>
 
     <div>
       <h1>h1 </h1>
@@ -179,46 +184,52 @@
   </div>
 
   <!-- Tables  -->
-  <div class="container-fluid mb-5 mt-3" data-category="tables">
-    <h2>Tables</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="tables">
+    <h1>Tables</h1>
 
-    <div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Header 1</th>
-            <th>Header 2</th>
-            <th>Header 3</th>
-          </tr>
-        </thead>
-        <tfoot>
-          <tr>
-            <th>Footer 1</th>
-            <th>Footer 2</th>
-            <th>Footer 3</th>
-          </tr>
-        </tfoot>
-        <tbody>
-          <tr>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-          </tr>
-          <tr>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-          </tr>
-          <tr>
-            <td>Cell</td>
-            <td>Cell</td>
-            <td>Cell</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="mt-3 mb-5">
+      <h3>Default table</h3>
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Header 1</th>
+              <th>Header 2</th>
+              <th>Header 3</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Footer 1</th>
+              <th>Footer 2</th>
+              <th>Footer 3</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr>
+              <td>Cell</td>
+              <td>Cell</td>
+              <td>Cell</td>
+            </tr>
+            <tr>
+              <td>Cell</td>
+              <td>Cell</td>
+              <td>Cell</td>
+            </tr>
+            <tr>
+              <td>Cell</td>
+              <td>Cell</td>
+              <td>Cell</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <div>
+
+
+    <div class="mt-3 mb-5">
+      <h3>Table inverse</h3>
       <table class="table table-inverse">
         <thead>
           <tr>
@@ -254,7 +265,10 @@
       </table>
     </div>
 
-    <div>
+
+
+    <div class="mt-3 mb-5">
+      <h3>Table striped</h3>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -290,7 +304,10 @@
       </table>
     </div>
 
-    <div>
+
+
+    <div class="mt-3 mb-5">
+      <h3>Table with border</h3>
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -326,7 +343,8 @@
       </table>
     </div>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Table with hover</h3>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -362,7 +380,10 @@
       </table>
     </div>
 
-    <div>
+
+
+    <div class="mt-3 mb-5">
+      <h3>Table with Head with default color</h3>
       <table class="table">
         <thead class="thead-default">
           <tr>
@@ -398,7 +419,10 @@
       </table>
     </div>
 
-    <div>
+
+
+    <div class="mt-3 mb-5">
+      <h3>Table with inverse Head color</h3>
       <table class="table">
         <thead class="thead-inverse">
           <tr>
@@ -436,10 +460,11 @@
   </div>
 
   <!-- Buttons  -->
-  <div class="container-fluid mb-5 mt-3" data-category="buttons">
-    <h2>Buttons</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="buttons">
+    <h1>Buttons</h1>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Default buttons</h3>
       <button type="button" class="btn btn-primary">Primary</button>
       <button type="button" class="btn btn-secondary">Secondary</button>
       <button type="button" class="btn btn-info">Info</button>
@@ -451,9 +476,8 @@
       <button type="button" class="btn btn-link">Link</button>
     </div>
 
-    <br>
-
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Buttons with outline</h3>
       <button type="button" class="btn btn-outline-primary">Primary</button>
       <button type="button" class="btn btn-outline-secondary">Secondary</button>
       <button type="button" class="btn btn-outline-info">Info</button>
@@ -464,22 +488,23 @@
       <button type="button" class="btn btn-outline-dark">Dark</button>
     </div>
 
-    <br>
-    <div>
+
+
+    <div class="mt-3 mb-5">
+      <h3>Buttons sizes</h3>
       <button type="button" class="btn btn-success btn-sm">Small</button>
       <button type="button" class="btn btn-success">Default</button>
       <button type="button" class="btn btn-success btn-lg">Large</button>
-    </div>
 
-    <br>
+      <br>
 
-    <div>
       <button type="button" class="btn btn-danger btn-lg btn-block">Block level button</button>
     </div>
 
-    <br>
 
-    <div>
+
+    <div class="mt-3 mb-5">
+      <h3>Disabled button</h3>
       <p>
         <a href="#" class="btn btn-primary btn-lg disabled" role="button">The 'a' Element</a>
       </p>
@@ -493,9 +518,8 @@
       </p>
     </div>
 
-    <br>
-
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Checkboxe buttons</h3>
       <div class="btn-group" data-toggle="buttons">
         <label class="btn btn-primary active">
           <input type="checkbox" checked autocomplete="off"> Boots
@@ -509,9 +533,10 @@
       </div>
     </div>
 
-    <br>
 
-    <div>
+
+    <div class="mt-3 mb-5">
+      <h3>Radio buttons</h3>
       <div class="btn-group" data-toggle="buttons">
         <label class="btn btn-primary">
           <input type="radio" name="options" id="boots" autocomplete="off" checked> Boots
@@ -527,10 +552,13 @@
   </div>
 
   <!-- Forms  -->
-  <div class="container-fluid mb-5 mt-3" data-category="forms">
-    <h2>Forms</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="forms">
+    <h1>Forms</h1>
 
-    <div>
+
+
+    <div class="mt-3 mb-5">
+      <h3>Default form group</h3>
       <form action="/html/tags/html_form_tag_action.cfm">
         <fieldset class="form-group">
           <label for="first_name">First Name</label>
@@ -544,10 +572,10 @@
       </form>
     </div>
 
-    <br>
+    <h3>Inline form</h3>
 
-    <div>
-      <form action="/html/tags/html_form_tag_action.cfm" class="form-inline">
+    <div class="mt-3 mb-5">
+      <form action class="form-inline">
         <label class="mr-sm-2 mb-0" for="first_name">First Name</label>
         <input type="text" class="form-control mr-sm-2 mb-2 mb-sm-0" id="first_name" name="first_name">
         <label class="mr-sm-2 mb-0" for="last_name">Last Name</label>
@@ -556,11 +584,11 @@
       </form>
     </div>
 
-    <br>
+    <h3>Aligned form</h3>
 
-    <div>
+    <div class="mt-3 mb-5">
       <div class="container">
-        <form action="/html/tags/html_form_tag_action.cfm">
+        <form action>
           <div class="form-group row">
             <label for="first_name" class="col-xs-3 col-form-label mr-2">First Name</label>
             <div class="col-xs-9">
@@ -582,10 +610,9 @@
       </div>
     </div>
 
-    <br>
     <div>
       <div class="container">
-        <form action="/html/tags/html_form_tag_action.cfm">
+        <form action>
 
           <fieldset class="form-group">
             <div class="row">
@@ -633,18 +660,17 @@
       </div>
     </div>
 
-    <br>
+    <h3>Form with help text </h3>
 
-    <div>
+    <div class="mt-3 mb-5">
       <label for="accountId">Account Id</label>
       <input type="text" id="accountId" class="form-control" aria-describedby="helpAccountId">
       <span id="helpAccountId" class="form-text text-muted">Your account ID is located at the top of your invoice.</span>
     </div>
 
-    <br>
+    <h3>Checkbox and radio </h3>
 
-    <div>
-      <!-- Checkboxes -->
+    <div class="mt-3 mb-5">
       <div class="form-check form-check-inline">
         <label class="form-check-label">
           <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1"> 1
@@ -660,7 +686,6 @@
         </label>
       </div>
 
-      <!-- Radio Buttons -->
       <div class="form-check form-check-inline">
         <label class="form-check-label">
           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"> 1
@@ -682,64 +707,65 @@
   </div>
 
   <!-- Dropdown  -->
-  <div class="container-fluid mb-5 mt-3" data-category="dropdown">
-    <h2>Dropdown</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="dropdown">
+    <h1>Dropdown</h1>
 
-    <div style="position: relative">
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          Dropdown button
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+    <div class="row">
+      <div style="position: relative" class="mt-3 mb-5 col-4">
+        <h3>Default dropdown</h3>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Dropdown button
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
 
-      </div>
-    </div>
-
-    <br>
-
-    <div>
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          About Us
-        </button>
-        <div class="dropdown-menu" aria-labelledby="about-us">
-          <h6 class="dropdown-header">Company Information</h6>
-          <a class="dropdown-item" href="#">Our Story</a>
-          <a class="dropdown-item" href="#">Our Team</a>
-          <h6 class="dropdown-header">Contact Us</h6>
-          <a class="dropdown-item" href="#">Call Center</a>
-          <a class="dropdown-item" href="#">Store Locations</a>
         </div>
       </div>
-    </div>
-
-    <br>
-
-    <div>
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          About Us
-        </button>
-        <div class="dropdown-menu" aria-labelledby="about-us">
-          <a class="dropdown-item" href="#">Our Story</a>
-          <a class="dropdown-item" href="#">Our Team</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Contact Us</a>
+      <div class="mt-3 mb-5 col-4">
+        <h3>Dropdown with menu</h3>
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            About Us
+          </button>
+          <div class="dropdown-menu" aria-labelledby="about-us">
+            <h6 class="dropdown-header">Company Information</h6>
+            <a class="dropdown-item" href="#">Our Story</a>
+            <a class="dropdown-item" href="#">Our Team</a>
+            <h6 class="dropdown-header">Contact Us</h6>
+            <a class="dropdown-item" href="#">Call Center</a>
+            <a class="dropdown-item" href="#">Store Locations</a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 mb-5 col-4">
+        <h3>Dropdown with divider</h3>
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            About Us
+          </button>
+          <div class="dropdown-menu" aria-labelledby="about-us">
+            <a class="dropdown-item" href="#">Our Story</a>
+            <a class="dropdown-item" href="#">Our Team</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Contact Us</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Navs  -->
-  <div class="container-fluid mb-5 mt-3" data-category="navs">
-    <h2>Navs</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="navs">
+    <h1>Navs</h1>
 
-    <div>
+    <h3>Default nav</h3>
+
+    <div class="mt-3 mb-5">
       <ul class="nav">
 
         <li class="nav-item">
@@ -761,22 +787,20 @@
       </ul>
     </div>
 
-    <br>
+    <h3>Horizontal menu</h3>
 
-    <div>
+    <div class="mt-3 mb-5">
       <nav class="nav flex-column">
-
         <a class="nav-link active" href="#">HTML</a>
         <a class="nav-link" href="#">CSS</a>
         <a class="nav-link" href="#">JavaScript</a>
         <a class="nav-link" href="#">Preview</a>
-
       </nav>
     </div>
 
-    <br>
+    <h3>Nav with tabs</h3>
 
-    <div>
+    <div class="mt-3 mb-5">
       <ul class="nav nav-tabs">
 
         <li class="nav-item">
@@ -798,9 +822,9 @@
       </ul>
     </div>
 
-    <br>
+    <h3>Nav with pills</h3>
 
-    <div>
+    <div class="mt-3 mb-5">
       <ul class="nav nav-pills">
 
         <li class="nav-item">
@@ -822,9 +846,9 @@
       </ul>
     </div>
 
-    <br>
+    <h3>Horizontal nav with pills</h3>
 
-    <div>
+    <div class="mt-3 mb-5">
       <ul class="nav nav-pills flex-column">
 
         <li class="nav-item">
@@ -846,9 +870,9 @@
       </ul>
     </div>
 
-    <br>
+    <h3>Nav with tabs and dropdown</h3>
 
-    <div>
+    <div class="mt-3 mb-5">
       <ul id="clothing-nav" class="nav nav-tabs" role="tablist">
 
         <li class="nav-item">
@@ -901,10 +925,10 @@
   </div>
 
   <!-- Navbar  -->
-  <div class="container-fluid mb-5 mt-3" data-category="navbar">
-    <h2>Navbar</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="navbar">
+    <h1>Navbar</h1>
 
-    <div>
+    <div class="mt-3 mb-5">
       <nav class="navbar navbar-expand-sm navbar-light bg-faded">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content"
           aria-expanded="false" aria-label="Toggle navigation">
@@ -932,8 +956,8 @@
         </div>
       </nav>
 
-      <br>
-
+    </div>
+    <div class="mt-3 mb-5">
       <nav class="navbar navbar-expand-sm navbar-light bg-primary">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content"
           aria-expanded="false" aria-label="Toggle navigation">
@@ -959,8 +983,9 @@
         </div>
       </nav>
 
-      <br>
+    </div>
 
+    <div class="mt-3 mb-5">
       <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content"
           aria-expanded="false" aria-label="Toggle navigation">
@@ -989,10 +1014,10 @@
   </div>
 
   <!-- Pagination  -->
-  <div class="container-fluid mb-5 mt-3" data-category="pagination">
-    <h2>Pagination</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="pagination">
+    <h1>Pagination</h1>
 
-    <div>
+    <div class="mt-3 mb-5">
       <nav>
         <ul class="pagination">
           <li class="page-item">
@@ -1030,9 +1055,7 @@
       </nav>
     </div>
 
-    <br>
-
-    <div>
+    <div class="mt-3 mb-5">
       <nav>
         <ul class="pagination">
           <li class="page-item">
@@ -1070,9 +1093,7 @@
       </nav>
     </div>
 
-    <br>
-
-    <div>
+    <div class="mt-3 mb-5">
       <nav>
         <ul class="pagination pagination-lg">
           <li class="page-item">
@@ -1108,7 +1129,9 @@
           </li>
         </ul>
       </nav>
+    </div>
 
+    <div class="mt-3 mb-5">
       <nav>
         <ul class="pagination">
           <li class="page-item">
@@ -1144,7 +1167,9 @@
           </li>
         </ul>
       </nav>
+    </div>
 
+    <div class="mt-3 mb-5">
       <nav>
         <ul class="pagination pagination-sm">
           <li class="page-item">
@@ -1184,12 +1209,12 @@
   </div>
 
   <!-- Jumbotron  -->
-  <div class="container-fluid mb-5 mt-3" data-category="jumbotron">
-    <h2>Jumbotron</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="jumbotron">
+    <h1>Jumbotron</h1>
 
     <div class="container">
       <div class="jumbotron">
-        <h1>My Jumbotron</h1>
+        <h1>Container size jumboton</h1>
         <p>Think BIG with a Bootstrap Jumbotron!</p>
       </div>
     </div>
@@ -1197,7 +1222,7 @@
     <div>
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1>My Jumbotron</h1>
+          <h1>Container fluid size jumbotron</h1>
           <p>Think BIG with a Bootstrap Jumbotron!</p>
         </div>
       </div>
@@ -1205,8 +1230,8 @@
   </div>
 
   <!-- Cards  -->
-  <div class="container-fluid mb-5 mt-3" data-category="cards">
-    <h2>Cards</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="cards">
+    <h1>Cards</h1>
     <div class="row mb-3">
       <div class="col-3">
         <div class="card card-body">
@@ -1234,7 +1259,7 @@
             <h4 class="card-title">Sun Gone</h4>
             <h6 class="card-subtitle text-muted">Sun disappears!</h6>
           </div>
-          <img src="/pix/samples/12s.jpg" alt="Photo of sunset">
+          <img src="https://via.placeholder.com/300x150" alt="Photo of sunset">
 
           <div class="card-body">
             <p class="card-text">The sun disappeared behind the horizon today. Experts claim it could be gone for good!</p>
@@ -1287,19 +1312,17 @@
   </div>
 
   <!-- Tooltip  -->
-  <div class="container-fluid mb-5 mt-3" data-category="tooltip">
-    <h2>Tooltip</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="tooltip">
+    <h1>Tooltip</h1>
 
-    <p style="margin:40px;">Check out my
-      <a target="_blank" href="" data-toggle="tooltip" data-placement="top" title="Build advanced layouts easily with CSS!">Grid tutorial</a>, as you never know when you might need it!</p>
-
-    <div>
-      <button type="button" class="btn btn-primary" data-toggle="tooltip" title="Top shoes" style="margin:20px;">
-        Shoes
-      </button>
+    <div class="mt-3 mb-5">
+      <h3>Inline tooltop</h3>
+      <p style="margin:40px;">Check out my
+        <a target="_blank" href="" data-toggle="tooltip" data-placement="top" title="Build advanced layouts easily with CSS!">Grid tutorial</a>, as you never know when you might need it!</p>
     </div>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>All position tooltip</h3>
       <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Top shoes" style="margin:20px;">
         Shoes
       </button>
@@ -1317,9 +1340,10 @@
   </div>
 
   <!-- Popovers  -->
-  <div class="container-fluid mb-5 mt-3" data-category="popovers">
-    <h2>Popovers</h2>
-    <div>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="popovers">
+    <h1>Popovers</h1>
+    <div class="mt-3 mb-5">
+      <h3>All popover position</h3>
       <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
         Popover on top
       </button>
@@ -1340,10 +1364,11 @@
   </div>
 
   <!-- Badges  -->
-  <div class="container-fluid mb-5 mt-3" data-category="badges">
-    <h2>Badges</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="badges">
+    <h1>Badges</h1>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Badge heading</h3>
       <h1>Example heading
         <span class="badge badge-secondary">New</span>
       </h1>
@@ -1364,7 +1389,8 @@
       </h6>
     </div>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Button with inline badge</h3>
       <button type="button" class="btn btn-primary">
         Notifications
         <span class="badge badge-light">4</span>
@@ -1376,7 +1402,8 @@
       </button>
     </div>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Default badges</h3>
       <span class="badge badge-primary">Primary</span>
       <span class="badge badge-secondary">Secondary</span>
       <span class="badge badge-success">Success</span>
@@ -1387,7 +1414,8 @@
       <span class="badge badge-dark">Dark</span>
     </div>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Badges pill</h3>
       <span class="badge badge-pill badge-primary">Primary</span>
       <span class="badge badge-pill badge-secondary">Secondary</span>
       <span class="badge badge-pill badge-success">Success</span>
@@ -1398,7 +1426,8 @@
       <span class="badge badge-pill badge-dark">Dark</span>
     </div>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Badges with link</h3>
       <a href="" class="badge badge-primary">Primary</a>
       <a href="" class="badge badge-secondary">Secondary</a>
       <a href="" class="badge badge-success">Success</a>
@@ -1411,19 +1440,19 @@
   </div>
 
   <!-- Modals  -->
-  <div class="container-fluid mb-5 mt-3" data-category="modals">
-    <h2>Modals</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="modals">
+    <h1>Modals</h1>
 
-    <div>
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#flipFlop">
-        Click Me
+    <div class="mt-3 mb-5 row">
+      <button type="button" class="btn btn-primary btn-lg col-3 mr-3 ml-3" data-toggle="modal" data-target="#flipFlop">
+        Default Modal
       </button>
 
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#largeShoes">
+      <button type="button" class="btn btn-primary btn-lg col-3 mr-3 ml-3" data-toggle="modal" data-target="#largeShoes">
         Large Modal
       </button>
 
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#smallShoes">
+      <button type="button" class="btn btn-primary btn-lg col-3 mr-3 ml-3" data-toggle="modal" data-target="#smallShoes">
         Small Modal
       </button>
 
@@ -1490,10 +1519,11 @@
   </div>
 
   <!-- Alerts  -->
-  <div class="container-fluid mb-5 mt-3" data-category="alerts">
-    <h2>Alerts</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="alerts">
+    <h1>Alerts</h1>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Default alert</h3>
       <div class="alert alert-success" role="alert">Success alert</div>
       <div class="alert alert-info" role="alert">Info alert</div>
       <div class="alert alert-warning" role="alert">Warning alert</div>
@@ -1502,7 +1532,8 @@
       <div class="alert alert-dark" role="alert">Dark alert</div>
     </div>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Dismissible alert</h3>
       <div class="alert alert-success alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -1511,7 +1542,8 @@
       </div>
     </div>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Dismissible alert with fade</h3>
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -1519,23 +1551,14 @@
         <strong>Congratulations!</strong> You successfully tied your shoelace!
       </div>
     </div>
-
-    <div>
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>Congratulations!</strong> Now you're ready to do the
-        <a href="#" class="alert-link">next shoelace</a>.
-      </div>
-    </div>
   </div>
 
   <!-- Progress bars  -->
-  <div class="container-fluid mb-5 mt-3" data-category="progress-bars">
-    <h2>Progress bars</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="progress-bars">
+    <h1>Progress bars</h1>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Default Progress bar</h3>
       <div class="progress">
         <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
@@ -1561,9 +1584,8 @@
       </div>
     </div>
 
-    <br>
-
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Stripped Progress bar </h3>
       <div class="progress">
         <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0"
           aria-valuemax="100"></div>
@@ -1600,9 +1622,8 @@
       </div>
     </div>
 
-    <br>
-
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Animated Progress bar</h3>
       <div class="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0"
           aria-valuemax="100" style="width: 75%"></div>
@@ -1611,10 +1632,11 @@
   </div>
 
   <!-- List group  -->
-  <div class="container-fluid mb-5 mt-3" data-category="list-group">
-    <h2>List group</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="list-group">
+    <h1>List group</h1>
 
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Default list group</h3>
       <ul class="list-group">
         <li class="list-group-item">These Boots Are Made For Walking</li>
         <li class="list-group-item">Eleanor, Put Your Boots On</li>
@@ -1624,9 +1646,8 @@
       </ul>
     </div>
 
-    <br>
-
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>List group with pills</h3>
       <ul class="list-group">
         <li class="list-group-item justify-content-between">
           These Boots Are Made For Walking
@@ -1651,9 +1672,8 @@
       </ul>
     </div>
 
-    <br>
-
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Link List group</h3>
       <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action">These Boots Are Made For Walking</a>
         <a href="#" class="list-group-item list-group-item-action active">Eleanor, Put Your Boots On</a>
@@ -1663,9 +1683,8 @@
       </div>
     </div>
 
-    <br>
-
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>Button List group</h3>
       <div class="list-group">
         <button type="button" class="list-group-item list-group-item-action">These Boots Are Made For Walking</button>
         <button type="button" class="list-group-item list-group-item-action active">Eleanor, Put Your Boots On</button>
@@ -1675,9 +1694,8 @@
       </div>
     </div>
 
-    <br>
-
-    <div>
+    <div class="mt-3 mb-5">
+      <h3>List group with colors</h3>
       <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action list-group-item-success">These Boots Are Made For Walking</a>
         <a href="#" class="list-group-item list-group-item-action list-group-item-success active">Eleanor, Put Your Boots On</a>
@@ -1691,8 +1709,8 @@
   </div>
 
   <!-- Image thumbnails  -->
-  <div class="container-fluid mb-5 mt-3" data-category="image-thumbnails">
-    <h2>Image thumbnails </h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="image-thumbnails">
+    <h1>Image thumbnails </h1>
 
     <div>
       <img src="https://via.placeholder.com/100x100" class="rounded" alt="Sample image">
@@ -1703,8 +1721,8 @@
   </div>
 
   <!-- Figures  -->
-  <div class="container-fluid mb-5 mt-3" data-category="figures">
-    <h2>Figures</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="figures">
+    <h1>Figures</h1>
 
     <div>
       <figure class="figure">
@@ -1722,8 +1740,8 @@
   </div>
 
   <!-- Breadcrumbs  -->
-  <div class="container-fluid mb-5 mt-3" data-category="breadcrumbs">
-    <h2>Breadcrumbs</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="breadcrumbs">
+    <h1>Breadcrumbs</h1>
 
     <div>
       <ul class="breadcrumb">
@@ -1739,8 +1757,8 @@
   </div>
 
   <!-- Carousel  -->
-  <div class="container-fluid mb-5 mt-3" data-category="carousel">
-    <h2>Carousel</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="carousel">
+    <h1>Carousel</h1>
 
     <div>
       <div id="myCarousel" class="carousel slide bg-inverse w-50 ml-auto mr-auto" data-ride="carousel">
@@ -1785,36 +1803,44 @@
   </div>
 
   <!-- Close  -->
-  <div class="container-fluid mb-5 mt-3" data-category="close">
-    <h2>Close</h2>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="close">
+    <h1>Close</h1>
     <button type="button" class="close" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
 
   <!-- Code -->
-  <div class="container-fluid mb-5 mt-3" data-category="code">
-    <h2>Code</h2>
-    <div>
+  <div class="container-fluid pt-5 pb-5 mb-5 mt-3" data-category="code">
+    <h1>Code</h1>
+    <div class="mt-3 mb-5">
+      <h3>Default code</h3>
       For example,
       <code>&lt;section&gt;</code> should be wrapped as inline.
     </div>
 
-    <pre>
-      <code>
-        &lt;p&gt;Sample text here...&lt;/p&gt;
-        &lt;p&gt;And another line of sample text here...&lt;/p&gt;
-      </code>
-    </pre>
+    <div class="mt-3 mb-5">
+      <h3>Code with pre tag</h3>
+      <pre>
+        <code>
+          &lt;p&gt;Sample text here...&lt;/p&gt;
+          &lt;p&gt;And another line of sample text here...&lt;/p&gt;
+        </code>
+      </pre>
+    </div>
 
-    <p>
+
+
+    <div class="mt-3 mb-5">
+      <h3>Var tag</h3>
       <var>y</var> =
       <var>m</var>
       <var>x</var> +
       <var>b</var>
-    </p>
+    </div>
 
-    <p>
+    <div class="mt-3 mb-5">
+      <h3>Kbd tag</h3>
       To switch directories, type
       <kbd>cd</kbd> followed by the name of the directory.
       <br> To edit settings, press
@@ -1822,10 +1848,14 @@
         <kbd>ctrl</kbd> +
         <kbd>,</kbd>
       </kbd>
-    </p>
+    </div>
 
-    <p>
+    <div class="mt-3 mb-5">
+      <h3>Samp tag</h3>
       <samp>This text is meant to be treated as sample output from a computer program.</samp>
-    </p>
+    </div>
+
+
+
   </div>
 </div>

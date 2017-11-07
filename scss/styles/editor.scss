@@ -157,6 +157,48 @@ footer.protected {
       width: 100%;
       padding: 40px 0;
     }
+
+    .logo {
+      display: block;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .logo-orson {
+      width: 220px;
+    }
+
+    .logo-mashup {
+      width: 300px;
+    }
+
+    &.mashup-template {
+      padding: 1.5rem 0;
+      img.logo-header {
+        padding: 25px 10px 0 0;
+        margin: 0;
+      }
+
+      .block-cta {
+        padding: 155px 0 130px 53px;
+      }
+    }
+
+    &.orson {
+      padding: 1.5rem 0 8rem;
+      img.logo-header {
+        margin: 0;
+        padding: 0;
+      }
+
+      .block-cta {
+        padding: 100px 0 100px 53px;
+      }
+
+      .col-lg-8 {
+        padding: 0;
+      }
+    }
   }
 
   .container.is-big.newsletter {
@@ -623,4 +665,11 @@ footer.protected {
   textarea {
     color: $gray-800;
   }
+}
+
+.protected.alerts {
+  z-index: 100000;
+  position: absolute;
+  right: 20px;
+  top: 60px;
 }

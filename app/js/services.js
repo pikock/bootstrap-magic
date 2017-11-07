@@ -164,16 +164,6 @@ window.angular.module('data', []).service('data', [
     `
 
     var fontKeys = [
-      "'Helvetica Neue', Helvetica, Arial",
-      'Georgia',
-      "'Courrier New', Consolas",
-      'Impact',
-      "'Lucida Console', Monaco",
-      "'Palatino Linotype','Book Antiqua'",
-      "'Trebuchet MS'",
-      'Tahoma, Geneva',
-      'Verdana, Geneva',
-      "'Times New Roman', Times",
       'ABeeZee',
       'Abel',
       'Abhaya Libre',
@@ -1022,7 +1012,7 @@ window.angular.module('data', []).service('data', [
       'Zilla Slab Highlight'
     ]
 
-    var sass_function_keys = [
+    var sassFunctionKeys = [
       'rgb($red, $green, $blue)',
       'rgba($red, $green, $blue, $alpha)',
       'red($color)',
@@ -1111,7 +1101,7 @@ window.angular.module('data', []).service('data', [
       bootstrapFiles: bootstrapFiles,
       cssToAdd: cssToAdd,
       fontKeys: fontKeys,
-      sass_function_keys: sass_function_keys
+      sassFunctionKeys: sassFunctionKeys
     }
   }
 ])
@@ -1123,9 +1113,29 @@ window.angular.module('apSass', []).factory('apSass', [
   function($http, data, $q) {
     window.Sass.setWorkerUrl('/app/lib/sass/sass.worker.js')
     var sass = new window.Sass()
+    sass.options({
+      // Format output: nested, expanded, compact, compressed
+      // style: window.Sass.style.compressed,
+      // Decimal point precision for outputting fractional numbers
+      // (-1 will use the libsass default, which currently is 5)
+      precision: -1,
+      indentedSyntax: false,
+      // If you want inline source comments
+      comments: false,
+      // String to be used for indentation
+      indent: '',
+      // String to be used to for line feeds
+      linefeed: ''
+    })
+
+    var base = '../../scss/'
+    var directory = ''
+    var first = true
 
     var service = {
       sass: sass,
+      fonts: undefined,
+      bootstrapContent: undefined,
       importVariables: importVariables,
       getVariables: getVariables,
       setVariables: setVariables,
@@ -1140,49 +1150,108 @@ window.angular.module('apSass', []).factory('apSass', [
 
     // public function
 
-    function applySass(scope) {
-      return $q(function(resolve, reject) {
-        var vars = getVariables(scope)
-        var stringvar = getVariablesToString(scope)
+    function resolveFonts(fonts) {
+      window.fonts = fonts
+      window.data = data
+      var resolve = fonts.reduce(function(memo, font) {
+        var splits = font.split(',')
+        splits.forEach(function(split) {
+          split = split.trim()
+          if (data.fontKeys.indexOf(split) !== -1) {
+            memo.push(split)
+          }
+        })
+        return memo
+      }, [])
 
-        preloadFile(data.bootstrapFiles, stringvar + data.cssToAdd)
-          .then(function(result) {
-            resolve(result)
-            if (typeof vars.fonts !== 'undefined' && vars.fonts.length !== 0) {
-              window.WebFont.load({
-                google: {
-                  families: vars.fonts
-                }
-              })
+      service.fonts = resolve
+
+      if (typeof fonts !== 'undefined' && fonts.length !== 0) {
+        window.WebFont.load({
+          google: {
+            families: resolve
+          }
+        })
+
+        $('iframe.fixedPreview')
+          .get(0)
+          .contentWindow.WebFont.load({
+            google: {
+              families: resolve
             }
           })
-          .catch(function(error) {
-            console.error(error)
-          })
+      }
+    }
+
+    function applySass(scope) {
+      return $q(function(resolve, reject) {
+        var stringvar = getVariablesToString(scope)
+        var scss = stringvar + data.cssToAdd
+        var vars = getVariables(scope)
+
+        if (first) {
+          preloadFile(data.bootstrapFiles)
+            .then(function() {
+              compileSass(scss)
+                .then(function(result) {
+                  resolve(result)
+                  resolveFonts(vars.fonts)
+                  first = false
+                })
+                .catch(function(error) {
+                  reject(error)
+                })
+            })
+            .catch(function(error) {
+              reject(error)
+            })
+        } else {
+          compileSass(scss)
+            .then(function(result) {
+              resolve(result)
+              resolveFonts(vars.fonts)
+            })
+            .catch(function(error) {
+              reject(error)
+            })
+        }
       })
     }
 
-    function preloadFile(files, scss) {
+    function compileSass(scss) {
       return $q(function(resolve, reject) {
         try {
-          var base = '../../scss/'
-          var directory = ''
-
+          var t0 = performance.now()
           sass.writeFile('toAddScss.scss', scss)
-
-          sass.preloadFiles(base, directory, files, function() {
-            var t0 = performance.now()
-
-            sass.readFile('bootstrap.scss', function callback(bootstrapContent) {
-              sass.compile("@import 'functions'; @import 'toAddScss';" + bootstrapContent, function(
-                result
-              ) {
-                console.log(result)
+          sass.compile(
+            "@import 'functions'; @import 'toAddScss';" + service.bootstrapContent,
+            function(result) {
+              console.log(result)
+              if (result.status === 0) {
                 var t1 = performance.now()
-                console.log('Call to preloadFile took ' + (t1 - t0) / 1000 + ' seconds.')
+                console.log('Call to compileSass took ' + (t1 - t0) / 1000 + ' seconds.')
                 addStyle(result.text)
                 resolve(result.text)
-              })
+              } else {
+                reject(result.message)
+              }
+            }
+          )
+        } catch (e) {
+          reject(e)
+        }
+      })
+    }
+
+    function preloadFile(files) {
+      return $q(function(resolve, reject) {
+        try {
+          console.log('Preload File')
+          sass.preloadFiles(base, directory, files, function() {
+            console.log('Reading bootstrap file')
+            sass.readFile('bootstrap.scss', function callback(bootstrapContent) {
+              service.bootstrapContent = bootstrapContent
+              resolve()
             })
           })
         } catch (e) {
@@ -1197,9 +1266,6 @@ window.angular.module('apSass', []).factory('apSass', [
         .contentWindow.document.querySelector('style')
       styleContent.innerText = style
     }
-
-    preloadFile(data.bootstrapFiles)
-
     function importVariables($scope, string) {
       var regex = {
         variable: /^\s*([^:]*)\s*:\s*([^\\;]*)/,
@@ -1286,7 +1352,7 @@ window.angular.module('apSass', []).factory('apSass', [
     }
 
     function getKeys($scope) {
-      var keys = data.sass_function_keys
+      var keys = data.sassFunctionKeys
       for (var i = 0; i < $scope.variables.length; i++) {
         for (var j = 0; j < $scope.variables[i].data.length; j++) {
           keys.push($scope.variables[i].data[j].key)
@@ -1345,7 +1411,7 @@ window.angular.module('apSass', []).factory('apSass', [
       var blob = new Blob([data], { type: 'text/css' })
       var link = document.createElement('a')
       link.href = window.URL.createObjectURL(blob)
-      link.download = 'custom-variables-bootstrap' + res + '.scss'
+      link.download = 'custom-variables-bootstrap-' + res + '.scss'
       link.click()
     }
 
@@ -1360,7 +1426,7 @@ window.angular.module('apSass', []).factory('apSass', [
           var blob = new Blob([result.text], { type: 'text/css' })
           var link = document.createElement('a')
           link.href = window.URL.createObjectURL(blob)
-          link.download = 'custom-css-bootstrap-magic' + res + '.css'
+          link.download = 'custom-css-bootstrap-magic-' + res + '.css'
           link.click()
         })
       })

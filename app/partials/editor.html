@@ -52,6 +52,13 @@
   </header>
 </div>
 
+
+<div class="protected alerts" ng-if="alert">
+  <div class="alert alert-danger" role="alert" ng-bind="alert">
+    This is a danger alert—check it out!
+  </div>
+</div>
+
 <div ng-hide="show !== 'variables'">
   <div class="editor protected container-fluid p-0">
     <div class="row m-0">
@@ -67,9 +74,12 @@
               <label for="{{variable.key}}" ng-bind="variable.key"></label>
               <div class="input {' ap-color-picker: variable.value': colorpicker(variable.type)} input-group" data-color="{{ color(variable.type, variable.value) }}"
                 data-color-format="hex" ng-class="{'input-group color colorpicker' : colorpicker(variable.type)}" color-picker-apply="">
-                <input id="{{variable.key}}" type="text" data-ng-model="variable.value" class="sassVariable form-control {{variable.key}}"
-                  ng-model-options='{ updateOn: "blur" }' ng-change="autoApplySass()">
-                <span class="reset" ng-click="resetBaseVariable(variable)" ng-if="variable.value !== variable.default">x</span>
+                <input id="{{variable.key}}" type="text" data-ng-model="variable.value" class="sassVariable form-control {{variable.key}} {{$index}}"
+                  ng-change="autoApplySass()" ng-model-options="{
+                    updateOn: 'default blur',
+                    debounce: { 'default': 500, 'blur': 0 }
+                  }">
+                <span class="reset" ng-click="resetBaseVariable(variable, $event)" ng-if="variable.value !== variable.default">x</span>
                 <span class="input-group-addon" ng-class="{ 'hidden' : !colorpicker(variable.type)}">
                   <i></i>
                 </span>
@@ -177,7 +187,7 @@
             </div>
           </div>
 
-          <p>Add your less variables to Bootstrap Magic.</p>
+          <p>Add your SCSS variables to Bootstrap Magic.</p>
 
           <textarea class="form-control" ng-model="importedVariables" rows="3" placeholder="Example $text-color: #242424;" style="height:400px"></textarea>
         </div>

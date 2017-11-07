@@ -148,7 +148,7 @@
         "default": "Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
         "type": "font"
       },
-      { "key": "$font-family-base", "value": "$font-family-sans-serif", "default": "$font-family-sans-serif", "type": "" },
+      { "key": "$font-family-base", "value": "$font-family-sans-serif", "default": "$font-family-sans-serif", "type": "font" },
       { "key": "$font-size-base", "value": "1rem", "default": "1rem", "type": "" },
       { "key": "$font-size-lg", "value": "1.25rem", "default": "1.25rem", "type": "" },
       { "key": "$font-size-sm", "value": "0.875rem", "default": "0.875rem", "type": "" },
@@ -163,7 +163,7 @@
       { "key": "$h5-font-size", "value": "1.25rem", "default": "1.25rem", "type": "" },
       { "key": "$h6-font-size", "value": "1rem", "default": "1rem", "type": "" },
       { "key": "$headings-margin-bottom", "value": "($spacer / 2)", "default": "($spacer / 2)", "type": "" },
-      { "key": "$headings-font-family", "value": "inherit", "default": "inherit", "type": "" },
+      { "key": "$headings-font-family", "value": "inherit", "default": "inherit", "type": "font" },
       { "key": "$headings-font-weight", "value": "500", "default": "500", "type": "" },
       { "key": "$headings-line-height", "value": "1.1", "default": "1.1", "type": "" },
       { "key": "$headings-color", "value": "inherit", "default": "inherit", "type": "" },
@@ -558,7 +558,7 @@
     "slug": "jumbotron",
     "data": [
       { "key": "$jumbotron-padding", "value": "2rem", "default": "2rem", "type": "" },
-      { "key": "$jumbotron-bg", "value": "$gray-200", "default": "2rem", "type": "color" }
+      { "key": "$jumbotron-bg", "value": "$gray-200", "default": "$gray-200", "type": "color" }
     ]
   },
   {

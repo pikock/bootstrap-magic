@@ -123,11 +123,9 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
         })
           .then(function(templateCss) {
             $scope.subRoute = 'preview'
-            $timeout(function() {
-              $scope.template.html = templateHtml.data
-              $scope.template.css = templateCss.data
-              generatePreviewHtml()
-            }, 1)
+            $scope.template.html = templateHtml.data
+            $scope.template.css = templateCss.data
+            generatePreviewHtml()
           })
           .catch(function(error) {
             console.error(error)
@@ -224,15 +222,12 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     })
   }
 
-  // saveSassVar,
-  // saveCSS
-
   function iframeMoveTo(categoryName) {
     var content = $('iframe.fixedPreview').get(0).contentWindow
     var category = content.document.querySelector('div[data-category="' + categoryName + '"]')
 
     if (category) {
-      var categoryHeight = category.getBoundingClientRect().top
+      var categoryHeight = category.offsetTop
       $(content).scrollTop(categoryHeight)
     }
   }
@@ -286,16 +281,35 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
   }
 
   function generatePreviewHtml(css, html) {
-    var generatedCss = css || $scope.generatedCss
-    var templateHtml = html || $scope.template.html
+    var generatedCss = css || $scope.generatedCss || ''
+    var templateHtml = html || $scope.template.html || ''
     var templateCss = '<style>' + $scope.template.css + '</style>'
+    var fonts = apSass.fonts
+    var scriptToAdd
+    if (fonts && fonts.length !== 0) {
+      console.log(fonts)
+      scriptToAdd =
+        '<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>' +
+        '<script>window.WebFont.load({google: {families: ' +
+        JSON.stringify(apSass.fonts) +
+        '}})</script>'
+      console.log(scriptToAdd)
+    } else {
+      scriptToAdd = ''
+    }
+
     var generateHtml =
       '<!doctype html><html lang="en"><head>' +
       generatedCss +
       templateCss +
       '</head><body><div class="preview">' +
       templateHtml +
-      '</div></body></html>'
+      '</div>' +
+      '<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>' +
+      '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>' +
+      '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>' +
+      scriptToAdd +
+      '</body></html>'
     var blob = new Blob([generateHtml], {
       type: 'text/html'
     })
@@ -306,24 +320,23 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
 
   function applySass() {
     $scope.loading = true
-    $timeout(function() {
-      apSass
-        .applySass($scope)
-        .then(function(result) {
-          $scope.generatedCss = '<style>' + result + '</style>'
-          $scope.loading = false
-        })
-        .catch(function(error) {
-          console.error(error)
-          $scope.loading = false
-        })
-    }, 1)
+    apSass
+      .applySass($scope)
+      .then(function(result) {
+        $scope.generatedCss = '<style>' + result + '</style>'
+        $scope.loading = false
+        $scope.alert = undefined
+      })
+      .catch(function(error) {
+        console.error(error)
+        $scope.alert = error
+        $scope.loading = false
+      })
   }
 
   function resetBaseVariable(variable) {
-    $timeout(function() {
-      variable.value = variable.default
-    }, 0)
+    variable.value = variable.default
+    applySass()
   }
 
   function colorpicker(type) {
