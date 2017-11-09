@@ -18,18 +18,21 @@ Live preview, live HTML coding to help you create your Bootstrap 4.0 theme direc
 ### Build project
 
 ```
-// to compile SCSS
+
+// To launch Bootstrap Magic locally
+npm run dev
+
+
+// In an another terminal, edit Bootstrap Magic theme to compile SCSS
 npm run watch 
 
-// In an another terminal
-npm run dev
 ```
 
 ### License
 
 The MIT License
 
-Copyright (c) 2013 - 2017 the Autre planete and Orson.io, http://www.autreplanete.com, http://en.orson.io,
+Copyright (c) 2013 - 2017 Orson.io and the Autre planete http://en.orson.io, http://www.autreplanete.com,
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
