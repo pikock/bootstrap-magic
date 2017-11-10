@@ -24,6 +24,46 @@
   $(function () {
     $('[data-toggle="popover"]').popover()
   })
+
+  var last_known_scroll_position = 0;
+  var ticking = false;
+  var first = false
+
+  var scrollPositionCategory
+
+
+  function sendData(scrollPos) {
+    var closest = scrollPositionCategory.reduce(function (memo, current) {
+      if (Math.abs(current.pos - scrollPos) < Math.abs(memo.pos - scrollPos)) {
+        memo = current
+      }
+      return memo
+    });
+    window.parent.window.scrollToCategory(closest.name)
+  }
+
+  window.addEventListener('scroll', function (e) {
+    if (!first) {
+      first = true
+      var c = document.querySelectorAll('*[data-category]')
+      if (c) {
+        var memo = []
+        c.forEach(function (dom) {
+          memo.push({ pos: dom.offsetTop, name: dom.dataset.category })
+        })
+        scrollPositionCategory = memo
+      }
+
+    }
+    last_known_scroll_position = window.scrollY;
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        sendData(last_known_scroll_position);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
 </script>
 
 <style>
@@ -1869,7 +1909,11 @@
       <samp>This text is meant to be treated as sample output from a computer program.</samp>
     </div>
 
-
+    <div class="pt-5 pb-5 mb-5 mt-3"></div>
+    <div class="pt-5 pb-5 mb-5 mt-3"></div>
+    <div class="pt-5 pb-5 mb-5 mt-3"></div>
+    <div class="pt-5 pb-5 mb-5 mt-3"></div>
+    <div class="pt-5 pb-5 mb-5 mt-3"></div>
 
   </div>
 </div>

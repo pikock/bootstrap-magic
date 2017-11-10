@@ -6,17 +6,16 @@
           <img src="../app/img/logo-boostrapmagic.svg" width="24" height="24" alt="logo">
         </a>
         <span class="navbar-text rs">
-          <div data-size="medium" data-href="http://pikock.github.io/bootstrap-magic/">
+          <a data-size="medium" href="https://github.com/pikock/bootstrap-magic">
             <img src="../app/img/icn-github-editor.svg" width="24" height="24">
-          </div>
-          <a href="https://twitter.com/share" data-url="http://pikock.github.io/bootstrap-magic/" data-text="Bootstrap Magic feat Bootstrap 3.1 : Awesome theme generator with live preview"
-            data-lang="en" data-hashtags="bootstrap, angularjs">
+          </a>
+          <a href="https://twitter.com/home?status=https%3A//pikock.github.io/bootstrap-magic/" data-url="https://pikock.github.io/bootstrap-magic/"
+            data-text="Bootstrap Magic feat Bootstrap 3.1 : Awesome theme generator with live preview" data-lang="en" data-hashtags="bootstrap, angularjs">
             <img src="../app/img/icn-twitter.svg" width="24" height="24">
           </a>
-          <div data-href="http://pikock.github.io/bootstrap-magic/" data-send="false" data-layout="button_count" data-width="24" data-show-faces="false"
-            data-action="like">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//pikock.github.io/bootstrap-magic/">
             <img src="../app/img/icn-facebook.svg" width="24" height="24">
-          </div>
+          </a>
 
         </span>
       </div>
@@ -66,7 +65,7 @@
         <div ng-repeat="group in variables">
           <section class="category category-{{ group.slug }}" ng-click="toggle(group)">
             <span ng-bind="group.name"></span>
-            <span class="arrow is-left">></span>
+            <span class="arrow {{ group.hidden ? 'is-left' : 'is-down' }}">></span>
           </section>
           <section class="variables protected" ng-hide="group.hidden">
             <div class="form-group {' ap-color-picker: variable.value': colorpicker(variable.type)}" data-color="{{ color(variable.type, variable.value) }}"
@@ -249,24 +248,19 @@
 
           <div class="row mb-5">
             <div class="col d-flex justify-content-center">
-              <div data-href="http://pikock.github.io/bootstrap-magic/" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false"
-                data-action="like">
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//pikock.github.io/bootstrap-magic/">
                 <img src="./img/fb-icn.svg" width="80" height="80" alt="">
-              </div>
-              <a href="https://twitter.com/share" data-url="http://pikock.github.io/bootstrap-magic/" data-text="Bootstrap Magic feat Bootstrap 3.1 : Awesome theme generator with live preview"
-                data-lang="en" data-hashtags="bootstrap, angularjs">
+              </a>
+              <a href="https://twitter.com/home?status=https%3A//pikock.github.io/bootstrap-magic/">
                 <img src="./img/twitter-icn.svg" width="80" height="80" alt="">
               </a>
-              <div data-size="medium" data-href="http://pikock.github.io/bootstrap-magic/">
+              <a href="https://plus.google.com/share?url=https%3A//pikock.github.io/bootstrap-magic/">
                 <img src="./img/g-icn.svg" width="80" height="80" alt="">
-              </div>
-
+              </a>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
-</div>
 </div>

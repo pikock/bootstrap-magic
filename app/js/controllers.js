@@ -60,8 +60,11 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     chooseTemplate: chooseTemplate,
     generatePreviewHtml: generatePreviewHtml,
     generateFixedHtml: generateFixedHtml,
-    iframeMoveTo: iframeMoveTo
+    iframeMoveTo: iframeMoveTo,
+    scrollToCategory: scrollToCategory
   }
+
+  window.scrollToCategory = scrollToCategory
 
   $scope.$on('$routeChangeStart', function() {
     $scope.isViewLoading = true
@@ -80,6 +83,25 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
       generatePreviewHtml()
     }
     $scope[routePath] = route
+  }
+
+  function scrollToCategory(category) {
+    var data = document.querySelector('.category-' + category)
+    var tmp = angular.element(data).scope()
+    tmp.$apply(function() {
+      $scope.variables.forEach(function(g) {
+        g.hidden = true
+      })
+      tmp.group.hidden = false
+    })
+    $timeout(function() {
+      $('.variables-container').animate(
+        {
+          scrollTop: data.offsetTop
+        },
+        0
+      )
+    }, 0)
   }
 
   function toggle(group) {
@@ -287,13 +309,11 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     var fonts = apSass.fonts
     var scriptToAdd
     if (fonts && fonts.length !== 0) {
-      console.log(fonts)
       scriptToAdd =
         '<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>' +
         '<script>window.WebFont.load({google: {families: ' +
         JSON.stringify(apSass.fonts) +
         '}})</script>'
-      console.log(scriptToAdd)
     } else {
       scriptToAdd = ''
     }

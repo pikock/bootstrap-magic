@@ -64,6 +64,21 @@
       { "key": "$sizes", "value": "(25: 25%, 50: 50%, 75: 75%, 100: 100%)", "default": "(25: 25%, 50: 50%, 75: 75%, 100: 100%)", "type": "" }
     ]
   },
+
+  {
+    "name": "Options",
+    "slug": "options",
+    "data": [
+      { "key": "$enable-rounded", "value": "true", "default": "true", "type": "boolean" },
+      { "key": "$enable-shadows", "value": "false", "default": "false", "type": "boolean" },
+      { "key": "$enable-gradients", "value": "false", "default": "false", "type": "boolean" },
+      { "key": "$enable-transitions", "value": "true", "default": "true", "type": "boolean" },
+      { "key": "$enable-hover-media-query", "value": "false", "default": "false", "type": "boolean" },
+      { "key": "$enable-grid-classes", "value": "true", "default": "true", "type": "boolean" },
+      { "key": "$enable-print-styles", "value": "true", "default": "true", "type": "boolean" }
+    ]
+  },
+
   {
     "name": "Body",
     "slug": "body",

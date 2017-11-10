@@ -475,9 +475,9 @@ footer.protected {
   .arrow {
     position: absolute;
     right: 19px;
-    &.is-left {
-    }
+
     &.is-down {
+      transform: rotate(90deg);
     }
   }
 
