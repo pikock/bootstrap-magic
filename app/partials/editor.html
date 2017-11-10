@@ -93,7 +93,14 @@
   <div class="protected protectedHtml">
     <div class="blockview is-hidden"></div>
     <div class="preview protected-css">
-      <div class="loading" ng-show="loading">LOADING</div>
+      <div class="loading" ng-show="loading">
+        <div class='box' id="loader">
+          <div class='wave -one'></div>
+          <div class='wave -two'></div>
+          <div class='wave -three'></div>
+        </div>
+          <h4>Wait for it ...</h4>
+      </div>
       <iframe class="fixedPreview" ng-src="{{fixedContent.blobUrl}}" frameborder="0">
       </iframe>
     </div>

@@ -12,10 +12,7 @@
     "dev": "./node_modules/serve/bin/serve.js",
     "clean": "rimraf dist",
     "watch": "nodemon -e scss -x \"npm run build\"",
-    "build": "npm run clean && NODE_ENV=production webpack",
-    "deploy:now": "npm run build && cd dist && now --static -p -n agora  && cd ..",
-    "deploy:gae:staging": "npm run build && gcloud app deploy --version=staging --no-promote && gcloud app browse --service=staging",
-    "deploy:gae:production": "npm run build && gcloud app deploy --version production && gcloud app browse && gcloud app logs tail -s default"
+    "build": "npm run clean && NODE_ENV=production webpack"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -55,6 +52,7 @@
     "dotenv-webpack": "^1.5.4",
     "firebase": "^4.3.0",
     "jquery": "^3.2.1",
+    "nodemon": "^1.12.1",
     "normalize.css": "^7.0.0"
   }
 }

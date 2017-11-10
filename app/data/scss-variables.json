@@ -49,19 +49,7 @@
       { "key": "$theme-color-interval", "value": "8%", "default": "8%", "type": "" }
     ]
   },
-  {
-    "name": "Options",
-    "slug": "options",
-    "data": [
-      { "key": "$enable-rounded", "value": "true", "default": "true", "type": "boolean" },
-      { "key": "$enable-shadows", "value": "false", "default": "false", "type": "boolean" },
-      { "key": "$enable-gradients", "value": "false", "default": "false", "type": "boolean" },
-      { "key": "$enable-transitions", "value": "true", "default": "true", "type": "boolean" },
-      { "key": "$enable-hover-media-query", "value": "false", "default": "false", "type": "boolean" },
-      { "key": "$enable-grid-classes", "value": "true", "default": "true", "type": "boolean" },
-      { "key": "$enable-print-styles", "value": "true", "default": "true", "type": "boolean" }
-    ]
-  },
+  
   {
     "name": "Spacing",
     "slug": "spacing",
@@ -192,27 +180,7 @@
       { "key": "$mark-bg", "value": "#fcf8e3", "default": "#fcf8e3", "type": "color" }
     ]
   },
-  {
-    "name": "Tables",
-    "slug": "tables",
-    "data": [
-      { "key": "$table-cell-padding", "value": "0.75rem", "default": "0.75rem", "type": "" },
-      { "key": "$table-cell-padding-sm", "value": "0.3rem", "default": "0.3rem", "type": "" },
-      { "key": "$table-bg", "value": "transparent", "default": "transparent", "type": "color" },
-      { "key": "$table-accent-bg", "value": "rgba($black, 0.05)", "default": "rgba($black, 0.05)", "type": "color" },
-      { "key": "$table-hover-bg", "value": "rgba($black, 0.075)", "default": "rgba($black, 0.075)", "type": "color" },
-      { "key": "$table-active-bg", "value": "$table-hover-bg", "default": "$table-hover-bg", "type": "color" },
-      { "key": "$table-border-width", "value": "$border-width", "default": "$border-width", "type": "" },
-      { "key": "$table-border-color", "value": "$gray-200", "default": "$gray-200", "type": "color" },
-      { "key": "$table-head-bg", "value": "$gray-200", "default": "$gray-200", "type": "color" },
-      { "key": "$table-head-color", "value": "$gray-700", "default": "$gray-700", "type": "color" },
-      { "key": "$table-inverse-bg", "value": "$gray-900", "default": "$gray-900", "type": "color" },
-      { "key": "$table-inverse-accent-bg", "value": "rgba($white, 0.05)", "default": "rgba($white, 0.05)", "type": "color" },
-      { "key": "$table-inverse-hover-bg", "value": "rgba($white, 0.075)", "default": "rgba($white, 0.075)", "type": "color" },
-      { "key": "$table-inverse-border-color", "value": "lighten($gray-900, 7.5%)", "default": "lighten($gray-900, 7.5%)", "type": "color" },
-      { "key": "$table-inverse-color", "value": "$body-bg", "default": "$body-bg", "type": "color" }
-    ]
-  },
+  
   {
     "name": "Buttons",
     "slug": "buttons",
@@ -455,19 +423,6 @@
     ]
   },
   {
-    "name": "Z Index",
-    "slug": "z-index",
-    "data": [
-      { "key": "$zindex-dropdown", "value": "1000", "default": "1000", "type": "" },
-      { "key": "$zindex-sticky", "value": "1020", "default": "1020", "type": "" },
-      { "key": "$zindex-fixed", "value": "1030", "default": "1030", "type": "" },
-      { "key": "$zindex-modal-backdrop", "value": "1040", "default": "1040", "type": "" },
-      { "key": "$zindex-modal", "value": "1050", "default": "1050", "type": "" },
-      { "key": "$zindex-popover", "value": "1060", "default": "1060", "type": "" },
-      { "key": "$zindex-tooltip", "value": "1070", "default": "1070", "type": "" }
-    ]
-  },
-  {
     "name": "Navs",
     "slug": "navs",
     "data": [
@@ -527,6 +482,41 @@
       { "key": "$navbar-light-toggler-border-color", "value": "rgba($black, 0.1)", "default": "rgba($black, 0.1)", "type": "color" }
     ]
   },
+  {
+    "name": "Tables",
+    "slug": "tables",
+    "data": [
+      { "key": "$table-cell-padding", "value": "0.75rem", "default": "0.75rem", "type": "" },
+      { "key": "$table-cell-padding-sm", "value": "0.3rem", "default": "0.3rem", "type": "" },
+      { "key": "$table-bg", "value": "transparent", "default": "transparent", "type": "color" },
+      { "key": "$table-accent-bg", "value": "rgba($black, 0.05)", "default": "rgba($black, 0.05)", "type": "color" },
+      { "key": "$table-hover-bg", "value": "rgba($black, 0.075)", "default": "rgba($black, 0.075)", "type": "color" },
+      { "key": "$table-active-bg", "value": "$table-hover-bg", "default": "$table-hover-bg", "type": "color" },
+      { "key": "$table-border-width", "value": "$border-width", "default": "$border-width", "type": "" },
+      { "key": "$table-border-color", "value": "$gray-200", "default": "$gray-200", "type": "color" },
+      { "key": "$table-head-bg", "value": "$gray-200", "default": "$gray-200", "type": "color" },
+      { "key": "$table-head-color", "value": "$gray-700", "default": "$gray-700", "type": "color" },
+      { "key": "$table-inverse-bg", "value": "$gray-900", "default": "$gray-900", "type": "color" },
+      { "key": "$table-inverse-accent-bg", "value": "rgba($white, 0.05)", "default": "rgba($white, 0.05)", "type": "color" },
+      { "key": "$table-inverse-hover-bg", "value": "rgba($white, 0.075)", "default": "rgba($white, 0.075)", "type": "color" },
+      { "key": "$table-inverse-border-color", "value": "lighten($gray-900, 7.5%)", "default": "lighten($gray-900, 7.5%)", "type": "color" },
+      { "key": "$table-inverse-color", "value": "$body-bg", "default": "$body-bg", "type": "color" }
+    ]
+  },
+  {
+    "name": "Z Index",
+    "slug": "z-index",
+    "data": [
+      { "key": "$zindex-dropdown", "value": "1000", "default": "1000", "type": "" },
+      { "key": "$zindex-sticky", "value": "1020", "default": "1020", "type": "" },
+      { "key": "$zindex-fixed", "value": "1030", "default": "1030", "type": "" },
+      { "key": "$zindex-modal-backdrop", "value": "1040", "default": "1040", "type": "" },
+      { "key": "$zindex-modal", "value": "1050", "default": "1050", "type": "" },
+      { "key": "$zindex-popover", "value": "1060", "default": "1060", "type": "" },
+      { "key": "$zindex-tooltip", "value": "1070", "default": "1070", "type": "" }
+    ]
+  },
+  
   {
     "name": "Pagination",
     "slug": "pagination",
@@ -790,6 +780,19 @@
 
       { "key": "$pre-color", "value": "$gray-900", "default": "$gray-900", "type": "color" },
       { "key": "$pre-scrollable-max-height", "value": "340px", "default": "340px", "type": "" }
+    ]
+  },
+  {
+    "name": "Options",
+    "slug": "options",
+    "data": [
+      { "key": "$enable-rounded", "value": "true", "default": "true", "type": "boolean" },
+      { "key": "$enable-shadows", "value": "false", "default": "false", "type": "boolean" },
+      { "key": "$enable-gradients", "value": "false", "default": "false", "type": "boolean" },
+      { "key": "$enable-transitions", "value": "true", "default": "true", "type": "boolean" },
+      { "key": "$enable-hover-media-query", "value": "false", "default": "false", "type": "boolean" },
+      { "key": "$enable-grid-classes", "value": "true", "default": "true", "type": "boolean" },
+      { "key": "$enable-print-styles", "value": "true", "default": "true", "type": "boolean" }
     ]
   }
 ]
