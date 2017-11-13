@@ -66,13 +66,13 @@
     right: 0;
     text-align: center;
     display: block;
-    line-height: 25px;
-    margin: 8px;
-    height: 25px;
+    line-height: 24px;
+    margin: 8px 0;
+    height: 24px;
     color: black;
     border-radius: 50%;
     background: #fff;
-    width: 25px;
+    width: 24px;
   }
 
   .color .reset {
@@ -344,7 +344,7 @@ footer.protected {
     padding: 10px 0 10px;
 
     .nav-link {
-      margin: 0 0 0 30px;
+      // margin: 0 0 0 30px;
       color: white;
       &.not-active {
         color: #d4d4d4;
@@ -375,24 +375,27 @@ footer.protected {
     }
 
     .responsive-submenu {
-      background: #030413;
+      // background: #030413;
       padding: 13px 0 13px 17px;
       min-width: calc(#{$variables-container-width});
       height: $editor-menu-height;
-      margin: 0 20px 0 0;
+      margin: 0 11px 0 0;
 
       * {
         padding: 0;
         line-height: 1;
       }
-
-      .rs {
-        margin: 0 20px;
+      
+      .navbar-brand{
+        font-size: 0.9rem;
       }
 
       .rs > a,
       .rs > div {
         margin: 0 5px 0 0;
+        &:hover{
+          color: white;
+        }
       }
     }
 
@@ -435,7 +438,7 @@ footer.protected {
     margin: 4px 0 4px 7px;
     padding: 0;
     border-radius: 50%;
-    border: 1px solid #fff;
+    border: 1px solid #777;
     overflow: hidden;
 
     i {
@@ -450,16 +453,26 @@ footer.protected {
     margin: 0;
   }
 
+  label {
+    margin-bottom: .2rem;
+  }
+
   .category {
     background: $category-bg;
     color: $category-color;
     position: relative;
-    padding: 13px;
+    padding: 7px 15px 8px;
+    font-size: 0.9rem;
+    display: block;
+    &:hover{
+      color: #fff;
+      text-decoration: none;
+    }
   }
 
   .variables {
     background: $variables-bg;
-    padding: $variables-padding;
+    padding: $variables-padding 15px;
     font-size: 14px;
     color: #ffffff;
     letter-spacing: 0.02px;
@@ -468,7 +481,9 @@ footer.protected {
       font-family: $open-sans;
       background: #030413;
       color: #ffffff;
-      border: 1px solid #e6e6e6;
+      border: 1px solid #777;
+      font-size: 0.9rem;
+      border-radius: 2px;
     }
   }
 
@@ -501,7 +516,9 @@ footer.protected {
   height: calc(100vh - #{$editor-menu-height});
   display: flex;
   flex-direction: column;
-
+  .sub-bar{
+    font-size: 0.9rem;
+  }
   .sub-bar > .sub-nav {
     min-width: $sub-nav-width;
     margin: 0;
@@ -514,7 +531,7 @@ footer.protected {
     padding: 0 $sub-nav-width 0 0;
     margin: 0;
   }
-
+  
   label {
     line-height: $sub-bar-height;
     margin: 0 0 0 23px;
@@ -522,7 +539,7 @@ footer.protected {
 
   .nav-link {
     cursor: pointer;
-
+    padding: .6rem 1rem;
     &.active,
     &:hover {
       color: white;
@@ -657,7 +674,9 @@ footer.protected {
 .colorpicker:after {
   border-bottom: 6px solid $indigo;
 }
-
+.input.colorpicker{
+  padding: 0;
+}
 .protected .modal {
   border-radius: 0;
 

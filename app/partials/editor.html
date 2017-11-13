@@ -4,17 +4,18 @@
       <div class="responsive-submenu">
         <a class="navbar-brand" href="/">
           <img src="../app/img/logo-boostrapmagic.svg" width="24" height="24" alt="logo">
+          Bootstrap Magic
         </a>
         <span class="navbar-text rs">
-          <a data-size="medium" href="https://github.com/pikock/bootstrap-magic">
-            <img src="../app/img/icn-github-editor.svg" width="24" height="24">
-          </a>
-          <a href="https://twitter.com/home?status=https%3A//pikock.github.io/bootstrap-magic/" data-url="https://pikock.github.io/bootstrap-magic/"
+          <a href="https://twitter.com/home?status=Bootstrap%20Magic%204.0%20%3A%20Generate%20your%20own%20%23Bootstrap%204.0%20theme%20quickly%20and%20easily%20in%20the%20browser.%20%23bootstrapmagic%20%23angularjs%20https%3A//pikock.github.io/bootstrap-magic/"
             data-text="Bootstrap Magic feat Bootstrap 3.1 : Awesome theme generator with live preview" data-lang="en" data-hashtags="bootstrap, angularjs">
             <img src="../app/img/icn-twitter.svg" width="24" height="24">
           </a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//pikock.github.io/bootstrap-magic/">
             <img src="../app/img/icn-facebook.svg" width="24" height="24">
+          </a>
+          <a data-size="medium" href="https://github.com/pikock/bootstrap-magic">
+            <img src="../app/img/icn-github-editor.svg" width="24" height="24">
           </a>
 
         </span>
@@ -63,10 +64,10 @@
     <div class="row m-0">
       <div class="variables-container">
         <div ng-repeat="group in variables">
-          <section class="category category-{{ group.slug }}" ng-click="toggle(group)">
+          <a class="category category-{{ group.slug }}" href="" ng-click="toggle(group)">
             <span ng-bind="group.name"></span>
             <span class="arrow {{ group.hidden ? 'is-left' : 'is-down' }}">></span>
-          </section>
+          </a>
           <section class="variables protected" ng-hide="group.hidden">
             <div class="form-group {' ap-color-picker: variable.value': colorpicker(variable.type)}" data-color="{{ color(variable.type, variable.value) }}"
               ng-repeat="variable in group.data">
@@ -122,16 +123,17 @@
           </label>
         </li>
       </ul>
-      <ul class="nav justify-content-center main-nav">
+      <ul class="nav main-nav">
         <li class="nav-item">
-          <a class="nav-link" ng-class="{ 'active': subRoute==='html' }" ng-click="goTo( 'subRoute', 'html')">Content Editor</a>
-        </li>
-        <li class="nav-item">
-          <a ng-class="{ 'active': subRoute==='templateHtml' }" class="nav-link" ng-click="goTo( 'subRoute','templateHtml')">Examples</a>
+          <a class="nav-link" ng-class="{ 'active': subRoute==='html' }" ng-click="goTo( 'subRoute', 'html')">HTML/CSS Editor</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" ng-class="{ 'active': subRoute==='preview' }" ng-click="goTo( 'subRoute', 'preview')">Preview</a>
         </li>
+        <li class="nav-item">
+          <a ng-class="{ 'active': subRoute==='templateHtml' }" class="nav-link" ng-click="goTo( 'subRoute','templateHtml')">Examples</a>
+        </li>
+        
       </ul>
     </div>
     <div ng-if="subRoute==='html'">
@@ -155,10 +157,10 @@
             <div class="card">
               <img class="card-img" ng-src="{{template.image_url}}" alt="{{template.slug}}">
               <div class="card-body">
-                <h6 class="card-title" ng-bind="template.name"></h6>
+                <h6 class="card-title text-center" ng-bind="template.name"></h6>
                 <p class="card-text" ng-bind="template.description"></p>
                 <div class="col text-center mt-4">
-                  <a class="fancy-button is-boring is-green" ng-click="chooseTemplate(template)">Start</a>
+                  <a class="fancy-button is-boring" ng-click="chooseTemplate(template)">Start</a>
                 </div>
               </div>
             </div>
@@ -227,7 +229,7 @@
 
           <h3>Thanks for using Bootstrap magic!</h3>
 
-          <p class="pl-5 pr-5 pt-1 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ullamcorper efficitur lacus !</p>
+          <p class="pl-5 pr-5 pt-1 pb-2">Save your Bootstrap theme in CSS or just the SCSS variables.</p>
 
           <div class="col">
             <a class="nav-link fancy-button is-boring mr-3" ng-click="saveSassVariables()">Save SCSS variables</a>
@@ -241,18 +243,18 @@
           <div class="row">
             <div class="col">
               <p>
-                Spread #bootstrapmagic love to your friends
+                Spread #bootstrapmagic love to your friends. It's the best 🎁 for us!
               </p>
             </div>
           </div>
 
           <div class="row mb-5">
             <div class="col d-flex justify-content-center">
+              <a href="https://twitter.com/home?status=Bootstrap%20Magic%204.0%20%3A%20Generate%20your%20own%20%23Bootstrap%204.0%20theme%20quickly%20and%20easily%20in%20the%20browser.%20%23bootstrapmagic%20%23angularjs%20https%3A//pikock.github.io/bootstrap-magic/">
+                <img src="./img/twitter-icn.svg" width="80" height="80" alt="">
+              </a>
               <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//pikock.github.io/bootstrap-magic/">
                 <img src="./img/fb-icn.svg" width="80" height="80" alt="">
-              </a>
-              <a href="https://twitter.com/home?status=https%3A//pikock.github.io/bootstrap-magic/">
-                <img src="./img/twitter-icn.svg" width="80" height="80" alt="">
               </a>
               <a href="https://plus.google.com/share?url=https%3A//pikock.github.io/bootstrap-magic/">
                 <img src="./img/g-icn.svg" width="80" height="80" alt="">
