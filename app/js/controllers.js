@@ -35,7 +35,7 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     },
     template: {
       blobUrl: '',
-      html: '<div id="example" class="container"><div class="row"><div class="col-sm-12"><h3>Import your HTML/CSS code or use on of Bootstrap ready-to-start example</h3><p>You can add your own HTML/CSS and see how your Bootstrap theme looks like on your website or application. If you like it, just save your theme. Enjoy and share the love!</p></div></div></div>',
+      html: '<div id="example" class="container"><div class="row"><div class="col-sm-12"><h3>Import your HTML/CSS code or use on of Bootstrap ready-to-start example</h3><p>You can add your own HTML/CSS and see how your Bootstrap themes looks like on your website or application. If you like it, just save your theme. Enjoy and share the love!</p></div></div></div>',
       css: '#example{margin-top: 50px;}'
     }
   }

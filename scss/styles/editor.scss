@@ -6,9 +6,7 @@
 .bg-indigo {
   background: $indigo;
 }
-.example-container{
-  
-}
+
 .protected {
   .loading {
     position: absolute;
@@ -385,15 +383,15 @@ footer.protected {
         padding: 0;
         line-height: 1;
       }
-      
-      .navbar-brand{
+
+      .navbar-brand {
         font-size: 0.9rem;
       }
 
       .rs > a,
       .rs > div {
         margin: 0 5px 0 0;
-        &:hover{
+        &:hover {
           color: white;
         }
       }
@@ -424,6 +422,7 @@ footer.protected {
 }
 
 .protected.editor .variables-container {
+  background: $category-bg;
   width: $variables-container-width;
   height: $variables-container-height;
   position: absolute;
@@ -454,17 +453,16 @@ footer.protected {
   }
 
   label {
-    margin-bottom: .2rem;
+    margin-bottom: 0.2rem;
   }
 
   .category {
-    background: $category-bg;
     color: $category-color;
     position: relative;
     padding: 7px 15px 8px;
     font-size: 0.9rem;
     display: block;
-    &:hover{
+    &:hover {
       color: #fff;
       text-decoration: none;
     }
@@ -516,7 +514,7 @@ footer.protected {
   height: calc(100vh - #{$editor-menu-height});
   display: flex;
   flex-direction: column;
-  .sub-bar{
+  .sub-bar {
     font-size: 0.9rem;
   }
   .sub-bar > .sub-nav {
@@ -528,10 +526,10 @@ footer.protected {
   }
 
   .sub-bar > .main-nav {
-    padding: 0 $sub-nav-width 0 0;
+    padding: 0 0 0 3px;
     margin: 0;
   }
-  
+
   label {
     line-height: $sub-bar-height;
     margin: 0 0 0 23px;
@@ -539,7 +537,7 @@ footer.protected {
 
   .nav-link {
     cursor: pointer;
-    padding: .6rem 1rem;
+    padding: 0.6rem 1rem;
     &.active,
     &:hover {
       color: white;
@@ -674,7 +672,7 @@ footer.protected {
 .colorpicker:after {
   border-bottom: 6px solid $indigo;
 }
-.input.colorpicker{
+.input.colorpicker {
   padding: 0;
 }
 .protected .modal {
