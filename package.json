@@ -1,8 +1,8 @@
 {
-  "name": "mashup-template",
-  "author": "Antoine Renault <antoine.renault.mmi@gmail.com>",
-  "version": "0.1.0",
-  "description": "Agora",
+  "name": "Bootstrap Magic",
+  "author": "Orson <contact@orson.io> Autreplanète",
+  "version": "4.0.0",
+  "description": "Generate your Bootstrap 4.0 Theme with Bootstrap Magic",
   "license": "MIT",
   "engines": {
     "node": ">=6"
