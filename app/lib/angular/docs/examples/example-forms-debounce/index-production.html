@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-forms-debounce-production</title>
+  
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <script src="script.js"></script>
+  
+
+  
+</head>
+<body ng-app="debounceExample">
+  <div ng-controller="ExampleController">
+  <form>
+    <label>Name:
+    <input type="text" ng-model="user.name" ng-model-options="{ debounce: 250 }" /></label><br />
+  </form>
+  <pre>username = "{{user.name}}"</pre>
+</div>
+</body>
+</html>

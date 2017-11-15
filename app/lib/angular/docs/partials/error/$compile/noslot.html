@@ -1,0 +1,45 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/error/$compile/noslot.ngdoc?message=docs(error%2Fnoslot)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>Error: $compile:noslot
+  <div><span class='hint'>No matching slot in parent directive</span></div>
+</h1>
+
+<div>
+    <pre class="minerr-errmsg" error-display="No parent directive that requires a transclusion with slot name "{0}". Element: {1}">No parent directive that requires a transclusion with slot name "{0}". Element: {1}</pre>
+</div>
+
+<h2>Description</h2>
+<div class="description">
+  <p>This error occurs when declaring a specific slot in a <a href="api/ng/directive/ngTransclude"><code>ngTransclude</code></a> 
+which does not map to a specific slot defined in the transclude property of the directive.</p>
+<p>In this example the template has declared a slot missing from the transclude definition.
+This example will generate a noslot error.</p>
+<pre><code class="lang-js">var componentConfig = {
+  template: &#39;&lt;div&gt;&#39; +
+                &#39;&lt;div ng-transclude=&quot;slotProvided&quot;&gt;&lt;/div&gt;&#39; +
+                &#39;&lt;div ng-transclude=&quot;noSlotProvided&quot;&gt;&lt;/div&gt;&#39; +
+            &#39;&lt;/div&gt;&#39;,
+  transclude: {
+      // The key value pairs here are considered &quot;slots&quot; that are provided for components to slot into.
+    slotProvided: &#39;slottedComponent&#39;, // mandatory transclusion
+    // There is no slot provided here for the transclude &#39;noSlotProvided&#39; declared in the above template.
+  }
+};
+</code></pre>
+<p>If we make the following change we will no longer get the noslot error.</p>
+<pre><code class="lang-js">var componentConfig = {
+  template: &#39;&lt;div&gt;&#39; +
+                &#39;&lt;div ng-transclude=&quot;slotProvided&quot;&gt;&lt;/div&gt;&#39; +
+                &#39;&lt;div ng-transclude=&quot;noSlotProvided&quot;&gt;&lt;/div&gt;&#39; +
+            &#39;&lt;/div&gt;&#39;,
+  transclude: {
+    slotProvided: &#39;slottedComponent&#39;,
+    noSlotProvided: &#39;otherComponent&#39; // now it is declared and the error should cease
+  }
+};
+</code></pre>
+
+</div>
+
+

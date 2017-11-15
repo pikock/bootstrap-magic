@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-httpbackend-e2e-testing-jquery</title>
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  <script src="../../../angular-mocks.js"></script>
+  <script src="app.js"></script>
+  <script src="e2e.js"></script>
+  
+
+  
+</head>
+<body ng-app="myAppE2E">
+  <div ng-controller="MainCtrl as $ctrl">
+<form name="newPhoneForm" ng-submit="$ctrl.addPhone($ctrl.newPhone)">
+  <input type="text" ng-model="$ctrl.newPhone.name">
+  <input type="submit" value="Add Phone">
+</form>
+<h1>Phones</h1>
+<ul>
+  <li ng-repeat="phone in $ctrl.phones">{{phone.name}}</li>
+</ul>
+</div>
+</body>
+</html>

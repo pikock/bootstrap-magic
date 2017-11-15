@@ -1,0 +1,322 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/guide/decorators.ngdoc?message=docs(guide%2FDecorators)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1 id="decorators-in-angularjs">Decorators in AngularJS</h1>
+<div class="alert alert-warning">
+  <strong>NOTE:</strong> This guide is targeted towards developers who are already familiar with AngularJS basics.
+  If you&#39;re just getting started, we recommend the <a href="tutorial/">tutorial</a> first.
+</div>
+
+<h2 id="what-are-decorators-">What are decorators?</h2>
+<p>Decorators are a design pattern that is used to separate modification or <em>decoration</em> of a class without modifying the
+original source code. In Angular, decorators are functions that allow a service, directive or filter to be modified
+prior to its usage.</p>
+<h2 id="how-to-use-decorators">How to use decorators</h2>
+<p>There are two ways to register decorators</p>
+<ul>
+<li><code>$provide.decorator</code>, and</li>
+<li><code>module.decorator</code></li>
+</ul>
+<p>Each provide access to a <code>$delegate</code>, which is the instantiated service/directive/filter, prior to being passed to the
+service that required it.</p>
+<h3 id="-provide-decorator">$provide.decorator</h3>
+<p>The <a href="api/auto/service/$provide#decorator">decorator function</a> allows access to a $delegate of the service once it
+has been instantiated. For example:</p>
+<pre><code class="lang-js">angular.module(&#39;myApp&#39;, [])
+
+.config([ &#39;$provide&#39;, function($provide) {
+
+  $provide.decorator(&#39;$log&#39;, [
+    &#39;$delegate&#39;,
+    function $logDecorator($delegate) {
+
+      var originalWarn = $delegate.warn;
+      $delegate.warn = function decoratedWarn(msg) {
+        msg = &#39;Decorated Warn: &#39; + msg;
+        originalWarn.apply($delegate, arguments);
+      };
+
+      return $delegate;
+    }
+  ]);
+}]);
+</code></pre>
+<p>After the <code>$log</code> service has been instantiated the decorator is fired. The decorator function has a <code>$delegate</code> object
+injected to provide access to the service that matches the selector in the decorator. This <code>$delegate</code> will be the
+service you are decorating. The return value of the function <em>provided to the decorator</em> will take place of the service,
+directive, or filter being decorated.</p>
+<hr>
+
+<p>The <code>$delegate</code> may be either modified or completely replaced. Given a service <code>myService</code> with a method <code>someFn</code>, the
+following could all be viable solutions:</p>
+<h4 id="completely-replace-the-delegate">Completely Replace the $delegate</h4>
+<pre><code class="lang-js">angular.module(&#39;myApp&#39;, [])
+
+.config([ &#39;$provide&#39;, function($provide) {
+
+  $provide.decorator(&#39;myService&#39;, [
+    &#39;$delegate&#39;,
+    function myServiceDecorator($delegate) {
+
+      var myDecoratedService = {
+        // new service object to replace myService
+      };
+      return myDecoratedService;
+    }
+  ]);
+}]);
+</code></pre>
+<h4 id="patch-the-delegate">Patch the $delegate</h4>
+<pre><code class="lang-js">angular.module(&#39;myApp&#39;, [])
+
+.config([ &#39;$provide&#39;, function($provide) {
+
+  $provide.decorator(&#39;myService&#39;, [
+    &#39;$delegate&#39;,
+    function myServiceDecorator($delegate) {
+
+      var someFn = $delegate.someFn;
+
+      function aNewFn() {
+        // new service function
+        someFn.apply($delegate, arguments);
+      }
+
+      $delegate.someFn = aNewFn;
+      return $delegate;
+    }
+  ]);
+}]);
+</code></pre>
+<h4 id="augment-the-delegate">Augment the $delegate</h4>
+<pre><code class="lang-js">angular.module(&#39;myApp&#39;, [])
+
+.config([ &#39;$provide&#39;, function($provide) {
+
+  $provide.decorator(&#39;myService&#39;, [
+    &#39;$delegate&#39;,
+    function myServiceDecorator($delegate) {
+
+      function helperFn() {
+        // an additional fn to add to the service
+      }
+
+      $delegate.aHelpfulAddition = helperFn;
+      return $delegate;
+    }
+  ]);
+}]);
+</code></pre>
+<div class="alert alert-info">
+  Note that whatever is returned by the decorator function will replace that which is being decorated. For example, a
+  missing return statement will wipe out the entire object being decorated.
+</div>
+
+<hr>
+
+<p>Decorators have different rules for different services. This is because services are registered in different ways.
+Services are selected by name, however filters and directives are selected by appending <code>&quot;Filter&quot;</code> or <code>&quot;Directive&quot;</code> to
+the end of the name. The <code>$delegate</code> provided is dictated by the type of service.</p>
+<table>
+<thead>
+<tr>
+<th>Service Type</th>
+<th>Selector</th>
+<th>$delegate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Service</td>
+<td><code>serviceName</code></td>
+<td>The <code>object</code> or <code>function</code> returned by the service</td>
+</tr>
+<tr>
+<td>Directive</td>
+<td><code>directiveName + &#39;Directive&#39;</code></td>
+<td>An <code>Array.&lt;DirectiveObject&gt;</code><sub><a href="guide/decorators#drtvArray">1</a></sub></td>
+</tr>
+<tr>
+<td>Filter</td>
+<td><code>filterName + &#39;Filter&#39;</code></td>
+<td>The <code>function</code> returned by the filter</td>
+</tr>
+</tbody>
+</table>
+<p><small id="drtvArray">1. Multiple directives may be registered to the same selector/name</small></p>
+<div class="alert alert-warning">
+  <strong>NOTE:</strong> Developers should take care in how and why they are modifying the <code>$delegate</code> for the service. Not only
+  should expectations for the consumer be kept, but some functionality (such as directive registration) does not take
+  place after decoration, but during creation/registration of the original service. This means, for example, that
+  an action such as pushing a directive object to a directive <code>$delegate</code> will likely result in unexpected behavior.
+
+  Furthermore, great care should be taken when decorating core services, directives, or filters as this may unexpectedly
+  or adversely affect the functionality of the framework.
+</div>
+
+<h3 id="module-decorator">module.decorator</h3>
+<p>This <a href="api/ng/type/angular.Module#decorator">function</a> is the same as the <code>$provide.decorator</code> function except it is
+exposed through the module API. This allows you to separate your decorator patterns from your module config blocks.</p>
+<p>Like with <code>$provide.decorator</code>, the <code>module.decorator</code> function runs during the config phase of the app. That means
+you can define a <code>module.decorator</code> before the decorated service is defined.</p>
+<p>Since you can apply multiple decorators, it is noteworthy that decorator application always follows order
+of declaration:</p>
+<ul>
+<li>If a service is decorated by both <code>$provide.decorator</code> and <code>module.decorator</code>, the decorators are applied in order:</li>
+</ul>
+<pre><code class="lang-js">angular
+.module(&#39;theApp&#39;, [])
+.factory(&#39;theFactory&#39;, theFactoryFn)
+.config(function($provide) {
+  $provide.decorator(&#39;theFactory&#39;, provideDecoratorFn); // runs first
+})
+.decorator(&#39;theFactory&#39;, moduleDecoratorFn); // runs seconds
+</code></pre>
+<ul>
+<li>If the service has been declared multiple times, a decorator will decorate the service that has been declared
+last:</li>
+</ul>
+<pre><code class="lang-js">angular
+  .module(&#39;theApp&#39;, [])
+  .factory(&#39;theFactory&#39;, theFactoryFn)
+  .decorator(&#39;theFactory&#39;, moduleDecoratorFn)
+  .factory(&#39;theFactory&#39;, theOtherFactoryFn);
+
+// `theOtherFactoryFn` is selected as &#39;theFactory&#39; provider and it is decorated via `moduleDecoratorFn`.
+</code></pre>
+<h2 id="example-applications">Example Applications</h2>
+<p>The following sections provide examples each of a service decorator, a directive decorator, and a filter decorator.</p>
+<h3 id="service-decorator-example">Service Decorator Example</h3>
+<p>This example shows how we can replace the $log service with our own to display log messages.</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-service-decorator"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-service-decorator"
+      module="myServiceDecorator"
+      name="service-decorator">
+
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;myServiceDecorator&#39;, []).&#10;&#10;controller(&#39;Ctrl&#39;, [&#10;  &#39;$scope&#39;,&#10;  &#39;$log&#39;,&#10;  &#39;$timeout&#39;,&#10;  function($scope, $log, $timeout) {&#10;    var types = [&#39;error&#39;, &#39;warn&#39;, &#39;log&#39;, &#39;info&#39; ,&#39;debug&#39;], i;&#10;&#10;    for (i = 0; i &lt; types.length; i++) {&#10;      $log[types[i]](types[i] + &#39;: message &#39; + (i + 1));&#10;    }&#10;&#10;    $timeout(function() {&#10;      $log.info(&#39;info: message logged in timeout&#39;);&#10;    });&#10;  }&#10;]).&#10;&#10;directive(&#39;myLog&#39;, [&#10;  &#39;$log&#39;,&#10;  function($log) {&#10;    return {&#10;      restrict: &#39;E&#39;,&#10;      template: &#39;&lt;ul id=&quot;myLog&quot;&gt;&lt;li ng-repeat=&quot;l in myLog&quot; class=&quot;{{l.type}}&quot;&gt;{{l.message}}&lt;/li&gt;&lt;/ul&gt;&#39;,&#10;      scope: {},&#10;      compile: function() {&#10;        return function(scope) {&#10;          scope.myLog = $log.stack;&#10;        };&#10;      }&#10;    };&#10;  }&#10;]).&#10;&#10;config([&#10;  &#39;$provide&#39;,&#10;  function($provide) {&#10;&#10;    $provide.decorator(&#39;$log&#39;, [&#10;      &#39;$delegate&#39;,&#10;      function logDecorator($delegate) {&#10;&#10;        var myLog = {&#10;          warn: function(msg) {&#10;            log(msg, &#39;warn&#39;);&#10;          },&#10;          error: function(msg) {&#10;            log(msg, &#39;error&#39;);&#10;          },&#10;          info: function(msg) {&#10;            log(msg, &#39;info&#39;);&#10;          },&#10;          debug: function(msg) {&#10;            log(msg, &#39;debug&#39;);&#10;          },&#10;          log: function(msg) {&#10;            log(msg, &#39;log&#39;);&#10;          },&#10;          stack: []&#10;        };&#10;&#10;        function log(msg, type) {&#10;          myLog.stack.push({ type: type, message: msg.toString() });&#10;          if (console &amp;&amp; console[type]) console[type](msg);&#10;        }&#10;&#10;        return myLog;&#10;&#10;      }&#10;    ]);&#10;&#10;  }&#10;]);</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;Ctrl&quot;&gt;&#10;  &lt;h1&gt;Logs&lt;/h1&gt;&#10;  &lt;my-log&gt;&lt;/my-log&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="style.css"
+      language="css"
+      type="css">
+      <pre><code>li.warn { color: yellow; }&#10;li.error { color: red; }&#10;li.info { color: blue }&#10;li.log { color: black }&#10;li.debug { color: green }</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>it(&#39;should display log messages in dom&#39;, function() {&#10;  element.all(by.repeater(&#39;l in myLog&#39;)).count().then(function(count) {&#10;    expect(count).toEqual(6);&#10;  });&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-service-decorator')}}" name="example-service-decorator"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h3 id="directive-decorator-example">Directive Decorator Example</h3>
+<p>Failed interpolated expressions in <code>ng-href</code> attributes can easily go unnoticed. We can decorate <code>ngHref</code> to warn us of
+those conditions.</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-directive-decorator"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-directive-decorator"
+      module="urlDecorator"
+      name="directive-decorator">
+
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;urlDecorator&#39;, []).&#10;&#10;controller(&#39;Ctrl&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.id = 3;&#10;  $scope.warnCount = 0; // for testing&#10;}]).&#10;&#10;config([&#39;$provide&#39;, function($provide) {&#10;&#10;  // matchExpressions looks for interpolation markup in the directive attribute, extracts the expressions&#10;  // from that markup (if they exist) and returns an array of those expressions&#10;  function matchExpressions(str) {&#10;    var exps = str.match(/{{([^}]+)}}/g);&#10;&#10;    // if there isn&#39;t any, get out of here&#10;    if (exps === null) return;&#10;&#10;    exps = exps.map(function(exp) {&#10;      var prop = exp.match(/[^{}]+/);&#10;      return prop === null ? null : prop[0];&#10;    });&#10;&#10;    return exps;&#10;  }&#10;&#10;  // remember: directives must be selected by appending &#39;Directive&#39; to the directive selector&#10;  $provide.decorator(&#39;ngHrefDirective&#39;, [&#10;    &#39;$delegate&#39;,&#10;    &#39;$log&#39;,&#10;    &#39;$parse&#39;,&#10;    function($delegate, $log, $parse) {&#10;&#10;      // store the original link fn&#10;      var originalLinkFn = $delegate[0].link;&#10;&#10;      // replace the compile fn&#10;      $delegate[0].compile = function(tElem, tAttr) {&#10;&#10;        // store the original exp in the directive attribute for our warning message&#10;        var originalExp = tAttr.ngHref;&#10;&#10;        // get the interpolated expressions&#10;        var exps = matchExpressions(originalExp);&#10;&#10;        // create and store the getters using $parse&#10;        var getters = exps.map(function(exp) {&#10;          return exp &amp;&amp; $parse(exp);&#10;        });&#10;&#10;        return function newLinkFn(scope, elem, attr) {&#10;          // fire the originalLinkFn&#10;          originalLinkFn.apply($delegate[0], arguments);&#10;&#10;          // observe the directive attr and check the expressions&#10;          attr.$observe(&#39;ngHref&#39;, function(val) {&#10;&#10;            // if we have getters and getters is an array...&#10;            if (getters &amp;&amp; angular.isArray(getters)) {&#10;&#10;              // loop through the getters and process them&#10;              angular.forEach(getters, function(g, idx) {&#10;&#10;                // if val is truthy, then the warning won&#39;t log&#10;                var val = angular.isFunction(g) ? g(scope) : true;&#10;                if (!val) {&#10;                  $log.warn(&#39;NgHref Warning: &quot;&#39; + exps[idx] + &#39;&quot; in the expression &quot;&#39; + originalExp +&#10;                    &#39;&quot; is falsy!&#39;);&#10;&#10;                  scope.warnCount++; // for testing&#10;                }&#10;&#10;              });&#10;&#10;            }&#10;&#10;          });&#10;&#10;        };&#10;&#10;      };&#10;&#10;      // get rid of the old link function since we return a link function in compile&#10;      delete $delegate[0].link;&#10;&#10;      // return the $delegate&#10;      return $delegate;&#10;&#10;    }&#10;&#10;  ]);&#10;&#10;}]);</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;Ctrl&quot;&gt;&#10;  &lt;a ng-href=&quot;/products/{{ id }}/view&quot; id=&quot;id3&quot;&gt;View Product {{ id }}&lt;/a&gt;&#10;  - &lt;strong&gt;id === 3&lt;/strong&gt;, so no warning&lt;br&gt;&#10;  &lt;a ng-href=&quot;/products/{{ id + 5 }}/view&quot; id=&quot;id8&quot;&gt;View Product {{ id + 5 }}&lt;/a&gt;&#10;  - &lt;strong&gt;id + 5 === 8&lt;/strong&gt;, so no warning&lt;br&gt;&#10;  &lt;a ng-href=&quot;/products/{{ someOtherId }}/view&quot; id=&quot;someOtherId&quot;&gt;View Product {{ someOtherId }}&lt;/a&gt;&#10;  - &lt;strong style=&quot;background-color: #ffff00;&quot;&gt;someOtherId === undefined&lt;/strong&gt;, so warn&lt;br&gt;&#10;  &lt;a ng-href=&quot;/products/{{ someOtherId + 5 }}/view&quot; id=&quot;someOtherId5&quot;&gt;View Product {{ someOtherId + 5 }}&lt;/a&gt;&#10;  - &lt;strong&gt;someOtherId + 5 === 5&lt;/strong&gt;, so no warning&lt;br&gt;&#10;  &lt;div&gt;Warn Count: {{ warnCount }}&lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>it(&#39;should warn when an expression in the interpolated value is falsy&#39;, function() {&#10;  var id3 = element(by.id(&#39;id3&#39;));&#10;  var id8 = element(by.id(&#39;id8&#39;));&#10;  var someOther = element(by.id(&#39;someOtherId&#39;));&#10;  var someOther5 = element(by.id(&#39;someOtherId5&#39;));&#10;&#10;  expect(id3.getText()).toEqual(&#39;View Product 3&#39;);&#10;  expect(id3.getAttribute(&#39;href&#39;)).toContain(&#39;/products/3/view&#39;);&#10;&#10;  expect(id8.getText()).toEqual(&#39;View Product 8&#39;);&#10;  expect(id8.getAttribute(&#39;href&#39;)).toContain(&#39;/products/8/view&#39;);&#10;&#10;  expect(someOther.getText()).toEqual(&#39;View Product&#39;);&#10;  expect(someOther.getAttribute(&#39;href&#39;)).toContain(&#39;/products//view&#39;);&#10;&#10;  expect(someOther5.getText()).toEqual(&#39;View Product 5&#39;);&#10;  expect(someOther5.getAttribute(&#39;href&#39;)).toContain(&#39;/products/5/view&#39;);&#10;&#10;  expect(element(by.binding(&#39;warnCount&#39;)).getText()).toEqual(&#39;Warn Count: 1&#39;);&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-directive-decorator')}}" name="example-directive-decorator"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h3 id="filter-decorator-example">Filter Decorator Example</h3>
+<p>Let&#39;s say we have created an app that uses the default format for many of our <code>Date</code> filters. Suddenly requirements have
+changed (that never happens) and we need all of our default dates to be <code>&#39;shortDate&#39;</code> instead of <code>&#39;mediumDate&#39;</code>.</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-filter-decorator"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-filter-decorator"
+      module="filterDecorator"
+      name="filter-decorator">
+
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;filterDecorator&#39;, []).&#10;&#10;controller(&#39;Ctrl&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.genesis = new Date(2010, 0, 5);&#10;  $scope.ngConf = new Date(2016, 4, 4);&#10;}]).&#10;&#10;config([&#39;$provide&#39;, function($provide) {&#10;&#10;  $provide.decorator(&#39;dateFilter&#39;, [&#10;    &#39;$delegate&#39;,&#10;    function dateDecorator($delegate) {&#10;&#10;      // store the original filter&#10;      var originalFilter = $delegate;&#10;&#10;      // return our filter&#10;      return shortDateDefault;&#10;&#10;      // shortDateDefault sets the format to shortDate if it is falsy&#10;      function shortDateDefault(date, format, timezone) {&#10;        if (!format) format = &#39;shortDate&#39;;&#10;&#10;        // return the result of the original filter&#10;        return originalFilter(date, format, timezone);&#10;      }&#10;&#10;    }&#10;&#10;  ]);&#10;&#10;}]);</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;Ctrl&quot;&gt;&#10;  &lt;div id=&quot;genesis&quot;&gt;Initial Commit default to short date: {{ genesis | date }}&lt;/div&gt;&#10;  &lt;div&gt;ng-conf 2016 default short date: {{ ngConf | date }}&lt;/div&gt;&#10;  &lt;div id=&quot;ngConf&quot;&gt;ng-conf 2016 with full date format: {{ ngConf | date:&#39;fullDate&#39; }}&lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>it(&#39;should default date filter to short date format&#39;, function() {&#10;  expect(element(by.id(&#39;genesis&#39;)).getText())&#10;    .toMatch(/Initial Commit default to short date: \d{1,2}\/\d{1,2}\/\d{2}/);&#10;});&#10;&#10;it(&#39;should still allow dates to be formatted&#39;, function() {&#10;  expect(element(by.id(&#39;ngConf&#39;)).getText())&#10;    .toMatch(/ng-conf 2016 with full date format: [A-Za-z]+, [A-Za-z]+ \d{1,2}, \d{4}/);&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-filter-decorator')}}" name="example-filter-decorator"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+

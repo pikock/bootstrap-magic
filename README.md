@@ -1,36 +1,38 @@
-Bootstrap magic featuring Bootstrap 3.1
-=======================================
+Bootstrap magic 4.0
+===================
 
-Bootstrap themes generator, featuring Bootstrap 3.1 and AngularJS.
-Update your variables, change it with a smooth colorpicker and get instantly the result.
+Create your Boostrap 4.0 theme easily.
+Live preview, live HTML coding to help you create your Bootstrap 4.0 theme direclty in your browser
 
-[Try it out!](http://pikock.github.com/bootstrap-magic/)
+### Features
 
-If you want to use Bootstrap Magic featuring Bootstrap 2.3.2, it's still available 
-[here](http://pikock.github.com/bootstrap-magic/2.3.2)
+- Bootstrap 4.0 : Latest version of Bootstrap 4.0 avaiable to create your amazing template. 
+- Sass included : Bootstrap worked with Saas ( CSS compiler now) so do Bootstrap Magic Get all Saas functions to make your life easier. Darken, Lighten, Mixins and co can all be used directly from variables.
+- Color picker : For each color variable, you can either use the color picker or type directly your HEXA or RGBA color
+- HTML code preview :You can now insert your own HTML and CSS and have a live preview with your new Bootstrap theme freshly created.
+- Magic Variables Typeahead :Find all Bootstrap vairables as you type to create links between variables.
+- Google Fonts :Create your template with all Google Fonts. They are all included in font magic TypeHead. Simple.
+- Download in CSS/SCSS :Happy about your template, download your custom CSS, minified or just SCSS variables.
+- Open Source Project :Bootstrap Magic is all Open Source and free. Can be reused as you want.
 
-### New features
+### Build project
 
-* Bootstrap 3.1 awesomeness
-* Google webfonts included in typehead
-* Better performance
-* Still developed with [AngularJS](http://angularjs.org/) and [LessCSS](http://lesscss.org/) . 
+```
 
-### Contact
-
-* Create your website easily with [Pikock](http://www.pikock.com/en), try it out on http://www.pikock.com/en
-* For more information on [Autre planete](http://www.autreplanete.com/)  please check out http://www.autreplanete.com/
-* For more information on [AngularJS](http://angularjs.org/)  please check out http://angularjs.org/
-* For more information on [Twitter Bootstrap](http://twitter.github.com/bootstrap/)  please check out http://twitter.github.com/bootstrap/
-* For more information on [Webfontloader](https://github.com/typekit/webfontloader)  please check out https://github.com/typekit/webfontloader
+// To launch Bootstrap Magic locally
+npm run dev
 
 
+// In an another terminal, edit Bootstrap Magic theme to compile SCSS
+npm run watch 
+
+```
 
 ### License
 
 The MIT License
 
-Copyright (c) 2013 the Autre planete and Pikock Team, http://www.autreplanete.com, http://www.pikock.com,
+Copyright (c) 2013 - 2017 Orson.io and the Autre planete http://en.orson.io, http://www.autreplanete.com,
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

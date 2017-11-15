@@ -1,0 +1,7 @@
+{
+  "name": "example-directive-link",
+  "files": [
+    "index-production.html",
+    "script.js"
+  ]
+}

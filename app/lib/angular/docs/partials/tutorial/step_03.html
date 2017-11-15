@@ -1,0 +1,235 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/tutorial/step_03.ngdoc?message=docs(tutorial%2F3 - Components)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<ul doc-tutorial-nav="3"></ul>
+
+
+<p>In the previous step, we saw how a controller and a template worked together to convert a static
+HTML page into a dynamic view. This is a very common pattern in Single-Page Applications in general
+(and Angular applications in particular):</p>
+<ul>
+<li>Instead of creating a static HTML page on the server, the client-side code &quot;takes over&quot; and
+interacts dynamically with the view, updating it instantly to reflect changes in model data or
+state, usually as a result of user interaction (we&#39;ll see an example shortly in
+<a href="tutorial/step_05">step 5</a>).</li>
+</ul>
+<p>The <strong>template</strong> (the part of the view containing the bindings and presentation logic) acts as a 
+blueprint for how our data should be organized and presented to the user.
+The <strong>controller</strong> provides the context in which the bindings are evaluated and applies behavior
+and logic to our template.</p>
+<p>There are still a couple of areas we can do better:</p>
+<ol>
+<li>What if we want to reuse the same functionality in a different part of our application ?<br />
+We would need to duplicate the whole template (including the controller). This is error-prone and
+hurts maintainability.</li>
+<li><p>The scope, that glues our controller and template together into a dynamic view, is not isolated
+from other parts of the page. What this means is that a random, unrelated change in a different
+part of the page (e.g. a property-name conflict) could have unexpected and hard-to-debug side
+effects on our view.</p>
+<p>(OK, this might not be a real concern in our minimal example, but it <strong>is</strong> a valid concern for
+ bigger, real-world applications.)</p>
+</li>
+</ol>
+<div doc-tutorial-reset="3"></div>
+
+
+<h2 id="components-to-the-rescue-">Components to the rescue!</h2>
+<p>Since this combination (template + controller) is such a common and recurring pattern, Angular
+provides an easy and concise way to combine them together into reusable and isolated entities,
+known as <em>components</em>.
+Additionally, Angular will create a so called <em>isolate scope</em> for each instance of our component,
+which means no prototypal inheritance and no risk of our component affecting other parts of the
+application or vice versa.</p>
+<div class="alert alert-info">
+  <p>
+    Since this is an introductory tutorial, we are not going to dive deep into all features provided
+    by Angular <strong>components</strong>. You can read more about components and their usage patterns in the
+    <a href="guide/component">Components</a> section of the Developer Guide.
+  </p>
+  <p>
+    In fact, one could think of components as an opinionated and stripped-down version of their more
+    complex and verbose (but powerful) siblings, <strong>directives</strong>, which are Angular&#39;s way of teaching
+    HTML new tricks. You can read all about them in the <a href="guide/directive">Directives</a> section of the
+    Developer Guide.
+  </p>
+  <p>
+    (<strong>Note:</strong> Directives are an advanced topic, so you might want to postpone studying them, until
+               you have mastered the basics.)
+  </p>
+</div>
+
+<p>To create a component, we use the <a href="api/ng/type/angular.Module#component">.component()</a> method of an
+<a href="guide/module">Angular module</a>. We must provide the name of the component and the Component
+Definition Object (CDO for short).</p>
+<p>Remember that (since components are also directives) the name of the component is in <code>camelCase</code>
+(e.g. <code>myAwesomeComponent</code>), but we will use <code>kebab-case</code> (e.g. <code>my-awesome-component</code>) when
+referring to it in our HTML. (See <a href="https://en.wikipedia.org/wiki/Letter_case#Special_case_styles">here</a> for a description of different case styles.)</p>
+<p>In its simplest form, the CDO will just contain a template and a controller. (We can actually omit
+the controller and Angular will create a dummy controller for us. This is useful for simple
+&quot;presentational&quot; components, that don&#39;t attach any behavior to the template.)</p>
+<p>Let&#39;s see an example:</p>
+<pre><code class="lang-js">angular.
+  module(&#39;myApp&#39;).
+  component(&#39;greetUser&#39;, {
+    template: &#39;Hello, {{$ctrl.user}}!&#39;,
+    controller: function GreetUserController() {
+      this.user = &#39;world&#39;;
+    }
+  });
+</code></pre>
+<p>Now, every time we include <code>&lt;greet-user&gt;&lt;/greet-user&gt;</code> in our view, Angular will expand it into a
+DOM sub-tree constructed using the provided <code>template</code> and managed by an instance of the specified
+controller.</p>
+<p>But wait, where did that <code>$ctrl</code> come from and what does it refer to ?</p>
+<p>For reasons already mentioned (and for other reasons that are out of the scope of this tutorial), it
+is considered a good practice to avoid using the scope directly. We can (and should) use our
+controller instance; i.e. assign our data and methods on properties of our controller (the &quot;<code>this</code>&quot;
+inside the controller constructor), instead of directly to the scope.</p>
+<p>From the template, we can refer to our controller instance using an alias. This way, the context of
+evaluation for our expressions is even more clear. By default, components use <code>$ctrl</code> as the
+controller alias, but we can override it, should the need arise.</p>
+<p>There are more options available, so make sure you check out the
+<a href="api/ng/provider/$compileProvider#component">API Reference</a>, before using <code>.component()</code> in your own
+applications.</p>
+<h2 id="using-components">Using Components</h2>
+<p>Now that we know how to create components, let&#39;s refactor the HTML page to make use of our newly
+acquired skill.</p>
+<p><br />
+<strong><code>app/index.html</code>:</strong></p>
+<pre><code class="lang-html">&lt;html ng-app=&quot;phonecatApp&quot;&gt;
+&lt;head&gt;
+  ...
+  &lt;script src=&quot;bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;phone-list.component.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- Use a custom component to render a list of phones --&gt;
+  &lt;phone-list&gt;&lt;/phone-list&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><br />
+<strong><code>app/app.js</code>:</strong></p>
+<pre><code class="lang-js">// Define the `phonecatApp` module
+angular.module(&#39;phonecatApp&#39;, []);
+</code></pre>
+<p><br />
+<strong><code>app/phone-list.component.js</code>:</strong></p>
+<pre><code class="lang-js">// Register `phoneList` component, along with its associated controller and template
+angular.
+  module(&#39;phonecatApp&#39;).
+  component(&#39;phoneList&#39;, {
+    template:
+        &#39;&lt;ul&gt;&#39; +
+          &#39;&lt;li ng-repeat=&quot;phone in $ctrl.phones&quot;&gt;&#39; +
+            &#39;&lt;span&gt;{{phone.name}}&lt;/span&gt;&#39; +
+            &#39;&lt;p&gt;{{phone.snippet}}&lt;/p&gt;&#39; +
+          &#39;&lt;/li&gt;&#39; +
+        &#39;&lt;/ul&gt;&#39;,
+    controller: function PhoneListController() {
+      this.phones = [
+        {
+          name: &#39;Nexus S&#39;,
+          snippet: &#39;Fast just got faster with Nexus S.&#39;
+        }, {
+          name: &#39;Motorola XOOM™ with Wi-Fi&#39;,
+          snippet: &#39;The Next, Next Generation tablet.&#39;
+        }, {
+          name: &#39;MOTOROLA XOOM™&#39;,
+          snippet: &#39;The Next, Next Generation tablet.&#39;
+        }
+      ];
+    }
+  });
+</code></pre>
+<p>Voilà! The resulting output should look the same, but let&#39;s see what we have gained:</p>
+<ul>
+<li>Our phone list is reusable. Just drop <code>&lt;phone-list&gt;&lt;/phone-list&gt;</code> anywhere in the page to get a
+list of phones.</li>
+<li>Our main view (<code>index.html</code>) is cleaner and more declarative. Just by looking at it, we know there
+is a list of phones. We are not bothered with implementation details.</li>
+<li>Our component is isolated and safe from &quot;external influences&quot;. Likewise, we don&#39;t have to worry,
+that we might accidentally break something in some other part of the application. What happens
+inside our component, stays inside our component.</li>
+<li>It&#39;s easier to test our component in isolation.</li>
+</ul>
+<p><img class="diagram" src="img/tutorial/tutorial_03.png"></p>
+<div class="alert alert-info">
+  <p><strong>A note on file naming:</strong></p>
+  <p>
+    It is a good practice to distinguish different types of entities by suffix. In this tutorial, we
+    are using the <code>.component</code> suffix for components, so the definition of a <code>someComponent</code> 
+    component would be in a file named <code>some-component.component.js</code>.
+  </p>
+</div>
+
+
+<h1 id="testing">Testing</h1>
+<p>Although we have combined our controller with a template into a component, we still can (and should)
+unit test the controller separately, since this is where our application logic and data reside.</p>
+<p>In order to retrieve and instantiate a component&#39;s controller, Angular provides the
+<a href="api/ngMock/service/$componentController">$componentController</a> service.</p>
+<div class="alert alert-info">
+  The <code>$controller</code> service that we used in the previous step can only instantiate controllers that
+  were registered by name, using the <code>.controller()</code> method. We could have registered our component
+  controller this way, too, if we wanted to. Instead, we chose to define it inline &mdash; inside
+  the CDO &mdash; to keep things localized, but either way works equally well.
+</div>
+
+<p><br />
+<strong><code>app/phone-list.component.spec.js</code>:</strong></p>
+<pre><code class="lang-js">describe(&#39;phoneList&#39;, function() {
+
+  // Load the module that contains the `phoneList` component before each test
+  beforeEach(module(&#39;phonecatApp&#39;));
+
+  // Test the controller
+  describe(&#39;PhoneListController&#39;, function() {
+
+    it(&#39;should create a `phones` model with 3 phones&#39;, inject(function($componentController) {
+      var ctrl = $componentController(&#39;phoneList&#39;);
+
+      expect(ctrl.phones.length).toBe(3);
+    }));
+
+  });
+
+});
+</code></pre>
+<p>The test retrieves the controller associated with the <code>phoneList</code> component, instantiates it and
+verifies that the phones array property on it contains three records. Note that the data is now on
+the controller instance itself, not on a <code>scope</code>.</p>
+<h2 id="running-tests">Running Tests</h2>
+<p>Same as before, execute <code>npm test</code> to run the tests and then watch the files for changes.</p>
+<h1 id="experiments">Experiments</h1>
+<div></div>
+
+<ul>
+<li><p>Try the experiments from the previous step, this time on the <code>phoneList</code> component.</p>
+</li>
+<li><p>Add a couple more phone lists on the page, by just adding more <code>&lt;phone-list&gt;&lt;/phone-list&gt;</code>
+elements in <code>index.html</code>. Now add another binding to the <code>phoneList</code> component&#39;s template:</p>
+<pre><code class="lang-js">template:
+    &#39;&lt;p&gt;Total number of phones: {{$ctrl.phones.length}}&lt;/p&gt;&#39; +
+    &#39;&lt;ul&gt;&#39; +
+    ...
+</code></pre>
+<p>Reload the page and watch the new &quot;feature&quot; propagate to all phone lists. In real-world
+applications, where the phone lists could appear on several different pages, being able to change
+or add something in one place (e.g. a component&#39;s template) and have that change propagate
+throughout the application, is a big win.</p>
+</li>
+</ul>
+<h1 id="summary">Summary</h1>
+<p>You have learned how to organize your application and presentation logic into isolated, reusable
+components. Let&#39;s go to <a href="tutorial/step_04">step 4</a> to learn how to organize our code in directories and
+files, so it remains easy to locate as our application grows.</p>
+<ul doc-tutorial-nav="3"></ul>
+
+
+
+
+

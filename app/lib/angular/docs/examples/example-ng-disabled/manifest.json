@@ -1,0 +1,7 @@
+{
+  "name": "example-ng-disabled",
+  "files": [
+    "index-production.html",
+    "protractor.js"
+  ]
+}

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-doCheckArrayExample</title>
+  
+
+  <script src="../../../angular.min.js"></script>
+  <script src="app.js"></script>
+  
+
+  
+</head>
+<body ng-app="do-check-module">
+  <div ng-init="items = []">
+  <button ng-click="items.push(items.length)">Add Item</button>
+  <button ng-click="items = []">Reset Items</button>
+  <pre>{{ items }}</pre>
+  <test items="items"></test>
+</div>
+</body>
+</html>

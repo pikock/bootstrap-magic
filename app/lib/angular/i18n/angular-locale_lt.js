@@ -1,4 +1,143 @@
+'use strict';
 angular.module("ngLocale", [], ["$provide", function($provide) {
 var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
-$provide.value("$locale", {"DATETIME_FORMATS":{"MONTH":["sausis","vasaris","kovas","balandis","gegužė","birželis","liepa","rugpjūtis","rugsėjis","spalis","lapkritis","gruodis"],"SHORTMONTH":["Sau","Vas","Kov","Bal","Geg","Bir","Lie","Rgp","Rgs","Spl","Lap","Grd"],"DAY":["sekmadienis","pirmadienis","antradienis","trečiadienis","ketvirtadienis","penktadienis","šeštadienis"],"SHORTDAY":["Sk","Pr","An","Tr","Kt","Pn","Št"],"AMPMS":["priešpiet","popiet"],"medium":"yyyy.MM.dd HH:mm:ss","short":"yyyy-MM-dd HH:mm","fullDate":"y 'm'. MMMM d 'd'.,EEEE","longDate":"y 'm'. MMMM d 'd'.","mediumDate":"yyyy.MM.dd","shortDate":"yyyy-MM-dd","mediumTime":"HH:mm:ss","shortTime":"HH:mm"},"NUMBER_FORMATS":{"DECIMAL_SEP":",","GROUP_SEP":".","PATTERNS":[{"minInt":1,"minFrac":0,"macFrac":0,"posPre":"","posSuf":"","negPre":"-","negSuf":"","gSize":3,"lgSize":3,"maxFrac":3},{"minInt":1,"minFrac":2,"macFrac":0,"posPre":"","posSuf":" \u00A4","negPre":"-","negSuf":" \u00A4","gSize":3,"lgSize":3,"maxFrac":2}],"CURRENCY_SYM":"Lt"},"pluralCat":function (n) {  if ((n % 10) == 1 && ((n % 100) < 11 || (n % 100) > 19)) {    return PLURAL_CATEGORY.ONE;  }  if ((n % 10) >= 2 && (n % 10) <= 9 &&      ((n % 100) < 11 || (n % 100) > 19) && n == Math.floor(n)) {    return PLURAL_CATEGORY.FEW;  }  return PLURAL_CATEGORY.OTHER;},"id":"lt"});
+function getDecimals(n) {
+  n = n + '';
+  var i = n.indexOf('.');
+  return (i == -1) ? 0 : n.length - i - 1;
+}
+
+function getVF(n, opt_precision) {
+  var v = opt_precision;
+
+  if (undefined === v) {
+    v = Math.min(getDecimals(n), 3);
+  }
+
+  var base = Math.pow(10, v);
+  var f = ((n * base) | 0) % base;
+  return {v: v, f: f};
+}
+
+$provide.value("$locale", {
+  "DATETIME_FORMATS": {
+    "AMPMS": [
+      "prie\u0161piet",
+      "popiet"
+    ],
+    "DAY": [
+      "sekmadienis",
+      "pirmadienis",
+      "antradienis",
+      "tre\u010diadienis",
+      "ketvirtadienis",
+      "penktadienis",
+      "\u0161e\u0161tadienis"
+    ],
+    "ERANAMES": [
+      "prie\u0161 Krist\u0173",
+      "po Kristaus"
+    ],
+    "ERAS": [
+      "pr. Kr.",
+      "po Kr."
+    ],
+    "FIRSTDAYOFWEEK": 0,
+    "MONTH": [
+      "sausio",
+      "vasario",
+      "kovo",
+      "baland\u017eio",
+      "gegu\u017e\u0117s",
+      "bir\u017eelio",
+      "liepos",
+      "rugpj\u016b\u010dio",
+      "rugs\u0117jo",
+      "spalio",
+      "lapkri\u010dio",
+      "gruod\u017eio"
+    ],
+    "SHORTDAY": [
+      "sk",
+      "pr",
+      "an",
+      "tr",
+      "kt",
+      "pn",
+      "\u0161t"
+    ],
+    "SHORTMONTH": [
+      "saus.",
+      "vas.",
+      "kov.",
+      "bal.",
+      "geg.",
+      "bir\u017e.",
+      "liep.",
+      "rugp.",
+      "rugs.",
+      "spal.",
+      "lapkr.",
+      "gruod."
+    ],
+    "STANDALONEMONTH": [
+      "sausis",
+      "vasaris",
+      "kovas",
+      "balandis",
+      "gegu\u017e\u0117",
+      "bir\u017eelis",
+      "liepa",
+      "rugpj\u016btis",
+      "rugs\u0117jis",
+      "spalis",
+      "lapkritis",
+      "gruodis"
+    ],
+    "WEEKENDRANGE": [
+      5,
+      6
+    ],
+    "fullDate": "y 'm'. MMMM d 'd'., EEEE",
+    "longDate": "y 'm'. MMMM d 'd'.",
+    "medium": "y-MM-dd HH:mm:ss",
+    "mediumDate": "y-MM-dd",
+    "mediumTime": "HH:mm:ss",
+    "short": "y-MM-dd HH:mm",
+    "shortDate": "y-MM-dd",
+    "shortTime": "HH:mm"
+  },
+  "NUMBER_FORMATS": {
+    "CURRENCY_SYM": "\u20ac",
+    "DECIMAL_SEP": ",",
+    "GROUP_SEP": "\u00a0",
+    "PATTERNS": [
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 3,
+        "minFrac": 0,
+        "minInt": 1,
+        "negPre": "-",
+        "negSuf": "",
+        "posPre": "",
+        "posSuf": ""
+      },
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 2,
+        "minFrac": 2,
+        "minInt": 1,
+        "negPre": "-",
+        "negSuf": "\u00a0\u00a4",
+        "posPre": "",
+        "posSuf": "\u00a0\u00a4"
+      }
+    ]
+  },
+  "id": "lt",
+  "localeID": "lt",
+  "pluralCat": function(n, opt_precision) {  var vf = getVF(n, opt_precision);  if (n % 10 == 1 && (n % 100 < 11 || n % 100 > 19)) {    return PLURAL_CATEGORY.ONE;  }  if (n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) {    return PLURAL_CATEGORY.FEW;  }  if (vf.f != 0) {    return PLURAL_CATEGORY.MANY;  }  return PLURAL_CATEGORY.OTHER;}
+});
 }]);

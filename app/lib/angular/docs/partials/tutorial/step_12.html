@@ -1,0 +1,147 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/tutorial/step_12.ngdoc?message=docs(tutorial%2F12 - Event Handlers)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<ul doc-tutorial-nav="12"></ul>
+
+
+<p>In this step, you will add a clickable phone image swapper to the phone details page.</p>
+<ul>
+<li>The phone details view displays one large image of the current phone and several smaller thumbnail
+images. It would be great if we could replace the large image with any of the thumbnails just by
+clicking on the desired thumbnail image. Let&#39;s have a look at how we can do this with Angular.</li>
+</ul>
+<div doc-tutorial-reset="12"></div>
+
+
+<h2 id="component-controller">Component Controller</h2>
+<p><br />
+<strong><code>app/phone-detail/phone-detail.component.js</code>:</strong></p>
+<pre><code class="lang-js">...
+controller: [&#39;$http&#39;, &#39;$routeParams&#39;,
+  function PhoneDetailController($http, $routeParams) {
+    var self = this;
+
+    self.setImage = function setImage(imageUrl) {
+      self.mainImageUrl = imageUrl;
+    };
+
+    $http.get(&#39;phones/&#39; + $routeParams.phoneId + &#39;.json&#39;).then(function(response) {
+      self.phone = response.data;
+      self.setImage(self.phone.images[0]);
+    });
+  }
+]
+...
+</code></pre>
+<p>In the <code>phoneDetail</code> component&#39;s controller, we created the <code>mainImageUrl</code> model property and set
+its default value to the first phone image URL.</p>
+<p>We also created a <code>setImage()</code> method (to be used as event handler), that will change the value of
+<code>mainImageUrl</code>.</p>
+<h2 id="component-template">Component Template</h2>
+<p><br />
+<strong><code>app/phone-detail/phone-detail.template.html</code>:</strong></p>
+<pre><code class="lang-html">&lt;img ng-src=&quot;{{$ctrl.mainImageUrl}}&quot; class=&quot;phone&quot; /&gt;
+...
+&lt;ul class=&quot;phone-thumbs&quot;&gt;
+  &lt;li ng-repeat=&quot;img in $ctrl.phone.images&quot;&gt;
+    &lt;img ng-src=&quot;{{img}}&quot; ng-click=&quot;$ctrl.setImage(img)&quot; /&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+...
+</code></pre>
+<p>We bound the <code>ngSrc</code> directive of the large image to the <code>$ctrl.mainImageUrl</code> property.</p>
+<p>We also registered an <a href="api/ng/directive/ngClick">ngClick</a> handler with thumbnail images. When a
+user clicks on one of the thumbnail images, the handler will use the <code>$ctrl.setImage()</code> method
+callback to change the value of the <code>$ctrl.mainImageUrl</code> property to the URL of the clicked
+thumbnail image.</p>
+<p><img class="diagram" src="img/tutorial/tutorial_12.png"></p>
+<h1 id="testing">Testing</h1>
+<p>To verify this new feature, we added two E2E tests. One verifies that <code>mainImageUrl</code> is set to the
+first phone image URL by default. The second test clicks on several thumbnail images and verifies
+that the main image URL changes accordingly.</p>
+<p><br />
+<strong><code>e2e-tests/scenarios.js</code>:</strong></p>
+<pre><code class="lang-js">...
+
+describe(&#39;View: Phone detail&#39;, function() {
+
+  ...
+
+  it(&#39;should display the first phone image as the main phone image&#39;, function() {
+    var mainImage = element(by.css(&#39;img.phone&#39;));
+
+    expect(mainImage.getAttribute(&#39;src&#39;)).toMatch(/img\/phones\/nexus-s.0.jpg/);
+  });
+
+  it(&#39;should swap the main image when clicking on a thumbnail image&#39;, function() {
+    var mainImage = element(by.css(&#39;img.phone&#39;));
+    var thumbnails = element.all(by.css(&#39;.phone-thumbs img&#39;));
+
+    thumbnails.get(2).click();
+    expect(mainImage.getAttribute(&#39;src&#39;)).toMatch(/img\/phones\/nexus-s.2.jpg/);
+
+    thumbnails.get(0).click();
+    expect(mainImage.getAttribute(&#39;src&#39;)).toMatch(/img\/phones\/nexus-s.0.jpg/);
+  });
+
+});
+
+...
+</code></pre>
+<p>You can now rerun the tests with <code>npm run protractor</code>.</p>
+<p>We also have to refactor one of our unit tests, because of the addition of the <code>mainImageUrl</code> model
+property to the controller. As previously, we will use a mocked response.</p>
+<p><br />
+<strong><code>app/phone-detail/phone-detail.component.spec.js</code>:</strong></p>
+<pre><code class="lang-js">...
+
+describe(&#39;controller&#39;, function() {
+  var $httpBackend, ctrl
+  var xyzPhoneData = {
+    name: &#39;phone xyz&#39;,
+    images: [&#39;image/url1.png&#39;, &#39;image/url2.png&#39;]
+  };
+
+  beforeEach(inject(function($componentController, _$httpBackend_, _$routeParams_) {
+    $httpBackend = _$httpBackend_;
+    $httpBackend.expectGET(&#39;phones/xyz.json&#39;).respond(xyzPhoneData);
+
+    ...
+  }));
+
+  it(&#39;should fetch phone details&#39;, function() {
+    expect(ctrl.phone).toBeUndefined();
+
+    $httpBackend.flush();
+    expect(ctrl.phone).toEqual(xyzPhoneData);
+  });
+
+});
+
+...
+</code></pre>
+<p>Our unit tests should now be passing again.</p>
+<h1 id="experiments">Experiments</h1>
+<div></div>
+
+<ul>
+<li><p>Similar to the <code>ngClick</code> directive, which binds an Angular expression to the <code>click</code> event, there
+are built-in directives for all native events, such as <code>dblclick</code>, <code>focus</code>/<code>blur</code>, mouse and key
+events, etc.</p>
+<p>Let&#39;s add a new controller method to the <code>phoneDetail</code> component&#39;s controller:</p>
+<pre><code class="lang-js">self.onDblclick = function onDblclick(imageUrl) {
+  alert(&#39;You double-clicked image: &#39; + imageUrl);
+};
+</code></pre>
+<p>and add the following to the <code>&lt;img&gt;</code> element in <code>phone-detail.template.html</code>:</p>
+<pre><code class="lang-html">&lt;img ... ng-dblclick=&quot;$ctrl.onDblclick(img)&quot; /&gt;
+</code></pre>
+<p>Now, whenever you double-click on a thumbnail, an alert pops-up. Pretty annoying!</p>
+</li>
+</ul>
+<h1 id="summary">Summary</h1>
+<p>With the phone image swapper in place, we are ready for <a href="tutorial/step_13">step 13</a> to learn an even
+better way to fetch data.</p>
+<ul doc-tutorial-nav="12"></ul>
+
+

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ng-form-debug</title>
+  
+
+  <script src="../../../angular.js"></script>
+  <script src="../../../angular-animate.js"></script>
+  
+
+  <script type="text/javascript">
+    angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
+  </script>
+</head>
+<body ng-app="formExample">
+  <script>
+  angular.module('formExample', [])
+    .controller('FormController', ['$scope', function($scope) {
+      $scope.userType = 'guest';
+    }]);
+</script>
+<style>
+ .my-form {
+   transition:all linear 0.5s;
+   background: transparent;
+ }
+ .my-form.ng-invalid {
+   background: red;
+ }
+</style>
+<form name="myForm" ng-controller="FormController" class="my-form">
+  userType: <input name="input" ng-model="userType" required>
+  <span class="error" ng-show="myForm.input.$error.required">Required!</span><br>
+  <code>userType = {{userType}}</code><br>
+  <code>myForm.input.$valid = {{myForm.input.$valid}}</code><br>
+  <code>myForm.input.$error = {{myForm.input.$error}}</code><br>
+  <code>myForm.$valid = {{myForm.$valid}}</code><br>
+  <code>myForm.$error.required = {{!!myForm.$error.required}}</code><br>
+ </form>
+</body>
+</html>

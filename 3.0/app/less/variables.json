@@ -493,7 +493,7 @@
 
 			{"key":"@well-bg", "value":"#f5f5f5", "type": "color"},
 
-			{"key":"@badge-color", "value":"#fff", "type": "color"},
+			{"key":"@badge-color:", "value":"#fff", "type": "color"},
 			{"key":"@badge-link-hover-color", "value":"#fff", "type": "color"},
 			{"key":"@badge-bg", "value":"@gray-light", "type": "color"},
 

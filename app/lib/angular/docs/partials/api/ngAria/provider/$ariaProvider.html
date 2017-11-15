@@ -1,0 +1,127 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ngAria/aria.js?message=docs($ariaProvider)%3A%20describe%20your%20change...#L70' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ngAria/aria.js#L70' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">$ariaProvider</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+  <li>
+    <a href="api/ngAria/service/$aria">- $aria</a>
+  </li>
+
+    <li>
+      - provider in module <a href="api/ngAria">ngAria</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>Used for configuring the ARIA attributes injected and managed by ngAria.</p>
+<pre><code class="lang-js">angular.module(&#39;myApp&#39;, [&#39;ngAria&#39;], function config($ariaProvider) {
+  $ariaProvider.config({
+    ariaValue: true,
+    tabindex: false
+  });
+});
+</code></pre>
+<h2 id="dependencies">Dependencies</h2>
+<p>Requires the <a href="api/ngAria"><code>ngAria</code></a> module to be installed.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+
+  
+
+  
+<h2>Methods</h2>
+<ul class="methods">
+  <li id="config">
+    <h3><p><code>config(config);</code></p>
+
+</h3>
+    <div><p>Enables/disables various ARIA attributes</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        config
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">object</a>
+      </td>
+      <td>
+        <p>object to enable/disable specific ARIA attributes</p>
+<ul>
+<li><strong>ariaHidden</strong> – <code>{boolean}</code> – Enables/disables aria-hidden tags</li>
+<li><strong>ariaChecked</strong> – <code>{boolean}</code> – Enables/disables aria-checked tags</li>
+<li><strong>ariaReadonly</strong> – <code>{boolean}</code> – Enables/disables aria-readonly tags</li>
+<li><strong>ariaDisabled</strong> – <code>{boolean}</code> – Enables/disables aria-disabled tags</li>
+<li><strong>ariaRequired</strong> – <code>{boolean}</code> – Enables/disables aria-required tags</li>
+<li><strong>ariaInvalid</strong> – <code>{boolean}</code> – Enables/disables aria-invalid tags</li>
+<li><strong>ariaValue</strong> – <code>{boolean}</code> – Enables/disables aria-valuemin, aria-valuemax and
+aria-valuenow tags</li>
+<li><strong>tabindex</strong> – <code>{boolean}</code> – Enables/disables tabindex tags</li>
+<li><strong>bindKeydown</strong> – <code>{boolean}</code> – Enables/disables keyboard event binding on non-interactive
+elements (such as <code>div</code> or <code>li</code>) using ng-click, making them more accessible to users of
+assistive technologies</li>
+<li><strong>bindRoleForClick</strong> – <code>{boolean}</code> – Adds role=button to non-interactive elements (such as
+<code>div</code> or <code>li</code>) using ng-click, making them more accessible to users of assistive
+technologies</li>
+</ul>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    </li>
+  </ul>
+  
+  
+
+
+
+  
+</div>
+
+

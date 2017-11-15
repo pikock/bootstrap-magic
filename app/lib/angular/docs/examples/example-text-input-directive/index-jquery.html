@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-text-input-directive-jquery</title>
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  
+
+  
+</head>
+<body ng-app="textInputExample">
+  <script>
+  angular.module('textInputExample', [])
+    .controller('ExampleController', ['$scope', function($scope) {
+      $scope.example = {
+        text: 'guest',
+        word: /^\s*\w*\s*$/
+      };
+    }]);
+</script>
+<form name="myForm" ng-controller="ExampleController">
+  <label>Single word:
+    <input type="text" name="input" ng-model="example.text"
+           ng-pattern="example.word" required ng-trim="false">
+  </label>
+  <div role="alert">
+    <span class="error" ng-show="myForm.input.$error.required">
+      Required!</span>
+    <span class="error" ng-show="myForm.input.$error.pattern">
+      Single word only!</span>
+  </div>
+  <code>text = {{example.text}}</code><br/>
+  <code>myForm.input.$valid = {{myForm.input.$valid}}</code><br/>
+  <code>myForm.input.$error = {{myForm.input.$error}}</code><br/>
+  <code>myForm.$valid = {{myForm.$valid}}</code><br/>
+  <code>myForm.$error.required = {{!!myForm.$error.required}}</code><br/>
+ </form>
+</body>
+</html>

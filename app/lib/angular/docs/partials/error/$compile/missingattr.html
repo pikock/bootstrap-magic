@@ -1,0 +1,20 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/error/$compile/missingattr.ngdoc?message=docs(error%2Fmissingattr)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>Error: $compile:missingattr
+  <div><span class='hint'>Missing required attribute</span></div>
+</h1>
+
+<div>
+    <pre class="minerr-errmsg" error-display="Attribute '{0}' of '{1}' is non-optional and must be set!">Attribute '{0}' of '{1}' is non-optional and must be set!</pre>
+</div>
+
+<h2>Description</h2>
+<div class="description">
+  <p>This error may occur only when <code>$compileProvider.strictComponentBindingsEnabled</code> is set to <code>true</code>.
+Then all attributes mentioned in <code>bindings</code> without <code>?</code> must be set. If one or more aren&#39;t set,
+the first one will throw an error.</p>
+
+</div>
+
+

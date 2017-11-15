@@ -196,7 +196,7 @@ angular.module('bootstrapVariablesEditor.services', []).
     lessEngine.getVariablesToString = function ($scope) {
     	var string = "" +
     	"/*\n"+
-    	"* pikock http://www.pikock.com/ , autreplanete http://www.autreplanete.com/ \n"+
+    	"* orson http://en.orson.io , autreplanete http://www.autreplanete.com/ \n"+
     	"*  \n"+
     	"**/\n";
         for (var i = 0; i < $scope.variables.length; i++ ) {
@@ -209,7 +209,7 @@ angular.module('bootstrapVariablesEditor.services', []).
     };
     
     lessEngine.saveLessVar = function(data){
-        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').append(
+        var $form = $('<form>').attr('method', 'POST').attr('action', 'http://www.pikock-unis.com/tools/download.php').append(
                 $('<input>')
                     .attr('type', 'hidden')
                     .attr('name', 'data')
@@ -242,7 +242,7 @@ angular.module('bootstrapVariablesEditor.services', []).
         	    var type = ($scope.minified) ? 'mincss' : 'css';
                 var css = tree.toCSS({ compress: $scope.minified });
                 console.log(css)
-                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://bootstrapmagic.pikock.com/').
+                var $form = $('<form>').attr('method', 'POST').attr('action', 'http://www.pikock-unis.com/tools/download.php').
                     append(
                         $('<input>')
                             .attr('type', 'hidden')

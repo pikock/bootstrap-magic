@@ -1,0 +1,21 @@
+.friends {
+  border-collapse: collapse;
+}
+
+.friends th {
+  border-bottom: 1px solid;
+}
+.friends td, .friends th {
+  border-left: 1px solid;
+  padding: 5px 10px;
+}
+.friends td:first-child, .friends th:first-child {
+  border-left: none;
+}
+
+.sortorder:after {
+  content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+}
+.sortorder.reverse:after {
+  content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+}

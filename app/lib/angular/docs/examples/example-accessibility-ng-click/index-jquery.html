@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-accessibility-ng-click-jquery</title>
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  <script src="../../../angular-aria.js"></script>
+  
+
+  
+</head>
+<body ng-app="ngAria_ngClickExample">
+   <div ng-click="someFunction" show-attrs>
+   &lt;div&gt; with ng-click and bindRoleForClick, tabindex set to false
+ </div>
+<script>
+ angular.module('ngAria_ngClickExample', ['ngAria'], function config($ariaProvider) {
+   $ariaProvider.config({
+     bindRoleForClick: false,
+     tabindex: false
+   });
+ })
+ .directive('showAttrs', function() {
+   return function(scope, el, attrs) {
+     var pre = document.createElement('pre');
+     el.after(pre);
+     scope.$watch(function() {
+       var attrs = {};
+       Array.prototype.slice.call(el[0].attributes, 0).forEach(function(item) {
+         if (item.name !== 'show-attrs') {
+           attrs[item.name] = item.value;
+         }
+       });
+       return attrs;
+     }, function(newAttrs, oldAttrs) {
+       pre.textContent = JSON.stringify(newAttrs, null, 2);
+     }, true);
+   }
+ });
+</script>
+</body>
+</html>

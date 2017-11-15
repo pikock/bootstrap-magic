@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-doCheckArrayExample-jquery</title>
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  <script src="app.js"></script>
+  
+
+  
+</head>
+<body ng-app="do-check-module">
+  <div ng-init="items = []">
+  <button ng-click="items.push(items.length)">Add Item</button>
+  <button ng-click="items = []">Reset Items</button>
+  <pre>{{ items }}</pre>
+  <test items="items"></test>
+</div>
+</body>
+</html>

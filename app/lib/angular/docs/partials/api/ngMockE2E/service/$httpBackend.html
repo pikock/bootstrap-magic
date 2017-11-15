@@ -1,0 +1,1022 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ngMock/angular-mocks.js?message=docs($httpBackend)%3A%20describe%20your%20change...#L2438' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ngMock/angular-mocks.js#L2438' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">$httpBackend</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+  
+
+    <li>
+      - service in module <a href="api/ngMockE2E">ngMockE2E</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>Fake HTTP backend implementation suitable for end-to-end testing or backend-less development of
+applications that use the <a href="api/ng/service/$http">$http service</a>.</p>
+<div class="alert alert-info">
+<strong>Note</strong>: For fake http backend implementation suitable for unit testing please see
+<a href="api/ngMock/service/$httpBackend">unit-testing $httpBackend mock</a>.
+</div>
+
+<p>This implementation can be used to respond with static or dynamic responses via the <code>when</code> api
+and its shortcuts (<code>whenGET</code>, <code>whenPOST</code>, etc) and optionally pass through requests to the
+real $httpBackend for specific requests (e.g. to interact with certain remote apis or to fetch
+templates from a webserver).</p>
+<p>As opposed to unit-testing, in an end-to-end testing scenario or in scenario when an application
+is being developed with the real backend api replaced with a mock, it is often desirable for
+certain category of requests to bypass the mock and issue a real http request (e.g. to fetch
+templates or static files from the webserver). To configure the backend with this behavior
+use the <code>passThrough</code> request handler of <code>when</code> instead of <code>respond</code>.</p>
+<p>Additionally, we don&#39;t want to manually have to flush mocked out requests like we do during unit
+testing. For this reason the e2e $httpBackend flushes mocked out requests
+automatically, closely simulating the behavior of the XMLHttpRequest object.</p>
+<p>To setup the application to run with this http backend, you have to create a module that depends
+on the <code>ngMockE2E</code> and your application modules and defines the fake backend:</p>
+<pre><code class="lang-js">var myAppDev = angular.module(&#39;myAppDev&#39;, [&#39;myApp&#39;, &#39;ngMockE2E&#39;]);
+myAppDev.run(function($httpBackend) {
+  var phones = [{name: &#39;phone1&#39;}, {name: &#39;phone2&#39;}];
+
+  // returns the current list of phones
+  $httpBackend.whenGET(&#39;/phones&#39;).respond(phones);
+
+  // adds a new phone to the phones array
+  $httpBackend.whenPOST(&#39;/phones&#39;).respond(function(method, url, data) {
+    var phone = angular.fromJson(data);
+    phones.push(phone);
+    return [200, phone, {}];
+  });
+  $httpBackend.whenGET(/^\/templates\//).passThrough(); // Requests for templates are handled by the real server
+  //...
+});
+</code></pre>
+<p>Afterwards, bootstrap your app with this new module.</p>
+<h2 id="example">Example</h2>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-httpbackend-e2e-testing"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-httpbackend-e2e-testing"
+      name="httpbackend-e2e-testing"
+      module="myAppE2E"
+      deps="angular-mocks.js">
+
+  
+    <div class="runnable-example-file" 
+      name="app.js"
+      language="js"
+      type="js">
+      <pre><code>var myApp = angular.module(&#39;myApp&#39;, []);&#10;&#10;myApp.controller(&#39;MainCtrl&#39;, function MainCtrl($http) {&#10;  var ctrl = this;&#10;&#10;  ctrl.phones = [];&#10;  ctrl.newPhone = {&#10;    name: &#39;&#39;&#10;  };&#10;&#10;  ctrl.getPhones = function() {&#10;    $http.get(&#39;/phones&#39;).then(function(response) {&#10;      ctrl.phones = response.data;&#10;    });&#10;  };&#10;&#10;  ctrl.addPhone = function(phone) {&#10;    $http.post(&#39;/phones&#39;, phone).then(function() {&#10;      ctrl.newPhone = {name: &#39;&#39;};&#10;      return ctrl.getPhones();&#10;    });&#10;  };&#10;&#10;  ctrl.getPhones();&#10;});</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="e2e.js"
+      language="js"
+      type="js">
+      <pre><code>var myAppDev = angular.module(&#39;myAppE2E&#39;, [&#39;myApp&#39;, &#39;ngMockE2E&#39;]);&#10;&#10;myAppDev.run(function($httpBackend) {&#10;  var phones = [{name: &#39;phone1&#39;}, {name: &#39;phone2&#39;}];&#10;&#10;  // returns the current list of phones&#10;  $httpBackend.whenGET(&#39;/phones&#39;).respond(phones);&#10;&#10;  // adds a new phone to the phones array&#10;  $httpBackend.whenPOST(&#39;/phones&#39;).respond(function(method, url, data) {&#10;    var phone = angular.fromJson(data);&#10;    phones.push(phone);&#10;    return [200, phone, {}];&#10;  });&#10;});</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;MainCtrl as $ctrl&quot;&gt;&#10;&lt;form name=&quot;newPhoneForm&quot; ng-submit=&quot;$ctrl.addPhone($ctrl.newPhone)&quot;&gt;&#10;  &lt;input type=&quot;text&quot; ng-model=&quot;$ctrl.newPhone.name&quot;&gt;&#10;  &lt;input type=&quot;submit&quot; value=&quot;Add Phone&quot;&gt;&#10;&lt;/form&gt;&#10;&lt;h1&gt;Phones&lt;/h1&gt;&#10;&lt;ul&gt;&#10;  &lt;li ng-repeat=&quot;phone in $ctrl.phones&quot;&gt;{{phone.name}}&lt;/li&gt;&#10;&lt;/ul&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-httpbackend-e2e-testing')}}" name="example-httpbackend-e2e-testing"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+
+  
+
+  
+<h2>Methods</h2>
+<ul class="methods">
+  <li id="when">
+    <h3><p><code>when(method, url, [data], [headers], [keys]);</code></p>
+
+</h3>
+    <div><p>Creates a new backend definition.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        method
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>HTTP method.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        url
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)=</a>
+      </td>
+      <td>
+        <p>HTTP url or function that receives a url
+  and returns true if the url matches the current definition.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        data
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)</a>
+      </td>
+      <td>
+        <p>HTTP request body or function that receives
+  data string and returns true if the data is as expected.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        headers
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">Object</a><a href="" class="label type-hint type-hint-function">function(Object)</a>
+      </td>
+      <td>
+        <p>HTTP headers or function that receives http header
+  object and returns true if the headers match the current definition.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        keys
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array</a>
+      </td>
+      <td>
+        <p>Array of keys to assign to regex matches in request url described on
+  <a href="api/ngMock/service/$httpBackend">$httpBackend mock</a>.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-requesthandler">requestHandler</a></td>
+    <td><p>Returns an object with <code>respond</code> and <code>passThrough</code> methods that
+  control how a matched request is handled. You can save this object for later use and invoke
+  <code>respond</code> or <code>passThrough</code> again in order to change how a matched request is handled.</p>
+<ul>
+<li>respond –<pre><code>{ function([status,] data[, headers, statusText])
+| function(function(method, url, data, headers, params)}
+</code></pre>
+– The respond method takes a set of static data to be returned or a function that can return
+an array containing response status (number), response data (Array|Object|string), response
+headers (Object), and the text for the status (string).</li>
+<li>passThrough – <code>{function()}</code> – Any request matching a backend definition with
+<code>passThrough</code> handler will be passed through to the real backend (an XHR request will be made
+to the server.)</li>
+<li>Both methods return the <code>requestHandler</code> object for possible overrides.</li>
+</ul>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li id="whenGET">
+    <h3><p><code>whenGET(url, [headers], [keys]);</code></p>
+
+</h3>
+    <div><p>Creates a new backend definition for GET requests. For more info see <code>when()</code>.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        url
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)=</a>
+      </td>
+      <td>
+        <p>HTTP url or function that receives a url
+  and returns true if the url matches the current definition.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        headers
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">Object</a><a href="" class="label type-hint type-hint-function">function(Object)</a>
+      </td>
+      <td>
+        <p>HTTP headers.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        keys
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array</a>
+      </td>
+      <td>
+        <p>Array of keys to assign to regex matches in request url described on
+  <a href="api/ngMock/service/$httpBackend">$httpBackend mock</a>.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-requesthandler">requestHandler</a></td>
+    <td><p>Returns an object with <code>respond</code> and <code>passThrough</code> methods that
+  control how a matched request is handled. You can save this object for later use and invoke
+  <code>respond</code> or <code>passThrough</code> again in order to change how a matched request is handled.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li id="whenHEAD">
+    <h3><p><code>whenHEAD(url, [headers], [keys]);</code></p>
+
+</h3>
+    <div><p>Creates a new backend definition for HEAD requests. For more info see <code>when()</code>.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        url
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)=</a>
+      </td>
+      <td>
+        <p>HTTP url or function that receives a url
+  and returns true if the url matches the current definition.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        headers
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">Object</a><a href="" class="label type-hint type-hint-function">function(Object)</a>
+      </td>
+      <td>
+        <p>HTTP headers.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        keys
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array</a>
+      </td>
+      <td>
+        <p>Array of keys to assign to regex matches in request url described on
+  <a href="api/ngMock/service/$httpBackend">$httpBackend mock</a>.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-requesthandler">requestHandler</a></td>
+    <td><p>Returns an object with <code>respond</code> and <code>passThrough</code> methods that
+  control how a matched request is handled. You can save this object for later use and invoke
+  <code>respond</code> or <code>passThrough</code> again in order to change how a matched request is handled.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li id="whenDELETE">
+    <h3><p><code>whenDELETE(url, [headers], [keys]);</code></p>
+
+</h3>
+    <div><p>Creates a new backend definition for DELETE requests. For more info see <code>when()</code>.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        url
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)=</a>
+      </td>
+      <td>
+        <p>HTTP url or function that receives a url
+  and returns true if the url matches the current definition.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        headers
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">Object</a><a href="" class="label type-hint type-hint-function">function(Object)</a>
+      </td>
+      <td>
+        <p>HTTP headers.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        keys
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array</a>
+      </td>
+      <td>
+        <p>Array of keys to assign to regex matches in request url described on
+  <a href="api/ngMock/service/$httpBackend">$httpBackend mock</a>.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-requesthandler">requestHandler</a></td>
+    <td><p>Returns an object with <code>respond</code> and <code>passThrough</code> methods that
+  control how a matched request is handled. You can save this object for later use and invoke
+  <code>respond</code> or <code>passThrough</code> again in order to change how a matched request is handled.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li id="whenPOST">
+    <h3><p><code>whenPOST(url, [data], [headers], [keys]);</code></p>
+
+</h3>
+    <div><p>Creates a new backend definition for POST requests. For more info see <code>when()</code>.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        url
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)=</a>
+      </td>
+      <td>
+        <p>HTTP url or function that receives a url
+  and returns true if the url matches the current definition.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        data
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)</a>
+      </td>
+      <td>
+        <p>HTTP request body or function that receives
+  data string and returns true if the data is as expected.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        headers
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">Object</a><a href="" class="label type-hint type-hint-function">function(Object)</a>
+      </td>
+      <td>
+        <p>HTTP headers.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        keys
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array</a>
+      </td>
+      <td>
+        <p>Array of keys to assign to regex matches in request url described on
+  <a href="api/ngMock/service/$httpBackend">$httpBackend mock</a>.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-requesthandler">requestHandler</a></td>
+    <td><p>Returns an object with <code>respond</code> and <code>passThrough</code> methods that
+  control how a matched request is handled. You can save this object for later use and invoke
+  <code>respond</code> or <code>passThrough</code> again in order to change how a matched request is handled.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li id="whenPUT">
+    <h3><p><code>whenPUT(url, [data], [headers], [keys]);</code></p>
+
+</h3>
+    <div><p>Creates a new backend definition for PUT requests.  For more info see <code>when()</code>.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        url
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)=</a>
+      </td>
+      <td>
+        <p>HTTP url or function that receives a url
+  and returns true if the url matches the current definition.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        data
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)</a>
+      </td>
+      <td>
+        <p>HTTP request body or function that receives
+  data string and returns true if the data is as expected.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        headers
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">Object</a><a href="" class="label type-hint type-hint-function">function(Object)</a>
+      </td>
+      <td>
+        <p>HTTP headers.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        keys
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array</a>
+      </td>
+      <td>
+        <p>Array of keys to assign to regex matches in request url described on
+  <a href="api/ngMock/service/$httpBackend">$httpBackend mock</a>.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-requesthandler">requestHandler</a></td>
+    <td><p>Returns an object with <code>respond</code> and <code>passThrough</code> methods that
+  control how a matched request is handled. You can save this object for later use and invoke
+  <code>respond</code> or <code>passThrough</code> again in order to change how a matched request is handled.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li id="whenPATCH">
+    <h3><p><code>whenPATCH(url, [data], [headers], [keys]);</code></p>
+
+</h3>
+    <div><p>Creates a new backend definition for PATCH requests.  For more info see <code>when()</code>.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        url
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)=</a>
+      </td>
+      <td>
+        <p>HTTP url or function that receives a url
+  and returns true if the url matches the current definition.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        data
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)</a>
+      </td>
+      <td>
+        <p>HTTP request body or function that receives
+  data string and returns true if the data is as expected.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        headers
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">Object</a><a href="" class="label type-hint type-hint-function">function(Object)</a>
+      </td>
+      <td>
+        <p>HTTP headers.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        keys
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array</a>
+      </td>
+      <td>
+        <p>Array of keys to assign to regex matches in request url described on
+  <a href="api/ngMock/service/$httpBackend">$httpBackend mock</a>.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-requesthandler">requestHandler</a></td>
+    <td><p>Returns an object with <code>respond</code> and <code>passThrough</code> methods that
+  control how a matched request is handled. You can save this object for later use and invoke
+  <code>respond</code> or <code>passThrough</code> again in order to change how a matched request is handled.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li id="whenJSONP">
+    <h3><p><code>whenJSONP(url, [keys]);</code></p>
+
+</h3>
+    <div><p>Creates a new backend definition for JSONP requests. For more info see <code>when()</code>.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        url
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-regexp">RegExp</a><a href="" class="label type-hint type-hint-function">function(string)=</a>
+      </td>
+      <td>
+        <p>HTTP url or function that receives a url
+  and returns true if the url matches the current definition.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        keys
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array</a>
+      </td>
+      <td>
+        <p>Array of keys to assign to regex matches in request url described on
+  <a href="api/ngMock/service/$httpBackend">$httpBackend mock</a>.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-requesthandler">requestHandler</a></td>
+    <td><p>Returns an object with <code>respond</code> and <code>passThrough</code> methods that
+  control how a matched request is handled. You can save this object for later use and invoke
+  <code>respond</code> or <code>passThrough</code> again in order to change how a matched request is handled.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  
+  <li id="whenRoute">
+    <h3><p><code>whenRoute(method, url);</code></p>
+
+</h3>
+    <div><p>Creates a new backend definition that compares only with the requested route.</p>
+</div>
+
+    
+
+    
+    <h4>Parameters</h4>
+    
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        method
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>HTTP method.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        url
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>HTTP url string that supports colon param matching.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+    
+
+    
+
+    
+    <h4>Returns</h4>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-requesthandler">requestHandler</a></td>
+    <td><p>Returns an object with <code>respond</code> and <code>passThrough</code> methods that
+  control how a matched request is handled. You can save this object for later use and invoke
+  <code>respond</code> or <code>passThrough</code> again in order to change how a matched request is handled.</p>
+</td>
+  </tr>
+</table>
+    </li>
+  </ul>
+  
+  
+
+
+
+  
+</div>
+
+

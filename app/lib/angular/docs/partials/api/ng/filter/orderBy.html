@@ -1,0 +1,438 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/filter/orderBy.js?message=docs(orderBy)%3A%20describe%20your%20change...#L3' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/filter/orderBy.js#L3' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">orderBy</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - filter in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>Returns an array containing the items from the specified <code>collection</code>, ordered by a <code>comparator</code>
+function based on the values computed using the <code>expression</code> predicate.</p>
+<p>For example, <code>[{id: &#39;foo&#39;}, {id: &#39;bar&#39;}] | orderBy:&#39;id&#39;</code> would result in
+<code>[{id: &#39;bar&#39;}, {id: &#39;foo&#39;}]</code>.</p>
+<p>The <code>collection</code> can be an Array or array-like object (e.g. NodeList, jQuery object, TypedArray,
+String, etc).</p>
+<p>The <code>expression</code> can be a single predicate, or a list of predicates each serving as a tie-breaker
+for the preceding one. The <code>expression</code> is evaluated against each item and the output is used
+for comparing with other items.</p>
+<p>You can change the sorting order by setting <code>reverse</code> to <code>true</code>. By default, items are sorted in
+ascending order.</p>
+<p>The comparison is done using the <code>comparator</code> function. If none is specified, a default, built-in
+comparator is used (see below for details - in a nutshell, it compares numbers numerically and
+strings alphabetically).</p>
+<h3 id="under-the-hood">Under the hood</h3>
+<p>Ordering the specified <code>collection</code> happens in two phases:</p>
+<ol>
+<li>All items are passed through the predicate (or predicates), and the returned values are saved
+along with their type (<code>string</code>, <code>number</code> etc). For example, an item <code>{label: &#39;foo&#39;}</code>, passed
+through a predicate that extracts the value of the <code>label</code> property, would be transformed to:<pre><code>{
+  value: &#39;foo&#39;,
+  type: &#39;string&#39;,
+  index: ...
+}
+</code></pre>
+</li>
+<li>The comparator function is used to sort the items, based on the derived values, types and
+indices.</li>
+</ol>
+<p>If you use a custom comparator, it will be called with pairs of objects of the form
+<code>{value: ..., type: &#39;...&#39;, index: ...}</code> and is expected to return <code>0</code> if the objects are equal
+(as far as the comparator is concerned), <code>-1</code> if the 1st one should be ranked higher than the
+second, or <code>1</code> otherwise.</p>
+<p>In order to ensure that the sorting will be deterministic across platforms, if none of the
+specified predicates can distinguish between two items, <code>orderBy</code> will automatically introduce a
+dummy predicate that returns the item&#39;s index as <code>value</code>.
+(If you are using a custom comparator, make sure it can handle this predicate as well.)</p>
+<p>If a custom comparator still can&#39;t distinguish between two items, then they will be sorted based
+on their index using the built-in comparator.</p>
+<p>Finally, in an attempt to simplify things, if a predicate returns an object as the extracted
+value for an item, <code>orderBy</code> will try to convert that object to a primitive value, before passing
+it to the comparator. The following rules govern the conversion:</p>
+<ol>
+<li>If the object has a <code>valueOf()</code> method that returns a primitive, its return value will be
+used instead.<br />
+(If the object has a <code>valueOf()</code> method that returns another object, then the returned object
+will be used in subsequent steps.)</li>
+<li>If the object has a custom <code>toString()</code> method (i.e. not the one inherited from <code>Object</code>) that
+returns a primitive, its return value will be used instead.<br />
+(If the object has a <code>toString()</code> method that returns another object, then the returned object
+will be used in subsequent steps.)</li>
+<li>No conversion; the object itself is used.</li>
+</ol>
+<h3 id="the-default-comparator">The default comparator</h3>
+<p>The default, built-in comparator should be sufficient for most usecases. In short, it compares
+numbers numerically, strings alphabetically (and case-insensitively), for objects falls back to
+using their index in the original collection, and sorts values of different types by type.</p>
+<p>More specifically, it follows these steps to determine the relative order of items:</p>
+<ol>
+<li>If the compared values are of different types, compare the types themselves alphabetically.</li>
+<li>If both values are of type <code>string</code>, compare them alphabetically in a case- and
+locale-insensitive way.</li>
+<li>If both values are objects, compare their indices instead.</li>
+<li>Otherwise, return:<ul>
+<li><code>0</code>, if the values are equal (by strict equality comparison, i.e. using <code>===</code>).</li>
+<li><code>-1</code>, if the 1st value is &quot;less than&quot; the 2nd value (compared using the <code>&lt;</code> operator).</li>
+<li><code>1</code>, otherwise.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Note:</strong> If you notice numbers not being sorted as expected, make sure they are actually being
+          saved as numbers and not strings.
+<strong>Note:</strong> For the purpose of sorting, <code>null</code> values are treated as the string <code>&#39;null&#39;</code> (i.e.
+          <code>type: &#39;string&#39;</code>, <code>value: &#39;null&#39;</code>). This may cause unexpected sort order relative to
+          other values.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2>Usage</h2>
+  <h3>In HTML Template Binding</h3>
+  
+    <pre><code>{{ orderBy_expression | orderBy : expression : reverse : comparator}}</code></pre>
+  
+
+  <h3>In JavaScript</h3>
+  <pre><code>$filter(&#39;orderBy&#39;)(collection, expression, reverse, comparator)</code></pre>
+
+  
+<section class="api-section">
+  <h3>Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        collection
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-array">Array</a><a href="" class="label type-hint type-hint-arraylike">ArrayLike</a>
+      </td>
+      <td>
+        <p>The collection (array or array-like object) to sort.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        expression
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-function">function()</a><a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-array">Array.&lt;(function()|string)&gt;</a>
+      </td>
+      <td>
+        <p>A predicate (or list of
+   predicates) to be used by the comparator to determine the order of elements.</p>
+<p>   Can be one of:</p>
+<ul>
+<li><code>Function</code>: A getter function. This function will be called with each item as argument and
+the return value will be used for sorting.</li>
+<li><code>string</code>: An Angular expression. This expression will be evaluated against each item and the
+result will be used for sorting. For example, use <code>&#39;label&#39;</code> to sort by a property called
+<code>label</code> or <code>&#39;label.substring(0, 3)&#39;</code> to sort by the first 3 characters of the <code>label</code>
+property.<br />
+(The result of a constant expression is interpreted as a property name to be used for
+comparison. For example, use <code>&#39;&quot;special name&quot;&#39;</code> (note the extra pair of quotes) to sort by a
+property called <code>special name</code>.)<br />
+An expression can be optionally prefixed with <code>+</code> or <code>-</code> to control the sorting direction,
+ascending or descending. For example, <code>&#39;+label&#39;</code> or <code>&#39;-label&#39;</code>. If no property is provided,
+(e.g. <code>&#39;+&#39;</code> or <code>&#39;-&#39;</code>), the collection element itself is used in comparisons.</li>
+<li><code>Array</code>: An array of function and/or string predicates. If a predicate cannot determine the
+relative order of two items, the next predicate is used as a tie-breaker.</li>
+</ul>
+<p><strong>Note:</strong> If the predicate is missing or empty then it defaults to <code>&#39;+&#39;</code>.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        reverse
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-boolean">boolean</a>
+      </td>
+      <td>
+        <p>If <code>true</code>, reverse the sorting order.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        comparator
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-function">function()</a>
+      </td>
+      <td>
+        <p>The comparator function used to determine the relative order of
+   value pairs. If omitted, the built-in comparator will be used.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+  <h3>Returns</h3>
+<table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-array">Array</a></td>
+    <td><ul>
+<li>The sorted array.</li>
+</ul>
+</td>
+  </tr>
+</table>
+
+
+  
+  <h2 id="example">Examples</h2><h3 id="ordering-a-table-with-ngrepeat-">Ordering a table with <code>ngRepeat</code></h3>
+<p>The example below demonstrates a simple <a href="api/ng/directive/ngRepeat">ngRepeat</a>, where the data is sorted by
+age in descending order (expression is set to <code>&#39;-age&#39;</code>). The <code>comparator</code> is not set, which means
+it defaults to the built-in comparator.</p>
+<p>   
+
+<div>
+  <plnkr-opener example-path="examples/example-orderBy-static"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-orderBy-static"
+      name="orderBy-static"
+      module="orderByExample1">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;table class=&quot;friends&quot;&gt;&#10;    &lt;tr&gt;&#10;      &lt;th&gt;Name&lt;/th&gt;&#10;      &lt;th&gt;Phone Number&lt;/th&gt;&#10;      &lt;th&gt;Age&lt;/th&gt;&#10;    &lt;/tr&gt;&#10;    &lt;tr ng-repeat=&quot;friend in friends | orderBy:&#39;-age&#39;&quot;&gt;&#10;      &lt;td&gt;{{friend.name}}&lt;/td&gt;&#10;      &lt;td&gt;{{friend.phone}}&lt;/td&gt;&#10;      &lt;td&gt;{{friend.age}}&lt;/td&gt;&#10;    &lt;/tr&gt;&#10;  &lt;/table&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;orderByExample1&#39;, [])&#10;.controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.friends = [&#10;    {name: &#39;John&#39;,   phone: &#39;555-1212&#39;,  age: 10},&#10;    {name: &#39;Mary&#39;,   phone: &#39;555-9876&#39;,  age: 19},&#10;    {name: &#39;Mike&#39;,   phone: &#39;555-4321&#39;,  age: 21},&#10;    {name: &#39;Adam&#39;,   phone: &#39;555-5678&#39;,  age: 35},&#10;    {name: &#39;Julie&#39;,  phone: &#39;555-8765&#39;,  age: 29}&#10;  ];&#10;}]);</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="style.css"
+      language="css"
+      type="css">
+      <pre><code>.friends {&#10;  border-collapse: collapse;&#10;}&#10;&#10;.friends th {&#10;  border-bottom: 1px solid;&#10;}&#10;.friends td, .friends th {&#10;  border-left: 1px solid;&#10;  padding: 5px 10px;&#10;}&#10;.friends td:first-child, .friends th:first-child {&#10;  border-left: none;&#10;}</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>// Element locators&#10;var names = element.all(by.repeater(&#39;friends&#39;).column(&#39;friend.name&#39;));&#10;&#10;it(&#39;should sort friends by age in reverse order&#39;, function() {&#10;  expect(names.get(0).getText()).toBe(&#39;Adam&#39;);&#10;  expect(names.get(1).getText()).toBe(&#39;Julie&#39;);&#10;  expect(names.get(2).getText()).toBe(&#39;Mike&#39;);&#10;  expect(names.get(3).getText()).toBe(&#39;Mary&#39;);&#10;  expect(names.get(4).getText()).toBe(&#39;John&#39;);&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-orderBy-static')}}" name="example-orderBy-static"></iframe>
+  </div>
+</div>
+
+
+</p>
+<hr /><h3 id="changing-parameters-dynamically">Changing parameters dynamically</h3>
+<p>All parameters can be changed dynamically. The next example shows how you can make the columns of
+a table sortable, by binding the <code>expression</code> and <code>reverse</code> parameters to scope properties.</p>
+<p>   
+
+<div>
+  <plnkr-opener example-path="examples/example-orderBy-dynamic"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-orderBy-dynamic"
+      name="orderBy-dynamic"
+      module="orderByExample2">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;pre&gt;Sort by = {{propertyName}}; reverse = {{reverse}}&lt;/pre&gt;&#10;  &lt;hr/&gt;&#10;  &lt;button ng-click=&quot;propertyName = null; reverse = false&quot;&gt;Set to unsorted&lt;/button&gt;&#10;  &lt;hr/&gt;&#10;  &lt;table class=&quot;friends&quot;&gt;&#10;    &lt;tr&gt;&#10;      &lt;th&gt;&#10;        &lt;button ng-click=&quot;sortBy(&#39;name&#39;)&quot;&gt;Name&lt;/button&gt;&#10;        &lt;span class=&quot;sortorder&quot; ng-show=&quot;propertyName === &#39;name&#39;&quot; ng-class=&quot;{reverse: reverse}&quot;&gt;&lt;/span&gt;&#10;      &lt;/th&gt;&#10;      &lt;th&gt;&#10;        &lt;button ng-click=&quot;sortBy(&#39;phone&#39;)&quot;&gt;Phone Number&lt;/button&gt;&#10;        &lt;span class=&quot;sortorder&quot; ng-show=&quot;propertyName === &#39;phone&#39;&quot; ng-class=&quot;{reverse: reverse}&quot;&gt;&lt;/span&gt;&#10;      &lt;/th&gt;&#10;      &lt;th&gt;&#10;        &lt;button ng-click=&quot;sortBy(&#39;age&#39;)&quot;&gt;Age&lt;/button&gt;&#10;        &lt;span class=&quot;sortorder&quot; ng-show=&quot;propertyName === &#39;age&#39;&quot; ng-class=&quot;{reverse: reverse}&quot;&gt;&lt;/span&gt;&#10;      &lt;/th&gt;&#10;    &lt;/tr&gt;&#10;    &lt;tr ng-repeat=&quot;friend in friends | orderBy:propertyName:reverse&quot;&gt;&#10;      &lt;td&gt;{{friend.name}}&lt;/td&gt;&#10;      &lt;td&gt;{{friend.phone}}&lt;/td&gt;&#10;      &lt;td&gt;{{friend.age}}&lt;/td&gt;&#10;    &lt;/tr&gt;&#10;  &lt;/table&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;orderByExample2&#39;, [])&#10;.controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  var friends = [&#10;    {name: &#39;John&#39;,   phone: &#39;555-1212&#39;,  age: 10},&#10;    {name: &#39;Mary&#39;,   phone: &#39;555-9876&#39;,  age: 19},&#10;    {name: &#39;Mike&#39;,   phone: &#39;555-4321&#39;,  age: 21},&#10;    {name: &#39;Adam&#39;,   phone: &#39;555-5678&#39;,  age: 35},&#10;    {name: &#39;Julie&#39;,  phone: &#39;555-8765&#39;,  age: 29}&#10;  ];&#10;&#10;  $scope.propertyName = &#39;age&#39;;&#10;  $scope.reverse = true;&#10;  $scope.friends = friends;&#10;&#10;  $scope.sortBy = function(propertyName) {&#10;    $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;&#10;    $scope.propertyName = propertyName;&#10;  };&#10;}]);</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="style.css"
+      language="css"
+      type="css">
+      <pre><code>.friends {&#10;  border-collapse: collapse;&#10;}&#10;&#10;.friends th {&#10;  border-bottom: 1px solid;&#10;}&#10;.friends td, .friends th {&#10;  border-left: 1px solid;&#10;  padding: 5px 10px;&#10;}&#10;.friends td:first-child, .friends th:first-child {&#10;  border-left: none;&#10;}&#10;&#10;.sortorder:after {&#10;  content: &#39;\25b2&#39;;   // BLACK UP-POINTING TRIANGLE&#10;}&#10;.sortorder.reverse:after {&#10;  content: &#39;\25bc&#39;;   // BLACK DOWN-POINTING TRIANGLE&#10;}</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>// Element locators&#10;var unsortButton = element(by.partialButtonText(&#39;unsorted&#39;));&#10;var nameHeader = element(by.partialButtonText(&#39;Name&#39;));&#10;var phoneHeader = element(by.partialButtonText(&#39;Phone&#39;));&#10;var ageHeader = element(by.partialButtonText(&#39;Age&#39;));&#10;var firstName = element(by.repeater(&#39;friends&#39;).column(&#39;friend.name&#39;).row(0));&#10;var lastName = element(by.repeater(&#39;friends&#39;).column(&#39;friend.name&#39;).row(4));&#10;&#10;it(&#39;should sort friends by some property, when clicking on the column header&#39;, function() {&#10;  expect(firstName.getText()).toBe(&#39;Adam&#39;);&#10;  expect(lastName.getText()).toBe(&#39;John&#39;);&#10;&#10;  phoneHeader.click();&#10;  expect(firstName.getText()).toBe(&#39;John&#39;);&#10;  expect(lastName.getText()).toBe(&#39;Mary&#39;);&#10;&#10;  nameHeader.click();&#10;  expect(firstName.getText()).toBe(&#39;Adam&#39;);&#10;  expect(lastName.getText()).toBe(&#39;Mike&#39;);&#10;&#10;  ageHeader.click();&#10;  expect(firstName.getText()).toBe(&#39;John&#39;);&#10;  expect(lastName.getText()).toBe(&#39;Adam&#39;);&#10;});&#10;&#10;it(&#39;should sort friends in reverse order, when clicking on the same column&#39;, function() {&#10;  expect(firstName.getText()).toBe(&#39;Adam&#39;);&#10;  expect(lastName.getText()).toBe(&#39;John&#39;);&#10;&#10;  ageHeader.click();&#10;  expect(firstName.getText()).toBe(&#39;John&#39;);&#10;  expect(lastName.getText()).toBe(&#39;Adam&#39;);&#10;&#10;  ageHeader.click();&#10;  expect(firstName.getText()).toBe(&#39;Adam&#39;);&#10;  expect(lastName.getText()).toBe(&#39;John&#39;);&#10;});&#10;&#10;it(&#39;should restore the original order, when clicking &quot;Set to unsorted&quot;&#39;, function() {&#10;  expect(firstName.getText()).toBe(&#39;Adam&#39;);&#10;  expect(lastName.getText()).toBe(&#39;John&#39;);&#10;&#10;  unsortButton.click();&#10;  expect(firstName.getText()).toBe(&#39;John&#39;);&#10;  expect(lastName.getText()).toBe(&#39;Julie&#39;);&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-orderBy-dynamic')}}" name="example-orderBy-dynamic"></iframe>
+  </div>
+</div>
+
+
+</p>
+<hr /><h3 id="using-orderby-inside-a-controller">Using <code>orderBy</code> inside a controller</h3>
+<p>It is also possible to call the <code>orderBy</code> filter manually, by injecting <code>orderByFilter</code>, and
+calling it with the desired parameters. (Alternatively, you could inject the <code>$filter</code> factory
+and retrieve the <code>orderBy</code> filter with <code>$filter(&#39;orderBy&#39;)</code>.)</p>
+<p>   
+
+<div>
+  <plnkr-opener example-path="examples/example-orderBy-call-manually"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-orderBy-call-manually"
+      name="orderBy-call-manually"
+      module="orderByExample3">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;pre&gt;Sort by = {{propertyName}}; reverse = {{reverse}}&lt;/pre&gt;&#10;  &lt;hr/&gt;&#10;  &lt;button ng-click=&quot;sortBy(null)&quot;&gt;Set to unsorted&lt;/button&gt;&#10;  &lt;hr/&gt;&#10;  &lt;table class=&quot;friends&quot;&gt;&#10;    &lt;tr&gt;&#10;      &lt;th&gt;&#10;        &lt;button ng-click=&quot;sortBy(&#39;name&#39;)&quot;&gt;Name&lt;/button&gt;&#10;        &lt;span class=&quot;sortorder&quot; ng-show=&quot;propertyName === &#39;name&#39;&quot; ng-class=&quot;{reverse: reverse}&quot;&gt;&lt;/span&gt;&#10;      &lt;/th&gt;&#10;      &lt;th&gt;&#10;        &lt;button ng-click=&quot;sortBy(&#39;phone&#39;)&quot;&gt;Phone Number&lt;/button&gt;&#10;        &lt;span class=&quot;sortorder&quot; ng-show=&quot;propertyName === &#39;phone&#39;&quot; ng-class=&quot;{reverse: reverse}&quot;&gt;&lt;/span&gt;&#10;      &lt;/th&gt;&#10;      &lt;th&gt;&#10;        &lt;button ng-click=&quot;sortBy(&#39;age&#39;)&quot;&gt;Age&lt;/button&gt;&#10;        &lt;span class=&quot;sortorder&quot; ng-show=&quot;propertyName === &#39;age&#39;&quot; ng-class=&quot;{reverse: reverse}&quot;&gt;&lt;/span&gt;&#10;      &lt;/th&gt;&#10;    &lt;/tr&gt;&#10;    &lt;tr ng-repeat=&quot;friend in friends&quot;&gt;&#10;      &lt;td&gt;{{friend.name}}&lt;/td&gt;&#10;      &lt;td&gt;{{friend.phone}}&lt;/td&gt;&#10;      &lt;td&gt;{{friend.age}}&lt;/td&gt;&#10;    &lt;/tr&gt;&#10;  &lt;/table&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;orderByExample3&#39;, [])&#10;.controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, &#39;orderByFilter&#39;, function($scope, orderBy) {&#10;  var friends = [&#10;    {name: &#39;John&#39;,   phone: &#39;555-1212&#39;,  age: 10},&#10;    {name: &#39;Mary&#39;,   phone: &#39;555-9876&#39;,  age: 19},&#10;    {name: &#39;Mike&#39;,   phone: &#39;555-4321&#39;,  age: 21},&#10;    {name: &#39;Adam&#39;,   phone: &#39;555-5678&#39;,  age: 35},&#10;    {name: &#39;Julie&#39;,  phone: &#39;555-8765&#39;,  age: 29}&#10;  ];&#10;&#10;  $scope.propertyName = &#39;age&#39;;&#10;  $scope.reverse = true;&#10;  $scope.friends = orderBy(friends, $scope.propertyName, $scope.reverse);&#10;&#10;  $scope.sortBy = function(propertyName) {&#10;    $scope.reverse = (propertyName !== null &amp;&amp; $scope.propertyName === propertyName)&#10;        ? !$scope.reverse : false;&#10;    $scope.propertyName = propertyName;&#10;    $scope.friends = orderBy(friends, $scope.propertyName, $scope.reverse);&#10;  };&#10;}]);</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="style.css"
+      language="css"
+      type="css">
+      <pre><code>.friends {&#10;  border-collapse: collapse;&#10;}&#10;&#10;.friends th {&#10;  border-bottom: 1px solid;&#10;}&#10;.friends td, .friends th {&#10;  border-left: 1px solid;&#10;  padding: 5px 10px;&#10;}&#10;.friends td:first-child, .friends th:first-child {&#10;  border-left: none;&#10;}&#10;&#10;.sortorder:after {&#10;  content: &#39;\25b2&#39;;   // BLACK UP-POINTING TRIANGLE&#10;}&#10;.sortorder.reverse:after {&#10;  content: &#39;\25bc&#39;;   // BLACK DOWN-POINTING TRIANGLE&#10;}</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>// Element locators&#10;var unsortButton = element(by.partialButtonText(&#39;unsorted&#39;));&#10;var nameHeader = element(by.partialButtonText(&#39;Name&#39;));&#10;var phoneHeader = element(by.partialButtonText(&#39;Phone&#39;));&#10;var ageHeader = element(by.partialButtonText(&#39;Age&#39;));&#10;var firstName = element(by.repeater(&#39;friends&#39;).column(&#39;friend.name&#39;).row(0));&#10;var lastName = element(by.repeater(&#39;friends&#39;).column(&#39;friend.name&#39;).row(4));&#10;&#10;it(&#39;should sort friends by some property, when clicking on the column header&#39;, function() {&#10;  expect(firstName.getText()).toBe(&#39;Adam&#39;);&#10;  expect(lastName.getText()).toBe(&#39;John&#39;);&#10;&#10;  phoneHeader.click();&#10;  expect(firstName.getText()).toBe(&#39;John&#39;);&#10;  expect(lastName.getText()).toBe(&#39;Mary&#39;);&#10;&#10;  nameHeader.click();&#10;  expect(firstName.getText()).toBe(&#39;Adam&#39;);&#10;  expect(lastName.getText()).toBe(&#39;Mike&#39;);&#10;&#10;  ageHeader.click();&#10;  expect(firstName.getText()).toBe(&#39;John&#39;);&#10;  expect(lastName.getText()).toBe(&#39;Adam&#39;);&#10;});&#10;&#10;it(&#39;should sort friends in reverse order, when clicking on the same column&#39;, function() {&#10;  expect(firstName.getText()).toBe(&#39;Adam&#39;);&#10;  expect(lastName.getText()).toBe(&#39;John&#39;);&#10;&#10;  ageHeader.click();&#10;  expect(firstName.getText()).toBe(&#39;John&#39;);&#10;  expect(lastName.getText()).toBe(&#39;Adam&#39;);&#10;&#10;  ageHeader.click();&#10;  expect(firstName.getText()).toBe(&#39;Adam&#39;);&#10;  expect(lastName.getText()).toBe(&#39;John&#39;);&#10;});&#10;&#10;it(&#39;should restore the original order, when clicking &quot;Set to unsorted&quot;&#39;, function() {&#10;  expect(firstName.getText()).toBe(&#39;Adam&#39;);&#10;  expect(lastName.getText()).toBe(&#39;John&#39;);&#10;&#10;  unsortButton.click();&#10;  expect(firstName.getText()).toBe(&#39;John&#39;);&#10;  expect(lastName.getText()).toBe(&#39;Julie&#39;);&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-orderBy-call-manually')}}" name="example-orderBy-call-manually"></iframe>
+  </div>
+</div>
+
+
+</p>
+<hr /><h3 id="using-a-custom-comparator">Using a custom comparator</h3>
+<p>If you have very specific requirements about the way items are sorted, you can pass your own
+comparator function. For example, you might need to compare some strings in a locale-sensitive
+way. (When specifying a custom comparator, you also need to pass a value for the <code>reverse</code>
+argument - passing <code>false</code> retains the default sorting order, i.e. ascending.)</p>
+<p>   
+
+<div>
+  <plnkr-opener example-path="examples/example-orderBy-custom-comparator"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-orderBy-custom-comparator"
+      name="orderBy-custom-comparator"
+      module="orderByExample4">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;div class=&quot;friends-container custom-comparator&quot;&gt;&#10;    &lt;h3&gt;Locale-sensitive Comparator&lt;/h3&gt;&#10;    &lt;table class=&quot;friends&quot;&gt;&#10;      &lt;tr&gt;&#10;        &lt;th&gt;Name&lt;/th&gt;&#10;        &lt;th&gt;Favorite Letter&lt;/th&gt;&#10;      &lt;/tr&gt;&#10;      &lt;tr ng-repeat=&quot;friend in friends | orderBy:&#39;favoriteLetter&#39;:false:localeSensitiveComparator&quot;&gt;&#10;        &lt;td&gt;{{friend.name}}&lt;/td&gt;&#10;        &lt;td&gt;{{friend.favoriteLetter}}&lt;/td&gt;&#10;      &lt;/tr&gt;&#10;    &lt;/table&gt;&#10;  &lt;/div&gt;&#10;  &lt;div class=&quot;friends-container default-comparator&quot;&gt;&#10;    &lt;h3&gt;Default Comparator&lt;/h3&gt;&#10;    &lt;table class=&quot;friends&quot;&gt;&#10;      &lt;tr&gt;&#10;        &lt;th&gt;Name&lt;/th&gt;&#10;        &lt;th&gt;Favorite Letter&lt;/th&gt;&#10;      &lt;/tr&gt;&#10;      &lt;tr ng-repeat=&quot;friend in friends | orderBy:&#39;favoriteLetter&#39;&quot;&gt;&#10;        &lt;td&gt;{{friend.name}}&lt;/td&gt;&#10;        &lt;td&gt;{{friend.favoriteLetter}}&lt;/td&gt;&#10;      &lt;/tr&gt;&#10;    &lt;/table&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;orderByExample4&#39;, [])&#10;.controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.friends = [&#10;    {name: &#39;John&#39;,   favoriteLetter: &#39;&Auml;&#39;},&#10;    {name: &#39;Mary&#39;,   favoriteLetter: &#39;&Uuml;&#39;},&#10;    {name: &#39;Mike&#39;,   favoriteLetter: &#39;&Ouml;&#39;},&#10;    {name: &#39;Adam&#39;,   favoriteLetter: &#39;H&#39;},&#10;    {name: &#39;Julie&#39;,  favoriteLetter: &#39;Z&#39;}&#10;  ];&#10;&#10;  $scope.localeSensitiveComparator = function(v1, v2) {&#10;    // If we don&#39;t get strings, just compare by index&#10;    if (v1.type !== &#39;string&#39; || v2.type !== &#39;string&#39;) {&#10;      return (v1.index &lt; v2.index) ? -1 : 1;&#10;    }&#10;&#10;    // Compare strings alphabetically, taking locale into account&#10;    return v1.value.localeCompare(v2.value);&#10;  };&#10;}]);</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="style.css"
+      language="css"
+      type="css">
+      <pre><code>.friends-container {&#10;  display: inline-block;&#10;  margin: 0 30px;&#10;}&#10;&#10;.friends {&#10;  border-collapse: collapse;&#10;}&#10;&#10;.friends th {&#10;  border-bottom: 1px solid;&#10;}&#10;.friends td, .friends th {&#10;  border-left: 1px solid;&#10;  padding: 5px 10px;&#10;}&#10;.friends td:first-child, .friends th:first-child {&#10;  border-left: none;&#10;}</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>// Element locators&#10;var container = element(by.css(&#39;.custom-comparator&#39;));&#10;var names = container.all(by.repeater(&#39;friends&#39;).column(&#39;friend.name&#39;));&#10;&#10;it(&#39;should sort friends by favorite letter (in correct alphabetical order)&#39;, function() {&#10;  expect(names.get(0).getText()).toBe(&#39;John&#39;);&#10;  expect(names.get(1).getText()).toBe(&#39;Adam&#39;);&#10;  expect(names.get(2).getText()).toBe(&#39;Mike&#39;);&#10;  expect(names.get(3).getText()).toBe(&#39;Mary&#39;);&#10;  expect(names.get(4).getText()).toBe(&#39;Julie&#39;);&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-orderBy-custom-comparator')}}" name="example-orderBy-custom-comparator"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+

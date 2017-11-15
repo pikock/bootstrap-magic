@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ng-show-simple-jquery</title>
+  <link href="animations.css" rel="stylesheet" type="text/css">
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  <script src="../../../angular-animate.js"></script>
+  
+
+  
+</head>
+<body ng-app="ngAnimate">
+  Show: <input type="checkbox" ng-model="checked" aria-label="Toggle ngShow"><br />
+<div class="check-element animate-show-hide" ng-show="checked">
+  I show up when your checkbox is checked.
+</div>
+</body>
+</html>

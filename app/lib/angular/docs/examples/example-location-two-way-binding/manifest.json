@@ -1,0 +1,7 @@
+{
+  "name": "example-location-two-way-binding",
+  "files": [
+    "index-production.html",
+    "script.js"
+  ]
+}

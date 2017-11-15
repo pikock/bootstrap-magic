@@ -1,0 +1,9 @@
+{
+  "name": "example-http-service",
+  "files": [
+    "index-production.html",
+    "script.js",
+    "http-hello.html",
+    "protractor.js"
+  ]
+}

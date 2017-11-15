@@ -1,4 +1,125 @@
+'use strict';
 angular.module("ngLocale", [], ["$provide", function($provide) {
 var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
-$provide.value("$locale", {"NUMBER_FORMATS":{"DECIMAL_SEP":".","GROUP_SEP":",","PATTERNS":[{"minInt":1,"minFrac":0,"macFrac":0,"posPre":"","posSuf":"","negPre":"-","negSuf":"","gSize":3,"lgSize":3,"maxFrac":3},{"minInt":1,"minFrac":2,"macFrac":0,"posPre":"\u00A4 ","posSuf":"","negPre":"\u00A4 -","negSuf":"","gSize":3,"lgSize":3,"maxFrac":2}],"CURRENCY_SYM":"F"},"pluralCat":function (n) {  if (n == 0 || n == 1) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;},"DATETIME_FORMATS":{"MONTH":["sánzá ya yambo","sánzá ya míbalé","sánzá ya mísáto","sánzá ya mínei","sánzá ya mítáno","sánzá ya motóbá","sánzá ya nsambo","sánzá ya mwambe","sánzá ya libwa","sánzá ya zómi","sánzá ya zómi na mɔ̌kɔ́","sánzá ya zómi na míbalé"],"SHORTMONTH":["s1","s2","s3","s4","s5","s6","s7","s8","s9","s10","s11","s12"],"DAY":["eyenga","mokɔlɔ ya libosó","mokɔlɔ ya míbalé","mokɔlɔ ya mísáto","mokɔlɔ ya mínéi","mokɔlɔ ya mítáno","mpɔ́sɔ"],"SHORTDAY":["eye","m1","m2","m3","m4","m5","mps"],"AMPMS":["AM","PM"],"medium":"y MMM d HH:mm:ss","short":"yy/MM/dd HH:mm","fullDate":"EEEE, y MMMM dd","longDate":"y MMMM d","mediumDate":"y MMM d","shortDate":"yy/MM/dd","mediumTime":"HH:mm:ss","shortTime":"HH:mm"},"id":"ln-cd"});
+$provide.value("$locale", {
+  "DATETIME_FORMATS": {
+    "AMPMS": [
+      "nt\u0254\u0301ng\u0254\u0301",
+      "mp\u00f3kwa"
+    ],
+    "DAY": [
+      "eyenga",
+      "mok\u0254l\u0254 mwa yambo",
+      "mok\u0254l\u0254 mwa m\u00edbal\u00e9",
+      "mok\u0254l\u0254 mwa m\u00eds\u00e1to",
+      "mok\u0254l\u0254 ya m\u00edn\u00e9i",
+      "mok\u0254l\u0254 ya m\u00edt\u00e1no",
+      "mp\u0254\u0301s\u0254"
+    ],
+    "ERANAMES": [
+      "Yambo ya Y\u00e9zu Kr\u00eds",
+      "Nsima ya Y\u00e9zu Kr\u00eds"
+    ],
+    "ERAS": [
+      "lib\u00f3so ya",
+      "nsima ya Y"
+    ],
+    "FIRSTDAYOFWEEK": 0,
+    "MONTH": [
+      "s\u00e1nz\u00e1 ya yambo",
+      "s\u00e1nz\u00e1 ya m\u00edbal\u00e9",
+      "s\u00e1nz\u00e1 ya m\u00eds\u00e1to",
+      "s\u00e1nz\u00e1 ya m\u00ednei",
+      "s\u00e1nz\u00e1 ya m\u00edt\u00e1no",
+      "s\u00e1nz\u00e1 ya mot\u00f3b\u00e1",
+      "s\u00e1nz\u00e1 ya nsambo",
+      "s\u00e1nz\u00e1 ya mwambe",
+      "s\u00e1nz\u00e1 ya libwa",
+      "s\u00e1nz\u00e1 ya z\u00f3mi",
+      "s\u00e1nz\u00e1 ya z\u00f3mi na m\u0254\u030ck\u0254\u0301",
+      "s\u00e1nz\u00e1 ya z\u00f3mi na m\u00edbal\u00e9"
+    ],
+    "SHORTDAY": [
+      "eye",
+      "ybo",
+      "mbl",
+      "mst",
+      "min",
+      "mtn",
+      "mps"
+    ],
+    "SHORTMONTH": [
+      "yan",
+      "fbl",
+      "msi",
+      "apl",
+      "mai",
+      "yun",
+      "yul",
+      "agt",
+      "stb",
+      "\u0254tb",
+      "nvb",
+      "dsb"
+    ],
+    "STANDALONEMONTH": [
+      "s\u00e1nz\u00e1 ya yambo",
+      "s\u00e1nz\u00e1 ya m\u00edbal\u00e9",
+      "s\u00e1nz\u00e1 ya m\u00eds\u00e1to",
+      "s\u00e1nz\u00e1 ya m\u00ednei",
+      "s\u00e1nz\u00e1 ya m\u00edt\u00e1no",
+      "s\u00e1nz\u00e1 ya mot\u00f3b\u00e1",
+      "s\u00e1nz\u00e1 ya nsambo",
+      "s\u00e1nz\u00e1 ya mwambe",
+      "s\u00e1nz\u00e1 ya libwa",
+      "s\u00e1nz\u00e1 ya z\u00f3mi",
+      "s\u00e1nz\u00e1 ya z\u00f3mi na m\u0254\u030ck\u0254\u0301",
+      "s\u00e1nz\u00e1 ya z\u00f3mi na m\u00edbal\u00e9"
+    ],
+    "WEEKENDRANGE": [
+      5,
+      6
+    ],
+    "fullDate": "EEEE d MMMM y",
+    "longDate": "d MMMM y",
+    "medium": "d MMM y HH:mm:ss",
+    "mediumDate": "d MMM y",
+    "mediumTime": "HH:mm:ss",
+    "short": "d/M/y HH:mm",
+    "shortDate": "d/M/y",
+    "shortTime": "HH:mm"
+  },
+  "NUMBER_FORMATS": {
+    "CURRENCY_SYM": "FrCD",
+    "DECIMAL_SEP": ",",
+    "GROUP_SEP": ".",
+    "PATTERNS": [
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 3,
+        "minFrac": 0,
+        "minInt": 1,
+        "negPre": "-",
+        "negSuf": "",
+        "posPre": "",
+        "posSuf": ""
+      },
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 2,
+        "minFrac": 2,
+        "minInt": 1,
+        "negPre": "-",
+        "negSuf": "\u00a0\u00a4",
+        "posPre": "",
+        "posSuf": "\u00a0\u00a4"
+      }
+    ]
+  },
+  "id": "ln-cd",
+  "localeID": "ln_CD",
+  "pluralCat": function(n, opt_precision) {  if (n >= 0 && n <= 1) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+});
 }]);

@@ -1,0 +1,9 @@
+{
+  "name": "example-accessibility-ng-model",
+  "files": [
+    "index-production.html",
+    "script.js",
+    "style.css",
+    "protractor.js"
+  ]
+}

@@ -1,0 +1,178 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ngMessageFormat/messageFormatService.js?message=docs(ngMessageFormat)%3A%20describe%20your%20change...#L14' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>
+  <code>ngMessageFormat</code>
+</h1>
+
+
+
+<h2>Installation</h2>
+
+
+  <p>First, get the file:</p>
+  <ul>
+    <li>
+      <a href="https://developers.google.com/speed/libraries/devguide#angularjs">Google CDN</a> e.g.
+      <pre><code>&quot;//ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-message-format.js&quot;</code></pre>
+    </li>
+    <li>
+      <a href="https://www.npmjs.com/">NPM</a> e.g.
+      <pre><code>npm install --save angular-message-format@X.Y.Z</code></pre>
+      or
+      <pre><code>yarn add angular-message-format@X.Y.Z</code></pre>
+    </li>
+    <li>
+      <a href="http://bower.io">Bower</a> e.g.
+      <pre><code>bower install angular-message-format#X.Y.Z</code></pre>
+    </li>
+    <li>
+      <a href="https://code.angularjs.org/">code.angularjs.org</a>
+      (discouraged for production use) e.g.
+      <pre><code>&quot;//code.angularjs.org/X.Y.Z/angular-message-format.js&quot;</code></pre>
+    </li>
+  </ul>
+  <p>where X.Y.Z is the AngularJS version you are running.</p>
+
+  <p>Then, include <code>angular-message-format.js</code> in your HTML:</p>
+
+  <pre><code>&lt;script src=&quot;path/to/angular.js&quot;&gt;&lt;/script&gt;&#10;&lt;script src=&quot;path/to/angular-message-format.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+  <p>Finally, load the module in your application by adding it as a dependent module:</p>
+  <pre><code>angular.module(&#39;app&#39;, [&#39;ngMessageFormat&#39;]);</code></pre>
+
+  <p>With that you&apos;re ready to get started!</p>
+
+
+<h2 id="what-is-ngmessageformat-">What is  ngMessageFormat?</h2>
+<p>The ngMessageFormat module extends the Angular <a href="api/ng/service/$interpolate"><code>$interpolate</code></a> service
+with a syntax for handling pluralization and gender specific messages, which is based on the
+<a href="http://userguide.icu-project.org/formatparse/messages#TOC-MessageFormat">ICU MessageFormat syntax</a>.</p>
+<p>See <a href="https://docs.google.com/a/google.com/document/d/1pbtW2yvtmFBikfRrJd8VAsabiFkKezmYZ_PbgdjQOVU/edit">the design doc</a> for more information.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="gender">Gender</h3>
+<p>This example uses the &quot;select&quot; keyword to specify the message based on gender.</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ngMessageFormat-example-gender"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngMessageFormat-example-gender"
+      name="ngMessageFormat-example-gender"
+      module="msgFmtExample"
+      deps="angular-message-format.js">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;AppController&quot;&gt;&#10;  Select Recipient:&lt;br&gt;&#10;     &lt;select ng-model=&quot;recipient&quot; ng-options=&quot;person as person.name for person in recipients&quot;&gt;&#10;     &lt;/select&gt;&#10;     &lt;p&gt;{{recipient.gender, select,&#10;               male {{{recipient.name}} unwrapped his gift. }&#10;               female {{{recipient.name}} unwrapped her gift. }&#10;               other {{{recipient.name}} unwrapped their gift. }&#10;     }}&lt;/p&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>function Person(name, gender) {&#10;  this.name = name;&#10;  this.gender = gender;&#10;}&#10;&#10;var alice   = new Person(&#39;Alice&#39;, &#39;female&#39;),&#10;    bob     = new Person(&#39;Bob&#39;, &#39;male&#39;),&#10;    ashley = new Person(&#39;Ashley&#39;, &#39;&#39;);&#10;&#10;angular.module(&#39;msgFmtExample&#39;, [&#39;ngMessageFormat&#39;])&#10;  .controller(&#39;AppController&#39;, [&#39;$scope&#39;, function($scope) {&#10;      $scope.recipients = [alice, bob, ashley];&#10;      $scope.recipient = $scope.recipients[0];&#10;    }]);</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ngMessageFormat-example-gender')}}" name="example-ngMessageFormat-example-gender"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h3 id="plural">Plural</h3>
+<p>This example shows how the &quot;plural&quot; keyword is used to account for a variable number of entities.
+The &quot;#&quot; variable holds the current number and can be embedded in the message.</p>
+<p>Note that &quot;=1&quot; takes precedence over &quot;one&quot;.</p>
+<p>The example also shows the &quot;offset&quot; keyword, which allows you to offset the value of the &quot;#&quot; variable.</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ngMessageFormat-example-plural"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngMessageFormat-example-plural"
+      name="ngMessageFormat-example-plural"
+      module="msgFmtExample"
+      deps="angular-message-format.js">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;AppController&quot;&gt;&#10; &lt;button ng-click=&quot;recipients.pop()&quot; id=&quot;decreaseRecipients&quot;&gt;decreaseRecipients&lt;/button&gt;&lt;br&gt;&#10; Select recipients:&lt;br&gt;&#10; &lt;select multiple size=5 ng-model=&quot;recipients&quot; ng-options=&quot;person as person.name for person in people&quot;&gt;&#10; &lt;/select&gt;&lt;br&gt;&#10;  &lt;p&gt;{{recipients.length, plural, offset:1&#10;          =0    {{{sender.name}} gave no gifts (\#=#)}&#10;          =1    {{{sender.name}} gave a gift to {{recipients[0].name}} (\#=#)}&#10;          one   {{{sender.name}} gave {{recipients[0].name}} and one other person a gift (\#=#)}&#10;          other {{{sender.name}} gave {{recipients[0].name}} and # other people a gift (\#=#)}&#10;        }}&lt;/p&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>function Person(name, gender) {&#10;  this.name = name;&#10;  this.gender = gender;&#10;}&#10;&#10;var alice   = new Person(&#39;Alice&#39;, &#39;female&#39;),&#10;    bob     = new Person(&#39;Bob&#39;, &#39;male&#39;),&#10;    sarah     = new Person(&#39;Sarah&#39;, &#39;female&#39;),&#10;    harry   = new Person(&#39;Harry Potter&#39;, &#39;male&#39;),&#10;    ashley   = new Person(&#39;Ashley&#39;, &#39;&#39;);&#10;&#10;angular.module(&#39;msgFmtExample&#39;, [&#39;ngMessageFormat&#39;])&#10;  .controller(&#39;AppController&#39;, [&#39;$scope&#39;, function($scope) {&#10;      $scope.people = [alice, bob, sarah, ashley];&#10;      $scope.recipients = [alice, bob, sarah];&#10;      $scope.sender = harry;&#10;    }]);</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="protractor.js"
+      type="protractor"
+      language="js">
+      <pre><code>describe(&#39;MessageFormat plural&#39;, function() {&#10;&#10;  it(&#39;should pluralize initial values&#39;, function() {&#10;    var messageElem = element(by.binding(&#39;recipients.length&#39;)),&#10;        decreaseRecipientsBtn = element(by.id(&#39;decreaseRecipients&#39;));&#10;&#10;    expect(messageElem.getText()).toEqual(&#39;Harry Potter gave Alice and 2 other people a gift (#=2)&#39;);&#10;    decreaseRecipientsBtn.click();&#10;    expect(messageElem.getText()).toEqual(&#39;Harry Potter gave Alice and one other person a gift (#=1)&#39;);&#10;    decreaseRecipientsBtn.click();&#10;    expect(messageElem.getText()).toEqual(&#39;Harry Potter gave a gift to Alice (#=0)&#39;);&#10;    decreaseRecipientsBtn.click();&#10;    expect(messageElem.getText()).toEqual(&#39;Harry Potter gave no gifts (#=-1)&#39;);&#10;  });&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ngMessageFormat-example-plural')}}" name="example-ngMessageFormat-example-plural"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h3 id="plural-and-gender-together">Plural and Gender together</h3>
+<p>This example shows how you can specify gender rules for specific plural matches - in this case,
+=1 is special cased for gender.
+
+
+<div>
+  <plnkr-opener example-path="examples/example-ngMessageFormat-example-plural-gender"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ngMessageFormat-example-plural-gender"
+      name="ngMessageFormat-example-plural-gender"
+      module="msgFmtExample"
+      deps="angular-message-format.js">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;AppController&quot;&gt;&#10;Select recipients:&lt;br&gt;&#10;&lt;select multiple size=5 ng-model=&quot;recipients&quot; ng-options=&quot;person as person.name for person in people&quot;&gt;&#10;&lt;/select&gt;&lt;br&gt;&#10; &lt;p&gt;{{recipients.length, plural,&#10;   =0 {{{sender.name}} has not given any gifts to anyone.}&#10;   =1 {  {{recipients[0].gender, select,&#10;          female { {{sender.name}} gave {{recipients[0].name}} her gift.}&#10;          male { {{sender.name}} gave {{recipients[0].name}} his gift.}&#10;          other { {{sender.name}} gave {{recipients[0].name}} their gift.}&#10;         }}&#10;       }&#10;   other {{{sender.name}} gave {{recipients.length}} people gifts.}&#10;   }}&lt;/p&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>function Person(name, gender) {&#10;  this.name = name;&#10;  this.gender = gender;&#10;}&#10;&#10;var alice   = new Person(&#39;Alice&#39;, &#39;female&#39;),&#10;    bob     = new Person(&#39;Bob&#39;, &#39;male&#39;),&#10;    harry   = new Person(&#39;Harry Potter&#39;, &#39;male&#39;),&#10;    ashley   = new Person(&#39;Ashley&#39;, &#39;&#39;);&#10;&#10;angular.module(&#39;msgFmtExample&#39;, [&#39;ngMessageFormat&#39;])&#10;  .controller(&#39;AppController&#39;, [&#39;$scope&#39;, function($scope) {&#10;      $scope.people = [alice, bob, ashley];&#10;      $scope.recipients = [alice];&#10;      $scope.sender = harry;&#10;    }]);</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ngMessageFormat-example-plural-gender')}}" name="example-ngMessageFormat-example-plural-gender"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+

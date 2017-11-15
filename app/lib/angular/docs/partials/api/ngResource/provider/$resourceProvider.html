@@ -1,0 +1,119 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ngResource/resource.js?message=docs($resourceProvider)%3A%20describe%20your%20change...#L62' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ngResource/resource.js#L62' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">$resourceProvider</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+  <li>
+    <a href="api/ngResource/service/$resource">- $resource</a>
+  </li>
+
+    <li>
+      - provider in module <a href="api/ngResource">ngResource</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>Use <code>$resourceProvider</code> to change the default behavior of the <a href="api/ngResource/service/$resource"><code>$resource</code></a>
+service.</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>Requires the <a href="api/ngResource"><code>ngResource</code></a> module to be installed.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+
+  
+
+  
+  
+  
+<h2>Properties</h2>
+<ul class="properties">
+  <li id="defaults">
+    <h3><code>defaults</code></h3>
+    <table class="variables-matrix return-arguments">
+  <tr>
+    <td></td>
+    <td><p>Object containing default options used when creating <code>$resource</code> instances.</p>
+<p>The default values satisfy a wide range of usecases, but you may choose to overwrite any of
+them to further customize your instances. The available properties are:</p>
+<ul>
+<li><strong>stripTrailingSlashes</strong> – <code>{boolean}</code> – If true, then the trailing slashes from any
+calculated URL will be stripped.<br />
+(Defaults to true.)</li>
+<li><strong>cancellable</strong> – <code>{boolean}</code> – If true, the request made by a &quot;non-instance&quot; call will be
+cancelled (if not already completed) by calling <code>$cancelRequest()</code> on the call&#39;s return
+value. For more details, see <a href="api/ngResource/service/$resource"><code>$resource</code></a>. This can be overwritten per
+resource class or action.<br />
+(Defaults to false.)</li>
+<li><strong>actions</strong> - <code>{Object.&lt;Object&gt;}</code> - A hash with default actions declarations. Actions are
+high-level methods corresponding to RESTful actions/methods on resources. An action may
+specify what HTTP method to use, what URL to hit, if the return value will be a single
+object or a collection (array) of objects etc. For more details, see
+<a href="api/ngResource/service/$resource"><code>$resource</code></a>. The actions can also be enhanced or overwritten per resource
+class.<br />
+The default actions are:<pre><code class="lang-js">{
+  get: {method: &#39;GET&#39;},
+  save: {method: &#39;POST&#39;},
+  query: {method: &#39;GET&#39;, isArray: true},
+  remove: {method: &#39;DELETE&#39;},
+  delete: {method: &#39;DELETE&#39;}
+}
+</code></pre>
+</li>
+</ul>
+<h4 id="example">Example</h4>
+<p>For example, you can specify a new <code>update</code> action that uses the <code>PUT</code> HTTP verb:</p>
+<pre><code class="lang-js">angular.
+  module(&#39;myApp&#39;).
+  config([&#39;$resourceProvider&#39;, function ($resourceProvider) {
+    $resourceProvider.defaults.actions.update = {
+      method: &#39;PUT&#39;
+    };
+  }]);
+</code></pre>
+<p>Or you can even overwrite the whole <code>actions</code> list and specify your own:</p>
+<pre><code class="lang-js">angular.
+  module(&#39;myApp&#39;).
+  config([&#39;$resourceProvider&#39;, function ($resourceProvider) {
+    $resourceProvider.defaults.actions = {
+      create: {method: &#39;POST&#39;},
+      get:    {method: &#39;GET&#39;},
+      getAll: {method: &#39;GET&#39;, isArray:true},
+      update: {method: &#39;PUT&#39;},
+      delete: {method: &#39;DELETE&#39;}
+    };
+  });
+</code></pre>
+</td>
+  </tr>
+</table>
+    
+  </li>
+  </ul>
+
+
+
+  
+</div>
+
+

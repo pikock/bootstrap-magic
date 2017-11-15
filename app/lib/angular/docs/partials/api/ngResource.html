@@ -1,0 +1,103 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ngResource/resource.js?message=docs(ngResource)%3A%20describe%20your%20change...#L46' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>
+  <code>ngResource</code>
+</h1>
+
+
+
+<h2>Installation</h2>
+
+
+  <p>First, get the file:</p>
+  <ul>
+    <li>
+      <a href="https://developers.google.com/speed/libraries/devguide#angularjs">Google CDN</a> e.g.
+      <pre><code>&quot;//ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-resource.js&quot;</code></pre>
+    </li>
+    <li>
+      <a href="https://www.npmjs.com/">NPM</a> e.g.
+      <pre><code>npm install --save angular-resource@X.Y.Z</code></pre>
+      or
+      <pre><code>yarn add angular-resource@X.Y.Z</code></pre>
+    </li>
+    <li>
+      <a href="http://bower.io">Bower</a> e.g.
+      <pre><code>bower install angular-resource#X.Y.Z</code></pre>
+    </li>
+    <li>
+      <a href="https://code.angularjs.org/">code.angularjs.org</a>
+      (discouraged for production use) e.g.
+      <pre><code>&quot;//code.angularjs.org/X.Y.Z/angular-resource.js&quot;</code></pre>
+    </li>
+  </ul>
+  <p>where X.Y.Z is the AngularJS version you are running.</p>
+
+  <p>Then, include <code>angular-resource.js</code> in your HTML:</p>
+
+  <pre><code>&lt;script src=&quot;path/to/angular.js&quot;&gt;&lt;/script&gt;&#10;&lt;script src=&quot;path/to/angular-resource.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+  <p>Finally, load the module in your application by adding it as a dependent module:</p>
+  <pre><code>angular.module(&#39;app&#39;, [&#39;ngResource&#39;]);</code></pre>
+
+  <p>With that you&apos;re ready to get started!</p>
+
+
+<h1 id="ngresource">ngResource</h1>
+<p>The <code>ngResource</code> module provides interaction support with RESTful services
+via the $resource service.</p>
+<div doc-module-components="ngResource"></div>
+
+<p>See <a href="api/ngResource/provider/$resourceProvider"><code>$resourceProvider</code></a> and <a href="api/ngResource/service/$resource"><code>$resource</code></a> for usage.</p>
+
+
+
+
+
+
+<div class="component-breakdown">
+  <h2>Module Components</h2>
+  
+  <div>
+    <h3 class="component-heading" id="provider">Provider</h3>
+    <table class="definition-table">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ngResource/provider/$resourceProvider">$resourceProvider</a></td>
+        <td><p>Use <code>$resourceProvider</code> to change the default behavior of the <a href="api/ngResource/service/$resource"><code>$resource</code></a>
+service.</p>
+</td>
+      </tr>
+      
+    </table>
+  </div>
+  
+  <div>
+    <h3 class="component-heading" id="service">Service</h3>
+    <table class="definition-table">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      
+      <tr>
+        <td><a href="api/ngResource/service/$resource">$resource</a></td>
+        <td><p>A factory which creates a resource object that lets you interact with
+<a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">RESTful</a> server-side data sources.</p>
+</td>
+      </tr>
+      
+    </table>
+  </div>
+  
+</div>
+
+
+
+
+

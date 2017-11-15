@@ -1,0 +1,160 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/Angular.js?message=docs(angular.equals)%3A%20describe%20your%20change...#L1037' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/Angular.js#L1037' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">angular.equals</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - function in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>Determines if two objects or two values are equivalent. Supports value types, regular
+expressions, arrays and objects.</p>
+<p>Two objects or values are considered equivalent if at least one of the following is true:</p>
+<ul>
+<li>Both objects or values pass <code>===</code> comparison.</li>
+<li>Both objects or values are of the same type and all of their properties are equal by
+comparing them with <code>angular.equals</code>.</li>
+<li>Both values are NaN. (In JavaScript, NaN == NaN =&gt; false. But we consider two NaN as equal)</li>
+<li>Both values represent the same regular expression (In JavaScript,
+/abc/ == /abc/ =&gt; false. But we consider two regular expressions as equal when their textual
+representation matches).</li>
+</ul>
+<p>During a property comparison, properties of <code>function</code> type and properties with names
+that begin with <code>$</code> are ignored.</p>
+<p>Scope and DOMWindow objects are being compared only by identify (<code>===</code>).</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+
+  <h2 id="usage">Usage</h2>
+    
+      <p><code>angular.equals(o1, o2);</code></p>
+
+
+    
+
+    
+<section class="api-section">
+  <h3>Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        o1
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">*</a>
+      </td>
+      <td>
+        <p>Object or value to compare.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        o2
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-object">*</a>
+      </td>
+      <td>
+        <p>Object or value to compare.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+    
+    <h3>Returns</h3>
+<table class="variables-matrix return-arguments">
+  <tr>
+    <td><a href="" class="label type-hint type-hint-boolean">boolean</a></td>
+    <td><p>True if arguments are equal.</p>
+</td>
+  </tr>
+</table>
+
+  
+  
+  
+
+
+
+  
+  <h2 id="example">Examples</h2><p>
+
+<div>
+  <plnkr-opener example-path="examples/example-equalsExample"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-equalsExample"
+      module="equalsExample"
+      name="equalsExample">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;form novalidate&gt;&#10;    &lt;h3&gt;User 1&lt;/h3&gt;&#10;    Name: &lt;input type=&quot;text&quot; ng-model=&quot;user1.name&quot;&gt;&#10;    Age: &lt;input type=&quot;number&quot; ng-model=&quot;user1.age&quot;&gt;&#10;&#10;    &lt;h3&gt;User 2&lt;/h3&gt;&#10;    Name: &lt;input type=&quot;text&quot; ng-model=&quot;user2.name&quot;&gt;&#10;    Age: &lt;input type=&quot;number&quot; ng-model=&quot;user2.age&quot;&gt;&#10;&#10;    &lt;div&gt;&#10;      &lt;br/&gt;&#10;      &lt;input type=&quot;button&quot; value=&quot;Compare&quot; ng-click=&quot;compare()&quot;&gt;&#10;    &lt;/div&gt;&#10;    User 1: &lt;pre&gt;{{user1 | json}}&lt;/pre&gt;&#10;    User 2: &lt;pre&gt;{{user2 | json}}&lt;/pre&gt;&#10;    Equal: &lt;pre&gt;{{result}}&lt;/pre&gt;&#10;  &lt;/form&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;equalsExample&#39;, []).controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;  $scope.user1 = {};&#10;  $scope.user2 = {};&#10;  $scope.compare = function() {&#10;    $scope.result = angular.equals($scope.user1, $scope.user2);&#10;  };&#10;}]);</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-equalsExample')}}" name="example-equalsExample"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-animate-css-class-production</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.js"></script>
+  
+
+  
+</head>
+<body ng-app="ngAnimate">
+  <p>
+  <button ng-click="myCssVar='css-class'">Set</button>
+  <button ng-click="myCssVar=''">Clear</button>
+  <br>
+  <span ng-class="myCssVar">CSS-Animated Text</span>
+</p>
+</body>
+</html>

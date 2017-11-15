@@ -1,4 +1,125 @@
+'use strict';
 angular.module("ngLocale", [], ["$provide", function($provide) {
 var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
-$provide.value("$locale", {"NUMBER_FORMATS":{"DECIMAL_SEP":".","GROUP_SEP":",","PATTERNS":[{"minInt":1,"minFrac":0,"macFrac":0,"posPre":"","posSuf":"","negPre":"-","negSuf":"","gSize":3,"lgSize":3,"maxFrac":3},{"minInt":1,"minFrac":2,"macFrac":0,"posPre":"\u00A4","posSuf":"","negPre":"\u00A4-","negSuf":"","gSize":3,"lgSize":3,"maxFrac":2}],"CURRENCY_SYM":"¥"},"pluralCat":function (n) {  return PLURAL_CATEGORY.OTHER;},"DATETIME_FORMATS":{"MONTH":["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],"SHORTMONTH":["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],"DAY":["日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"],"SHORTDAY":["日","月","火","水","木","金","土"],"AMPMS":["午前","午後"],"medium":"yyyy/MM/dd H:mm:ss","short":"yy/MM/dd H:mm","fullDate":"y年M月d日EEEE","longDate":"y年M月d日","mediumDate":"yyyy/MM/dd","shortDate":"yy/MM/dd","mediumTime":"H:mm:ss","shortTime":"H:mm"},"id":"ja-jp"});
+$provide.value("$locale", {
+  "DATETIME_FORMATS": {
+    "AMPMS": [
+      "\u5348\u524d",
+      "\u5348\u5f8c"
+    ],
+    "DAY": [
+      "\u65e5\u66dc\u65e5",
+      "\u6708\u66dc\u65e5",
+      "\u706b\u66dc\u65e5",
+      "\u6c34\u66dc\u65e5",
+      "\u6728\u66dc\u65e5",
+      "\u91d1\u66dc\u65e5",
+      "\u571f\u66dc\u65e5"
+    ],
+    "ERANAMES": [
+      "\u7d00\u5143\u524d",
+      "\u897f\u66a6"
+    ],
+    "ERAS": [
+      "\u7d00\u5143\u524d",
+      "\u897f\u66a6"
+    ],
+    "FIRSTDAYOFWEEK": 6,
+    "MONTH": [
+      "1\u6708",
+      "2\u6708",
+      "3\u6708",
+      "4\u6708",
+      "5\u6708",
+      "6\u6708",
+      "7\u6708",
+      "8\u6708",
+      "9\u6708",
+      "10\u6708",
+      "11\u6708",
+      "12\u6708"
+    ],
+    "SHORTDAY": [
+      "\u65e5",
+      "\u6708",
+      "\u706b",
+      "\u6c34",
+      "\u6728",
+      "\u91d1",
+      "\u571f"
+    ],
+    "SHORTMONTH": [
+      "1\u6708",
+      "2\u6708",
+      "3\u6708",
+      "4\u6708",
+      "5\u6708",
+      "6\u6708",
+      "7\u6708",
+      "8\u6708",
+      "9\u6708",
+      "10\u6708",
+      "11\u6708",
+      "12\u6708"
+    ],
+    "STANDALONEMONTH": [
+      "1\u6708",
+      "2\u6708",
+      "3\u6708",
+      "4\u6708",
+      "5\u6708",
+      "6\u6708",
+      "7\u6708",
+      "8\u6708",
+      "9\u6708",
+      "10\u6708",
+      "11\u6708",
+      "12\u6708"
+    ],
+    "WEEKENDRANGE": [
+      5,
+      6
+    ],
+    "fullDate": "y\u5e74M\u6708d\u65e5EEEE",
+    "longDate": "y\u5e74M\u6708d\u65e5",
+    "medium": "y/MM/dd H:mm:ss",
+    "mediumDate": "y/MM/dd",
+    "mediumTime": "H:mm:ss",
+    "short": "y/MM/dd H:mm",
+    "shortDate": "y/MM/dd",
+    "shortTime": "H:mm"
+  },
+  "NUMBER_FORMATS": {
+    "CURRENCY_SYM": "\u00a5",
+    "DECIMAL_SEP": ".",
+    "GROUP_SEP": ",",
+    "PATTERNS": [
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 3,
+        "minFrac": 0,
+        "minInt": 1,
+        "negPre": "-",
+        "negSuf": "",
+        "posPre": "",
+        "posSuf": ""
+      },
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 0,
+        "minFrac": 0,
+        "minInt": 1,
+        "negPre": "-\u00a4",
+        "negSuf": "",
+        "posPre": "\u00a4",
+        "posSuf": ""
+      }
+    ]
+  },
+  "id": "ja-jp",
+  "localeID": "ja_JP",
+  "pluralCat": function(n, opt_precision) {  return PLURAL_CATEGORY.OTHER;}
+});
 }]);

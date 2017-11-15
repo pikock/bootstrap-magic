@@ -1,0 +1,30 @@
+body {
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.funky-show-hide.ng-hide-add {
+  transform: rotateZ(0);
+  transform-origin: right;
+  transition: all 0.5s ease-in-out;
+}
+
+.funky-show-hide.ng-hide-add.ng-hide-add-active {
+  transform: rotateZ(-135deg);
+}
+
+.funky-show-hide.ng-hide-remove {
+  transform: rotateY(90deg);
+  transform-origin: left;
+  transition: all 0.5s ease;
+}
+
+.funky-show-hide.ng-hide-remove.ng-hide-remove-active {
+  transform: rotateY(0);
+}
+
+.check-element {
+  border: 1px solid black;
+  opacity: 1;
+  padding: 10px;
+}

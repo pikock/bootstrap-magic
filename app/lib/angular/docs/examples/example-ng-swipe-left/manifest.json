@@ -1,0 +1,7 @@
+{
+  "name": "example-ng-swipe-left",
+  "files": [
+    "index-production.html",
+    "script.js"
+  ]
+}

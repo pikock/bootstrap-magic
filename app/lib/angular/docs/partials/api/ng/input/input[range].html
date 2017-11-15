@@ -1,0 +1,274 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/input.js?message=docs(input[range])%3A%20describe%20your%20change...#L1040' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/input.js#L1040' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">input[range]</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - input in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>Native range input with validation and transformation.</p>
+<p>The model for the range input must always be a <code>Number</code>.</p>
+<p>IE9 and other browsers that do not support the <code>range</code> type fall back
+to a text input without any default values for <code>min</code>, <code>max</code> and <code>step</code>. Model binding,
+validation and number parsing are nevertheless supported.</p>
+<p>Browsers that support range (latest Chrome, Safari, Firefox, Edge) treat <code>input[range]</code>
+in a way that never allows the input to hold an invalid value. That means:</p>
+<ul>
+<li>any non-numerical value is set to <code>(max + min) / 2</code>.</li>
+<li>any numerical value that is less than the current min val, or greater than the current max val
+is set to the min / max val respectively.</li>
+<li>additionally, the current <code>step</code> is respected, so the nearest value that satisfies a step
+is used.</li>
+</ul>
+<p>See the <a href="https://www.w3.org/TR/html5/forms.html#range-state-(type=range">HTML Spec on input[type=range]</a>)
+for more info.</p>
+<p>This has the following consequences for Angular:</p>
+<p>Since the element value should always reflect the current model value, a range input
+will set the bound ngModel expression to the value that the browser has set for the
+input element. For example, in the following input <code>&lt;input type=&quot;range&quot; ng-model=&quot;model.value&quot;&gt;</code>,
+if the application sets <code>model.value = null</code>, the browser will set the input to <code>&#39;50&#39;</code>.
+Angular will then set the model to <code>50</code>, to prevent input and model value being out of sync.</p>
+<p>That means the model for range will immediately be set to <code>50</code> after <code>ngModel</code> has been
+initialized. It also means a range input can never have the required error.</p>
+<p>This does not only affect changes to the model value, but also to the values of the <code>min</code>,
+<code>max</code>, and <code>step</code> attributes. When these change in a way that will cause the browser to modify
+the input value, Angular will also update the model value.</p>
+<p>Automatic value adjustment also means that a range input element can never have the <code>required</code>,
+<code>min</code>, or <code>max</code> errors.</p>
+<p>However, <code>step</code> is currently only fully implemented by Firefox. Other browsers have problems
+when the step value changes dynamically - they do not adjust the element value correctly, but
+instead may set the <code>stepMismatch</code> error. If that&#39;s the case, the Angular will set the <code>step</code>
+error on the input, and set the model to <code>undefined</code>.</p>
+<p>Note that <code>input[range]</code> is not compatible with<code>ngMax</code>, <code>ngMin</code>, and <code>ngStep</code>, because they do
+not set the <code>min</code> and <code>max</code> attributes, which means that the browser won&#39;t automatically adjust
+the input value based on their values, and will always assume min = 0, max = 100, and step = 1.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2>Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 0.</li>
+    
+  </ul>
+
+  
+  <h2>Usage</h2>
+  <pre><code>&lt;input type=&quot;range&quot;&#10;       ng-model=&quot;string&quot;&#10;       [name=&quot;string&quot;]&#10;       [min=&quot;string&quot;]&#10;       [max=&quot;string&quot;]&#10;       [step=&quot;string&quot;]&#10;       [ng-change=&quot;string&quot;]&#10;       [ng-checked=&quot;expression&quot;]&gt;</code></pre>
+
+<section class="api-section">
+  <h3>Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        ngModel
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Assignable angular expression to data-bind to.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        name
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Property name of the form under which the control is published.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        min
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Sets the <code>min</code> validation to ensure that the value entered is greater
+                 than <code>min</code>. Can be interpolated.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        max
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Sets the <code>max</code> validation to ensure that the value entered is less than <code>max</code>.
+                 Can be interpolated.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        step
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Sets the <code>step</code> validation to ensure that the value entered matches the <code>step</code>
+                 Can be interpolated.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        ngChange
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Angular expression to be executed when the ngModel value changes due
+                 to user interaction with the input element.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        ngChecked
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-expression">expression</a>
+      </td>
+      <td>
+        <p>If the expression is truthy, then the <code>checked</code> attribute will be set on the
+                     element. <strong>Note</strong> : <code>ngChecked</code> should not be used alongside <code>ngModel</code>.
+                     Checkout <a href="api/ng/directive/ngChecked">ngChecked</a> for usage.</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+
+  
+  <h2 id="example">Examples</h2><p>
+
+<div>
+  <plnkr-opener example-path="examples/example-range-input-directive"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-range-input-directive"
+      name="range-input-directive"
+      module="rangeExample">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;script&gt;&#10;  angular.module(&#39;rangeExample&#39;, [])&#10;    .controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;      $scope.value = 75;&#10;      $scope.min = 10;&#10;      $scope.max = 90;&#10;    }]);&#10;&lt;/script&gt;&#10;&lt;form name=&quot;myForm&quot; ng-controller=&quot;ExampleController&quot;&gt;&#10;&#10;  Model as range: &lt;input type=&quot;range&quot; name=&quot;range&quot; ng-model=&quot;value&quot; min=&quot;{{min}}&quot;  max=&quot;{{max}}&quot;&gt;&#10;  &lt;hr&gt;&#10;  Model as number: &lt;input type=&quot;number&quot; ng-model=&quot;value&quot;&gt;&lt;br&gt;&#10;  Min: &lt;input type=&quot;number&quot; ng-model=&quot;min&quot;&gt;&lt;br&gt;&#10;  Max: &lt;input type=&quot;number&quot; ng-model=&quot;max&quot;&gt;&lt;br&gt;&#10;  value = &lt;code&gt;{{value}}&lt;/code&gt;&lt;br/&gt;&#10;  myForm.range.$valid = &lt;code&gt;{{myForm.range.$valid}}&lt;/code&gt;&lt;br/&gt;&#10;  myForm.range.$error = &lt;code&gt;{{myForm.range.$error}}&lt;/code&gt;&#10;&lt;/form&gt;</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-range-input-directive')}}" name="example-range-input-directive"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h2 id="range-input-with-ngmin-ngmax-attributes">Range Input with ngMin &amp; ngMax attributes</h2>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-range-input-directive-ng"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-range-input-directive-ng"
+      name="range-input-directive-ng"
+      module="rangeExample">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;script&gt;&#10;  angular.module(&#39;rangeExample&#39;, [])&#10;    .controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;      $scope.value = 75;&#10;      $scope.min = 10;&#10;      $scope.max = 90;&#10;    }]);&#10;&lt;/script&gt;&#10;&lt;form name=&quot;myForm&quot; ng-controller=&quot;ExampleController&quot;&gt;&#10;  Model as range: &lt;input type=&quot;range&quot; name=&quot;range&quot; ng-model=&quot;value&quot; ng-min=&quot;min&quot; ng-max=&quot;max&quot;&gt;&#10;  &lt;hr&gt;&#10;  Model as number: &lt;input type=&quot;number&quot; ng-model=&quot;value&quot;&gt;&lt;br&gt;&#10;  Min: &lt;input type=&quot;number&quot; ng-model=&quot;min&quot;&gt;&lt;br&gt;&#10;  Max: &lt;input type=&quot;number&quot; ng-model=&quot;max&quot;&gt;&lt;br&gt;&#10;  value = &lt;code&gt;{{value}}&lt;/code&gt;&lt;br/&gt;&#10;  myForm.range.$valid = &lt;code&gt;{{myForm.range.$valid}}&lt;/code&gt;&lt;br/&gt;&#10;  myForm.range.$error = &lt;code&gt;{{myForm.range.$error}}&lt;/code&gt;&#10;&lt;/form&gt;</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-range-input-directive-ng')}}" name="example-range-input-directive-ng"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+

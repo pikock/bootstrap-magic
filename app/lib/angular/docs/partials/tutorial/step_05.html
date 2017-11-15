@@ -1,0 +1,140 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/tutorial/step_05.ngdoc?message=docs(tutorial%2F5 - Filtering Repeaters)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<ul doc-tutorial-nav="5"></ul>
+
+
+<p>We did a lot of work in laying a foundation for the app in the previous steps, so now we&#39;ll do
+something simple; we will add full-text search (yes, it will be simple!). We will also write an
+end-to-end (E2E) test, because a good E2E test is a good friend. It stays with your app, keeps an
+eye on it, and quickly detects regressions.</p>
+<ul>
+<li>The app now has a search box. Notice that the phone list on the page changes depending on what a
+user types into the search box.</li>
+</ul>
+<div doc-tutorial-reset="5"></div>
+
+
+<h2 id="component-controller">Component Controller</h2>
+<p>We made no changes to the component&#39;s controller.</p>
+<h2 id="component-template">Component Template</h2>
+<p><br />
+<strong><code>app/phone-list/phone-list.template.html</code>:</strong></p>
+<pre><code class="lang-html">&lt;div class=&quot;container-fluid&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;div class=&quot;col-md-2&quot;&gt;
+      &lt;!--Sidebar content--&gt;
+
+      Search: &lt;input ng-model=&quot;$ctrl.query&quot; /&gt;
+
+    &lt;/div&gt;
+    &lt;div class=&quot;col-md-10&quot;&gt;
+      &lt;!--Body content--&gt;
+
+      &lt;ul class=&quot;phones&quot;&gt;
+        &lt;li ng-repeat=&quot;phone in $ctrl.phones | filter:$ctrl.query&quot;&gt;
+          &lt;span&gt;{{phone.name}}&lt;/span&gt;
+          &lt;p&gt;{{phone.snippet}}&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>We added a standard HTML <code>&lt;input&gt;</code> tag and used Angular&#39;s <a href="api/ng/filter/filter">filter</a> function
+to process the input for the <a href="api/ng/directive/ngRepeat">ngRepeat</a> directive.</p>
+<p>By virtue of the <a href="api/ng/directive/ngModel">ngModel</a> directive, this lets a user enter search criteria and
+immediately see the effects of their search on the phone list. This new code demonstrates the
+following:</p>
+<ul>
+<li><p>Data-binding: This is one of the core features in Angular. When the page loads, Angular binds the
+value of the input box to the data model variable specified with <code>ngModel</code> and keeps the two in
+sync.</p>
+<p>In this code, the data that a user types into the input box (bound to <strong><code>$ctrl.query</code></strong>) is
+immediately available as a filter input in the list repeater
+(<code>phone in $ctrl.phones | filter:</code><strong><code>$ctrl.query</code></strong>). When changes to the data model cause the
+repeater&#39;s input to change, the repeater efficiently updates the DOM to reflect the current state
+of the model.</p>
+<p><img  class="diagram" src="img/tutorial/tutorial_05.png"></p>
+</li>
+<li><p>Use of the <code>filter</code> filter: The <a href="api/ng/filter/filter">filter</a> function uses the <code>$ctrl.query</code>
+value to create a new array that contains only those records that match the query.</p>
+<p><code>ngRepeat</code> automatically updates the view in response to the changing number of phones returned
+by the <code>filter</code> filter. The process is completely transparent to the developer.</p>
+</li>
+</ul>
+<h1 id="testing">Testing</h1>
+<p>In previous steps, we learned how to write and run unit tests. Unit tests are perfect for testing
+controllers and other parts of our application written in JavaScript, but they can&#39;t easily
+test templates, DOM manipulation or interoperability of components and services. For these, an
+end-to-end (E2E) test is a much better choice.</p>
+<p>The search feature was fully implemented via templates and data-binding, so we&#39;ll write our first
+E2E test, to verify that the feature works.</p>
+<p><br />
+<strong><code>e2e-tests/scenarios.js</code>:</strong></p>
+<pre><code class="lang-js">describe(&#39;PhoneCat Application&#39;, function() {
+
+  describe(&#39;phoneList&#39;, function() {
+
+    beforeEach(function() {
+      browser.get(&#39;index.html&#39;);
+    });
+
+    it(&#39;should filter the phone list as a user types into the search box&#39;, function() {
+      var phoneList = element.all(by.repeater(&#39;phone in $ctrl.phones&#39;));
+      var query = element(by.model(&#39;$ctrl.query&#39;));
+
+      expect(phoneList.count()).toBe(3);
+
+      query.sendKeys(&#39;nexus&#39;);
+      expect(phoneList.count()).toBe(1);
+
+      query.clear();
+      query.sendKeys(&#39;motorola&#39;);
+      expect(phoneList.count()).toBe(2);
+    });
+
+  });
+
+});
+</code></pre>
+<p>This test verifies that the search box and the repeater are correctly wired together. Notice how
+easy it is to write E2E tests in Angular. Although this example is for a simple test, it really is
+that easy to set up any functional, readable, E2E test.</p>
+<h2 id="running-e2e-tests-with-protractor">Running E2E Tests with Protractor</h2>
+<p>Even though the syntax of this test looks very much like our controller unit test written with
+Jasmine, the E2E test uses APIs of <a href="https://github.com/angular/protractor">Protractor</a>. Read about the Protractor APIs in the
+<a href="https://angular.github.io/protractor/#/api">Protractor API Docs</a>.</p>
+<p>Much like Karma is the test runner for unit tests, we use Protractor to run E2E tests. Try it with
+<code>npm run protractor</code>. E2E tests take time, so unlike with unit tests, Protractor will exit after the
+tests run and will not automatically rerun the test suite on every file change.
+To rerun the test suite, execute <code>npm run protractor</code> again.</p>
+<div class="alert alert-info">
+  <strong>Note:</strong> In order for protractor to access and run tests against your application, it must be
+  served via a web server. In a different terminal/command line window, run <code>npm start</code> to fire up
+  the web server.
+</div>
+
+
+<h1 id="experiments">Experiments</h1>
+<div></div>
+
+<ul>
+<li><p>Display the current value of the <code>query</code> model by adding a <code>{{$ctrl.query}}</code> binding into the
+<code>phone-list.template.html</code> template and see how it changes, when you type in the input box.</p>
+<p>You might also try to add the <code>{{$ctrl.query}}</code> binding to <code>index.html</code>. However, when you reload
+the page, you won&#39;t see the expected result. This is because the <code>query</code> model lives in the scope
+defined by the <code>&lt;phone-list&gt;</code> component.<br />
+Component isolation at work!</p>
+</li>
+</ul>
+<h1 id="summary">Summary</h1>
+<p>We have now added full-text search and included a test to verify that it works! Now let&#39;s go on to
+<a href="tutorial/step_06">step 6</a> to learn how to add sorting capabilities to the PhoneCat application.</p>
+<ul doc-tutorial-nav="5"></ul>
+
+
+
+
+

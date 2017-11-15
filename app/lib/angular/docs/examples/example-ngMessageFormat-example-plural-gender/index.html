@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ngMessageFormat-example-plural-gender</title>
+  
+
+  <script src="../../../angular.min.js"></script>
+  <script src="../../../angular-message-format.js"></script>
+  <script src="script.js"></script>
+  
+
+  
+</head>
+<body ng-app="msgFmtExample">
+  <div ng-controller="AppController">
+   Select recipients:<br>
+   <select multiple size=5 ng-model="recipients" ng-options="person as person.name for person in people">
+   </select><br>
+    <p>{{recipients.length, plural,
+      =0 {{{sender.name}} has not given any gifts to anyone.}
+      =1 {  {{recipients[0].gender, select,
+             female { {{sender.name}} gave {{recipients[0].name}} her gift.}
+             male { {{sender.name}} gave {{recipients[0].name}} his gift.}
+             other { {{sender.name}} gave {{recipients[0].name}} their gift.}
+            }}
+          }
+      other {{{sender.name}} gave {{recipients.length}} people gifts.}
+      }}</p>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-orderBy-custom-comparator</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  
+
+  <script src="../../../angular.min.js"></script>
+  <script src="script.js"></script>
+  
+
+  
+</head>
+<body ng-app="orderByExample4">
+  <div ng-controller="ExampleController">
+  <div class="friends-container custom-comparator">
+    <h3>Locale-sensitive Comparator</h3>
+    <table class="friends">
+      <tr>
+        <th>Name</th>
+        <th>Favorite Letter</th>
+      </tr>
+      <tr ng-repeat="friend in friends | orderBy:'favoriteLetter':false:localeSensitiveComparator">
+        <td>{{friend.name}}</td>
+        <td>{{friend.favoriteLetter}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="friends-container default-comparator">
+    <h3>Default Comparator</h3>
+    <table class="friends">
+      <tr>
+        <th>Name</th>
+        <th>Favorite Letter</th>
+      </tr>
+      <tr ng-repeat="friend in friends | orderBy:'favoriteLetter'">
+        <td>{{friend.name}}</td>
+        <td>{{friend.favoriteLetter}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

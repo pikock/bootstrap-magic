@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-orderBy-static-jquery</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  <script src="script.js"></script>
+  
+
+  
+</head>
+<body ng-app="orderByExample1">
+  <div ng-controller="ExampleController">
+  <table class="friends">
+    <tr>
+      <th>Name</th>
+      <th>Phone Number</th>
+      <th>Age</th>
+    </tr>
+    <tr ng-repeat="friend in friends | orderBy:'-age'">
+      <td>{{friend.name}}</td>
+      <td>{{friend.phone}}</td>
+      <td>{{friend.age}}</td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

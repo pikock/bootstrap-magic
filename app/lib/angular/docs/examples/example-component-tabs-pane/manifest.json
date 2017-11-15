@@ -1,0 +1,9 @@
+{
+  "name": "example-component-tabs-pane",
+  "files": [
+    "index-production.html",
+    "script.js",
+    "my-tabs.html",
+    "my-pane.html"
+  ]
+}

@@ -1,0 +1,28 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/error/$http/badjsonp.ngdoc?message=docs(error%2Fbadjsonp)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>Error: $http:badjsonp
+  <div><span class='hint'>Bad JSONP Request Configuration</span></div>
+</h1>
+
+<div>
+    <pre class="minerr-errmsg" error-display="Illegal use of callback param, "{0}", in url, "{1}"">Illegal use of callback param, "{0}", in url, "{1}"</pre>
+</div>
+
+<h2>Description</h2>
+<div class="description">
+  <p>This error occurs when the URL generated from the configuration object contains a parameter with the
+same name as the configured <code>jsonpCallbackParam</code> property; or when it contains a parameter whose
+value is <code>JSON_CALLBACK</code>.</p>
+<p><code>$http</code> JSONP requests need to attach a callback query parameter to the URL. The name of this
+parameter is specified in the configuration object (or in the defaults) via the <code>jsonpCallbackParam</code>
+property. You must not provide your own parameter with this name in the configuratio of the request.</p>
+<p>In previous versions of Angular, you specified where to add the callback parameter value via the
+<code>JSON_CALLBACK</code> placeholder. This is no longer allowed.</p>
+<p>To resolve this error, remove any parameters that have the same name as the <code>jsonpCallbackParam</code>;
+and/or remove any parameters that have a value of <code>JSON_CALLBACK</code>.</p>
+<p>For more information, see the <a href="api/ng/service/$http#jsonp"><code>$http.jsonp()</code></a> method API documentation.</p>
+
+</div>
+
+

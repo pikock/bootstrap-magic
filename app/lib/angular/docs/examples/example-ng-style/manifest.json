@@ -1,0 +1,8 @@
+{
+  "name": "example-ng-style",
+  "files": [
+    "index-production.html",
+    "style.css",
+    "protractor.js"
+  ]
+}

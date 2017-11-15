@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-select-unknown-value-required-debug</title>
+  
+
+  <script src="../../../angular.js"></script>
+  <script src="app.js"></script>
+  
+
+  
+</head>
+<body ng-app="staticSelect">
+  <div ng-controller="ExampleController">
+  <form name="myForm">
+    <label for="testSelect"> Select: </label><br>
+    <select name="testSelect" ng-model="selected" unknown-value-required>
+      <option value="option-1">Option 1</option>
+      <option value="option-2">Option 2</option>
+    </select><br>
+    <span ng-if="myForm.testSelect.$error.required">Error: Please select a value</span><br>
+
+    <button ng-click="forceUnknownOption()">Force unknown option</button><br>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ng-readonly-jquery</title>
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  
+
+  
+</head>
+<body ng-app="">
+  <label>Check me to make text readonly: <input type="checkbox" ng-model="checked"></label><br/>
+<input type="text" ng-readonly="checked" value="I'm Angular" aria-label="Readonly field" />
+</body>
+</html>

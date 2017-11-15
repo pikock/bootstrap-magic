@@ -1,0 +1,8 @@
+{
+  "name": "example-directive-restrict",
+  "files": [
+    "index-production.html",
+    "script.js",
+    "my-customer.html"
+  ]
+}

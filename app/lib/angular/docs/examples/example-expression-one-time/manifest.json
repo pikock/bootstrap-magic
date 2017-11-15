@@ -1,0 +1,8 @@
+{
+  "name": "example-expression-one-time",
+  "files": [
+    "index-production.html",
+    "script.js",
+    "protractor.js"
+  ]
+}

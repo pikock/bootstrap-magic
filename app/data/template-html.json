@@ -1,0 +1,106 @@
+[
+  {
+    "name": "Frameworks",
+    "data": [
+      {
+        "name": "Starter Template",
+        "slug": "starter-template",
+        "description": "Nothing but the basics: compiled CSS and JavaScript.",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/starter-template.jpg"
+      },
+      {
+        "name": "Grids",
+        "slug": "grids",
+        "description": "Multiple examples of grid layouts with all four tiers, nesting, and more.",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/grid.jpg"
+      },
+      {
+        "name": "Jumbotron",
+        "slug": "jumbotron",
+        "description": "Build around the jumbotron with a navbar and some basic grid columns.",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/jumbotron.jpg"
+      },
+      {
+        "name": "Jumbotron Narrow",
+        "slug": "jumbotron-narrow",
+        "description": "Build a more custom page by narrowing the default container and jumbotron.",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/jumbotron-narrow.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Navbars",
+    "data": [
+      {
+        "name": "Navbar",
+        "slug": "navbars",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/navbar.jpg"
+      },
+      {
+        "name": "Static top navbar",
+        "slug": "navbar-top",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/navbar.jpg"
+      },
+      {
+        "name": "Fixed navbar",
+        "slug": "navbar-top-fixed",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/navbar.jpg"
+      },
+      {
+        "name": "Bottom navbar",
+        "slug": "navbar-bottom",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/navbar-bottom.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Custom components",
+    "data": [
+      {
+        "name": "Album",
+        "slug": "album",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/album.jpg"
+      },
+      {
+        "name": "Cover",
+        "slug": "cover",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/cover.jpg"
+      },
+      {
+        "name": "Carousel",
+        "slug": "carousel",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/carousel.jpg"
+      },
+      {
+        "name": "Blog",
+        "slug": "blog",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/blog.jpg"
+      },
+      {
+        "name": "Dashboard",
+        "slug": "dashboard",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/dashboard.jpg"
+      },
+      {
+        "name": "Sign-in page",
+        "slug": "signin",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/sign-in.jpg"
+      },
+      {
+        "name": "Justified nav",
+        "slug": "justified-nav",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/justified-nav.jpg"
+      },
+      {
+        "name": "Sticky footer",
+        "slug": "sticky-footer",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/sticky-footer.jpg"
+      },
+      {
+        "name": "Sticker footer with navbar",
+        "slug": "sticky-footer-navbar",
+        "image_url": "https://getbootstrap.com/docs/4.0/examples/screenshots/sticky-footer-navbar.jpg"
+      }
+    ]
+  }
+]

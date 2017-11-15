@@ -1,0 +1,8 @@
+{
+  "name": "example-httpbackend-e2e-testing",
+  "files": [
+    "index-production.html",
+    "app.js",
+    "e2e.js"
+  ]
+}

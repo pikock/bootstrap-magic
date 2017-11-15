@@ -1,0 +1,173 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/select.js?message=docs(select.SelectController)%3A%20describe%20your%20change...#L19' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/select.js#L19' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">select.SelectController</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - type in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>The controller for the <a href="api/ng/directive/select">select</a> directive. The controller exposes
+a few utility methods that can be used to augment the behavior of a regular or an
+<a href="api/ng/directive/ngOptions">ngOptions</a> select element.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+
+  
+
+  
+<h2>Methods</h2>
+<ul class="methods">
+  <li id="$hasEmptyOption">
+    <h3><p><code>$hasEmptyOption();</code></p>
+
+</h3>
+    <div><p>Returns <code>true</code> if the select element currently has an empty option
+element, i.e. an option that signifies that the select is empty / the selection is null.</p>
+</div>
+
+    
+
+    
+
+    
+
+    </li>
+  
+  <li id="$isUnknownOptionSelected">
+    <h3><p><code>$isUnknownOptionSelected();</code></p>
+
+</h3>
+    <div><p>Returns <code>true</code> if the select element&#39;s unknown option is selected. The unknown option is added
+and automatically selected whenever the select model doesn&#39;t match any option.</p>
+</div>
+
+    
+
+    
+
+    
+
+    </li>
+  
+  <li id="$isEmptyOptionSelected">
+    <h3><p><code>$isEmptyOptionSelected();</code></p>
+
+</h3>
+    <div><p>Returns <code>true</code> if the select element has an empty option and this empty option is currently
+selected. Returns <code>false</code> if the select element has no empty option or it is not selected.</p>
+</div>
+
+    
+
+    
+
+    
+
+    </li>
+  </ul>
+  
+  
+
+
+
+  
+  <h2 id="example">Examples</h2><h3 id="set-a-custom-error-when-the-unknown-option-is-selected">Set a custom error when the unknown option is selected</h3>
+<p>This example sets a custom error &quot;unknownValue&quot; on the ngModelController
+when the select element&#39;s unknown option is selected, i.e. when the model is set to a value
+that is not matched by any option.</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-select-unknown-value-error"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-select-unknown-value-error"
+      name="select-unknown-value-error"
+      module="staticSelect">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;form name=&quot;myForm&quot;&gt;&#10;    &lt;label for=&quot;testSelect&quot;&gt; Single select: &lt;/label&gt;&lt;br&gt;&#10;    &lt;select name=&quot;testSelect&quot; ng-model=&quot;selected&quot; unknown-value-error&gt;&#10;      &lt;option value=&quot;option-1&quot;&gt;Option 1&lt;/option&gt;&#10;      &lt;option value=&quot;option-2&quot;&gt;Option 2&lt;/option&gt;&#10;    &lt;/select&gt;&lt;br&gt;&#10;    &lt;span ng-if=&quot;myForm.testSelect.$error.unknownValue&quot;&gt;Error: The current model doesn&#39;t match any option&lt;/span&gt;&#10;&#10;    &lt;button ng-click=&quot;forceUnknownOption()&quot;&gt;Force unknown option&lt;/button&gt;&lt;br&gt;&#10;  &lt;/form&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="app.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;staticSelect&#39;, [])&#10; .controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;   $scope.selected = null;&#10;&#10;   $scope.forceUnknownOption = function() {&#10;     $scope.selected = &#39;nonsense&#39;;&#10;   };&#10;}])&#10;.directive(&#39;unknownValueError&#39;, function() {&#10;  return {&#10;    require: [&#39;ngModel&#39;, &#39;select&#39;],&#10;    link: function(scope, element, attrs, ctrls) {&#10;      var ngModelCtrl = ctrls[0];&#10;      var selectCtrl = ctrls[1];&#10;&#10;      ngModelCtrl.$validators.unknownValue = function(modelValue, viewValue) {&#10;        if (selectCtrl.$isUnknownOptionSelected()) {&#10;          return false;&#10;        }&#10;&#10;        return true;&#10;      };&#10;    }&#10;&#10;  };&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-select-unknown-value-error')}}" name="example-select-unknown-value-error"></iframe>
+  </div>
+</div>
+
+
+</p>
+<h3 id="set-the-required-error-when-the-unknown-option-is-selected-">Set the &quot;required&quot; error when the unknown option is selected.</h3>
+<p>By default, the &quot;required&quot; error on the ngModelController is only set on a required select
+when the empty option is selected. This example adds a custom directive that also sets the
+error when the unknown option is selected.</p>
+<p>
+
+<div>
+  <plnkr-opener example-path="examples/example-select-unknown-value-required"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-select-unknown-value-required"
+      name="select-unknown-value-required"
+      module="staticSelect">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;div ng-controller=&quot;ExampleController&quot;&gt;&#10;  &lt;form name=&quot;myForm&quot;&gt;&#10;    &lt;label for=&quot;testSelect&quot;&gt; Select: &lt;/label&gt;&lt;br&gt;&#10;    &lt;select name=&quot;testSelect&quot; ng-model=&quot;selected&quot; unknown-value-required&gt;&#10;      &lt;option value=&quot;option-1&quot;&gt;Option 1&lt;/option&gt;&#10;      &lt;option value=&quot;option-2&quot;&gt;Option 2&lt;/option&gt;&#10;    &lt;/select&gt;&lt;br&gt;&#10;    &lt;span ng-if=&quot;myForm.testSelect.$error.required&quot;&gt;Error: Please select a value&lt;/span&gt;&lt;br&gt;&#10;&#10;    &lt;button ng-click=&quot;forceUnknownOption()&quot;&gt;Force unknown option&lt;/button&gt;&lt;br&gt;&#10;  &lt;/form&gt;&#10;&lt;/div&gt;</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="app.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;staticSelect&#39;, [])&#10; .controller(&#39;ExampleController&#39;, [&#39;$scope&#39;, function($scope) {&#10;   $scope.selected = null;&#10;&#10;   $scope.forceUnknownOption = function() {&#10;     $scope.selected = &#39;nonsense&#39;;&#10;   };&#10;}])&#10;.directive(&#39;unknownValueRequired&#39;, function() {&#10;  return {&#10;    priority: 1, // This directive must run after the required directive has added its validator&#10;    require: [&#39;ngModel&#39;, &#39;select&#39;],&#10;    link: function(scope, element, attrs, ctrls) {&#10;      var ngModelCtrl = ctrls[0];&#10;      var selectCtrl = ctrls[1];&#10;&#10;      var originalRequiredValidator = ngModelCtrl.$validators.required;&#10;&#10;      ngModelCtrl.$validators.required = function() {&#10;        if (attrs.required &amp;&amp; selectCtrl.$isUnknownOptionSelected()) {&#10;          return false;&#10;        }&#10;&#10;        return originalRequiredValidator.apply(this, arguments);&#10;      };&#10;    }&#10;  };&#10;});</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-select-unknown-value-required')}}" name="example-select-unknown-value-required"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+

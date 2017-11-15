@@ -1,0 +1,8 @@
+{
+  "name": "example-ng-class-odd",
+  "files": [
+    "index-production.html",
+    "style.css",
+    "protractor.js"
+  ]
+}

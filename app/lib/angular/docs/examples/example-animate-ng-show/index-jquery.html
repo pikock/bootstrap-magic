@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-animate-ng-show-jquery</title>
+  <link href="animations.css" rel="stylesheet" type="text/css">
+  
+
+  <script src="../../components/jquery-3.2.1/jquery.js"></script>
+  <script src="../../../angular.js"></script>
+  <script src="../../../angular-animate.js"></script>
+  
+
+  
+</head>
+<body ng-app="ngAnimate">
+  <div ng-init="checked = true">
+  <label>
+    <input type="checkbox" ng-model="checked" />
+    Is visible
+  </label>
+  <div class="content-area sample-show-hide" ng-show="checked">
+    Content...
+  </div>
+</div>
+</body>
+</html>

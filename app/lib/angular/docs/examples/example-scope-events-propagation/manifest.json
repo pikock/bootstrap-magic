@@ -1,0 +1,7 @@
+{
+  "name": "example-scope-events-propagation",
+  "files": [
+    "index-production.html",
+    "script.js"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "example-angular-copy",
+  "files": [
+    "index-production.html",
+    "script.js"
+  ]
+}

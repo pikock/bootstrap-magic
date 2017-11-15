@@ -1,0 +1,7 @@
+{
+  "name": "example-doCheckArrayExample",
+  "files": [
+    "index-production.html",
+    "app.js"
+  ]
+}

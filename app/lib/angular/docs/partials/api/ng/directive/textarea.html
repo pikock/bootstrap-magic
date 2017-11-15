@@ -1,0 +1,252 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ng/directive/input.js?message=docs(textarea)%3A%20describe%20your%20change...#L1876' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ng/directive/input.js#L1876' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">textarea</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/ng">ng</a>
+    </li>
+  </ol>
+</header>
+
+
+
+
+
+<div class="api-profile-description">
+  <p>HTML textarea element control with angular data-binding. The data-binding and validation
+properties of this element are exactly the same as those of the
+<a href="api/ng/directive/input">input element</a>.</p>
+
+</div>
+
+
+
+<h2 id="known-issues">Known Issues</h2>
+<div class="known-issue">
+  <p>When specifying the <code>placeholder</code> attribute of <code>&lt;textarea&gt;</code>, Internet Explorer will temporarily
+insert the placeholder value as the textarea&#39;s content. If the placeholder value contains
+interpolation (<code>{{ ... }}</code>), an error will be logged in the console when Angular tries to update
+the value of the by-then-removed text node. This doesn&#39;t affect the functionality of the
+textarea, but can be undesirable.</p>
+<p>You can work around this Internet Explorer issue by using <code>ng-attr-placeholder</code> instead of
+<code>placeholder</code> on textareas, whenever you need interpolation in the placeholder value. You can
+find more details on <code>ngAttr</code> in the
+<a href="guide/interpolation#-ngattr-for-binding-to-arbitrary-attributes">Interpolation</a> section of the
+Developer Guide.</p>
+
+</div>
+
+
+<div>
+  
+
+  
+  <h2>Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 0.</li>
+    
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <ul>
+    
+      <li>as element:
+      <pre><code>&lt;textarea&#10;  ng-model=&quot;string&quot;&#10;  [name=&quot;string&quot;]&#10;  [required=&quot;string&quot;]&#10;  [ng-required=&quot;string&quot;]&#10;  [ng-minlength=&quot;number&quot;]&#10;  [ng-maxlength=&quot;number&quot;]&#10;  [ng-pattern=&quot;string&quot;]&#10;  [ng-change=&quot;string&quot;]&#10;  [ng-trim=&quot;boolean&quot;]&gt;&#10;...&#10;&lt;/textarea&gt;</code></pre>
+      </li>
+    
+  </div>
+  
+<section class="api-section">
+  <h3>Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        ngModel
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Assignable angular expression to data-bind to.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        name
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Property name of the form under which the control is published.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        required
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Sets <code>required</code> validation error key if the value is not entered.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        ngRequired
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Adds <code>required</code> attribute and <code>required</code> validation constraint to
+   the element when the ngRequired expression evaluates to true. Use <code>ngRequired</code> instead of
+   <code>required</code> when you want to data-bind to the <code>required</code> attribute.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        ngMinlength
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-number">number</a>
+      </td>
+      <td>
+        <p>Sets <code>minlength</code> validation error key if the value is shorter than
+   minlength.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        ngMaxlength
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-number">number</a>
+      </td>
+      <td>
+        <p>Sets <code>maxlength</code> validation error key if the value is longer than
+   maxlength. Setting the attribute to a negative or non-numeric value, allows view values of any
+   length.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        ngPattern
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Sets <code>pattern</code> validation error key if the ngModel <a href="api/ng/type/ngModel.NgModelController#$viewValue">$viewValue</a>
+   does not match a RegExp found by evaluating the Angular expression given in the attribute value.
+   If the expression evaluates to a RegExp object, then this is used directly.
+   If the expression evaluates to a string, then it will be converted to a RegExp
+   after wrapping it in <code>^</code> and <code>$</code> characters. For instance, <code>&quot;abc&quot;</code> will be converted to
+   <code>new RegExp(&#39;^abc$&#39;)</code>.<br />
+   <strong>Note:</strong> Avoid using the <code>g</code> flag on the RegExp, as it will cause each successive search to
+   start at the index of the last search&#39;s match, thus not taking the whole input value into
+   account.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        ngChange
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-string">string</a>
+      </td>
+      <td>
+        <p>Angular expression to be executed when input changes due to user
+   interaction with the input element.</p>
+
+        
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        ngTrim
+        
+        <div><em>(optional)</em></div>
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-boolean">boolean</a>
+      </td>
+      <td>
+        <p>If set to false Angular will not automatically trim the input.</p>
+
+        <p><em>(default: true)</em></p>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+
+  
+</div>
+
+

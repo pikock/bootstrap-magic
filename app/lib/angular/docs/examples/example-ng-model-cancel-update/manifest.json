@@ -1,0 +1,8 @@
+{
+  "name": "example-ng-model-cancel-update",
+  "files": [
+    "index-production.html",
+    "app.js",
+    "style.css"
+  ]
+}

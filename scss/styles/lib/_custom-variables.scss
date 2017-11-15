@@ -1,0 +1,54 @@
+$gray-900: #8082a0;
+$gray-600: #83858f;
+$gray-800: #d1d1d1;
+
+$white: #d4d4d4;
+$purple: #060611;
+$light-indigo: #222339;
+$indigo: #03041a;
+$dark-indigo: #2d2f54;
+$green: #0fd9b7;
+
+$open-sans: 'Open Sans', 'Arial', sans-serif;
+
+$editor-menu-height: 50px;
+
+$category-bg: $light-indigo;
+$category-color: #bebebe;
+
+$variables-padding: 11px;
+$variables-bg: #121326;
+
+$variables-container-width: 280px;
+$variables-container-height: calc(100vh - #{$editor-menu-height});
+
+$html-bg: #ffffff;
+$html-width: calc(100vw - #{$variables-container-width});
+$html-height: calc(100vh - #{$editor-menu-height});
+
+$font-family-sans-serif: 'Amiko', 'Helvetica Neue', Arial, sans-serif;
+
+$dropdown-bg: $purple;
+
+$heading-color: $white;
+
+$card-spacer-x: 1.5rem;
+$card-bg: #15162c;
+
+$input-bg: $indigo;
+$input-border-color: white;
+$input-border-radius: 0px;
+$input-btn-padding-y: 0.6rem;
+$input-btn-padding-x: 0.75rem;
+
+$colorpicker-size: 32px;
+$sub-nav-width: 280px;
+$sub-bar-height: 40px;
+
+$modal-content-bg: #030413;
+$modal-content-border-width: 0px;
+
+$close-color: white;
+$close-font-size: 2.5rem;
+$close-text-shadow: none;
+$close-font-weight: 100;

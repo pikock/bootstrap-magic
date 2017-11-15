@@ -1,0 +1,153 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/src/ngTouch/directive/ngClick.js?message=docs(ngClick)%3A%20describe%20your%20change...#L7' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+
+<a href='https://github.com/angular/angular.js/tree/v1.6.6/src/ngTouch/directive/ngClick.js#L7' class='view-source pull-right btn btn-primary'>
+  <i class="glyphicon glyphicon-zoom-in">&nbsp;</i>View Source
+</a>
+
+
+<header class="api-profile-header">
+  <h1 class="api-profile-header-heading">ngClick</h1>
+  <ol class="api-profile-header-structure naked-list step-list">
+    
+    <li>
+      - directive in module <a href="api/ngTouch">ngTouch</a>
+    </li>
+  </ol>
+</header>
+
+
+
+<div class="alert alert-danger deprecation">
+  <div class="title"><strong>Deprecated:</strong>
+    <span class="since">(since v1.5.0) </span>
+    
+  </div>
+  <p>This directive is deprecated and <strong>disabled</strong> by default.
+The directive will receive no further support and might be removed from future releases.
+If you need the directive, you can enable it with the <a href="api/ngTouch/provider/$touchProvider">$touchProvider#ngClickOverrideEnabled</a>
+function. We also recommend that you migrate to <a href="https://github.com/ftlabs/fastclick">FastClick</a>.
+To learn more about the 300ms delay, this <a href="http://developer.telerik.com/featured/300-ms-click-delay-ios-8/">Telerik article</a>
+gives a good overview.</p>
+
+</div>
+
+
+
+<div class="api-profile-description">
+  <p>A more powerful replacement for the default ngClick designed to be used on touchscreen
+devices. Most mobile browsers wait about 300ms after a tap-and-release before sending
+the click event. This version handles them immediately, and then prevents the
+following click event from propagating.</p>
+<p>Requires the <a href="api/ngTouch"><code>ngTouch</code></a> module to be installed.</p>
+<p>This directive can fall back to using an ordinary click event, and so works on desktop
+browsers as well as mobile.</p>
+<p>This directive also sets the CSS class <code>ng-click-active</code> while the element is being held
+down (by a mouse click or touch) so you can restyle the depressed element if you wish.</p>
+
+</div>
+
+
+
+
+<div>
+  
+
+  
+  <h2>Directive Info</h2>
+  <ul>
+    
+    <li>This directive executes at priority level 0.</li>
+    
+  </ul>
+
+  
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+  
+    <ul>
+    
+      <li>as element:
+      <pre><code>&lt;ng-click&#10;  ng-click=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ng-click&gt;</code></pre>
+      </li>
+    <li>as attribute:
+        <pre><code>&lt;ANY&#10;  ng-click=&quot;expression&quot;&gt;&#10;...&#10;&lt;/ANY&gt;</code></pre>
+      </li>
+    
+  </div>
+  
+<section class="api-section">
+  <h3>Arguments</h3>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td>
+        ngClick
+        
+        
+      </td>
+      <td>
+        <a href="" class="label type-hint type-hint-expression">expression</a>
+      </td>
+      <td>
+        <p><a href="guide/expression">Expression</a> to evaluate
+upon tap. (Event object is available as <code>$event</code>)</p>
+
+        
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+</section>
+  
+
+  
+  <h2 id="example">Examples</h2><p>
+
+<div>
+  <plnkr-opener example-path="examples/example-ng-touch-ng-click"></plnkr-opener>
+
+  <div class="runnable-example"
+      path="examples/example-ng-touch-ng-click"
+      module="ngClickExample"
+      deps="angular-touch.js"
+      name="ng-touch-ng-click">
+
+  
+    <div class="runnable-example-file" 
+      name="index.html"
+      language="html"
+      type="html">
+      <pre><code>&lt;button ng-click=&quot;count = count + 1&quot; ng-init=&quot;count=0&quot;&gt;&#10;  Increment&#10;&lt;/button&gt;&#10;count: {{ count }}</code></pre>
+    </div>
+  
+    <div class="runnable-example-file" 
+      name="script.js"
+      language="js"
+      type="js">
+      <pre><code>angular.module(&#39;ngClickExample&#39;, [&#39;ngTouch&#39;]);</code></pre>
+    </div>
+  
+
+    <iframe class="runnable-example-frame" ng-src="{{getExampleIndex('examples/example-ng-touch-ng-click')}}" name="example-ng-touch-ng-click"></iframe>
+  </div>
+</div>
+
+
+</p>
+
+</div>
+
+

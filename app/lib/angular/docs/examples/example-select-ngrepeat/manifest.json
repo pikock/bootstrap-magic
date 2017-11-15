@@ -1,0 +1,7 @@
+{
+  "name": "example-select-ngrepeat",
+  "files": [
+    "index-production.html",
+    "app.js"
+  ]
+}

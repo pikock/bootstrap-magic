@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ngController-debug</title>
+  
+
+  <script src="../../../angular.js"></script>
+  <script src="app.js"></script>
+  
+
+  
+</head>
+<body ng-app="controllerExample">
+  <div id="ctrl-exmpl" ng-controller="SettingsController2">
+  <label>Name: <input type="text" ng-model="name"/></label>
+  <button ng-click="greet()">greet</button><br/>
+  Contact:
+  <ul>
+    <li ng-repeat="contact in contacts">
+      <select ng-model="contact.type" id="select_{{$index}}">
+         <option>phone</option>
+         <option>email</option>
+      </select>
+      <input type="text" ng-model="contact.value" aria-labelledby="select_{{$index}}" />
+      <button ng-click="clearContact(contact)">clear</button>
+      <button ng-click="removeContact(contact)">X</button>
+    </li>
+    <li>[ <button ng-click="addContact()">add</button> ]</li>
+ </ul>
+</div>
+</body>
+</html>

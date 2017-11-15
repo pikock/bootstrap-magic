@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="646" height="344" viewBox="0 0 646 344">
+  <defs>
+    <rect id="b" width="30.38" height="10.342" x=".215" y=".108" rx="1.293"/>
+    <filter id="a" width="142.8%" height="225.7%" x="-21.4%" y="-53.2%" filterUnits="objectBoundingBox">
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+    </filter>
+    <rect id="d" width="30.38" height="10.342" x=".215" y=".108" rx="1.293"/>
+    <filter id="c" width="142.8%" height="225.7%" x="-21.4%" y="-53.2%" filterUnits="objectBoundingBox">
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+    </filter>
+    <rect id="f" width="30.38" height="10.342" x=".215" y=".108" rx="1.293"/>
+    <filter id="e" width="142.8%" height="225.7%" x="-21.4%" y="-53.2%" filterUnits="objectBoundingBox">
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(0 2)">
+    <g opacity=".204" transform="translate(284.05 97.85)">
+      <rect width="358.741" height="238.083" x=".224" fill="#0F1023" stroke="#2C354F" stroke-width=".646" rx="1.293"/>
+      <rect width="357.664" height="117.426" x=".763" y=".539" fill="#222339"/>
+      <path fill="#10111E" d="M2.05561,0.53865 L356.59504,0.53865 L356.59504,0.53865 C357.309012,0.53865 357.8878,1.11743837 357.8878,1.83141 L357.8878,14.54355 L0.76285,14.54355 L0.76285,1.83141 L0.76285,1.83141 C0.76285,1.11743837 1.34163837,0.53865 2.05561,0.53865 Z"/>
+      <rect width="17.237" height="2.693" x="10.459" y="6.464" fill="#444563" rx="1.293"/>
+      <rect width="17.237" height="2.693" x="32.005" y="6.464" fill="#444563" rx="1.293"/>
+      <rect width="17.237" height="2.693" x="53.551" y="6.464" fill="#444563" rx="1.293"/>
+      <rect width="17.237" height="2.693" x="75.097" y="6.464" fill="#B60958" rx="1.293"/>
+      <g fill="#18192F" fill-rule="nonzero" transform="translate(57.321 29.087)">
+        <path d="M275.507547,10.2845972 C271.286255,6.62660093 262.843672,6.62660093 258.62238,10.2845972 L184.75695,57.366225 C183.646084,58.2441441 181.868698,58.2441441 180.757832,57.5125449 L121.699743,23.431275 C117.256278,20.2122383 109.480215,20.2122383 105.03675,23.431275 L3.77055,71.1018 C1.54881755,72.7113184 0.215778084,74.7597963 0.215778084,76.954594 L0.323667126,85.3655736 C0.323667126,87.2677316 2.76757282,88.87725 5.655825,88.87725 L298.95075,88.87725 C302.187749,88.87725 301.05747,88.40744 301.05747,85.4930005 L301.05747,34.4273726 C301.05747,32.5252145 300.168777,30.6230565 298.169218,29.0135381 L275.507547,10.2845972 Z"/>
+        <ellipse cx="47.149" cy="7.81" rx="7.827" ry="7.81"/>
+      </g>
+      <g transform="translate(78.328 128.737)">
+        <rect width="84.568" height="73.957" fill="#23253C"/>
+        <g transform="translate(95.341)">
+          <g transform="translate(0 64.638)">
+            <use fill="black" filter="url(#a)" xlink:href="#b"/>
+            <use fill="#B60958" xlink:href="#b"/>
+            <text fill="#FFFFFF" font-family="OpenSans-Semibold, Open Sans" font-size="5.386" font-weight="500" letter-spacing="-.081">
+              <tspan x="7.002" y="7.077">Morbi </tspan>
+            </text>
+          </g>
+          <text fill="#8082A0" font-family="OpenSans-Bold, Open Sans" font-size="8.08" font-weight="bold" letter-spacing="-.081">
+            <tspan x="0" y="9">Phasellus arcu</tspan>
+          </text>
+          <text fill="#8082A0" font-family="OpenSans-Semibold, Open Sans" font-size="5.386" font-weight="500" letter-spacing="-.081">
+            <tspan x="0" y="22.16">Morbi molestie justo et finibus auctor. </tspan> <tspan x="0" y="30.16">Nunc accumsan leo vel metus sollicitudin </tspan> <tspan x="0" y="38.16">dapibus. Praesent rutrum nibh tincidunt </tspan> <tspan x="0" y="46.16">sagittis mattis.</tspan>
+          </text>
+        </g>
+        <path fill="#18192F" fill-rule="nonzero" d="M69.216525,26.39385 C68.0309386,24.0580211 65.6597658,24.0580211 64.4741795,26.39385 C48.9909908,47.5330939 41.1453976,57.9469939 40.9374,57.63555 L28.0098,39.052125 C26.7618143,36.9965955 24.5778394,36.9965955 23.3298537,39.052125 C7.81702001,57.0522304 0.060603147,66.5194489 0.060603147,67.4537805 L0.0909047205,72.824647 C0.0909047205,74.039278 -0.272540684,75.141675 0.53865,75.141675 L84.0294,75.141675 C84.8405907,75.141675 84.5546025,74.120647 84.5546025,72.906016 L84.56805,47.8752575 C84.56805,46.6606265 84.3184529,45.4459954 83.7568593,44.4182307 L69.216525,26.39385 Z"/>
+        <circle cx="15.892" cy="23.162" r="4.848" fill="#18192F" fill-rule="nonzero"/>
+        <g transform="translate(0 87.261)">
+          <rect width="84.568" height="21.546" fill="#23253C"/>
+          <g fill="#8082A0" letter-spacing="-.081" transform="translate(95.341)">
+            <text font-family="OpenSans-Bold, Open Sans" font-size="8.08" font-weight="bold">
+              <tspan x="0" y="9">Metus sollicitudin</tspan>
+            </text>
+            <text font-family="OpenSans-Semibold, Open Sans" font-size="5.386" font-weight="500">
+              <tspan x="0" y="22.16">Morbi molestie justo et finibus auctor. </tspan> <tspan x="0" y="30.16">Nunc accumsan leo vel metus sollicitudin </tspan> <tspan x="0" y="38.16">dapibus. Praesent rutrum nibh tincidunt </tspan> <tspan x="0" y="46.16">sagittis mattis.</tspan>
+            </text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g opacity=".15">
+      <rect width="358.741" height="238.083" x=".224" fill="#0F1023" stroke="#2C354F" stroke-width=".646" rx="1.293"/>
+      <rect width="357.664" height="117.426" x=".763" y=".539" fill="#222339"/>
+      <path fill="#10111E" d="M2.05561,0.53865 L356.59504,0.53865 L356.59504,0.53865 C357.309012,0.53865 357.8878,1.11743837 357.8878,1.83141 L357.8878,14.54355 L0.76285,14.54355 L0.76285,1.83141 L0.76285,1.83141 C0.76285,1.11743837 1.34163837,0.53865 2.05561,0.53865 Z"/>
+      <rect width="17.237" height="2.693" x="10.459" y="6.464" fill="#444563" rx="1.293"/>
+      <rect width="17.237" height="2.693" x="32.005" y="6.464" fill="#444563" rx="1.293"/>
+      <rect width="17.237" height="2.693" x="53.551" y="6.464" fill="#444563" rx="1.293"/>
+      <rect width="17.237" height="2.693" x="75.097" y="6.464" fill="#B60958" rx="1.293"/>
+      <g fill="#18192F" fill-rule="nonzero" transform="translate(57.321 29.087)">
+        <path d="M275.507547,10.2845972 C271.286255,6.62660093 262.843672,6.62660093 258.62238,10.2845972 L184.75695,57.366225 C183.646084,58.2441441 181.868698,58.2441441 180.757832,57.5125449 L121.699743,23.431275 C117.256278,20.2122383 109.480215,20.2122383 105.03675,23.431275 L3.77055,71.1018 C1.54881755,72.7113184 0.215778084,74.7597963 0.215778084,76.954594 L0.323667126,85.3655736 C0.323667126,87.2677316 2.76757282,88.87725 5.655825,88.87725 L298.95075,88.87725 C302.187749,88.87725 301.05747,88.40744 301.05747,85.4930005 L301.05747,34.4273726 C301.05747,32.5252145 300.168777,30.6230565 298.169218,29.0135381 L275.507547,10.2845972 Z"/>
+        <ellipse cx="47.149" cy="7.81" rx="7.827" ry="7.81"/>
+      </g>
+      <g transform="translate(78.328 128.737)">
+        <rect width="84.568" height="73.957" fill="#23253C"/>
+        <g transform="translate(95.341)">
+          <g transform="translate(0 64.638)">
+            <use fill="black" filter="url(#c)" xlink:href="#d"/>
+            <use fill="#B60958" xlink:href="#d"/>
+            <text fill="#FFFFFF" font-family="OpenSans-Semibold, Open Sans" font-size="5.386" font-weight="500" letter-spacing="-.081">
+              <tspan x="7.002" y="7.077">Morbi </tspan>
+            </text>
+          </g>
+          <text fill="#8082A0" font-family="OpenSans-Bold, Open Sans" font-size="8.08" font-weight="bold" letter-spacing="-.081">
+            <tspan x="0" y="9">Phasellus arcu</tspan>
+          </text>
+          <text fill="#8082A0" font-family="OpenSans-Semibold, Open Sans" font-size="5.386" font-weight="500" letter-spacing="-.081">
+            <tspan x="0" y="22.16">Morbi molestie justo et finibus auctor. </tspan> <tspan x="0" y="30.16">Nunc accumsan leo vel metus sollicitudin </tspan> <tspan x="0" y="38.16">dapibus. Praesent rutrum nibh tincidunt </tspan> <tspan x="0" y="46.16">sagittis mattis.</tspan>
+          </text>
+        </g>
+        <path fill="#18192F" fill-rule="nonzero" d="M69.216525,26.39385 C68.0309386,24.0580211 65.6597658,24.0580211 64.4741795,26.39385 C48.9909908,47.5330939 41.1453976,57.9469939 40.9374,57.63555 L28.0098,39.052125 C26.7618143,36.9965955 24.5778394,36.9965955 23.3298537,39.052125 C7.81702001,57.0522304 0.060603147,66.5194489 0.060603147,67.4537805 L0.0909047205,72.824647 C0.0909047205,74.039278 -0.272540684,75.141675 0.53865,75.141675 L84.0294,75.141675 C84.8405907,75.141675 84.5546025,74.120647 84.5546025,72.906016 L84.56805,47.8752575 C84.56805,46.6606265 84.3184529,45.4459954 83.7568593,44.4182307 L69.216525,26.39385 Z"/>
+        <circle cx="15.892" cy="23.162" r="4.848" fill="#18192F" fill-rule="nonzero"/>
+        <g transform="translate(0 87.261)">
+          <rect width="84.568" height="21.546" fill="#23253C"/>
+          <g fill="#8082A0" letter-spacing="-.081" transform="translate(95.341)">
+            <text font-family="OpenSans-Bold, Open Sans" font-size="8.08" font-weight="bold">
+              <tspan x="0" y="9">Metus sollicitudin</tspan>
+            </text>
+            <text font-family="OpenSans-Semibold, Open Sans" font-size="5.386" font-weight="500">
+              <tspan x="0" y="22.16">Morbi molestie justo et finibus auctor. </tspan> <tspan x="0" y="30.16">Nunc accumsan leo vel metus sollicitudin </tspan> <tspan x="0" y="38.16">dapibus. Praesent rutrum nibh tincidunt </tspan> <tspan x="0" y="46.16">sagittis mattis.</tspan>
+            </text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(179.55 46.55)">
+      <rect width="358.741" height="238.083" x=".224" fill="#0F1023" stroke="#2C354F" stroke-width=".646" rx="1.293"/>
+      <rect width="357.664" height="117.426" x=".763" y=".539" fill="#222339"/>
+      <path fill="#10111E" d="M2.05561,0.53865 L356.59504,0.53865 L356.59504,0.53865 C357.309012,0.53865 357.8878,1.11743837 357.8878,1.83141 L357.8878,14.54355 L0.76285,14.54355 L0.76285,1.83141 L0.76285,1.83141 C0.76285,1.11743837 1.34163837,0.53865 2.05561,0.53865 Z"/>
+      <rect width="17.237" height="2.693" x="10.459" y="6.464" fill="#444563" rx="1.293"/>
+      <rect width="17.237" height="2.693" x="32.005" y="6.464" fill="#444563" rx="1.293"/>
+      <rect width="17.237" height="2.693" x="53.551" y="6.464" fill="#444563" rx="1.293"/>
+      <rect width="17.237" height="2.693" x="75.097" y="6.464" fill="#B60958" rx="1.293"/>
+      <g fill="#18192F" fill-rule="nonzero" transform="translate(57.321 29.087)">
+        <path d="M275.507547,10.2845972 C271.286255,6.62660093 262.843672,6.62660093 258.62238,10.2845972 L184.75695,57.366225 C183.646084,58.2441441 181.868698,58.2441441 180.757832,57.5125449 L121.699743,23.431275 C117.256278,20.2122383 109.480215,20.2122383 105.03675,23.431275 L3.77055,71.1018 C1.54881755,72.7113184 0.215778084,74.7597963 0.215778084,76.954594 L0.323667126,85.3655736 C0.323667126,87.2677316 2.76757282,88.87725 5.655825,88.87725 L298.95075,88.87725 C302.187749,88.87725 301.05747,88.40744 301.05747,85.4930005 L301.05747,34.4273726 C301.05747,32.5252145 300.168777,30.6230565 298.169218,29.0135381 L275.507547,10.2845972 Z"/>
+        <ellipse cx="47.149" cy="7.81" rx="7.827" ry="7.81"/>
+      </g>
+      <g transform="translate(78.328 128.737)">
+        <rect width="84.568" height="73.957" fill="#23253C"/>
+        <g transform="translate(95)">
+          <g transform="translate(0 64.638)">
+            <use fill="black" filter="url(#e)" xlink:href="#f"/>
+            <use fill="#B60958" xlink:href="#f"/>
+            <text fill="#FFFFFF" font-family="OpenSans-Semibold, Open Sans" font-size="5.386" font-weight="500" letter-spacing="-.081">
+              <tspan x="7.002" y="7.077">Morbi </tspan>
+            </text>
+          </g>
+          <text fill="#8082A0" font-family="OpenSans-Bold, Open Sans" font-size="8.08" font-weight="bold" letter-spacing="-.081">
+            <tspan x="0" y="9">Phasellus arcu</tspan>
+          </text>
+          <text fill="#8082A0" font-family="OpenSans-Semibold, Open Sans" font-size="5.386" font-weight="500" letter-spacing="-.081">
+            <tspan x="0" y="22.16">Morbi molestie justo et finibus auctor. </tspan> <tspan x="0" y="30.16">Nunc accumsan leo vel metus sollicitudin </tspan> <tspan x="0" y="38.16">dapibus. Praesent rutrum nibh tincidunt </tspan> <tspan x="0" y="46.16">sagittis mattis.</tspan>
+          </text>
+        </g>
+        <path fill="#18192F" fill-rule="nonzero" d="M69.216525,26.39385 C68.0309386,24.0580211 65.6597658,24.0580211 64.4741795,26.39385 C48.9909908,47.5330939 41.1453976,57.9469939 40.9374,57.63555 L28.0098,39.052125 C26.7618143,36.9965955 24.5778394,36.9965955 23.3298537,39.052125 C7.81702001,57.0522304 0.060603147,66.5194489 0.060603147,67.4537805 L0.0909047205,72.824647 C0.0909047205,74.039278 -0.272540684,75.141675 0.53865,75.141675 L84.0294,75.141675 C84.8405907,75.141675 84.5546025,74.120647 84.5546025,72.906016 L84.56805,47.8752575 C84.56805,46.6606265 84.3184529,45.4459954 83.7568593,44.4182307 L69.216525,26.39385 Z"/>
+        <circle cx="15.892" cy="23.162" r="4.848" fill="#18192F" fill-rule="nonzero"/>
+        <g transform="translate(0 87.261)">
+          <rect width="84.568" height="21.546" fill="#23253C"/>
+          <g fill="#8082A0" letter-spacing="-.081" transform="translate(95.341)">
+            <text font-family="OpenSans-Bold, Open Sans" font-size="8.08" font-weight="bold">
+              <tspan x="0" y="9">Metus sollicitudin</tspan>
+            </text>
+            <text font-family="OpenSans-Semibold, Open Sans" font-size="5.386" font-weight="500">
+              <tspan x="0" y="20.16">Morbi molestie justo et finibus auctor. </tspan>
+            </text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

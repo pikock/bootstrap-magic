@@ -1,4 +1,143 @@
+'use strict';
 angular.module("ngLocale", [], ["$provide", function($provide) {
 var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
-$provide.value("$locale", {"DATETIME_FORMATS":{"MONTH":["ינואר","פברואר","מרס","אפריל","מאי","יוני","יולי","אוגוסט","ספטמבר","אוקטובר","נובמבר","דצמבר"],"SHORTMONTH":["ינו","פבר","מרס","אפר","מאי","יונ","יול","אוג","ספט","אוק","נוב","דצמ"],"DAY":["יום ראשון","יום שני","יום שלישי","יום רביעי","יום חמישי","יום שישי","יום שבת"],"SHORTDAY":["יום א׳","יום ב׳","יום ג׳","יום ד׳","יום ה׳","יום ו׳","שבת"],"AMPMS":["לפנה״צ","אחה״צ"],"medium":"d בMMM yyyy HH:mm:ss","short":"dd/MM/yy HH:mm","fullDate":"EEEE, d בMMMM y","longDate":"d בMMMM y","mediumDate":"d בMMM yyyy","shortDate":"dd/MM/yy","mediumTime":"HH:mm:ss","shortTime":"HH:mm"},"NUMBER_FORMATS":{"DECIMAL_SEP":".","GROUP_SEP":",","PATTERNS":[{"minInt":1,"minFrac":0,"macFrac":0,"posPre":"","posSuf":"","negPre":"-","negSuf":"","gSize":3,"lgSize":3,"maxFrac":3},{"minInt":1,"minFrac":2,"macFrac":0,"posPre":"","posSuf":" \u00A4","negPre":"-","negSuf":" \u00A4","gSize":3,"lgSize":3,"maxFrac":2}],"CURRENCY_SYM":"₪"},"pluralCat":function (n) {  if (n == 1) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;},"id":"he"});
+function getDecimals(n) {
+  n = n + '';
+  var i = n.indexOf('.');
+  return (i == -1) ? 0 : n.length - i - 1;
+}
+
+function getVF(n, opt_precision) {
+  var v = opt_precision;
+
+  if (undefined === v) {
+    v = Math.min(getDecimals(n), 3);
+  }
+
+  var base = Math.pow(10, v);
+  var f = ((n * base) | 0) % base;
+  return {v: v, f: f};
+}
+
+$provide.value("$locale", {
+  "DATETIME_FORMATS": {
+    "AMPMS": [
+      "\u05dc\u05e4\u05e0\u05d4\u05f4\u05e6",
+      "\u05d0\u05d7\u05d4\u05f4\u05e6"
+    ],
+    "DAY": [
+      "\u05d9\u05d5\u05dd \u05e8\u05d0\u05e9\u05d5\u05df",
+      "\u05d9\u05d5\u05dd \u05e9\u05e0\u05d9",
+      "\u05d9\u05d5\u05dd \u05e9\u05dc\u05d9\u05e9\u05d9",
+      "\u05d9\u05d5\u05dd \u05e8\u05d1\u05d9\u05e2\u05d9",
+      "\u05d9\u05d5\u05dd \u05d7\u05de\u05d9\u05e9\u05d9",
+      "\u05d9\u05d5\u05dd \u05e9\u05d9\u05e9\u05d9",
+      "\u05d9\u05d5\u05dd \u05e9\u05d1\u05ea"
+    ],
+    "ERANAMES": [
+      "\u05dc\u05e4\u05e0\u05d9 \u05d4\u05e1\u05e4\u05d9\u05e8\u05d4",
+      "\u05dc\u05e1\u05e4\u05d9\u05e8\u05d4"
+    ],
+    "ERAS": [
+      "\u05dc\u05e4\u05e0\u05d4\u05f4\u05e1",
+      "\u05dc\u05e1\u05e4\u05d9\u05e8\u05d4"
+    ],
+    "FIRSTDAYOFWEEK": 6,
+    "MONTH": [
+      "\u05d9\u05e0\u05d5\u05d0\u05e8",
+      "\u05e4\u05d1\u05e8\u05d5\u05d0\u05e8",
+      "\u05de\u05e8\u05e5",
+      "\u05d0\u05e4\u05e8\u05d9\u05dc",
+      "\u05de\u05d0\u05d9",
+      "\u05d9\u05d5\u05e0\u05d9",
+      "\u05d9\u05d5\u05dc\u05d9",
+      "\u05d0\u05d5\u05d2\u05d5\u05e1\u05d8",
+      "\u05e1\u05e4\u05d8\u05de\u05d1\u05e8",
+      "\u05d0\u05d5\u05e7\u05d8\u05d5\u05d1\u05e8",
+      "\u05e0\u05d5\u05d1\u05de\u05d1\u05e8",
+      "\u05d3\u05e6\u05de\u05d1\u05e8"
+    ],
+    "SHORTDAY": [
+      "\u05d9\u05d5\u05dd \u05d0\u05f3",
+      "\u05d9\u05d5\u05dd \u05d1\u05f3",
+      "\u05d9\u05d5\u05dd \u05d2\u05f3",
+      "\u05d9\u05d5\u05dd \u05d3\u05f3",
+      "\u05d9\u05d5\u05dd \u05d4\u05f3",
+      "\u05d9\u05d5\u05dd \u05d5\u05f3",
+      "\u05e9\u05d1\u05ea"
+    ],
+    "SHORTMONTH": [
+      "\u05d9\u05e0\u05d5\u05f3",
+      "\u05e4\u05d1\u05e8\u05f3",
+      "\u05de\u05e8\u05e5",
+      "\u05d0\u05e4\u05e8\u05f3",
+      "\u05de\u05d0\u05d9",
+      "\u05d9\u05d5\u05e0\u05d9",
+      "\u05d9\u05d5\u05dc\u05d9",
+      "\u05d0\u05d5\u05d2\u05f3",
+      "\u05e1\u05e4\u05d8\u05f3",
+      "\u05d0\u05d5\u05e7\u05f3",
+      "\u05e0\u05d5\u05d1\u05f3",
+      "\u05d3\u05e6\u05de\u05f3"
+    ],
+    "STANDALONEMONTH": [
+      "\u05d9\u05e0\u05d5\u05d0\u05e8",
+      "\u05e4\u05d1\u05e8\u05d5\u05d0\u05e8",
+      "\u05de\u05e8\u05e5",
+      "\u05d0\u05e4\u05e8\u05d9\u05dc",
+      "\u05de\u05d0\u05d9",
+      "\u05d9\u05d5\u05e0\u05d9",
+      "\u05d9\u05d5\u05dc\u05d9",
+      "\u05d0\u05d5\u05d2\u05d5\u05e1\u05d8",
+      "\u05e1\u05e4\u05d8\u05de\u05d1\u05e8",
+      "\u05d0\u05d5\u05e7\u05d8\u05d5\u05d1\u05e8",
+      "\u05e0\u05d5\u05d1\u05de\u05d1\u05e8",
+      "\u05d3\u05e6\u05de\u05d1\u05e8"
+    ],
+    "WEEKENDRANGE": [
+      4,
+      5
+    ],
+    "fullDate": "EEEE, d \u05d1MMMM y",
+    "longDate": "d \u05d1MMMM y",
+    "medium": "d \u05d1MMM y H:mm:ss",
+    "mediumDate": "d \u05d1MMM y",
+    "mediumTime": "H:mm:ss",
+    "short": "d.M.y H:mm",
+    "shortDate": "d.M.y",
+    "shortTime": "H:mm"
+  },
+  "NUMBER_FORMATS": {
+    "CURRENCY_SYM": "\u20aa",
+    "DECIMAL_SEP": ".",
+    "GROUP_SEP": ",",
+    "PATTERNS": [
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 3,
+        "minFrac": 0,
+        "minInt": 1,
+        "negPre": "-",
+        "negSuf": "",
+        "posPre": "",
+        "posSuf": ""
+      },
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 2,
+        "minFrac": 2,
+        "minInt": 1,
+        "negPre": "\u200f-",
+        "negSuf": "\u00a0\u00a4",
+        "posPre": "\u200f",
+        "posSuf": "\u00a0\u00a4"
+      }
+    ]
+  },
+  "id": "he",
+  "localeID": "he",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  if (i == 2 && vf.v == 0) {    return PLURAL_CATEGORY.TWO;  }  if (vf.v == 0 && (n < 0 || n > 10) && n % 10 == 0) {    return PLURAL_CATEGORY.MANY;  }  return PLURAL_CATEGORY.OTHER;}
+});
 }]);

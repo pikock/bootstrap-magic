@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-accessibility-ng-model-debug</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  
+
+  <script src="../../../angular.js"></script>
+  <script src="../../../angular-aria.js"></script>
+  <script src="script.js"></script>
+  
+
+  
+</head>
+<body ng-app="ngAria_ngModelExample">
+  <form>
+  <custom-checkbox role="checkbox" ng-model="checked" required
+      aria-label="Custom checkbox" show-attrs>
+    Custom checkbox
+  </custom-checkbox>
+</form>
+<hr />
+<b>Is checked:</b> {{ !!checked }}
+</body>
+</html>

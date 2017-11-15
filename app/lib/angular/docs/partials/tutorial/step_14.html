@@ -1,0 +1,470 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/tutorial/step_14.ngdoc?message=docs(tutorial%2F14 - Animations)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<ul doc-tutorial-nav="14"></ul>
+
+
+<p>In this step, we will enhance our web application by adding CSS and JavaScript animations on top of
+the template code we created earlier.</p>
+<ul>
+<li>We now use the <a href="api/ngAnimate">ngAnimate</a> module to enable animations throughout the application.</li>
+<li>We also rely on built-in directives to automatically trigger hooks for animations to tap into.</li>
+<li>When an animation is found, it will run along with the actual DOM operation that is being issued
+on the element at the given time (e.g. inserting/removing nodes on <a href="api/ng/directive/ngRepeat">ngRepeat</a> or
+adding/removing classes on <a href="api/ng/directive/ngClass">ngClass</a>).</li>
+</ul>
+<div doc-tutorial-reset="14"></div>
+
+
+<h2 id="dependencies">Dependencies</h2>
+<p>The animation functionality is provided by Angular in the <code>ngAnimate</code> module, which is distributed
+separately from the core Angular framework. In addition we will use <a href="https://jquery.com/">jQuery</a> in this project
+to do extra JavaScript animations.</p>
+<p>Since we are using <a href="http://bower.io/">Bower</a> to install client-side dependencies, this step updates the
+<code>bower.json</code> configuration file to include the new dependencies:</p>
+<p><br />
+<strong><code>bower.json</code>:</strong></p>
+<pre><code>{
+  &quot;name&quot;: &quot;angular-phonecat&quot;,
+  &quot;description&quot;: &quot;A starter project for AngularJS&quot;,
+  &quot;version&quot;: &quot;0.0.0&quot;,
+  &quot;homepage&quot;: &quot;https://github.com/angular/angular-phonecat&quot;,
+  &quot;license&quot;: &quot;MIT&quot;,
+  &quot;private&quot;: true,
+  &quot;dependencies&quot;: {
+    &quot;angular&quot;: &quot;1.5.x&quot;,
+    &quot;angular-animate&quot;: &quot;1.5.x&quot;,
+    &quot;angular-mocks&quot;: &quot;1.5.x&quot;,
+    &quot;angular-resource&quot;: &quot;1.5.x&quot;,
+    &quot;angular-route&quot;: &quot;1.5.x&quot;,
+    &quot;bootstrap&quot;: &quot;3.3.x&quot;,
+    &quot;jquery&quot;: &quot;3.2.x&quot;
+  }
+}
+</code></pre>
+<ul>
+<li><code>&quot;angular-animate&quot;: &quot;1.5.x&quot;</code> tells bower to install a version of the angular-animate module that
+is compatible with version 1.5.x of Angular.</li>
+<li><code>&quot;jquery&quot;: &quot;3.2.x&quot;</code> tells bower to install the latest patch release of the 3.2 version of jQuery.
+Note that this is not an Angular library; it is the standard jQuery library. We can use bower to
+install a wide range of 3rd party libraries.</li>
+</ul>
+<p>Now, we must tell bower to download and install these dependencies.</p>
+<pre><code>npm install
+</code></pre>
+<div class="alert alert-info">
+  <strong>Note:</strong> If you have bower installed globally, you can run <code>bower install</code>, but for this project
+  we have preconfigured <code>npm install</code> to run bower for us.
+</div>
+
+<div class="alert alert-warning">
+  <strong>Warning:</strong> If a new version of Angular has been released since you last ran <code>npm install</code>, then
+  you may have a problem with the <code>bower install</code> due to a conflict between the versions of
+  angular.js that need to be installed. If you run into this issue, simply delete your
+  <code>app/bower_components</code> directory and then run <code>npm install</code>.
+</div>
+
+
+<h2 id="how-animations-work-with-nganimate-">How Animations work with <code>ngAnimate</code></h2>
+<p>To get an idea of how animations work with AngularJS, you might want to read the
+<a href="guide/animations">Animations</a> section of the Developer Guide first.</p>
+<h2 id="template">Template</h2>
+<p>In order to enable animations, we need to update <code>index.html</code>, loading the necessary dependencies
+(<strong>angular-animate.js</strong> and <strong>jquery.js</strong>) and the files that contain the CSS and JavaScript code
+used in CSS/JavaScript animations. The animation module, <a href="api/ngAnimate">ngAnimate</a>, contains the
+code necessary to make your application &quot;animation aware&quot;.</p>
+<p><br />
+<strong><code>app/index.html</code>:</strong></p>
+<pre><code class="lang-html">...
+
+&lt;!-- Defines CSS necessary for animations --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;app.animations.css&quot; /&gt;
+
+...
+
+&lt;!-- Used for JavaScript animations (include this before angular.js) --&gt;
+&lt;script src=&quot;bower_components/jquery/dist/jquery.js&quot;&gt;&lt;/script&gt;
+
+...
+
+&lt;!-- Adds animation support in AngularJS --&gt;
+&lt;script src=&quot;bower_components/angular-animate/angular-animate.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- Defines JavaScript animations --&gt;
+&lt;script src=&quot;app.animations.js&quot;&gt;&lt;/script&gt;
+
+...
+</code></pre>
+<div class="alert alert-error">
+  <strong>Important:</strong> Be sure to use jQuery version 2.1 or newer, when using Angular 1.5; jQuery 1.x is
+  not officially supported.
+  In order for Angular to detect jQuery and take advantage of it, make sure to include <code>jquery.js</code>
+  before <code>angular.js</code>.
+</div>
+
+<p>Animations can now be created within the CSS code (<code>app.animations.css</code>) as well as the JavaScript
+code (<code>app.animations.js</code>).</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>We need to add a dependency on <code>ngAnimate</code> to our main module first:</p>
+<p><br />
+<strong><code>app/app.module.js</code>:</strong></p>
+<pre><code class="lang-js">angular.
+  module(&#39;phonecatApp&#39;, [
+    &#39;ngAnimate&#39;,
+    ...
+  ]);
+</code></pre>
+<p>Now that our application is &quot;animation aware&quot;, let&#39;s create some fancy animations!</p>
+<h2 id="css-transition-animations-animating-ngrepeat-">CSS Transition Animations: Animating <code>ngRepeat</code></h2>
+<p>We will start off by adding CSS transition animations to our <code>ngRepeat</code> directive present on the
+<code>phoneList</code> component&#39;s template. We need to add an extra CSS class to our repeated element, in
+order to be able to hook into it with our CSS animation code.</p>
+<p><br />
+<strong><code>app/phone-list/phone-list.template.html</code>:</strong></p>
+<pre><code class="lang-html">...
+&lt;ul class=&quot;phones&quot;&gt;
+  &lt;li ng-repeat=&quot;phone in $ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp&quot;
+      class=&quot;thumbnail phone-list-item&quot;&gt;
+    &lt;a href=&quot;#!/phones/{{phone.id}}&quot; class=&quot;thumb&quot;&gt;
+      &lt;img ng-src=&quot;{{phone.imageUrl}}&quot; alt=&quot;{{phone.name}}&quot; /&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;#!/phones/{{phone.id}}&quot;&gt;{{phone.name}}&lt;/a&gt;
+    &lt;p&gt;{{phone.snippet}}&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+...
+</code></pre>
+<p>Did you notice the added <code>phone-list-item</code> CSS class? This is all we need in our HTML code to get
+animations working.</p>
+<p>Now for the actual CSS transition animation code:</p>
+<p><br />
+<strong><code>app/app.animations.css</code>:</strong></p>
+<pre><code class="lang-css">.phone-list-item.ng-enter,
+.phone-list-item.ng-leave,
+.phone-list-item.ng-move {
+  transition: 0.5s linear all;
+}
+
+.phone-list-item.ng-enter,
+.phone-list-item.ng-move {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.phone-list-item.ng-enter.ng-enter-active,
+.phone-list-item.ng-move.ng-move-active {
+  height: 120px;
+  opacity: 1;
+}
+
+.phone-list-item.ng-leave {
+  opacity: 1;
+  overflow: hidden;
+}
+
+.phone-list-item.ng-leave.ng-leave-active {
+  height: 0;
+  opacity: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+</code></pre>
+<p>As you can see, our <code>phone-list-item</code> CSS class is combined together with the animation hooks that
+occur when items are inserted into and removed from the list:</p>
+<ul>
+<li>The <code>ng-enter</code> class is applied to the element when a new phone is added to the list and rendered
+on the page.</li>
+<li>The <code>ng-move</code> class is applied to the element when a phone&#39;s relative position in the list
+changes.</li>
+<li>The <code>ng-leave</code> class is applied to the element when a phone is removed from the list.</li>
+</ul>
+<p>The phone list items are added and removed based on the data passed to the <code>ngRepeat</code> directive.
+For example, if the filter data changes, the items will be animated in and out of the repeat list.</p>
+<p>Something important to note is that, when an animation occurs, two sets of CSS classes are added to
+the element:</p>
+<ol>
+<li>A &quot;starting&quot; class that represents the style at the beginning of the animation.</li>
+<li>An &quot;active&quot; class that represents the style at the end of the animation.</li>
+</ol>
+<p>The name of the starting class is the name of the event that is fired (like <code>enter</code>, <code>move</code> or
+<code>leave</code>) prefixed with <code>ng-</code>. So an <code>enter</code> event will result in adding the <code>ng-enter</code> class.</p>
+<p>The active class name is derived from the starting class by appending an <code>-active</code> suffix.
+This two-class CSS naming convention allows the developer to craft an animation, beginning to end.</p>
+<p>In the example above, animated elements are expanded from a height of <strong>0px</strong> to <strong>120px</strong> when they
+are added to the list and are collapsed back down to <strong>0px</strong> before being removed from the list.
+There is also a catchy fade-in/fade-out effect that occurs at the same time. All this is handled by
+the CSS transition declaration at the top of the CSS file.</p>
+<div class="alert alert-warning">
+  Although all modern browsers have good support for <a href="http://caniuse.com/#feat=css-transitions">CSS transitions</a> and
+  <a href="http://caniuse.com/#feat=css-animation">CSS animations</a>, IE9 and earlier IE versions do not.
+  If you want animations that are backwards-compatible with older browsers, consider using
+  JavaScript-based animations, which are demonstrated below.
+</div>
+
+
+<h2 id="css-keyframe-animations-animating-ngview-">CSS Keyframe Animations: Animating <code>ngView</code></h2>
+<p>Next, let&#39;s add an animation for transitions between route changes in
+<a href="api/ngRoute/directive/ngView">ngView</a>.</p>
+<p>Again, we need to prepare our HTML template by adding a new CSS class, this time to the <code>ng-view</code>
+element. In order to gain more &quot;expressive power&quot; for our animations, we will also wrap the
+<code>[ng-view]</code> element in a container element.</p>
+<p><br />
+<strong><code>app/index.html</code>:</strong></p>
+<pre><code class="lang-html">&lt;div class=&quot;view-container&quot;&gt;
+  &lt;div ng-view class=&quot;view-frame&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>We have applied a <code>position: relative</code> CSS style to the <code>.view-container</code> wrapper, so that it is
+easier for us to manage the <code>.view-frame</code> element&#39;s positioning during the animation.</p>
+<p>With our preparation code in place, let&#39;s move on to the actual CSS styles for this transition
+animation.</p>
+<p><br />
+<strong><code>app/app.animations.css</code>:</strong></p>
+<pre><code class="lang-css">...
+
+.view-container {
+  position: relative;
+}
+
+.view-frame.ng-enter,
+.view-frame.ng-leave {
+  background: white;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.view-frame.ng-enter {
+  animation: 1s fade-in;
+  z-index: 100;
+}
+
+.view-frame.ng-leave {
+  animation: 1s fade-out;
+  z-index: 99;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Older browsers might need vendor-prefixes for keyframes and animation! */
+</code></pre>
+<p>Nothing fancy here! Just a simple fade-in/fade-out effect between pages. The only thing out of the
+ordinary here is that we are using absolute positioning to position the entering page (identified
+by the <code>ng-enter</code> class) on top of the leaving page (identified by the <code>ng-leave</code> class). At the
+same time a cross-fade animation is performed. So, as the previous page is just about to be removed,
+it fades out, while the new page fades in right on top of it.</p>
+<p>Once the <code>leave</code> animation is over, the element is removed from the DOM. Likewise, once the <code>enter</code>
+animation is complete, the <code>ng-enter</code> and <code>ng-enter-active</code> CSS classes are removed from the
+element, causing it to rerender and reposition itself with its default CSS styles (so no more
+absolute positioning once the animation is over). This works fluidly and the pages flow naturally
+between route changes, without anything jumping around.</p>
+<p>The applied CSS classes are much the same as with <code>ngRepeat</code>. Each time a new page is loaded the
+<code>ngView</code> directive will create a copy of itself, download the template and append the contents. This
+ensures that all views are contained within a single HTML element, which allows for easy animation
+control.</p>
+<p>For more on CSS animations, see the <a href="https://docs.webplatform.org/wiki/css/properties/animations">Web Platform documentation</a>.</p>
+<h2 id="animating-ngclass-with-javascript">Animating <code>ngClass</code> with JavaScript</h2>
+<p>Let&#39;s add another animation to our application. On our <code>phone-detail.template.html</code> view, we have a
+nice thumbnail swapper. By clicking on the thumbnails listed on the page, the profile phone image
+changes. But how can we incorporate animations?</p>
+<p>Let&#39;s give it some thought first. Basically, when a user clicks on a thumbnail image, they are
+changing the state of the profile image to reflect the newly selected thumbnail image. The best way
+to specify state changes within HTML is to use classes. Much like before &mdash; when we used a CSS
+class to drive the animation &mdash; this time the animation will occur when the CSS class itself
+changes.</p>
+<p>Every time a phone thumbnail is selected, the state changes and the <code>.selected</code> CSS class is added
+to the matching profile image. This will trigger the animation.</p>
+<p>We will start by tweaking our HTML code in <code>phone-detail.template.html</code>. Notice that we have changed
+the way we display our large image:</p>
+<p><br />
+<strong><code>app/phone-detail/phone-detail.template.html</code>:</strong></p>
+<pre><code class="lang-html">&lt;div class=&quot;phone-images&quot;&gt;
+  &lt;img ng-src=&quot;{{img}}&quot; class=&quot;phone&quot;
+      ng-class=&quot;{selected: img === $ctrl.mainImageUrl}&quot;
+      ng-repeat=&quot;img in $ctrl.phone.images&quot; /&gt;
+&lt;/div&gt;
+
+...
+</code></pre>
+<p>Just like with the thumbnails, we are using a repeater to display <strong>all</strong> the profile images as a
+list, however we&#39;re not animating any repeat-related transitions. Instead, we will be keeping our
+eye on each element&#39;s classes and especially the <code>selected</code> class, since its presence or absence
+will determine if the element is visible or hidden. The addition/removal of the <code>selected</code> class is
+managed by the <a href="api/ng/directive/ngClass">ngClass</a> directive, based on the specified condition
+(<code>img === $ctrl.mainImageUrl</code>).
+In our case, there is always exactly one element that has the <code>selected</code> class, and therefore there
+will be exactly one phone profile image visible on the screen at all times.</p>
+<p>When the <code>selected</code> class is added to an element, the <code>selected-add</code> and <code>selected-add-active</code>
+classes are added just before to signal AngularJS to fire off an animation. When the <code>selected</code>
+class is removed from an element, the <code>selected-remove</code> and <code>selected-remove-active</code> classes are
+applied to the element, triggering another animation.</p>
+<p>Finally, in order to ensure that the phone images are displayed correctly when the page is first
+loaded, we also tweak the detail page CSS styles:</p>
+<p><br />
+<strong><code>app/app.css</code>:</strong></p>
+<pre><code class="lang-css">...
+
+.phone {
+  background-color: white;
+  display: none;
+  float: left;
+  height: 400px;
+  margin-bottom: 2em;
+  margin-right: 3em;
+  padding: 2em;
+  width: 400px;
+}
+
+.phone:first-child {
+  display: block;
+}
+
+.phone-images {
+  background-color: white;
+  float: left;
+  height: 450px;
+  overflow: hidden;
+  position: relative;
+  width: 450px;
+}
+
+...
+</code></pre>
+<p>You may be thinking that we are just going to create another CSS-based animation. Although we could
+do that, let&#39;s take the opportunity to learn how to create JavaScript-based animations with the
+<a href="api/ng/type/angular.Module#animation">.animation()</a> module method.</p>
+<p><br />
+<strong><code>app/app.animations.js</code>:</strong></p>
+<pre><code class="lang-js">angular.
+  module(&#39;phonecatApp&#39;).
+  animation(&#39;.phone&#39;, function phoneAnimationFactory() {
+    return {
+      addClass: animateIn,
+      removeClass: animateOut
+    };
+
+    function animateIn(element, className, done) {
+      if (className !== &#39;selected&#39;) return;
+
+      element.
+        css({
+          display: &#39;block&#39;,
+          position: &#39;absolute&#39;,
+          top: 500,
+          left: 0
+        }).
+        animate({
+          top: 0
+        }, done);
+
+      return function animateInEnd(wasCanceled) {
+        if (wasCanceled) element.stop();
+      };
+    }
+
+    function animateOut(element, className, done) {
+      if (className !== &#39;selected&#39;) return;
+
+      element.
+        css({
+          position: &#39;absolute&#39;,
+          top: 0,
+          left: 0
+        }).
+        animate({
+          top: -500
+        }, done);
+
+      return function animateOutEnd(wasCanceled) {
+        if (wasCanceled) element.stop();
+      };
+    }
+  });
+</code></pre>
+<p>We are creating a custom animation by specifying the target elements via a CSS class selector (here
+<code>.phone</code>) and an animation <em>factory</em> function (here <code>phoneAnimationFactory()</code>). The factory function
+returns an object associating specific <em>events</em> (object keys) to animation <em>callbacks</em> (object
+values). The <em>events</em> correspond to DOM actions that <code>ngAnimate</code> recognizes and can hook into, such
+as <code>addClass</code>/<code>removeClass</code>/<code>setClass</code>, <code>enter</code>/<code>move</code>/<code>leave</code> and <code>animate</code>. The associated
+callbacks are called by <code>ngAnimate</code> at appropriate times.</p>
+<p>For more info on animation factories, check out the
+<a href="api/ng/provider/$animateProvider#register">API Reference</a>.</p>
+<p>In this case, we are interested in a class getting added to/removed from a <code>.phone</code> element, thus we
+specify callbacks for the <code>addClass</code> and <code>removeClass</code> events. When the <code>selected</code> class is added to
+an element (via the <code>ngClass</code> directive), the <code>addClass</code> JavaScript callback will be executed with
+<code>element</code> passed in as a parameter. The last parameter passed in is the <code>done</code> callback function. We
+call <code>done()</code> to let Angular know that our custom JavaScript animation has ended. The <code>removeClass</code>
+callback works the same way, but instead gets executed when a class is removed.</p>
+<p>Note that we are using <a href="https://jquery.com/">jQuery</a>&#39;s <code>animate()</code> helper to implement the animation. jQuery
+isn&#39;t required to do JavaScript animations with AngularJS, but we use it here anyway in order to
+keep the example simple. More info on <code>jQuery.animate()</code> can be found in the
+<a href="https://api.jquery.com/animate/">jQuery documentation</a>.</p>
+<p>Within the event callbacks, we create the animation by manipulating the DOM. In the code above,
+this is achieved using <code>element.css()</code> and <code>element.animate()</code>. As a result the new element is
+positioned with an offset of <strong>500px</strong> and then both elements &mdash; the previous and the new
+&mdash; are animated together by shifting each one up by <strong>500px</strong>. The outcome is a conveyor-belt
+like animation. After the <code>animate()</code> function has completed the animation, it calls <code>done</code> to
+notify Angular.</p>
+<p>You may have noticed that each animation callback returns a function. This is an <strong>optional</strong>
+function, which (if provided) will be called when the animation ends, either because it ran to
+completion or because it was canceled (for example another animation took place on the same
+element). A boolean parameter (<code>wasCanceled</code>) is passed to the function, letting the developer know
+if the animation was canceled or not. Use this function to do any necessary clean-up.</p>
+<h1 id="experiments">Experiments</h1>
+<div></div>
+
+<ul>
+<li><p>Reverse the animation, so that the elements animate downwards.</p>
+</li>
+<li><p>Make the animation run faster or slower, by passing a <code>duration</code> argument to <code>.animate()</code>:</p>
+<pre><code class="lang-js">element.css({...}).animate({...}, 1000 /* 1 second */, done);
+</code></pre>
+</li>
+<li><p>Make the animations &quot;asymmetrical&quot;. For example, have the previous element fade out, while the new
+element zooms in:</p>
+<pre><code class="lang-js">// animateIn()
+element.css({
+  display: &#39;block&#39;,
+  opacity: 1,
+  position: &#39;absolute&#39;,
+  width: 0,
+  height: 0,
+  top: 200,
+  left: 200
+}).animate({
+  width: 400,
+  height: 400,
+  top: 0,
+  left: 0
+}, done);
+
+// animateOut()
+element.animate({
+  opacity: 0
+}, done);
+</code></pre>
+</li>
+<li><p>Go crazy and come up with your own funky animations!</p>
+</li>
+</ul>
+<h1 id="summary">Summary</h1>
+<p>Our application is now much more pleasant to use, thanks to the smooth transitions between pages
+and UI states.</p>
+<p>There you have it! We have created a web application in a relatively short amount of time. In the
+<a href="tutorial/the_end">closing notes</a> we will cover where to go from here.</p>
+<ul doc-tutorial-nav="14"></ul>
+
+
+
+
+

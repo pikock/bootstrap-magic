@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-ngMessageFormat-example-gender-production</title>
+  
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-message-format.js"></script>
+  <script src="script.js"></script>
+  
+
+  
+</head>
+<body ng-app="msgFmtExample">
+  <div ng-controller="AppController">
+  Select Recipient:<br>
+     <select ng-model="recipient" ng-options="person as person.name for person in recipients">
+     </select>
+     <p>{{recipient.gender, select,
+               male {{{recipient.name}} unwrapped his gift. }
+               female {{{recipient.name}} unwrapped her gift. }
+               other {{{recipient.name}} unwrapped their gift. }
+     }}</p>
+</div>
+</body>
+</html>

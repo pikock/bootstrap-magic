@@ -1,0 +1,252 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/tutorial/step_04.ngdoc?message=docs(tutorial%2F4 - Directory and File Organization)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<ul doc-tutorial-nav="4"></ul>
+
+
+<p>In this step, we will not be adding any new functionality to our application. Instead, we are going
+to take a step back, refactor our codebase and move files and code around, in order to make our
+application more easily expandable and maintainable.</p>
+<p>In the previous step, we saw how to architect our application to be modular and testable. What&#39;s
+equally important though, is organizing our codebase in a way that makes it easy (both for us and
+other developers on our team) to navigate through the code and quickly locate the pieces that are
+relevant to a specific feature or section of the application.</p>
+<p>To that end, we will explain why and how we:</p>
+<ul>
+<li>Put each entity in its <strong>own file</strong>.</li>
+<li>Organize our code by <strong>feature area</strong>, instead of by function.</li>
+<li>Split our code into <strong>modules</strong> that other modules can depend on.</li>
+</ul>
+<div class="alert alert-info">
+  We will keep it short, not going into great detail on every good practice and convention. These
+  principles are explained in great detail in the <a href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md">Angular Style Guide</a>, which also
+  contains many more techniques for effectively organizing Angular codebases.
+</div>
+
+
+<div doc-tutorial-reset="4"></div>
+
+
+<h2 id="one-feature-per-file">One Feature per File</h2>
+<p>It might be tempting, for the sake of simplicity, to put everything in one file, or have one file
+per type; e.g. all controllers in one file, all components in another file, all services in a third
+file, and so on.
+This might seem to work well in the beginning, but as our application grows it becomes a burden to
+maintain. As we add more and more features, our files will get bigger and bigger and it will be
+difficult to navigate and find the code we are looking for.</p>
+<p>Instead we should put each feature/entity in its own file. Each stand-alone controller will be
+defined in its own file, each component will be defined in its own file, etc.</p>
+<p>Luckily, we don&#39;t need to change anything with respect to that guideline in our code, since we have
+already defined our <code>phoneList</code> component in its own <code>phone-list.component.js</code> file. Good job!</p>
+<p>We will keep this in mind though, as we add more features.</p>
+<h2 id="organizing-by-feature">Organizing by Feature</h2>
+<p>So, now that we learned we should put everything in its own file, our <code>app/</code> directory will soon be
+full with dozens of files and specs (remember we keep our unit test files next to the corresponding
+source code files). What&#39;s more important, logically related files will not be grouped together; it
+will be really difficult to locate all files related to a specific section of the application and
+make a change or fix a bug.</p>
+<p>So, what shall we do?</p>
+<p>Well, we are going to group our files into directories <em>by feature</em>. For example, since we have a
+section in our application that lists phones, we will put all related files into a <code>phone-list/</code>
+directory under <code>app/</code>. We are soon to find out that certain features are used across different
+parts of the application. We will put those inside <code>app/core/</code>.</p>
+<div class="alert alert-info">
+  <p>
+    Other typical names for our <code>core</code> directory are <code>shared</code>, <code>common</code> and <code>components</code>. The last
+    one is kind of misleading though, as it will contain other things than components as well.
+  </p>
+  <p>
+    (This is mostly a relic of the past, when &quot;components&quot; just meant the generic building blocks of
+     an application.)
+  </p>
+</div>
+
+<p>Based on what we have discussed so far, here is our directory/file layout for the <code>phoneList</code>
+&quot;feature&quot;:</p>
+<pre><code>app/
+  phone-list/
+    phone-list.component.js
+    phone-list.component.spec.js
+  app.js
+</code></pre>
+<h2 id="using-modules">Using Modules</h2>
+<p>As previously mentioned, one of the benefits of having a modular architecture is code reuse &mdash;
+not only inside the same application, but across applications too. There is one final step in making
+this code reuse frictionless:</p>
+<ul>
+<li>Each feature/section should declare its own module and all related entities should register
+themselves on that module.</li>
+</ul>
+<p>Let&#39;s take the <code>phoneList</code> feature as an example. Previously, the <code>phoneList</code> component would
+register itself on the <code>phonecatApp</code> module:</p>
+<pre><code class="lang-js">angular.
+  module(&#39;phonecatApp&#39;).
+  component(&#39;phoneList&#39;, ...);
+</code></pre>
+<p>Similarly, the accompanying spec file loads the <code>phonecatApp</code> module before each test (because
+that&#39;s where our component is registered). Now, imagine that we need a list of phones on another
+project that we are working on. Thanks to our modular architecture, we don&#39;t have to reinvent the
+wheel; we simply copy the <code>phone-list/</code> directory on our other project and add the necessary script
+tags in our <code>index.html</code> file and we are done, right?</p>
+<p>Well, not so fast. The new project doesn&#39;t know anything about a <code>phonecatApp</code> module. So, we would
+have to replace all references to <code>phonecatApp</code> with the name of this project&#39;s main module. As you
+can imagine this is both laborious and error-prone.</p>
+<p>Yeah, you guessed it: There is a better way!</p>
+<p>Each feature/section, will declare its own module and have all related entities registered there.
+The main module (<code>phonecatApp</code>) will declare a dependency on each feature/section module. Now,
+all it takes to reuse the same code on a new project is copying the feature directory over and
+adding the feature module as a dependency in the new project&#39;s main module.</p>
+<p>Here is what our <code>phoneList</code> feature will look like after this change:</p>
+<p><br />
+<strong><code>/</code>:</strong></p>
+<pre><code>app/
+  phone-list/
+    phone-list.module.js
+    phone-list.component.js
+    phone-list.component.spec.js
+  app.module.js
+</code></pre>
+<p><br />
+<strong><code>app/phone-list/phone-list.module.js</code>:</strong></p>
+<pre><code class="lang-js">// Define the `phoneList` module
+angular.module(&#39;phoneList&#39;, []);
+</code></pre>
+<p><br />
+<strong><code>app/phone-list/phone-list.component.js</code>:</strong></p>
+<pre><code class="lang-js">// Register the `phoneList` component on the `phoneList` module,
+angular.
+  module(&#39;phoneList&#39;).
+  component(&#39;phoneList&#39;, {...});
+</code></pre>
+<p><br />
+<strong><code>app/app.module.js</code>:</strong><br />
+<em>(since <code>app/app.js</code> now only contains the main module declaration, we gave it a <code>.module</code> suffix)</em></p>
+<pre><code class="lang-js">// Define the `phonecatApp` module
+angular.module(&#39;phonecatApp&#39;, [
+  // ...which depends on the `phoneList` module
+  &#39;phoneList&#39;
+]);
+</code></pre>
+<p>By passing <code>phoneList</code> inside the dependencies array when defining the <code>phonecatApp</code> module, Angular
+will make all entities registered on <code>phoneList</code> available on <code>phonecatApp</code> as well.</p>
+<div class="alert alert-info">
+  <p>
+    Don&#39;t forget to also update your <code>index.html</code> adding a <code>&lt;script&gt;</code> tag for each JavaScript file
+    we have created. This might seem tedious, but is totally worth it.
+  </p>
+  <p>
+    In a production-ready application, you would concatenate and minify all your JavaScript files
+    anyway (for performance reasons), so this won&#39;t be an issue any more.
+  </p>
+</div>
+
+<div class="alert alert-warning">
+  Note that files defining a module (i.e. <code>.module.js</code>) need to be included before other files that
+  add features (e.g. components, controllers, services, filters) to that module. 
+</div>
+
+
+<h2 id="external-templates">External Templates</h2>
+<p>Since we are at refactoring, let&#39;s do one more thing. As we learned, components have templates,
+which are basically fragments of HTML code that dictate how our data is laid out and presented to
+the user. In <a href="tutorial/step_03">step 3</a>, we saw how we can specify the template for a component as a
+string using the <code>template</code> property of the CDO (Component Definition Object).
+Having HTML code in a string isn&#39;t ideal, especially for bigger templates. It would be much better,
+if we could have our HTML code in <code>.html</code> files. This way, we would get all the support our
+IDE/editor has to offer (e.g. HTML-specific color-highlighting and auto-completion) and also keep
+our component definitions cleaner.</p>
+<p>So, while it&#39;s perfectly fine to keep our component templates inline (using the <code>template</code> property
+of the CDO), we are going to use an external template for our <code>phoneList</code> component. In order to
+denote that we are using an external template, we use the <code>templateUrl</code> property and specify the URL
+that our template will be loaded from. Since we want to keep our template close to where the
+component is defined, we place it inside <code>app/phone-list/</code>.</p>
+<p>We copied the contents of the <code>template</code> property (the HTML code) into
+<code>app/phone-list/phone-list.template.html</code> and modified our CDO like this:</p>
+<p><br />
+<strong><code>app/phone-list/phone-list.component.js</code>:</strong></p>
+<pre><code class="lang-js">angular.
+module(&#39;phoneList&#39;).
+component(&#39;phoneList&#39;, {
+  // Note: The URL is relative to our `index.html` file
+  templateUrl: &#39;phone-list/phone-list.template.html&#39;,
+  controller: ...
+});
+</code></pre>
+<p>At runtime, when Angular needs to create an instance of the <code>phoneList</code> component, it will make an
+HTTP request to get the template from <code>app/phone-list/phone-list.template.html</code>.</p>
+<div class="alert alert-info">
+  Keeping inline with our convention, we will be using the <code>.template</code> suffix for external
+  templates. Another common convention is to just have the <code>.html</code> extension
+  (e.g. <code>phone-list.html</code>).
+</div>
+
+<div class="alert alert-warning">
+  <p>
+    Using an external template like this, will result in more HTTP requests to the server (one for
+    each external template). Although Angular takes care not to make extraneous requests (e.g.
+    fetching the templates lazily, caching the results, etc), additional requests do have a cost
+    (especially on mobile devices and data-plan connections).
+  </p>
+  <p>
+    Luckily, there are ways to avoid the extra costs (while still keeping your templates external).
+    A detailed discussion of the subject is outside the scope of this tutorial, but you can take a
+    look at the <a href="api/ng/service/$templateRequest">$templateRequest</a> and
+    <a href="api/ng/service/$templateCache">$templateCache</a> services for more info on how Angular manages external
+    templates.
+  </p>
+</div>
+
+
+<h2 id="final-directory-file-layout">Final Directory/File Layout</h2>
+<p>After all the refactorings that took place, this is how our application looks from the outside:</p>
+<p><br />
+<strong><code>/</code>:</strong></p>
+<pre><code>app/
+  phone-list/
+    phone-list.component.js
+    phone-list.component.spec.js
+    phone-list.module.js
+    phone-list.template.html
+  app.css
+  app.module.js
+  index.html
+</code></pre>
+<h1 id="testing">Testing</h1>
+<p>Since this was just a refactoring step (no actual code addition/deletions), we shouldn&#39;t need to
+change much (if anything) as far as our specs are concerned.</p>
+<p>One thing that we can (and should) change is the name of the module to be loaded before each test in
+<code>app/phone-list/phone-list.component.spec.js</code>. We don&#39;t need to pull in the whole <code>phonecatApp</code>
+module (which will soon grow to depend on more stuff). All we want to test is already included in
+the much smaller <code>phoneList</code> module, so it suffices to just load that.
+This is one extra benefit that we get out of our modular architecture for free.</p>
+<p><br />
+<strong><code>app/phone-list/phone-list.component.spec.js</code>:</strong></p>
+<pre><code class="lang-js">describe(&#39;phoneList&#39;, function() {
+
+  // Load the module that contains the `phoneList` component before each test
+  beforeEach(module(&#39;phoneList&#39;));
+
+  ...
+
+});
+</code></pre>
+<p>If not already done so, run the tests (using the <code>npm test</code> command) and verify that they still
+pass.</p>
+<div class="alert alert-success">
+  One of the great things about tests is the confidence they provide, when refactoring your
+  application. It&#39;s easy to break something as you start moving files around and re-arranging
+  modules. Having good test coverage is the quickest, easiest and most reliable way of knowing that
+  your application will continue to work as expected.
+</div>
+
+
+<h1 id="summary">Summary</h1>
+<p>Even if we didn&#39;t add any new and exciting functionality to our application, we have made a great
+step towards a well-architected and maintainable application. Time to spice things up. Let&#39;s go to
+<a href="tutorial/step_05">step 5</a> to learn how to add full-text search to the application.</p>
+<ul doc-tutorial-nav="4"></ul>
+
+
+
+
+

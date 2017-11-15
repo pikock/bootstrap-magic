@@ -18,7 +18,7 @@ If you want to use Bootstrap Magic featuring Bootstrap 2.3.2, it's still availab
 
 ### Contact
 
-* Create your website easily with [Pikock](http://www.pikock.com/en), try it out on http://www.pikock.com/en
+* Create your website easily with [Pikock](http://www.pikock.com/), try it out on http://www.pikock.com/
 * For more information on [Autre planete](http://www.autreplanete.com/)  please check out http://www.autreplanete.com/
 * For more information on [AngularJS](http://angularjs.org/)  please check out http://angularjs.org/
 * For more information on [Twitter Bootstrap](http://twitter.github.com/bootstrap/)  please check out http://twitter.github.com/bootstrap/

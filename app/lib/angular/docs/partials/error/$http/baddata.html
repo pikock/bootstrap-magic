@@ -1,0 +1,25 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/error/$http/baddata.ngdoc?message=docs(error%2Fbaddata)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>Error: $http:baddata
+  <div><span class='hint'>Bad JSON Data</span></div>
+</h1>
+
+<div>
+    <pre class="minerr-errmsg" error-display="Data must be a valid JSON object. Received: "{0}". Parse error: "{1}"">Data must be a valid JSON object. Received: "{0}". Parse error: "{1}"</pre>
+</div>
+
+<h2>Description</h2>
+<div class="description">
+  <p>The default <a href="api/ng/service/$http#default-transformations"><code>transformResponse</code></a> will try to parse the
+response as JSON if the <code>Content-Type</code> header is <code>application/json</code>, or the response looks like a
+valid JSON-stringified object or array.
+This error occurs when that data is not a valid JSON object.</p>
+<p>To resolve this error, make sure you pass valid JSON data to <code>transformResponse</code>. If the response
+data looks like JSON, but has a different <code>Content-Type</code> header, you must
+<a href="api/ng/service/$http#overriding-the-default-transformations-per-request">implement your own response
+transformer on a per request basis</a>, or <a href="api/ng/service/$http#default-transformations">modify the default <code>$http</code> responseTransform</a>.</p>
+
+</div>
+
+

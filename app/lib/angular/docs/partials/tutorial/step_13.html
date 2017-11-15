@@ -1,0 +1,247 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/tutorial/step_13.ngdoc?message=docs(tutorial%2F13 - REST and Custom Services)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<ul doc-tutorial-nav="13"></ul>
+
+
+<p>In this step, we will change the way our application fetches data.</p>
+<ul>
+<li>We define a custom service that represents a <a href="https://en.wikipedia.org/wiki/Representational_State_Transfer">RESTful</a> client. Using this client we can
+make requests for data to the server in an easier way, without having to deal with the lower-level
+<a href="api/ng/service/$http">$http</a> API, HTTP methods and URLs.</li>
+</ul>
+<div doc-tutorial-reset="13"></div>
+
+
+<h2 id="dependencies">Dependencies</h2>
+<p>The RESTful functionality is provided by Angular in the <a href="api/ngResource">ngResource</a> module, which
+is distributed separately from the core Angular framework.</p>
+<p>Since we are using <a href="http://bower.io/">Bower</a> to install client-side dependencies, this step updates the
+<code>bower.json</code> configuration file to include the new dependency:</p>
+<p><br />
+<strong><code>bower.json</code>:</strong></p>
+<pre><code>{
+  &quot;name&quot;: &quot;angular-phonecat&quot;,
+  &quot;description&quot;: &quot;A starter project for AngularJS&quot;,
+  &quot;version&quot;: &quot;0.0.0&quot;,
+  &quot;homepage&quot;: &quot;https://github.com/angular/angular-phonecat&quot;,
+  &quot;license&quot;: &quot;MIT&quot;,
+  &quot;private&quot;: true,
+  &quot;dependencies&quot;: {
+    &quot;angular&quot;: &quot;1.5.x&quot;,
+    &quot;angular-mocks&quot;: &quot;1.5.x&quot;,
+    &quot;angular-resource&quot;: &quot;1.5.x&quot;,
+    &quot;angular-route&quot;: &quot;1.5.x&quot;,
+    &quot;bootstrap&quot;: &quot;3.3.x&quot;
+  }
+}
+</code></pre>
+<p>The new dependency <code>&quot;angular-resource&quot;: &quot;1.5.x&quot;</code> tells bower to install a version of the
+angular-resource module that is compatible with version 1.5.x of Angular. We must tell bower to
+download and install this dependency.</p>
+<pre><code>npm install
+</code></pre>
+<div class="alert alert-info">
+  <strong>Note:</strong> If you have bower installed globally, you can run <code>bower install</code>, but for this project
+  we have preconfigured <code>npm install</code> to run bower for us.
+</div>
+
+<div class="alert alert-warning">
+  <strong>Warning:</strong> If a new version of Angular has been released since you last ran <code>npm install</code>, then
+  you may have a problem with the <code>bower install</code> due to a conflict between the versions of
+  angular.js that need to be installed. If you run into this issue, simply delete your
+  <code>app/bower_components</code> directory and then run <code>npm install</code>.
+</div>
+
+
+<h2 id="service">Service</h2>
+<p>We create our own service to provide access to the phone data on the server. We will put the service
+in its own module, under <code>core</code>, so we can explicitly declare its dependency on <code>ngResource</code>:</p>
+<p><br />
+<strong><code>app/core/phone/phone.module.js</code>:</strong></p>
+<pre><code class="lang-js">angular.module(&#39;core.phone&#39;, [&#39;ngResource&#39;]);
+</code></pre>
+<p><br />
+<strong><code>app/core/phone/phone.service.js</code>:</strong></p>
+<pre><code class="lang-js">angular.
+  module(&#39;core.phone&#39;).
+  factory(&#39;Phone&#39;, [&#39;$resource&#39;,
+    function($resource) {
+      return $resource(&#39;phones/:phoneId.json&#39;, {}, {
+        query: {
+          method: &#39;GET&#39;,
+          params: {phoneId: &#39;phones&#39;},
+          isArray: true
+        }
+      });
+    }
+  ]);
+</code></pre>
+<p>We used the <a href="api/ng/type/angular.Module">module API</a> to register a custom service using a factory function.
+We passed in the name of the service &mdash; <code>&#39;Phone&#39;</code> &mdash; and the factory function. The factory
+function is similar to a controller&#39;s constructor in that both can declare dependencies to be
+injected via function arguments. The <code>Phone</code> service declares a dependency on the <code>$resource</code>
+service, provided by the <code>ngResource</code> module.</p>
+<p>The <a href="api/ngResource/service/$resource">$resource</a> service makes it easy to create a <a href="https://en.wikipedia.org/wiki/Representational_State_Transfer">RESTful</a>
+client with just a few lines of code. This client can then be used in our application, instead of
+the lower-level <a href="api/ng/service/$http">$http</a> service.</p>
+<p><br />
+<strong><code>app/core/core.module.js</code>:</strong></p>
+<pre><code class="lang-js">angular.module(&#39;core&#39;, [&#39;core.phone&#39;]);
+</code></pre>
+<p>We need to add the <code>core.phone</code> module as a dependency of the <code>core</code> module.</p>
+<h2 id="template">Template</h2>
+<p>Our custom resource service will be defined in <code>app/core/phone/phone.service.js</code>, so we need to
+include this file and the associated <code>.module.js</code> file in our layout template. Additionally, we also
+need to load the <code>angular-resource.js</code> file, which contains the <code>ngResource</code> module:</p>
+<p><br />
+<strong><code>app/index.html</code>:</strong></p>
+<pre><code class="lang-html">&lt;head&gt;
+  ...
+  &lt;script src=&quot;bower_components/angular-resource/angular-resource.js&quot;&gt;&lt;/script&gt;
+  ...
+  &lt;script src=&quot;core/phone/phone.module.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;core/phone/phone.service.js&quot;&gt;&lt;/script&gt;
+  ...
+&lt;/head&gt;
+</code></pre>
+<h2 id="component-controllers">Component Controllers</h2>
+<p>We can now simplify our component controllers (<code>PhoneListController</code> and <code>PhoneDetailController</code>) by
+factoring out the lower-level <code>$http</code> service, replacing it with the new <code>Phone</code> service. Angular&#39;s
+<code>$resource</code> service is easier to use than <code>$http</code> for interacting with data sources exposed as
+RESTful resources. It is also easier now to understand what the code in our controllers is doing.</p>
+<p><br />
+<strong><code>app/phone-list/phone-list.module.js</code>:</strong></p>
+<pre><code class="lang-js">angular.module(&#39;phoneList&#39;, [&#39;core.phone&#39;]);
+</code></pre>
+<p><br />
+<strong><code>app/phone-list/phone-list.component.js</code>:</strong></p>
+<pre><code class="lang-js">angular.
+  module(&#39;phoneList&#39;).
+  component(&#39;phoneList&#39;, {
+    templateUrl: &#39;phone-list/phone-list.template.html&#39;,
+    controller: [&#39;Phone&#39;,
+      function PhoneListController(Phone) {
+        this.phones = Phone.query();
+        this.orderProp = &#39;age&#39;;
+      }
+    ]
+  });
+</code></pre>
+<p><br />
+<strong><code>app/phone-detail/phone-detail.module.js</code>:</strong></p>
+<pre><code class="lang-js">angular.module(&#39;phoneDetail&#39;, [
+  &#39;ngRoute&#39;,
+  &#39;core.phone&#39;
+]);
+</code></pre>
+<p><br />
+<strong><code>app/phone-detail/phone-detail.component.js</code>:</strong></p>
+<pre><code class="lang-js">angular.
+  module(&#39;phoneDetail&#39;).
+  component(&#39;phoneDetail&#39;, {
+    templateUrl: &#39;phone-detail/phone-detail.template.html&#39;,
+    controller: [&#39;$routeParams&#39;, &#39;Phone&#39;,
+      function PhoneDetailController($routeParams, Phone) {
+        var self = this;
+        self.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
+          self.setImage(phone.images[0]);
+        });
+
+        self.setImage = function setImage(imageUrl) {
+          self.mainImageUrl = imageUrl;
+        };
+      }
+    ]
+  });
+</code></pre>
+<p>Notice how in <code>PhoneListController</code> we replaced:</p>
+<pre><code class="lang-js">$http.get(&#39;phones/phones.json&#39;).then(function(response) {
+  self.phones = response.data;
+});
+</code></pre>
+<p>with just:</p>
+<pre><code class="lang-js">this.phones = Phone.query();
+</code></pre>
+<p>This is a simple and declarative statement that we want to query for all phones.</p>
+<p>An important thing to notice in the code above is that we don&#39;t pass any callback functions, when
+invoking methods of our <code>Phone</code> service. Although it looks as if the results were returned
+synchronously, that is not the case at all. What is returned synchronously is a &quot;future&quot; — an
+object, which will be filled with data, when the XHR response is received. Because of the
+data-binding in Angular, we can use this future and bind it to our template. Then, when the data
+arrives, the view will be updated automatically.</p>
+<p>Sometimes, relying on the future object and data-binding alone is not sufficient to do everything
+we require, so in these cases, we can add a callback to process the server response. The
+<code>phoneDetail</code> component&#39;s controller illustrates this by setting the <code>mainImageUrl</code> in a callback.</p>
+<h2 id="testing">Testing</h2>
+<p>Because we are now using the <a href="api/ngResource">ngResource</a> module, it is necessary to update the
+Karma configuration file with angular-resource.</p>
+<p><br />
+<strong><code>karma.conf.js</code>:</strong></p>
+<pre><code class="lang-js">files: [
+  &#39;bower_components/angular/angular.js&#39;,
+  &#39;bower_components/angular-resource/angular-resource.js&#39;,
+  ...
+],
+</code></pre>
+<p>We have added a unit test to verify that our new service is issuing HTTP requests and returns the
+expected &quot;future&quot; objects/arrays.</p>
+<p>The <a href="api/ngResource/service/$resource">$resource</a> service augments the response object with extra methods
+&mdash; e.g. for updating and deleting the resource &mdash; and properties (some of which are only
+meant to be accessed by Angular). If we were to use Jasmine&#39;s standard <code>.toEqual()</code> matcher, our
+tests would fail, because the test values would not match the responses exactly.</p>
+<p>To solve the  problem, we instruct Jasmine to use a <a href="https://jasmine.github.io/2.4/custom_equality.html">custom equality tester</a> for
+comparing objects. We specify <a href="api/ng/function/angular.equals">angular.equals</a> as our equality tester, which
+ignores functions and <code>$</code>-prefixed properties, such as those added by the <code>$resource</code> service.<br />
+(Remember that Angular uses the <code>$</code> prefix for its proprietary API.)</p>
+<p><br />
+<strong><code>app/core/phone/phone.service.spec.js</code>:</strong></p>
+<pre><code class="lang-js">describe(&#39;Phone&#39;, function() {
+  ...
+  var phonesData = [...];
+
+  // Add a custom equality tester before each test
+  beforeEach(function() {
+    jasmine.addCustomEqualityTester(angular.equals);
+  });
+
+  // Load the module that contains the `Phone` service before each test
+  ...
+
+  // Instantiate the service and &quot;train&quot; `$httpBackend` before each test
+  ...
+
+  // Verify that there are no outstanding expectations or requests after each test
+  afterEach(function () {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
+
+  it(&#39;should fetch the phones data from `/phones/phones.json`&#39;, function() {
+    var phones = Phone.query();
+
+    expect(phones).toEqual([]);
+
+    $httpBackend.flush();
+    expect(phones).toEqual(phonesData);
+  });
+
+});
+</code></pre>
+<p>Here we are using <code>$httpBackend</code>&#39;s
+<a href="api/ngMock/service/$httpBackend#verifyNoOutstandingExpectation">verifyNoOutstandingExpectation()</a> and
+<a href="api/ngMock/service/$httpBackend#verifyNoOutstandingExpectation">verifyNoOutstandingRequest()</a> methods to
+verify that all expected requests have been sent and that no extra request is scheduled for later.</p>
+<p>Note that we have also modified our component tests to use the custom matcher when appropriate.</p>
+<p>You should now see the following output in the Karma tab:</p>
+<pre><code>Chrome 49.0: Executed 5 of 5 SUCCESS (0.123 secs / 0.104 secs)
+</code></pre>
+<h1 id="summary">Summary</h1>
+<p>Now that we have seen how to build a custom service as a RESTful client, we are ready for
+<a href="tutorial/step_14">step 14</a> to learn how to enhance the user experience with animations.</p>
+<ul doc-tutorial-nav="13"></ul>
+
+
+
+
+

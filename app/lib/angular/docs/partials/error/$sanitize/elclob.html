@@ -1,0 +1,22 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/error/$sanitize/elclob.ngdoc?message=docs(error%2Felclob)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1>Error: $sanitize:elclob
+  <div><span class='hint'>Failed to sanitize html because the element is clobbered</span></div>
+</h1>
+
+<div>
+    <pre class="minerr-errmsg" error-display="Failed to sanitize html because the element is clobbered: {0}">Failed to sanitize html because the element is clobbered: {0}</pre>
+</div>
+
+<h2>Description</h2>
+<div class="description">
+  <p>This error occurs when <code>$sanitize</code> sanitizer is unable to traverse the HTML because one or more of the elements in the
+HTML have been &quot;clobbered&quot;. This could be a sign that the payload contains code attempting to cause a DoS attack on the
+browser.</p>
+<p>Typically clobbering breaks the <code>nextSibling</code> property on an element so that it points to one of its child nodes. This
+makes it impossible to walk the HTML tree without getting stuck in an infinite loop, which causes the browser to freeze.</p>
+
+</div>
+
+

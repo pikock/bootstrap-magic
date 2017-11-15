@@ -1,0 +1,7 @@
+{
+  "name": "example-select-ngvalue",
+  "files": [
+    "index-production.html",
+    "app.js"
+  ]
+}

@@ -1,0 +1,124 @@
+<a href='https://github.com/angular/angular.js/edit/v1.6.x/docs/content/misc/downloading.ngdoc?message=docs(misc%2FDownloading)%3A%20describe%20your%20change...' class='improve-docs btn btn-primary'><i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this Doc</a>
+
+
+<h1 id="including-angular-scripts-from-the-google-cdn">Including Angular scripts from the Google CDN</h1>
+<p>The quickest way to get started is to point your html <code>&lt;script&gt;</code> tag to a
+<a href="https://developers.google.com/speed/libraries/#angularjs">Google CDN</a> URL.
+This way, you don&#39;t have to download anything or maintain a local copy.</p>
+<p>There are two types of Angular script URLs you can point to, one for development and one for
+production:</p>
+<ul>
+<li><strong>angular.js</strong> — This is the human-readable, non-minified version, suitable for web development.</li>
+<li><strong>angular.min.js</strong> — This is the minified version, which we strongly suggest you use in
+production.</li>
+</ul>
+<p>To point your code to an angular script on the Google CDN server, use the following template. This 
+example points to the minified version 1.5.6:</p>
+<pre><code class="lang-html">&lt;!doctype html&gt;
+&lt;html ng-app&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Angular App&lt;/title&gt;
+    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<div class="alert alert-info">
+  Note that only versions 1.0.1 and above are available on the CDN. If you need an earlier version
+  (which you shouldn&#39;t) you can use the <a href="https://code.angularjs.org/">https://code.angularjs.org/</a> URL, which was the previous
+  recommended location for hosted code source. If you&#39;re still using the Angular server you should 
+  switch to the CDN version for even faster loading times.
+</div>
+
+<p><br /></p>
+<h1 id="downloading-and-hosting-angular-files-locally">Downloading and hosting angular files locally</h1>
+<p>This option is for those who want to work with Angular offline, or those who want to host the
+Angular files on their own servers.</p>
+<p>If you navigate to <a href="https://code.angularjs.org/">https://code.angularjs.org/</a>, you&#39;ll see a directory listing with all of the
+Angular versions since we started releasing versioned build artifacts. Each directory contains all
+artifacts that we released for a particular version. Download the version you want and have fun.</p>
+<div class="alert alert-warning">
+  You can ignore directories starting with <code>2.</code> (e.g. <code>2.0.0-beta.17</code>) — they are not related to
+  AngularJS. They contain build artifacts from <a href="https://angular.io">Angular 2</a> versions.
+</div>
+
+<p><br />
+Each directory under <a href="https://code.angularjs.org/">https://code.angularjs.org/</a> includes a set of files that comprise the
+corresponding version. All JavaScript files (except for <code>angular-mocks</code> which is only used during
+development) come in two flavors — one suitable for development, the other for production:</p>
+<ul>
+<li><p><strong><code>&lt;filename&gt;.js</code></strong> — These files are non-obfuscated, non-minified, and human-readable by opening
+them in any editor or browser. In order to get better error messages during development, you
+should always use these non-minified scripts.</p>
+</li>
+<li><p><strong><code>&lt;filename&gt;.min.js</code></strong> — These are minified and obfuscated versions, created with the
+<a href="https://developers.google.com/closure/compiler/">Closure compiler</a>. Use these versions for
+production in order to minimize the size of the application that is downloaded by your user&#39;s
+browser.</p>
+</li>
+<li><p><strong><code>&lt;filename&gt;.min.js.map</code></strong> — These are
+<a href="http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/">sourcemap files</a>. You can
+serve them alongside the <code>.min.js</code> files in order to be able to debug the minified code (e.g. on a
+production deployment) more easily, but without impacting performance.</p>
+</li>
+</ul>
+<p><br />
+The set of files included in each version directory are:</p>
+<ul>
+<li><p><strong><code>angular.zip</code></strong> — This is a zip archive that contains all of the files released for this Angular
+version. Use this file to get everything in a single download.</p>
+</li>
+<li><p><strong><code>angular.js</code></strong> — The core Angular framework. This is all you need to get your Angular app
+running.</p>
+</li>
+<li><p><strong><code>angular-csp.css</code></strong> — You only need this file if you are using
+<a href="https://developer.mozilla.org/en/Security/CSP">CSP (Content Security Policy)</a>. See
+<a href="api/ng/directive/ngCsp">here</a> for more info.</p>
+</li>
+<li><p><strong><code>angular-mocks.js</code></strong> — This file contains an implementation of mocks that makes testing angular
+apps even easier. Your unit/integration test harness should load this file after <code>angular.js</code> is
+loaded.</p>
+</li>
+<li><p><strong><code>angular-loader.js</code></strong> — Module loader for Angular modules. If you are loading multiple 
+script files containing Angular modules, you can load them asynchronously and in any order as long
+as you load this file first. Often the contents of this file are copy&amp;pasted into the <code>index.html</code>
+to avoid even the initial request to <code>angular-loader[.min].js</code>.
+See <a href="https://github.com/angular/angular-seed/blob/master/app/index-async.html">angular-seed</a> for
+an example of usage.</p>
+</li>
+<li><p><strong>Additional Angular modules:</strong> Optional modules with additional functionality. These files
+should be loaded after the core <code>angular[.min].js</code> file:</p>
+<ul>
+<li><strong><code>angular-animate.js</code></strong> — Enable animation support. (<a href="api/ngAnimate">API docs</a>)</li>
+<li><strong><code>angular-aria.js</code></strong> — Make your apps <a href="http://www.w3.org/TR/wai-aria/">accessible</a> to users of
+  assistive technologies. (<a href="api/ngAria">API docs</a>)</li>
+<li><strong><code>angular-cookies.js</code></strong> — A convenient wrapper for reading and writing browser cookies.
+  (<a href="api/ngCookies">API docs</a>)</li>
+<li><strong><code>angular-message-format.js</code></strong> — Enhanced support for pluralization and gender specific
+  messages in interpolated text. (<a href="api/ngMessageFormat">API docs</a>)</li>
+<li><strong><code>angular-messages.js</code></strong> — Enhanced support for displaying validation messages.
+  (<a href="api/ngMessages">API docs</a>)</li>
+<li><strong><code>angular-parse-ext.js</code></strong> — Allow Unicode characters in identifiers inside Angular expressions.
+  (<a href="api/ngParseExt">API docs</a>)</li>
+<li><strong><code>angular-resource.js</code></strong> — Easy interaction with RESTful services.
+  (<a href="api/ngResource">API docs</a>)</li>
+<li><strong><code>angular-route.js</code></strong> — Routing and deep-linking services and directives for Angular apps.
+  (<a href="api/ngRoute">API docs</a>)</li>
+<li><strong><code>angular-sanitize.js</code></strong> — Functionality to sanitize HTML. (<a href="api/ngSanitize">API docs</a>)</li>
+<li><strong><code>angular-touch.js</code></strong> — Touch events and other helpers for touch-enabled devices.
+(<a href="api/ngTouch">API docs</a>)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong><code>docs/</code></strong> — This directory contains all the files that compose the <a href="https://docs.angularjs.org/">https://docs.angularjs.org/</a>
+documentation app. These files are handy to see the older versions of our docs, or even more
+importantly, view the docs offline.</p>
+</li>
+<li><p><strong><code>i18n/</code></strong> - This directory contains <a href="https://docs.angularjs.org/guide/i18n">locale specific</a>
+<code>ngLocale</code> Angular modules to override the defaults defined in the main <code>ng</code> module.</p>
+</li>
+</ul>
+
+

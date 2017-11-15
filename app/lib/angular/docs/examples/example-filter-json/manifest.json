@@ -1,0 +1,7 @@
+{
+  "name": "example-filter-json",
+  "files": [
+    "index-production.html",
+    "protractor.js"
+  ]
+}
