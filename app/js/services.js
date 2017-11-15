@@ -1128,7 +1128,7 @@ window.angular.module('apSass', []).factory('apSass', [
       linefeed: ''
     })
 
-    var base = '../../app/scss/'
+    var base = '../../scss/'
     var directory = ''
     var first = true
 
