@@ -1128,7 +1128,7 @@ window.angular.module('apSass', []).factory('apSass', [
       linefeed: ''
     })
 
-    var base = '../../scss/'
+    var base = '../../app/scss/'
     var directory = ''
     var first = true
 
@@ -1246,7 +1246,7 @@ window.angular.module('apSass', []).factory('apSass', [
     function preloadFile(files) {
       return $q(function(resolve, reject) {
         try {
-          console.log('Preload File')
+          console.log('Preload File', base, directory, files)
           sass.preloadFiles(base, directory, files, function() {
             console.log('Reading bootstrap file')
             sass.readFile('bootstrap.scss', function callback(bootstrapContent) {
