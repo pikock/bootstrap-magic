@@ -1111,7 +1111,7 @@ window.angular.module('apSass', []).factory('apSass', [
   'data',
   '$q',
   function($http, data, $q) {
-    window.Sass.setWorkerUrl('/app/lib/sass/sass.worker.js')
+    window.Sass.setWorkerUrl('../lib/sass/sass.worker.js')
     var sass = new window.Sass()
     sass.options({
       // Format output: nested, expanded, compact, compressed
