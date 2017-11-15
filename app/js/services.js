@@ -60,7 +60,7 @@ window.angular.module('data', []).service('data', [
       '_tooltip.scss',
       '_transitions.scss',
       '_type.scss',
-      '_utilities.scss',
+      'utilities.scss',
       'bootstrap-grid.scss',
       'bootstrap-reboot.scss',
       'bootstrap.scss',
