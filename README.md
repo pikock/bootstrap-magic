@@ -1,19 +1,19 @@
 Bootstrap magic 4.0
 ===================
 
-Create your Boostrap 4.0 theme easily.
-Live preview, live HTML coding to help you create your Bootstrap 4.0 theme direclty in your browser
+Easily create your Boostrap 4.0 theme.
+Live preview and live HTML coding helps you create your Bootstrap 4.0 theme directly in your browser.
 
 ### Features
 
-- Bootstrap 4.0 : Latest version of Bootstrap 4.0 avaiable to create your amazing template. 
-- Sass included : Bootstrap worked with Saas ( CSS compiler now) so do Bootstrap Magic Get all Saas functions to make your life easier. Darken, Lighten, Mixins and co can all be used directly from variables.
-- Color picker : For each color variable, you can either use the color picker or type directly your HEXA or RGBA color
-- HTML code preview :You can now insert your own HTML and CSS and have a live preview with your new Bootstrap theme freshly created.
-- Magic Variables Typeahead :Find all Bootstrap vairables as you type to create links between variables.
-- Google Fonts :Create your template with all Google Fonts. They are all included in font magic TypeHead. Simple.
-- Download in CSS/SCSS :Happy about your template, download your custom CSS, minified or just SCSS variables.
-- Open Source Project :Bootstrap Magic is all Open Source and free. Can be reused as you want.
+- Bootstrap 4.0 : The latest version of Bootstrap is avaiable for creating your amazing template. 
+- Sass Included : Bootstrap 4 works with Saas (current CSS compiler) and so does Bootstrap Magic. Get all Saas functionality to make your life easier. Darken, Lighten, Mixins and more can be used directly with variables.
+- Color Picker : For each color variable, you can either use the color picker or directly type your HEXA or RGBA color values.
+- HTML Code Preview : You can now insert your own HTML and CSS and have a live preview with your new freshly created Bootstrap theme.
+- Magic Variables Typeahead : Find all Bootstrap vairables as you type so you can easily create links between variables.
+- Google Fonts : Create your template with any Google Font. They are all included in the font magic TypeHead. Simple.
+- Download in CSS/SCSS : Once you are happy about your template, quickly download your custom CSS, minified or download the SCSS variables if you prefer.
+- Open Source Project : Bootstrap Magic is all Open Source and free. Feel free to reuse to meet your needs.
 
 ### Build project
 
