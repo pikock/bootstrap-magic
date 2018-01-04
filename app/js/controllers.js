@@ -35,7 +35,8 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     },
     template: {
       blobUrl: '',
-      html: '<div id="example" class="container"><div class="row"><div class="col-sm-12"><h3>Import your HTML/CSS code or use on of Bootstrap ready-to-start example</h3><p>You can add your own HTML/CSS and see how your Bootstrap themes looks like on your website or application. If you like it, just save your theme. Enjoy and share the love!</p></div></div></div>',
+      html:
+        '<div id="example" class="container"><div class="row"><div class="col-sm-12"><h3>Import your HTML/CSS code or use on of Bootstrap ready-to-start example</h3><p>You can add your own HTML/CSS and see how your Bootstrap themes looks like on your website or application. If you like it, just save your theme. Enjoy and share the love!</p></div></div></div>',
       css: '#example{margin-top: 50px;}'
     }
   }
@@ -80,7 +81,10 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
 
   function goTo(routePath, route) {
     // console.log(routePath, route)
-    if (routePath === 'subRoute' && route === 'preview' || routePath === 'show' && route === 'editorHtml') {
+    if (
+      (routePath === 'subRoute' && route === 'preview') ||
+      (routePath === 'show' && route === 'editorHtml')
+    ) {
       generatePreviewHtml()
     }
     $scope[routePath] = route
@@ -311,7 +315,7 @@ function SassCtrl($scope, $http, apSass, $timeout, $sce, $q) {
     var scriptToAdd
     if (fonts && fonts.length !== 0) {
       scriptToAdd =
-        '<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>' +
+        '<script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>' +
         '<script>window.WebFont.load({google: {families: ' +
         JSON.stringify(apSass.fonts) +
         '}})</script>'
