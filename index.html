@@ -25,6 +25,12 @@
 </head>
 
 <body data-ng-cloak>
+	<div id="orson-alert" class="protected alert text-center alert-light">
+		<span class="">Create beautiful websites in minutes with Orson Website Builder 🔒 Free HTTPS included !    <a class="fancy-button" style="box-shadow: none"> Try for free</a></span>
+		<button type="button" id="orson-alert-close" class="close" data-dismiss="alert" aria-label="Close">
+	    <span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
 	<header class="protected">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-indigo">
 			<a class="navbar-brand" href="/" title="Bootstrap magic logo create theme with Bootstrap 4.0">
@@ -440,6 +446,16 @@
 	</script>
 	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
 	<script type="text/javascript">
+
+		setTimeout(function() {
+			$('body').addClass('active');
+			$('#orson-alert').addClass('active');
+
+			$('#orson-alert-close').click(function(){
+				$('body').removeClass('active');
+			})
+		}, 5000);
+
 		ScrollReveal({ reset: false }).reveal('.quick-reveal', { duration: 300 }).reveal('.to-reveal', { duration: 700 }).reveal('.long-reveal', { duration: 1000 });
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-37710723-1']);

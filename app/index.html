@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="fragment" content="!">
   <title>Bootstrap Magic : Generate your own Bootstrap themes quickly and easily</title>
-  <meta name="description" content="Awesome features like contextual typeahead and colorpicker help you make your custom bootstrap 3.1 themes quickly and easily."
+  <meta name="description" content="Awesome features like contextual typeahead and colorpicker help you make your custom bootstrap 4.0 themes quickly and easily."
   />
   <link rel="shortcut icon" href="../bootstrap-magic.ico" type="image/x-icon">
   <link rel="stylesheet" href="./css/docs.bootstrap.css">
@@ -76,6 +76,12 @@
 </head>
 
 <body data-ng-cloak>
+  <div id="orson-alert" class="protected alert text-center alert-light">
+    <span class="">Create beautiful websites in minutes with Orson Website Builder 🔒 Free HTTPS included !    <a class="fancy-button" style="box-shadow: none"> Try for free</a></span>
+    <button type="button" id="orson-alert-close" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
   <div class="protected">
     <!-- <div class="isViewLoading" ng-show="isViewLoading">
       <h1>It's gonna be magic... wait for it...</h1>
@@ -97,6 +103,16 @@
   <div id="fb-root"></div>
 
   <script type="text/javascript">
+
+    setTimeout(function() {
+      $('body').addClass('active');
+      $('#orson-alert').addClass('active');
+
+      $('#orson-alert-close').click(function(){
+        $('body').removeClass('active');
+      })
+    }, 10000);
+
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-37710723-1']);
     _gaq.push(['_trackPageview']);

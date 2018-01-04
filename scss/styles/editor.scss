@@ -7,6 +7,30 @@
   background: $indigo;
 }
 
+#orson-alert{
+  position: fixed;
+  top: -100px;
+  width: 100%;
+  z-index: 999;
+  border-radius: 0;
+  transition: all .3s ease-in-out;
+
+  &.active{
+    top: 0;
+  }
+
+  .close{
+    color: black;
+  }
+}
+
+body{
+  transition: all .3s ease-in-out;
+  &.active{
+    padding-top: 70px;
+  }
+}
+
 .protected {
   .loading {
     position: absolute;
