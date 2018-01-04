@@ -1110,7 +1110,8 @@ window.angular.module('apSass', []).factory('apSass', [
   '$http',
   'data',
   '$q',
-  function($http, data, $q) {
+  '$sce',
+  function($http, data, $q, $sce) {
     window.Sass.setWorkerUrl('../app/lib/sass/sass.worker.js')
     var sass = new window.Sass()
     sass.options({
@@ -1373,17 +1374,16 @@ window.angular.module('apSass', []).factory('apSass', [
 
     function getFonts($scope) {
       var keys = data.fontKeys
-      $.ajax({
-        url:
-          'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBb_pLbXGeesG8wE32FMtywG4Vsfq6Uk_8',
-        type: 'GET',
-        dataType: 'JSONP',
-        success: function(data) {
-          for (var i = 0; i < data.items.length; i++) {
-            keys.push(data.items[i].family)
-          }
-        }
-      })
+      var url = "https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyBb_pLbXGeesG8wE32FMtywG4Vsfq6Uk_8"
+      var trustedUrl = $sce.trustAsResourceUrl(url);
+
+      $http.jsonp(trustedUrl, {jsonpCallbackParam: 'callback'})
+          .then(function(response){
+            var data = response.data
+              for (var i = 0; i < data.items.length; i++) {
+                  keys.push(data.items[i].family)
+                }
+          });
       return keys
     }
 
