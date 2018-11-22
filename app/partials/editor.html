@@ -62,31 +62,96 @@
 </div>
 
 <div class="protected">
-    <div class="modal fade" id="thankYou" tabindex="-1" role="dialog" aria-labelledby="thankYouLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 id="myModalLabel"><span class="apico games apico-cloud-upload"></span>Thanks you for using Bootstrap Magic.</h4>
+  <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="sassVariablesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header justify-content-end">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+        </div>
+
+        <div class="modal-body container-fluid justify-content-center text-center">
+          <div class="row">
+            <div class="col-12 mb-5">
+              <img class="logo" src="../app/img/logo-boostrapmagic.svg" width="57" height="57" alt="logo">
             </div>
-            <div class="modal-body">
-                <p>Thanks you for using Bootstrap Magic.
-                   Just wait a little bit. We are compiling your CSS.
-                </p>
-                <br>
-                <div class="text-center">
-                    <!-- <a href="https://www.producthunt.com/tech" target="_blank">
-                        <img class="img-responsive" style="margin: 0 auto" src="https://cc6f218bd2ea04cb4973-fc9c6b9d141db7665c9530be5d7ac377.ssl.cf1.rackcdn.com/files/5668663fb2a7161287000036/size_4_site-orson-producthunt-redpng.png">
-                    </a> -->
-                    <a class="" href="http://en.orson.io/17/build-responsive-website-without-coding/?utm_source=Bootstrap%20Magic%20&utm_medium=referral&utm_content=Footer&utm_campaign=Bootstrap" target="_blank" title="Try Orson website builder"><img src="../app/img/orson-website-ad.jpg" class="img-responsive" alt="Create responsive website without coding"></a> 
+          </div>
+
+          <h3>Thanks for using Bootstrap magic!</h3>
+
+          <p class="pl-5 pr-5 pt-1 pb-2">Save your Bootstrap themes in CSS or just the SCSS variables.</p>
+
+          <div class="col">
+            <a class="nav-link fancy-button is-boring mr-3" ng-click="saveSassVariables()">Save SCSS variables</a>
+            <a class="nav-link fancy-button is-boring" ng-click="saveCSS()">Save CSS</a>
+          </div>
+        </div>
+
+        <span class="line"></span>
+
+        <div class="modal-footer text-center" style="flex-direction: column;">
+          <div class="row">
+            <div class="col">
+              <h3>Give what you can for Bootstrap Magic!</h3>
+              <p>
+                To help us keep up the good work on Bootstrap Magic and other side projects for you!
+              </p>
+              <div class="form-paypal-container">
+                
+              
+              <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="form-paypal">
+                  <input type="hidden" name="cmd" value="_s-xclick">
+                  <input type="hidden" name="hosted_button_id" value="W8B5H7NPKSZQE">
+        <!--           <input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
+         -->          <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+                  <button href="hidden" class="fancy-button" type="submit" name="submit">5€</button>
+                  </form>
+
+                  
+                  <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"  class="form-paypal">
+                  <input type="hidden" name="cmd" value="_s-xclick">
+                  <input type="hidden" name="hosted_button_id" value="H3F69APZ6RV5E">
+        <!--           <input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
+         -->          <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+         <button href="hidden" class="fancy-button" type="submit" name="submit">10€</button>
+                  </form>
+
+                  <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"  class="form-paypal">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="HG2F95MNPQ7VA">
+        <!-- <input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
+         --><img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+         <button href="hidden" class="fancy-button" type="submit" name="submit">20€</button>
+
+        </form>
+
+                  <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"  class="form-paypal">
+                  <input type="hidden" name="cmd" value="_s-xclick">
+                  <input type="hidden" name="hosted_button_id" value="467TSLTBQNPWA">
+                  <input type="hidden" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
+                  <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+
+                  <button href="hidden" class="fancy-button" type="submit" name="submit">Other amount</button>
+                  </form>
                 </div>
+
             </div>
-            <div class="modal-footer">
-                <button  data-dismiss="modal" aria-hidden="true" class="btn">Close</button>
-            </div>
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<style>
+.form-paypal-container{
+  display: flex;
+  justify-content: center;
+    margin-bottom: 3em;
+}
+</style>
 
 <div id="scrollTop" scroll-top="">↑</div>
